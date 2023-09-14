@@ -29,10 +29,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-    
-    
-
-
+ // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -67,8 +64,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
                 return cell
     }
-    
-    //MARK: - UICollectionViewDelegateFlowLayout
+
 
 }
 
