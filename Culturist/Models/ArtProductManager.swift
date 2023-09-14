@@ -22,6 +22,7 @@ class ArtProductManager {
             [weak self] response in
             switch response.result {
             case .success(let data):
+                //let filteredData = data.filter { $0.showInfo[0].latitude != nil && $0.showInfo[0].longitude != nil && !$0.imageURL.isEmpty }
                 let filteredData = data.filter { !$0.imageURL.isEmpty }
                 self?.delegate?.manager(self!, didGet: filteredData)
                 

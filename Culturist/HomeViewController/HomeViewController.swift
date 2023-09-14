@@ -12,32 +12,59 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
-    var artProducts = [ArtDatum]()
-    var artManager = ArtProductManager()
+    var artProducts1 = [ArtDatum]()
+    var artProducts6 = [ArtDatum]()
+    var artManager1 = ArtProductManager()
+    var artManager6 = ArtProductManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
-        artManager.delegate = self
-        artManager.getArtProductList(number: "6")
+        artManager1.delegate = self
+        artManager6.delegate = self
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         
     }
-    
 }
 
+    
+    
+
+
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("collectionView:\(artProducts.count)")
-        return artProducts.count
+        if section == 0 {
+            print(artProducts1.count)
+            return artProducts1.count
+        } else if section == 1 {
+            print(artProducts6.count)
+            return artProducts6.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-                let itemData = artProducts[indexPath.item]
-                let url = URL(string: itemData.imageURL)
-                cell.productImage.kf.setImage(with: url)
-                cell.productTitle.text = itemData.title
+
+        if indexPath.section == 0 {
+            let itemData = artProducts1[indexPath.item]
+            let url = URL(string: itemData.imageURL)
+            cell.productImage.kf.setImage(with: url)
+            cell.productTitle.text = itemData.title
+        } else if indexPath.section == 1 {
+            let itemData = artProducts6[indexPath.item]
+            let url = URL(string: itemData.imageURL)
+            cell.productImage.kf.setImage(with: url)
+            cell.productTitle.text = itemData.title
+        }
                 return cell
     }
 }
@@ -45,11 +72,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-            DispatchQueue.main.async {
-                self.artProducts = artProductList
+        DispatchQueue.main.async {
+            if artProductList.isEmpty {
+                print("no api data")
+            } else {
+                if manager === self.artManager1 {
+                    self.artProducts1 = artProductList
+                } else if manager === self.artManager6 {
+                    self.artProducts6 = artProductList
+                }
                 self.homeCollectionView.reloadData()
             }
-
+        }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
