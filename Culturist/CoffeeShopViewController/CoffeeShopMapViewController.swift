@@ -60,8 +60,10 @@ class CoffeeShopMapViewController: UIViewController {
         locationManager.startUpdatingLocation()
         
     }
-
+    
 }
+
+// MARK: - CoffeeShopManagerDelegate
 
 extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
     func manager(_ manager: CoffeeShopManager, didGet CoffeeShopList: [CoffeeShop]) {
@@ -79,10 +81,10 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
                     self.mapView.addAnnotation(annotation)
                 }
             }
-           
+            
         }
     }
-
+    
     func manager(_ manager: CoffeeShopManager, didFailWith error: Error) {
         print(error.localizedDescription)
     }
@@ -99,16 +101,19 @@ extension CoffeeShopMapViewController: CLLocationManagerDelegate {
     }
 }
 
+
+// MARK: - MKMapViewDelegate
 extension CoffeeShopMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         // get user tap mark
         guard let annotation = view.annotation as? MKPointAnnotation else { return }
-            // 在coffeeShopCollection中查找与标注标题匹配的咖啡店
-            if let selectedCoffeeShop = coffeeShopCollection.first(where: { $0.name == annotation.title }) {
+        //find the same name in coffeeShopCollection
+        if let selectedCoffeeShop = coffeeShopCollection.first(where: { $0.name == annotation.title }) {
             guard let coffeeShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopViewController") as? CoffeeShopViewController else { return }
-                //navigationController?.pushViewController(coffeeShopViewController, animated: true)
-                present(coffeeShopViewController, animated: true)
+            coffeeShopViewController.coffeeShop = selectedCoffeeShop
+            //navigationController?.pushViewController(coffeeShopViewController, animated: true)
+            present(coffeeShopViewController, animated: true)
             
         }
     }

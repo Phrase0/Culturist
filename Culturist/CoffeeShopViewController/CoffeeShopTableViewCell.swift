@@ -8,8 +8,7 @@
 import UIKit
 
 class CoffeeShopTableViewCell: UITableViewCell {
-    
-    
+     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var openTimeLabel: UILabel!
@@ -22,6 +21,7 @@ class CoffeeShopTableViewCell: UITableViewCell {
     @IBOutlet weak var limitTimeLabel: UILabel!
     @IBOutlet weak var socketLabel: UILabel!
     @IBOutlet weak var standingDeskLabel: UILabel!
+    @IBOutlet weak var coffeeImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

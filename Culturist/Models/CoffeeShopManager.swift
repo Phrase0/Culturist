@@ -15,7 +15,7 @@ protocol CoffeeShopManagerDelegate {
 
 class CoffeeShopManager {
     
-    var delegate:CoffeeShopManagerDelegate?
+    var delegate: CoffeeShopManagerDelegate?
     
     func loadCoffeeShops() {
         // ask for coffeeShop request
