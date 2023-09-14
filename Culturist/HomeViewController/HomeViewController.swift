@@ -33,12 +33,12 @@ class HomeViewController: UIViewController {
     
 
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             print(artProducts1.count)
@@ -67,6 +67,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
                 return cell
     }
+    
+    //MARK: - UICollectionViewDelegateFlowLayout
+
 }
 
 // MARK: - ProductManagerDelegate
