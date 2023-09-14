@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */; };
 		F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */; };
 		F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */; };
 		F82A34F22AB2AC4C004FF247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34F12AB2AC4C004FF247 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.debug.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.debug.xcconfig"; sourceTree = "<group>"; };
+		4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Culturist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.release.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.release.xcconfig"; sourceTree = "<group>"; };
 		F82A34EA2AB2AC4C004FF247 /* Culturist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culturist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A1E41190C6E6F7290373612 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */,
+				CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B75ED660726A6ABC1A2A37FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
+				9A1E41190C6E6F7290373612 /* Pods */,
+				B75ED660726A6ABC1A2A37FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F82A34FE2AB2AC4D004FF247 /* Build configuration list for PBXNativeTarget "Culturist" */;
 			buildPhases = (
+				69F6C808AD4C47990917ADA6 /* [CP] Check Pods Manifest.lock */,
 				F82A34E62AB2AC4C004FF247 /* Sources */,
 				F82A34E72AB2AC4C004FF247 /* Frameworks */,
 				F82A34E82AB2AC4C004FF247 /* Resources */,
+				FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		69F6C808AD4C47990917ADA6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Culturist-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Culturist/Pods-Culturist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Culturist/Pods-Culturist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Culturist/Pods-Culturist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F82A34E62AB2AC4C004FF247 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		F82A34FF2AB2AC4D004FF247 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +380,7 @@
 		};
 		F82A35002AB2AC4D004FF247 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
