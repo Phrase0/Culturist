@@ -10,9 +10,6 @@ import Kingfisher
 
 class HomeViewController: UIViewController {
     
-    
-    
-    
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
     var artProducts = [ArtDatum]()
@@ -27,7 +24,6 @@ class HomeViewController: UIViewController {
         
     }
     
-    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -38,8 +34,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-        
-
                 let itemData = artProducts[indexPath.item]
                 let url = URL(string: itemData.imageURL)
                 cell.productImage.kf.setImage(with: url)
@@ -48,7 +42,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-//MARK: - ProductManagerDelegate
+// MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
             DispatchQueue.main.async {
@@ -61,6 +55,5 @@ extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
     }
-    
     
 }

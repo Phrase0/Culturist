@@ -13,4 +13,3 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var productTitle: UILabel!
 }
-

@@ -14,7 +14,6 @@ protocol ArtManagerDelegate {
 }
 
 class ArtProductManager {
-    
     var delegate:ArtManagerDelegate?
     
     func getArtProductList(number:String) {
@@ -31,5 +30,4 @@ class ArtProductManager {
             }
         }
     }
-    
 }

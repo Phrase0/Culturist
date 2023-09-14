@@ -28,5 +28,3 @@ struct CoffeeShop: Codable {
         case openTime = "open_time"
     }
 }
-
-

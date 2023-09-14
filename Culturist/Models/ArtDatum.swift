@@ -32,7 +32,6 @@ struct ArtDatum: Codable {
         }
 }
 
-
 // MARK: - ShowInfo
 struct ShowInfo: Codable {
     let time, location, locationName: String
