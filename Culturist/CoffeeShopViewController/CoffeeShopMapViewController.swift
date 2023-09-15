@@ -15,8 +15,9 @@ class CoffeeShopMapViewController: UIViewController {
     var coffeeShopCollection = [CoffeeShop]()
     var coffeeShopManager = CoffeeShopManager()
     
-    let latitude = 25.039
-    let longitude = 121.532
+    var latitude: Double?
+    var longitude: Double?
+
     
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
@@ -39,17 +40,21 @@ class CoffeeShopMapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let initialLocation = CLLocation(latitude: latitude ?? 25.039, longitude: longitude ?? 121.532)
         let regionRadius: CLLocationDistance = 500
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate,
             latitudinalMeters: regionRadius,
             longitudinalMeters: regionRadius
         )
+        print("座標:\(latitude)")
+        print("座標:\(longitude)")
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
         
+
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +62,8 @@ class CoffeeShopMapViewController: UIViewController {
         // askForPositionRequest
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        
     }
     
 }
@@ -100,7 +105,6 @@ extension CoffeeShopMapViewController: CLLocationManagerDelegate {
         print("Location manager error: \(error.localizedDescription)")
     }
 }
-
 
 // MARK: - MKMapViewDelegate
 extension CoffeeShopMapViewController: MKMapViewDelegate {

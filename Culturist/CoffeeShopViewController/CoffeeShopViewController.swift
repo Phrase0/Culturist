@@ -44,10 +44,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.musicLabel.text = "\(coffeeShop.music)"
             cell.limitTimeLabel.text = coffeeShop.limitedTime
             cell.socketLabel.text = coffeeShop.socket
-            cell.standingDeskLabel.text = coffeeShop.standingDesk
-            
-            
-            
+            cell.standingDeskLabel.text = coffeeShop.standingDesk  
         }
         return cell
     }
