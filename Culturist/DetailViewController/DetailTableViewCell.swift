@@ -18,15 +18,20 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    var searchCoffeeButtonHandler: ((UIButton) -> Void)?
+    var searchBookButtonHandler: ((UIButton) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    @IBAction func searchCoffeeShop(_ sender: Any) {
+    @IBAction func searchCoffeeShop(_ sender: UIButton) {
+        searchCoffeeButtonHandler?(sender)
     }
     
-    @IBAction func searchBookShop(_ sender: Any) {
+    @IBAction func searchBookShop(_ sender: UIButton) {
+        searchBookButtonHandler?(sender)
     }
     
 }

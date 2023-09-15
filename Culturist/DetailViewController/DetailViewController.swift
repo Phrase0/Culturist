@@ -11,7 +11,7 @@ import Kingfisher
 class DetailViewController: UIViewController {
     
     var detailDesctription: ArtDatum?
-
+    
     @IBOutlet weak var detailTableView: UITableView!
     
     override func viewDidLoad() {
@@ -19,9 +19,9 @@ class DetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.delegate = self
     }
-
-
-
+    
+    
+    
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -41,6 +41,17 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo[0].endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
+            //CoffeeButtonTapped
+            cell.searchCoffeeButtonHandler = { [weak self] sender in
+                guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
+                self?.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            //BookButtonTapped
+            cell.searchBookButtonHandler = { [weak self] sender in
+                guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
+                self?.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            
         }
         return cell
     }

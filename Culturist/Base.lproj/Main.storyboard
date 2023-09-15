@@ -202,7 +202,7 @@
         <!--Coffee Shop Map View Controller-->
         <scene sceneID="aY8-sH-Pro">
             <objects>
-                <viewController id="igu-oC-UdB" customClass="CoffeeShopMapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CoffeeShopMapViewController" id="igu-oC-UdB" customClass="CoffeeShopMapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FFv-iS-RkX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -217,7 +217,7 @@
         <!--Book Shop Map View Controller-->
         <scene sceneID="sAk-E7-bdo">
             <objects>
-                <viewController id="3EV-qH-dhP" customClass="BookShopMapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookShopMapViewController" id="3EV-qH-dhP" customClass="BookShopMapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A8Y-jz-mlb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
