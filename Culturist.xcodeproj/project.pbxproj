@@ -27,6 +27,8 @@
 		F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7422AB35F9A0029C78E /* BookShopManager.swift */; };
 		F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7442AB361C50029C78E /* BookShopViewController.swift */; };
 		F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */; };
+		F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7492AB41F690029C78E /* DetailViewController.swift */; };
+		F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		F851F7422AB35F9A0029C78E /* BookShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopManager.swift; sourceTree = "<group>"; };
 		F851F7442AB361C50029C78E /* BookShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopViewController.swift; sourceTree = "<group>"; };
 		F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopTableViewCell.swift; sourceTree = "<group>"; };
+		F851F7492AB41F690029C78E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +120,7 @@
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
+				F851F7482AB41F460029C78E /* DetailViewController */,
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
@@ -156,6 +161,15 @@
 				F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */,
 			);
 			path = BookShopViewController;
+			sourceTree = "<group>";
+		};
+		F851F7482AB41F460029C78E /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F851F7492AB41F690029C78E /* DetailViewController.swift */,
+				F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */,
+			);
+			path = DetailViewController;
 			sourceTree = "<group>";
 		};
 		F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */ = {
@@ -303,7 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
+				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,

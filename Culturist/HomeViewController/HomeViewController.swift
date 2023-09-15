@@ -64,8 +64,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
                 return cell
     }
-
-
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
+        
+        if let selectedIndexPaths = self.homeCollectionView.indexPathsForSelectedItems,
+           let selectedIndexPath = selectedIndexPaths.first {
+            if indexPath.section == 0 {
+                detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
+            } else if indexPath.section == 1 {
+                detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
+            }           
+        }
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - ProductManagerDelegate
