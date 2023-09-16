@@ -10,15 +10,15 @@ import Alamofire
 import MapKit
 //import CoreLocation
 
-class CoffeeShopMapViewController: UIViewController {
+class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     
     var coffeeShopCollection = [CoffeeShop]()
     var coffeeShopManager = CoffeeShopManager()
+    let locationManager = CLLocationManager()
     
     var latitude: Double?
     var longitude: Double?
     let mapView = MKMapView()
-    //let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,13 @@ class CoffeeShopMapViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Request user location permission
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        // askForPositionRequest
@@ -59,11 +66,7 @@ class CoffeeShopMapViewController: UIViewController {
 //        locationManager.requestAlwaysAuthorization()
 //        locationManager.startUpdatingLocation()
 //    }
-//
-//    override func viewDidDisappear(_ animated: Bool) {
-//        // 因為 GPS 功能很耗電,所以背景執行時關閉定位功能
-//        locationManager.stopUpdatingLocation()
-//    }
+
 }
 
 // MARK: - CoffeeShopManagerDelegate
@@ -92,17 +95,6 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
         print(error.localizedDescription)
     }
 }
-
-// MARK: - CLLocationManagerDelegate
-//extension CoffeeShopMapViewController: CLLocationManagerDelegate {
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.last else { return }
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("Location manager error: \(error.localizedDescription)")
-//    }
-//}
 
 // MARK: - MKMapViewDelegate
 extension CoffeeShopMapViewController: MKMapViewDelegate {

@@ -15,12 +15,9 @@ class CoffeeShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         coffeeShopTableView.dataSource = self
         coffeeShopTableView.delegate = self
     }
-    
-    
 }
 
 extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
