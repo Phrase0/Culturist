@@ -120,12 +120,10 @@ extension CoffeeMapNavigationViewController: CLLocationManagerDelegate {
             }
         }
     }
-
 }
 
 // MARK: - extension
-extension CoffeeMapNavigationViewController {
-    
+extension CoffeeMapNavigationViewController {   
     func setAutolayout() {
         // Add auto-layout constraints for the mapView
         NSLayoutConstraint.activate([
