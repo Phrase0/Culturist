@@ -6,6 +6,7 @@ class CoffeeMapNavigationViewController: UIViewController, MKMapViewDelegate, CL
     
     var latitude: Double?
     var longitude: Double?
+    var name: String?
     
     var route: MKRoute?
     let mapView = MKMapView()
@@ -50,7 +51,7 @@ class CoffeeMapNavigationViewController: UIViewController, MKMapViewDelegate, CL
         destinationLocation = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!) // 替换为目标经纬度
         let destinationAnnotation = MKPointAnnotation()
         destinationAnnotation.coordinate = destinationLocation
-        destinationAnnotation.title = "目标位置"
+        destinationAnnotation.title = "\(name)"
         mapView.addAnnotation(destinationAnnotation)
         
         let sourcePlacemark = MKPlacemark(coordinate: locationManager.location?.coordinate ?? CLLocationCoordinate2D())
@@ -66,33 +67,19 @@ class CoffeeMapNavigationViewController: UIViewController, MKMapViewDelegate, CL
         
         let directions = MKDirections(request: directionsRequest)
         directions.calculate { [self] (response, error) in
+            if let error = error {
+                print("路線計算錯誤：\(error.localizedDescription)")
+                return
+            }
             if let route = response?.routes.first {
                 mapView.addOverlay(route.polyline, level: .aboveRoads)
                 self.route = route // 保存路线信息，以便稍后使用
                 
-                // 创建开始导航按钮
-                let startNavigationButton = UIButton(type: .system)
-                startNavigationButton.setTitle("开始导航", for: .normal)
-                startNavigationButton.addTarget(self, action: #selector(startNavigation), for: .touchUpInside)
-                view.addSubview(startNavigationButton)
-                
-                // 设置按钮的布局约束
-                startNavigationButton.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    startNavigationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    startNavigationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
-                ])
+                // 开始导航
+                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
         }
-    }
-    
-    @objc func startNavigation() {
-        if let route = self.route {
-            // 创建导航视图控制器
-            let navigationVC = MKNavigationViewController()
-            navigationVC.route = route
-            present(navigationVC, animated: true, completion: nil)
-        }
+
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

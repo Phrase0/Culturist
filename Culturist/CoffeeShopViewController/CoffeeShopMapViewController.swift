@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 import MapKit
-import CoreLocation
+//import CoreLocation
 
 class CoffeeShopMapViewController: UIViewController {
     

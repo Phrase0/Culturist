@@ -5,11 +5,9 @@
 //  Created by Peiyun on 2023/9/14.
 //
 
-
 import UIKit
 import Alamofire
 import MapKit
-import CoreLocation
 
 class BookShopMapViewController: UIViewController {
     
@@ -21,7 +19,6 @@ class BookShopMapViewController: UIViewController {
     var longitude: Double?
     
     let mapView = MKMapView()
-    //let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,8 +89,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
                 guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
                 bookShopViewController.bookShop = selectedBookShop
                 //navigationController?.pushViewController(bookShopViewController, animated: true)
-                present(bookShopViewController, animated: true)
-                
+                present(bookShopViewController, animated: true)                
             }
         }
         

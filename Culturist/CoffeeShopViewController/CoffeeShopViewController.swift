@@ -7,21 +7,17 @@
 
 import UIKit
 import Kingfisher
-import MapKit
-import CoreLocation
 
 class CoffeeShopViewController: UIViewController {
     
     @IBOutlet weak var coffeeShopTableView: UITableView!
     var coffeeShop: CoffeeShop?
-    //let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         coffeeShopTableView.dataSource = self
         coffeeShopTableView.delegate = self
-        //locationManager.requestWhenInUseAuthorization()
     }
     
     
@@ -49,6 +45,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.standingDeskLabel.text = coffeeShop.standingDesk
             cell.mapNavigationButtonHandler = { [weak self] sender in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeMapNavigationViewController") as? CoffeeMapNavigationViewController else { return }
+                detailVC.name = coffeeShop.name
                 detailVC.latitude = Double(coffeeShop.latitude)
                 detailVC.longitude = Double(coffeeShop.longitude)
                 self?.present(detailVC, animated: true)
