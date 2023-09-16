@@ -21,7 +21,7 @@ class BookShopMapViewController: UIViewController {
     var longitude: Double?
     
     let mapView = MKMapView()
-    let locationManager = CLLocationManager()
+    //let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,23 +48,11 @@ class BookShopMapViewController: UIViewController {
             latitudinalMeters: regionRadius,
             longitudinalMeters: regionRadius
         )
-        print("座標:\(latitude)")
-        print("座標:\(longitude)")
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
-        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // askForPositionRequest
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-    }
-    
+ 
 }
 
 // MARK: - BookShopManagerDelegate
@@ -92,16 +80,6 @@ extension BookShopMapViewController: BookShopManagerDelegate {
     }
     
 }
-    // MARK: - CLLocationManagerDelegate
-    extension BookShopMapViewController: CLLocationManagerDelegate {
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.last else { return }
-        }
-        
-        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            print("Location manager error: \(error.localizedDescription)")
-        }
-    }
     
     // MARK: - MKMapViewDelegate
     extension BookShopMapViewController: MKMapViewDelegate {

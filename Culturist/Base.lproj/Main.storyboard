@@ -274,6 +274,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="gray" title="導航"/>
+                                                    <connections>
+                                                        <action selector="mapNavigation:" destination="UeP-M9-fdd" eventType="touchUpInside" id="wR6-sD-PHk"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="opentime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Np-X7R">
                                                     <rect key="frame" x="20" y="419" width="343" height="21"/>
@@ -503,6 +506,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="gray" title="導航"/>
+                                                    <connections>
+                                                        <action selector="mapNavigation:" destination="Xcj-Jx-88r" eventType="touchUpInside" id="hk3-Ds-zjS"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -535,6 +541,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrU-Ol-zDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4133.5877862595416" y="-182.3943661971831"/>
+        </scene>
+        <!--Coffee Map Navigation View Controller-->
+        <scene sceneID="SJL-7m-a8B">
+            <objects>
+                <viewController storyboardIdentifier="CoffeeMapNavigationViewController" id="Ybv-w7-4c0" customClass="CoffeeMapNavigationViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eA1-Nz-3yl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KDr-hO-EbM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Tg-oF-4wm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5203.8167938931292" y="-194.36619718309859"/>
         </scene>
         <!--Item-->
         <scene sceneID="ckV-0z-aXN">

@@ -23,15 +23,15 @@ class CoffeeShopTableViewCell: UITableViewCell {
     @IBOutlet weak var standingDeskLabel: UILabel!
     @IBOutlet weak var coffeeImageView: UIImageView!
     
+    var mapNavigationButtonHandler: ((UIButton) -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    @IBAction func mapNavigation(_ sender: UIButton) {
+        mapNavigationButtonHandler?(sender)
     }
-
+    
 }
