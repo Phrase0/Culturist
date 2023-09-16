@@ -50,7 +50,7 @@ class CoffeeMapNavigationViewController: UIViewController {
 
 // MARK: - MKMapViewDelegate
 extension CoffeeMapNavigationViewController: MKMapViewDelegate {
-    //drawing map line
+    // drawing map line
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let polyline = overlay as? MKPolyline {
             let renderer = MKPolylineRenderer(overlay: polyline)
