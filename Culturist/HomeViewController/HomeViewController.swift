@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
+    let firebaseManager = FirebaseManager()
     
     var result: [ArtDatum] = []
     var mySearchController: UISearchController?
@@ -92,10 +93,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
            let selectedIndexPath = selectedIndexPaths.first {
             if indexPath.section == 0 {
                 detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
+                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid)
             } else if indexPath.section == 1 {
                 detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
+                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid)
             }
         }
+        
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
