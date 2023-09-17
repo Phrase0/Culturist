@@ -32,7 +32,7 @@
 		F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7572AB6B4C70029C78E /* RecommendViewController.swift */; };
 		F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */; };
 		F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */; };
-		F851F75E2AB6C0710029C78E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F851F75D2AB6C0710029C78E /* GoogleService-Info.plist */; };
+		F851F7642AB6C44E0029C78E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -67,7 +67,7 @@
 		F851F7572AB6B4C70029C78E /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionViewCell.swift; sourceTree = "<group>"; };
 		F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		F851F75D2AB6C0710029C78E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,7 +134,7 @@
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
-				F851F75D2AB6C0710029C78E /* GoogleService-Info.plist */,
+				F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */,
 				F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */,
 				F82A34FB2AB2AC4D004FF247 /* Info.plist */,
 			);
@@ -273,7 +273,7 @@
 			files = (
 				F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */,
 				F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */,
-				F851F75E2AB6C0710029C78E /* GoogleService-Info.plist in Resources */,
+				F851F7642AB6C44E0029C78E /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
 				F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */,
 			);
