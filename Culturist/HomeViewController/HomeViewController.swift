@@ -148,18 +148,18 @@ extension HomeViewController: UISearchResultsUpdating {
             let title = artData.title.lowercased()
             let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
             let location = artData.showInfo.first?.location.lowercased() ?? ""
-            
+
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
-        
+
         let filtered6 = artProducts6.filter { artData in
             let title = artData.title.lowercased()
             let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
             let location = artData.showInfo.first?.location.lowercased() ?? ""
-            
+
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
-        
+
         result = filtered1 + filtered6
     }
 

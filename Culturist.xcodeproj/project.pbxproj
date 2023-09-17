@@ -120,6 +120,7 @@
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
+				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
 				F851F7482AB41F460029C78E /* DetailViewController */,
@@ -139,9 +140,6 @@
 				F82A35072AB2B8B4004FF247 /* ArtDatum.swift */,
 				F82A350A2AB2B8FD004FF247 /* BookShop.swift */,
 				F82A350C2AB2B916004FF247 /* CoffeeShop.swift */,
-				F82A35052AB2B84C004FF247 /* ArtProductManager.swift */,
-				F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */,
-				F851F7422AB35F9A0029C78E /* BookShopManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +170,16 @@
 				F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */,
 			);
 			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		F851F7512AB6136B0029C78E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F82A35052AB2B84C004FF247 /* ArtProductManager.swift */,
+				F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */,
+				F851F7422AB35F9A0029C78E /* BookShopManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */ = {
