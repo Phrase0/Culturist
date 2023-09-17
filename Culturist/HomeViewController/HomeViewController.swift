@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
         artManager6.getArtProductList(number: "6")
         settingSearchController()
     }
+
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout

@@ -7,17 +7,29 @@
 
 import UIKit
 
+
 class RecommendViewController: UIViewController {
+
+    
 
     @IBOutlet weak var recommendCollectionView: UICollectionView!
     
     var recommendProducts = [ArtDatum]()
+    var recommendationList = [RecommendationData]()
+    let firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
+        firebaseManager.collectionDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firebaseManager.readExhibitionUid()
+        print(recommendationList)
     }
     
 
@@ -49,5 +61,17 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
             detailVC.detailDesctription = recommendProducts[selectedIndexPath.row]
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+extension RecommendViewController: FirebaseCollectionDelegate {
+    func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
+        DispatchQueue.main.async {
+            self.recommendationList = recommendationData
+        }
+    }
+    
+    func manager(_ manager: FirebaseManager, didFailWith error: Error) {
+        print(error.localizedDescription)
     }
 }
