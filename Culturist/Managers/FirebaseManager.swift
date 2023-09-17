@@ -11,49 +11,34 @@ import FirebaseFirestore
 
 class FirebaseManager {
 
-    let products = Firestore.firestore().collection("products")
+    let userData = Firestore.firestore().collection("user")
     
-    func addData(exhibitionUid:String?) {
-        let document = products.document()
+    func addData(exhibitionUid: String) {
+        // Create a new RecommendationData
+        let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid)
+        // Get the Firestore database reference
+        let db = Firestore.firestore()
+        // Assuming a User object
+        let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [])
+        // Get the user's document reference
+        let userRef = db.collection("users").document(user.id)
+        // Add RecommendationData to the user's document data
         let data: [String: Any] = [
-            "exhibitionUid": exhibitionUid as Any,
-            "createdTime": Date().timeIntervalSince1970,
-            "id": document.documentID
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "recommendationData": FieldValue.arrayUnion([["exhibitionUid": newRecommendationData.exhibitionUid]])
         ]
-        document.setData(data)
-    }
-    
-    func fetchData() {
-        products.order(by: "createdTime", descending: true).addSnapshotListener { [weak self] (querySnapshot, error) in
-            //清空data資料
-//            self?.myData = []
+
+        // Set the user's document data with merge option to update existing data
+        userRef.setData(data, merge: true) { (error) in
             if let error = error {
-                print("There was an issue retrieving data from Firestore, \(error)")
+                print("Error adding RecommendationData: \(error)")
             } else {
-                if let snapshotDocuments = querySnapshot?.documents {
-                    for document in snapshotDocuments {
-                        let data = document.data()
-                        if let exhibitionUid = data["exhibitionUid"] as? String,
-                           let createdTime = data["createdTime"] as? TimeInterval,
-                           let id = data["id"] as? String {
-                            let newData = RecommendationData(exhibitionUid: exhibitionUid, createdTime: createdTime, id: id)
-                            //self?.myData.append(newData)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            //self?.tableView.reloadData()
-                        }
-                        
-                    }
-                }
+                print("RecommendationData added successfully.")
             }
         }
     }
-}
 
 
-struct RecommendationData {
-    let exhibitionUid: String
-    let createdTime: TimeInterval
-    let id: String
 }

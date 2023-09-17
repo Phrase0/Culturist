@@ -94,6 +94,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if indexPath.section == 0 {
                 detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
                 firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid)
+                
             } else if indexPath.section == 1 {
                 detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
                 firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid)
