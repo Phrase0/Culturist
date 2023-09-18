@@ -14,9 +14,13 @@ protocol FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didFailWith error: Error)
 }
 
+protocol FirebaseLikeDelegate {
+    func manager(_ manager: FirebaseManager, didGet likeData: [LikeData])
+}
 class FirebaseManager {
     
     var collectionDelegate:FirebaseCollectionDelegate?
+    var likeDelegate: FirebaseLikeDelegate?
     
     // Get the Firestore database reference
     let db = Firestore.firestore()
@@ -242,4 +246,41 @@ class FirebaseManager {
         
     }
     // ---------------------------------------------------
+    // 在页面加载时获取用户的喜欢数据
+    func fetchUserLikeData(completion: @escaping ([LikeData]?, Error?) -> Void) {
+        let userRef = db.collection("users").document(user.id)
+        let likeCollection = userRef.collection("likeCollection")
+        
+        likeCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching LikeData: \(error)")
+                completion(nil, error) // 调用闭包通知发生错误
+            } else {
+                var userLikes: [LikeData] = []
+                
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let exhibitionUid = data["exhibitionUid"] as? String
+                    let coffeeShopUid = data["coffeeShopUid"] as? String
+                    let bookShopUid = data["bookShopUid"] as? String
+                    
+                    let likeData = LikeData(exhibitionUid: exhibitionUid, coffeeShopUid: coffeeShopUid, bookShopUid: bookShopUid)
+                    userLikes.append(likeData)
+                }
+                
+                // 将用户的喜欢数据保存在适当的位置，以便在页面上使用
+                // 例如，你可以将它们存储在一个成员变量中
+                self.likeDelegate?.manager(self, didGet: userLikes)
+                print("userLike:\(userLikes)")
+                
+                // 调用闭包通知操作成功
+                completion(userLikes, nil)
+                
+                // 更新页面以反映用户的喜欢数据
+                // 这里可以调用页面的刷新函数或更新 UI 的逻辑
+            }
+        }
+    }
+
+
 }

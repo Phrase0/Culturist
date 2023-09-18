@@ -66,7 +66,6 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(recommendProducts.count)
         return recommendProducts.count
         
     }

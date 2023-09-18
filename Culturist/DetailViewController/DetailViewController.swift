@@ -10,22 +10,46 @@ import Kingfisher
 import MapKit
 
 class DetailViewController: UIViewController {
+    
     // detailData from home page
     var detailDesctription: ArtDatum?
-
+    
     let firebaseManager = FirebaseManager()
     var isLiked: Bool?
+    var likeData = [LikeData]()
     
     @IBOutlet weak var detailTableView: UITableView!
-    
+    let semaphore = DispatchSemaphore(value: 0)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTableView.dataSource = self
         detailTableView.delegate = self
-    }
-    
+        firebaseManager.likeDelegate = self
+        
+        // create DispatchGroup
+        let group = DispatchGroup()
 
+        group.enter()
+        firebaseManager.fetchUserLikeData {_,_ in 
+            group.leave() // 离开 DispatchGroup
+        }
+
+        // use DispatchGroup notify
+        group.notify(queue: .main) {
+            let isLiked = self.likeData.contains { like in
+                print(like.exhibitionUid)
+                return like.exhibitionUid == self.detailDesctription?.uid
+            }
+            
+            DispatchQueue.main.async {
+                self.isLiked = isLiked
+                self.detailTableView.reloadData()
+            }
+        }
+    }
 }
+
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,9 +68,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo[0].endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-            
-            
-            
+             
             // CoffeeButtonTapped
             cell.searchCoffeeButtonHandler = { [weak self] sender in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
@@ -87,7 +109,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-
+            
             // BookButtonTapped
             cell.searchBookButtonHandler = { [weak self] sender in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
@@ -130,15 +152,20 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
-
+            if isLiked == false {
+                cell.likeBtn.isSelected = false
+            } else {
+                cell.likeBtn.isSelected = true
+            }
+            
             cell.likeButtonHandler = { [weak self] sender in
-                sender.isSelected = !sender.isSelected
                 if self?.isLiked == true {
-                    // 如果已经喜欢了，执行移除喜欢的操作
+                    // if isLiked, removeFavorite
                     self?.removeFavorite()
+                    cell.likeBtn.isSelected = false
                 } else {
-                    // 如果还没有喜欢，执行添加喜欢的操作
                     self?.addFavorite()
+                    cell.likeBtn.isSelected = true
                 }
             }
             
@@ -146,25 +173,30 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-
+    
     func addFavorite() {
-        // 创建 LikeData 对象并设置相应的 exhibitionUid、coffeeShopUid 或 bookShopUid
+        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
         let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
-        // 调用添加喜欢数据的函数
+        // Call the function to add liked data
         firebaseManager.addLikeData(likeData: likeData)
-        // 更新标志以表示用户已经喜欢了该项目
+        // Update the flag to indicate that the user has liked the item
         isLiked = true
     }
-
-    // 移除喜欢的操作
+    
+    // Remove favorite action
     func removeFavorite() {
-        // 创建 LikeData 对象并设置相应的 exhibitionUid、coffeeShopUid 或 bookShopUid
+        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
         let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
-        
-        // 调用移除喜欢数据的函数
+        // Call the function to remove liked data
         firebaseManager.removeLikeData(likeData: likeData)
-        
-        // 更新标志以表示用户取消了喜欢该项目
+        // Update the flag to indicate that the user has unliked the item
         isLiked = false
+    }
+    
+}
+
+extension DetailViewController: FirebaseLikeDelegate {
+    func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
+        self.likeData = likeData
     }
 }
