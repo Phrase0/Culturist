@@ -10,8 +10,7 @@ import Alamofire
 import MapKit
 
 class BookShopMapViewController: UIViewController {
-    
-    
+
     var bookShopCollection = [BookShop]()
     var bookShopManager = BookShopManager()
     

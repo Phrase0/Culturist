@@ -10,7 +10,6 @@ import UIKit
 class ProfileViewController: UIViewController {
     
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +19,8 @@ class ProfileViewController: UIViewController {
     @IBAction func goToLikecollection(_ sender: UIButton) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
 
-            present(detailVC, animated: true)
+        self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
-
 
 }

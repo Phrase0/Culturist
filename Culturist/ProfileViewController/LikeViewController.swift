@@ -18,36 +18,39 @@ class LikeViewController: UIViewController {
     var artManager6 = ArtProductManager()
     
     let semaphore = DispatchSemaphore(value: 0)
+    // create DispatchGroup
+    let group = DispatchGroup()
+
     
-    //products in likeCollection
+    // products in likeCollection
     var likeEXProducts = [ArtDatum]()
     
     @IBOutlet weak var likeCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         firebaseManager.likeDelegate = self
         likeCollectionView.dataSource = self
         likeCollectionView.delegate = self
-        
         artManager1.delegate = self
         artManager6.delegate = self
-        
-        
-        
-        DispatchQueue.global().async { [self] in
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        group.enter()
             artManager1.getArtProductList(number: "1")
-
+        group.enter()
             artManager6.getArtProductList(number: "6")
-            self.semaphore.wait()
-            // load data
-            self.firebaseManager.fetchUserLikeData {_,_ in
-                self.semaphore.signal()
+        group.enter()
+            firebaseManager.fetchUserLikeData {_,_ in
             }
-            semaphore.wait()
-            var filteredProducts = artProducts1 + artProducts6
+        group.leave()
+        group.notify(queue: .main) {
+            var filteredProducts = self.artProducts1 + self.artProducts6
             // compactMap: a map without nil
-            likeEXProducts = likeData.compactMap { like in
+            self.likeEXProducts = self.likeData.compactMap { like in
                 if let exhibitionUid = like.exhibitionUid {
                     return filteredProducts.first { product in
                         return product.uid == exhibitionUid
@@ -55,15 +58,17 @@ class LikeViewController: UIViewController {
                 }
                 return nil
             }
-            print(likeEXProducts)
-            print(likeEXProducts.count)
+            print(self.likeEXProducts.count)
             DispatchQueue.main.async {
                 self.likeCollectionView.reloadData()
             }
         }
     }
+    
+    
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return likeEXProducts.count
@@ -76,6 +81,17 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.imageView.kf.setImage(with: url)
         cell.titleLabel.text = itemData.title
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
+        
+        if let selectedIndexPaths = self.likeCollectionView.indexPathsForSelectedItems,
+           let selectedIndexPath = selectedIndexPaths.first {
+                detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]     
+        }
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -99,11 +115,11 @@ extension LikeViewController: ArtManagerDelegate {
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
-                // Release the semaphore after data loading is completed
-                self.semaphore.signal()
+                self.group.leave()
             }
         }
     }
+
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)

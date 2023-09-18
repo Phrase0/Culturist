@@ -32,13 +32,13 @@ class DetailViewController: UIViewController {
 
         group.enter()
         firebaseManager.fetchUserLikeData {_,_ in 
-            group.leave() // 离开 DispatchGroup
+            group.leave() // leave DispatchGroup
         }
 
         // use DispatchGroup notify
         group.notify(queue: .main) {
             let isLiked = self.likeData.contains { like in
-                print(like.exhibitionUid)
+                print(like.exhibitionUid!)
                 return like.exhibitionUid == self.detailDesctription?.uid
             }
             
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
@@ -66,11 +66,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.priceLabel.text = detailDesctription.showInfo[0].price
             cell.addressLabel.text = detailDesctription.showInfo[0].location
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
-            cell.endTimeLabel.text = detailDesctription.showInfo[0].endTime
+            cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
              
             // CoffeeButtonTapped
-            cell.searchCoffeeButtonHandler = { [weak self] sender in
+            cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
@@ -111,7 +111,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // BookButtonTapped
-            cell.searchBookButtonHandler = { [weak self] sender in
+            cell.searchBookButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
@@ -158,7 +158,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.likeBtn.isSelected = true
             }
             
-            cell.likeButtonHandler = { [weak self] sender in
+            cell.likeButtonHandler = { [weak self] _ in
                 if self?.isLiked == true {
                     // if isLiked, removeFavorite
                     self?.removeFavorite()
