@@ -95,4 +95,63 @@ class FirebaseManager {
     }
 
     // ---------------------------------------------------
+    func readFilterRecommendationData() {
+        let userRef = db.collection("users").document(user.id)
+        let recommendationDataCollection = userRef.collection("recommendationData")
+        
+        // search "recommendationData" documents
+        recommendationDataCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching recommendationData: \(error)")
+                return
+            }
+            var recommendationDataList = [RecommendationData]()
+            
+            for document in querySnapshot!.documents {
+                let data = document.data()
+                
+                if let exhibitionUid = data["exhibitionUid"] as? String,
+                   let title = data["title"] as? String,
+                   let location = data["location"] as? String,
+                   let locationName = data["locationName"] as? String {
+                    // add RecommendationData to list
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+                    recommendationDataList.append(recommendationData)
+                }
+            }
+            
+            if !recommendationDataList.isEmpty {
+                // calculate every RecommendationData amount
+                var counts = [RecommendationData: Int]()
+                
+                for recommendationData in recommendationDataList {
+                    counts[recommendationData, default: 0] += 1
+                }
+                
+                // find  mostRepeatedData
+                var mostRepeatedData = recommendationDataList[0]
+                var maxCount = counts[mostRepeatedData] ?? 0
+                
+                for (recommendationData, count) in counts {
+                    if count > maxCount {
+                        mostRepeatedData = recommendationData
+                        maxCount = count
+                    }
+                }
+                
+                // recommend mostRepeatedData
+                self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
+            } else {
+                // if no RecommendationData，recommend for random
+                if let randomData = recommendationDataList.randomElement() {
+                    self.collectionDelegate?.manager(self, didGet: [randomData])
+                } else {
+                    // no data could choose
+                    self.collectionDelegate?.manager(self, didGet: [])
+                }
+            }
+        }
+    }
+
+    // ---------------------------------------------------
 }

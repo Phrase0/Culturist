@@ -18,9 +18,32 @@ struct User {
     let recommendationData: [RecommendationData]
 }
 
-struct RecommendationData {
+//struct RecommendationData {
+//    let exhibitionUid: String
+//    let title: String
+//    let location: String
+//    let locationName: String
+//}
+
+struct RecommendationData: Hashable {
     let exhibitionUid: String
     let title: String
     let location: String
     let locationName: String
+
+    // provide hash
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(exhibitionUid)
+        hasher.combine(title)
+        hasher.combine(location)
+        hasher.combine(locationName)
+    }
+
+    static func == (lhs: RecommendationData, rhs: RecommendationData) -> Bool {
+        return lhs.exhibitionUid == rhs.exhibitionUid &&
+               lhs.title == rhs.title &&
+               lhs.location == rhs.location &&
+               lhs.locationName == rhs.locationName
+    }
 }
+
