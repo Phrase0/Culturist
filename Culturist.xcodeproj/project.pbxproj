@@ -34,6 +34,8 @@
 		F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */; };
 		F851F7642AB6C44E0029C78E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */; };
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
+		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
+		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +139,7 @@
 				F851F7482AB41F460029C78E /* DetailViewController */,
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
+				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
 				F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */,
 				F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */,
@@ -200,6 +205,15 @@
 				F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */,
 			);
 			path = RecommendViewController;
+			sourceTree = "<group>";
+		};
+		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
+				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
+			);
+			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
 		F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */ = {
@@ -354,6 +368,7 @@
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,
 				F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */,
+				F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */,
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
@@ -361,6 +376,7 @@
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
 				F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */,
 				F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */,
+				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,
 				F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */,
 				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,

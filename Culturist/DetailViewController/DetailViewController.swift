@@ -10,8 +10,11 @@ import Kingfisher
 import MapKit
 
 class DetailViewController: UIViewController {
-    
+    // detailData from home page
     var detailDesctription: ArtDatum?
+
+    let firebaseManager = FirebaseManager()
+    var isLiked: Bool?
     
     @IBOutlet weak var detailTableView: UITableView!
     
@@ -20,6 +23,8 @@ class DetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.delegate = self
     }
+    
+
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -39,6 +44,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo[0].endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
+            
+            
             
             // CoffeeButtonTapped
             cell.searchCoffeeButtonHandler = { [weak self] sender in
@@ -121,8 +128,43 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
+            
+            // ---------------------------------------------------
+
+            cell.likeButtonHandler = { [weak self] sender in
+                sender.isSelected = !sender.isSelected
+                if self?.isLiked == true {
+                    // 如果已经喜欢了，执行移除喜欢的操作
+                    self?.removeFavorite()
+                } else {
+                    // 如果还没有喜欢，执行添加喜欢的操作
+                    self?.addFavorite()
+                }
+            }
+            
+            // ---------------------------------------------------
         }
         return cell
     }
 
+    func addFavorite() {
+        // 创建 LikeData 对象并设置相应的 exhibitionUid、coffeeShopUid 或 bookShopUid
+        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
+        // 调用添加喜欢数据的函数
+        firebaseManager.addLikeData(likeData: likeData)
+        // 更新标志以表示用户已经喜欢了该项目
+        isLiked = true
+    }
+
+    // 移除喜欢的操作
+    func removeFavorite() {
+        // 创建 LikeData 对象并设置相应的 exhibitionUid、coffeeShopUid 或 bookShopUid
+        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
+        
+        // 调用移除喜欢数据的函数
+        firebaseManager.removeLikeData(likeData: likeData)
+        
+        // 更新标志以表示用户取消了喜欢该项目
+        isLiked = false
+    }
 }

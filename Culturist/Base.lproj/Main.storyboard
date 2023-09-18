@@ -143,13 +143,24 @@
             </objects>
             <point key="canvasLocation" x="936.64122137404581" y="679.57746478873241"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="cc3-ZK-c0c">
             <objects>
-                <viewController id="zFx-gN-yGZ" sceneMemberID="viewController">
+                <viewController id="zFx-gN-yGZ" customClass="ProfileViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WbB-Tf-pdW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRl-u2-UEa">
+                                <rect key="frame" x="125" y="620" width="142" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="like"/>
+                                <connections>
+                                    <action selector="goToLikecollection:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="ywv-Qc-Hia"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dzO-pN-0Fh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -157,7 +168,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOc-Cg-mCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="1389"/>
+            <point key="canvasLocation" x="936.64122137404581" y="1388.7323943661972"/>
+        </scene>
+        <!--Like View Controller-->
+        <scene sceneID="TzA-IQ-8P6">
+            <objects>
+                <viewController storyboardIdentifier="LikeViewController" id="zKE-vo-gJM" customClass="LikeViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TyY-KY-lIH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nyo-lR-e9N">
+                                    <size key="itemSize" width="180" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="giQ-Vv-m2B" customClass="HomeCollectionViewCell" customModule="Culturist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tdo-dL-e3S">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6K-cQ-8Fm">
+                                                    <rect key="frame" x="8" y="0.0" width="164" height="130"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOc-ee-4p1">
+                                                    <rect key="frame" x="8" y="138" width="164" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="productImage" destination="c6K-cQ-8Fm" id="c4a-ZR-mFq"/>
+                                            <outlet property="productTitle" destination="SOc-ee-4p1" id="DYF-5V-cPm"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="58j-rJ-fMb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uEv-xo-R60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2592" y="1193"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
@@ -220,15 +286,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7E-Uv-1dp">
-                                                    <rect key="frame" x="47" y="440" width="111" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="tinted" title="探索咖啡店"/>
-                                                    <connections>
-                                                        <action selector="searchCoffeeShop:" destination="eiP-1D-OOg" eventType="touchUpInside" id="sj1-ex-Ads"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oab-pH-xdy">
                                                     <rect key="frame" x="208" y="441" width="94" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -252,6 +309,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxU-qk-DO3">
+                                                    <rect key="frame" x="320" y="272" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="heart_Selected"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="heart_Selected"/>
+                                                    <connections>
+                                                        <action selector="likeButton:" destination="eiP-1D-OOg" eventType="touchUpInside" id="VBo-VL-TkS"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7E-Uv-1dp">
+                                                    <rect key="frame" x="47" y="440" width="111" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="tinted" title="探索咖啡店"/>
+                                                    <connections>
+                                                        <action selector="searchCoffeeShop:" destination="eiP-1D-OOg" eventType="touchUpInside" id="sj1-ex-Ads"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="JeH-8q-b7M" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leadingMargin" id="DRN-Q2-phD"/>
@@ -265,6 +343,7 @@
                                             <outlet property="descriptionLabel" destination="waa-ue-cTV" id="OfG-1Q-Igg"/>
                                             <outlet property="detailImageView" destination="JeH-8q-b7M" id="E9h-Hc-Nxm"/>
                                             <outlet property="endTimeLabel" destination="uGF-Gu-guP" id="as3-uJ-aIr"/>
+                                            <outlet property="likeBtn" destination="CxU-qk-DO3" id="0mR-go-4NH"/>
                                             <outlet property="locationLabel" destination="BLB-fj-jlp" id="lCx-6K-1nO"/>
                                             <outlet property="priceLabel" destination="cQk-Xd-gUq" id="mtY-xs-wzP"/>
                                             <outlet property="startTimeLabel" destination="cO2-Pv-l6m" id="2nf-US-jOQ"/>
@@ -724,6 +803,7 @@
     </scenes>
     <resources>
         <image name="coffeeDemo" width="5824" height="3259"/>
+        <image name="heart_Selected" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

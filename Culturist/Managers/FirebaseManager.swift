@@ -21,7 +21,7 @@ class FirebaseManager {
     // Get the Firestore database reference
     let db = Firestore.firestore()
     // Assuming a User object
-    let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [])
+    let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [], likeData: [])
     
     func addData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
@@ -64,8 +64,8 @@ class FirebaseManager {
             }
         }
     }
-
-
+    
+    
     // ---------------------------------------------------
     func readRecommendationData() {
         let userRef = db.collection("users").document(user.id)
@@ -93,7 +93,7 @@ class FirebaseManager {
             
         }
     }
-
+    
     // ---------------------------------------------------
     func readFilterRecommendationData() {
         let userRef = db.collection("users").document(user.id)
@@ -152,6 +152,94 @@ class FirebaseManager {
             }
         }
     }
-
+    
+    // ---------------------------------------------------
+    func addLikeData(likeData: LikeData) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(user.id)
+        // Create a new collection reference for likeData
+        let likeCollection = userRef.collection("likeCollection")
+        
+        // Create a data dictionary for LikeData
+        var likeDataDict: [String: Any] = [:]
+        if let exhibitionUid = likeData.exhibitionUid {
+            likeDataDict["exhibitionUid"] = exhibitionUid
+        }
+        if let coffeeShopUid = likeData.coffeeShopUid {
+            likeDataDict["coffeeShopUid"] = coffeeShopUid
+        }
+        if let bookShopUid = likeData.bookShopUid {
+            likeDataDict["bookShopUid"] = bookShopUid
+        }
+        
+        // Add LikeData to the likeCollection
+        likeCollection.addDocument(data: likeDataDict) { (error) in
+            if let error = error {
+                print("Error adding LikeData: \(error)")
+            } else {
+                print("LikeData added successfully.")
+            }
+        }
+        
+        // Update user document data with id, name, and email
+        let userData: [String: Any] = [
+            "id": user.id,
+            "name": user.name,
+            "email": user.email
+        ]
+        
+        // Set the user's document data with merge option to update existing data
+        userRef.setData(userData, merge: true) { (error) in
+            if let error = error {
+                print("Error updating user data: \(error)")
+            } else {
+                print("User data updated successfully.")
+            }
+        }
+    }
+    
+    // ---------------------------------------------------
+    // 移除喜欢的数据
+    func removeLikeData(likeData: LikeData) {
+        // 获取用户文档的引用
+        let userRef = db.collection("users").document(user.id)
+        
+        // 创建一个引用到用户的 likeCollection
+        let likeCollection = userRef.collection("likeCollection")
+        
+        // 创建一个查询，以查找匹配喜欢数据的文档
+        var query: Query = likeCollection
+        
+        if let exhibitionUid = likeData.exhibitionUid {
+            query = query.whereField("exhibitionUid", isEqualTo: exhibitionUid)
+        }
+        
+        if let coffeeShopUid = likeData.coffeeShopUid {
+            query = query.whereField("coffeeShopUid", isEqualTo: coffeeShopUid)
+        }
+        
+        if let bookShopUid = likeData.bookShopUid {
+            query = query.whereField("bookShopUid", isEqualTo: bookShopUid)
+        }
+        
+        // 执行查询，获取匹配的文档并删除它们
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error removing LikeData: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let documentID = document.documentID
+                    likeCollection.document(documentID).delete { (error) in
+                        if let error = error {
+                            print("Error removing LikeData document: \(error)")
+                        } else {
+                            print("LikeData removed successfully.")
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
     // ---------------------------------------------------
 }

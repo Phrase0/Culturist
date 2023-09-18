@@ -32,12 +32,11 @@ class RecommendViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
-        
-        
+    
         DispatchQueue.global().async {
             // wait data load
             self.semaphore.wait()
-            //load data
+            // load data
             self.filterContent()
             DispatchQueue.main.async {
                 self.recommendCollectionView.reloadData()
@@ -52,12 +51,11 @@ class RecommendViewController: UIViewController {
     
     func filterContent() {
         var filteredProducts = artProducts1 + artProducts6
-        // 按 hitRate 字段降序排序
+        // sort by hitRate
         filteredProducts.sort { $0.hitRate > $1.hitRate }
-        // 取前6项数据
+        // Get the first 6 items of data
         recommendProducts = Array(filteredProducts.prefix(6))
     }
-    
     
 }
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -96,7 +94,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
 
 // MARK: - ArtManagerDelegate
 extension RecommendViewController: ArtManagerDelegate {
-    // 在 manager(_:didGet:) 中调用信号量的 signal() 方法来通知数据加载完成
+    // Call the signal() method of the semaphore in manager(_:didGet:) to notify that the data loading is complete
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
         DispatchQueue.main.async {
             if artProductList.isEmpty {
@@ -107,7 +105,7 @@ extension RecommendViewController: ArtManagerDelegate {
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
-                // 数据加载完成后释放信号量
+                // Release the semaphore after data loading is completed
                 self.semaphore.signal()
             }
         }
