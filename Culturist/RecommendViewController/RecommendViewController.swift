@@ -7,10 +7,7 @@
 
 import UIKit
 
-
 class RecommendViewController: UIViewController {
-
-    
 
     @IBOutlet weak var recommendCollectionView: UICollectionView!
     
@@ -28,13 +25,12 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        firebaseManager.readExhibitionUid()
+        firebaseManager.readRecommendationData()
         print(recommendationList)
     }
     
 
 }
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

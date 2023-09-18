@@ -15,9 +15,12 @@ struct User {
     let id: String
     let name: String
     let email: String
-    let recommendationData:[RecommendationData]
+    let recommendationData: [RecommendationData]
 }
 
 struct RecommendationData {
     let exhibitionUid: String
+    let title: String
+    let location: String
+    let locationName: String
 }
