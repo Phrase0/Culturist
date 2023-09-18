@@ -19,7 +19,6 @@ class DetailViewController: UIViewController {
     var likeData = [LikeData]()
     
     @IBOutlet weak var detailTableView: UITableView!
-    let semaphore = DispatchSemaphore(value: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class DetailViewController: UIViewController {
         let group = DispatchGroup()
 
         group.enter()
-        firebaseManager.fetchUserLikeData {_,_ in 
+        firebaseManager.fetchUserLikeData { _ in
             group.leave() // leave DispatchGroup
         }
 

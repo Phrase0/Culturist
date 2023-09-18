@@ -17,10 +17,9 @@ class LikeViewController: UIViewController {
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
     
-    let semaphore = DispatchSemaphore(value: 0)
     // create DispatchGroup
     let group = DispatchGroup()
-
+    
     
     // products in likeCollection
     var likeEXProducts = [ArtDatum]()
@@ -40,12 +39,12 @@ class LikeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         group.enter()
-            artManager1.getArtProductList(number: "1")
+        artManager1.getArtProductList(number: "1")
         group.enter()
-            artManager6.getArtProductList(number: "6")
+        artManager6.getArtProductList(number: "6")
         group.enter()
-            firebaseManager.fetchUserLikeData {_,_ in
-            }
+        firebaseManager.fetchUserLikeData { _ in
+        }
         group.leave()
         group.notify(queue: .main) {
             var filteredProducts = self.artProducts1 + self.artProducts6
@@ -64,8 +63,6 @@ class LikeViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -88,7 +85,7 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         if let selectedIndexPaths = self.likeCollectionView.indexPathsForSelectedItems,
            let selectedIndexPath = selectedIndexPaths.first {
-                detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]     
+            detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]
         }
         
         self.navigationController?.pushViewController(detailVC, animated: true)
@@ -119,7 +116,7 @@ extension LikeViewController: ArtManagerDelegate {
             }
         }
     }
-
+    
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)

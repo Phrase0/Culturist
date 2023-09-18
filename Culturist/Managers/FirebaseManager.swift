@@ -245,14 +245,13 @@ class FirebaseManager {
         
     }
     // ---------------------------------------------------
-    func fetchUserLikeData(completion: @escaping ([LikeData]?, Error?) -> Void) {
+    func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
         let userRef = db.collection("users").document(user.id)
         let likeCollection = userRef.collection("likeCollection")
         
         likeCollection.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error fetching LikeData: \(error)")
-                completion(nil, error)
             } else {
                 var userLikes: [LikeData] = []
                 
@@ -266,8 +265,8 @@ class FirebaseManager {
                     userLikes.append(likeData)
                 }
 
-                self.likeDelegate?.manager(self, didGet: userLikes)
-                completion(userLikes, nil)
+                 self.likeDelegate?.manager(self, didGet: userLikes)
+                completion(userLikes)
  
             }
         }
