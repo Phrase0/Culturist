@@ -36,6 +36,7 @@
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
+		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,6 +214,7 @@
 			children = (
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
 				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
+				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */,
 				F851F74E2AB45D880029C78E /* CoffeeMapNavigationViewController.swift in Sources */,
 				F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */,
+				F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */,
 				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */,
 				F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */,

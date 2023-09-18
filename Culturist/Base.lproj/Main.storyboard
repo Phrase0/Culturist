@@ -189,7 +189,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCollectionViewCell" id="giQ-Vv-m2B" customClass="HomeCollectionViewCell" customModule="Culturist" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LikeCollectionViewCell" id="giQ-Vv-m2B" customClass="LikeCollectionViewCell" customModule="Culturist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tdo-dL-e3S">
@@ -210,8 +210,8 @@
                                             </subviews>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="productImage" destination="c6K-cQ-8Fm" id="c4a-ZR-mFq"/>
-                                            <outlet property="productTitle" destination="SOc-ee-4p1" id="DYF-5V-cPm"/>
+                                            <outlet property="imageView" destination="c6K-cQ-8Fm" id="2KX-hy-ohn"/>
+                                            <outlet property="titleLabel" destination="SOc-ee-4p1" id="zcM-ol-neK"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -220,10 +220,13 @@
                         <viewLayoutGuide key="safeArea" id="58j-rJ-fMb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="likeCollectionView" destination="52K-Os-cd3" id="ApC-vs-sNf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEv-xo-R60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592" y="1193"/>
+            <point key="canvasLocation" x="1694" y="1389"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">

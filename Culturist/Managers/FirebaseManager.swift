@@ -27,6 +27,8 @@ class FirebaseManager {
     // Assuming a User object
     let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [], likeData: [])
     
+    
+    // MARK: - Recommendation
     func addData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
         let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
@@ -158,6 +160,7 @@ class FirebaseManager {
     }
     
     // ---------------------------------------------------
+    // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {
         // Get the user's document reference
         let userRef = db.collection("users").document(user.id)
@@ -203,15 +206,11 @@ class FirebaseManager {
     }
     
     // ---------------------------------------------------
-    // 移除喜欢的数据
     func removeLikeData(likeData: LikeData) {
-        // 获取用户文档的引用
         let userRef = db.collection("users").document(user.id)
-        
-        // 创建一个引用到用户的 likeCollection
         let likeCollection = userRef.collection("likeCollection")
         
-        // 创建一个查询，以查找匹配喜欢数据的文档
+        // Create a query to find documents matching likeCollection data
         var query: Query = likeCollection
         
         if let exhibitionUid = likeData.exhibitionUid {
@@ -226,7 +225,7 @@ class FirebaseManager {
             query = query.whereField("bookShopUid", isEqualTo: bookShopUid)
         }
         
-        // 执行查询，获取匹配的文档并删除它们
+        // Execute a query, get matching documents and delete them
         query.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error removing LikeData: \(error)")
@@ -246,7 +245,6 @@ class FirebaseManager {
         
     }
     // ---------------------------------------------------
-    // 在页面加载时获取用户的喜欢数据
     func fetchUserLikeData(completion: @escaping ([LikeData]?, Error?) -> Void) {
         let userRef = db.collection("users").document(user.id)
         let likeCollection = userRef.collection("likeCollection")
@@ -254,7 +252,7 @@ class FirebaseManager {
         likeCollection.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error fetching LikeData: \(error)")
-                completion(nil, error) // 调用闭包通知发生错误
+                completion(nil, error)
             } else {
                 var userLikes: [LikeData] = []
                 
@@ -267,20 +265,12 @@ class FirebaseManager {
                     let likeData = LikeData(exhibitionUid: exhibitionUid, coffeeShopUid: coffeeShopUid, bookShopUid: bookShopUid)
                     userLikes.append(likeData)
                 }
-                
-                // 将用户的喜欢数据保存在适当的位置，以便在页面上使用
-                // 例如，你可以将它们存储在一个成员变量中
+
                 self.likeDelegate?.manager(self, didGet: userLikes)
-                print("userLike:\(userLikes)")
-                
-                // 调用闭包通知操作成功
                 completion(userLikes, nil)
-                
-                // 更新页面以反映用户的喜欢数据
-                // 这里可以调用页面的刷新函数或更新 UI 的逻辑
+ 
             }
         }
     }
-
 
 }
