@@ -18,13 +18,6 @@ struct User {
     let recommendationData: [RecommendationData]
 }
 
-//struct RecommendationData {
-//    let exhibitionUid: String
-//    let title: String
-//    let location: String
-//    let locationName: String
-//}
-
 struct RecommendationData: Hashable {
     let exhibitionUid: String
     let title: String

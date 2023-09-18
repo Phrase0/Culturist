@@ -140,8 +140,6 @@ extension HomeViewController: UISearchResultsUpdating {
         navigationItem.hidesSearchBarWhenScrolling = false
         mySearchController?.searchResultsUpdater = self
         mySearchController?.searchBar.placeholder = "搜尋展覽"
-        //        mySearchController?.searchBar.barTintColor = .blue
-        //        mySearchController?.searchBar.tintColor = .red
         mySearchController?.searchBar.searchBarStyle = .prominent
     }
     
