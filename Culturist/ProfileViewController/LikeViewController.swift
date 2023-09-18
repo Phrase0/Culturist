@@ -8,7 +8,7 @@
 import UIKit
 
 class LikeViewController: UIViewController {
-
+    
     let firebaseManager = FirebaseManager()
     var likeData = [LikeData]()
     
@@ -21,7 +21,7 @@ class LikeViewController: UIViewController {
     
     //products in likeCollection
     var likeEXProducts = [ArtDatum]()
-
+    
     @IBOutlet weak var likeCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -32,11 +32,13 @@ class LikeViewController: UIViewController {
         
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
-  
+        
+        
+        
         DispatchQueue.global().async { [self] in
-            // wait data load
+            artManager1.getArtProductList(number: "1")
+
+            artManager6.getArtProductList(number: "6")
             self.semaphore.wait()
             // load data
             self.firebaseManager.fetchUserLikeData {_,_ in
@@ -44,35 +46,28 @@ class LikeViewController: UIViewController {
             }
             semaphore.wait()
             var filteredProducts = artProducts1 + artProducts6
-            for like in likeData {
+            // compactMap: a map without nil
+            likeEXProducts = likeData.compactMap { like in
                 if let exhibitionUid = like.exhibitionUid {
-                    let matchingProducts = filteredProducts.filter { product in
-                        print(exhibitionUid)
+                    return filteredProducts.first { product in
                         return product.uid == exhibitionUid
                     }
-                    
-                    likeEXProducts.append(contentsOf: matchingProducts)
-                    print(likeEXProducts)
                 }
+                return nil
             }
-                    self.semaphore.signal()
-                    semaphore.wait()
-                    DispatchQueue.main.async {
-                        self.likeCollectionView.reloadData()
-                    }
-                }
+            print(likeEXProducts)
+            print(likeEXProducts.count)
+            DispatchQueue.main.async {
+                self.likeCollectionView.reloadData()
             }
- 
-        
-    
-    
+        }
+    }
 }
 
 extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return likeEXProducts.count
     }
-
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikeCollectionViewCell", for: indexPath) as? LikeCollectionViewCell else {return UICollectionViewCell()}
