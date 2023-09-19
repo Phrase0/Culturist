@@ -11,17 +11,45 @@ import MapKit
 
 class DetailViewController: UIViewController {
     
+    // detailData from home page
     var detailDesctription: ArtDatum?
     
-    @IBOutlet weak var detailTableView: UITableView!
+    let firebaseManager = FirebaseManager()
+    var isLiked: Bool?
+    var likeData = [LikeData]()
     
+    @IBOutlet weak var detailTableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTableView.dataSource = self
         detailTableView.delegate = self
+        firebaseManager.likeDelegate = self
+        
+        // create DispatchGroup
+        let group = DispatchGroup()
+
+        group.enter()
+        firebaseManager.fetchUserLikeData { _ in
+            group.leave() // leave DispatchGroup
+        }
+
+        // use DispatchGroup notify
+        group.notify(queue: .main) {
+            let isLiked = self.likeData.contains { like in
+                print(like.exhibitionUid!)
+                return like.exhibitionUid == self.detailDesctription?.uid
+            }
+            
+            DispatchQueue.main.async {
+                self.isLiked = isLiked
+                self.detailTableView.reloadData()
+            }
+        }
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
@@ -37,11 +65,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.priceLabel.text = detailDesctription.showInfo[0].price
             cell.addressLabel.text = detailDesctription.showInfo[0].location
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
-            cell.endTimeLabel.text = detailDesctription.showInfo[0].endTime
+            cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-            
+             
             // CoffeeButtonTapped
-            cell.searchCoffeeButtonHandler = { [weak self] sender in
+            cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
@@ -80,9 +108,9 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-
+            
             // BookButtonTapped
-            cell.searchBookButtonHandler = { [weak self] sender in
+            cell.searchBookButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
@@ -121,8 +149,53 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
+            
+            // ---------------------------------------------------
+            if isLiked == false {
+                cell.likeBtn.isSelected = false
+            } else {
+                cell.likeBtn.isSelected = true
+            }
+            
+            cell.likeButtonHandler = { [weak self] _ in
+                if self?.isLiked == true {
+                    // if isLiked, removeFavorite
+                    self?.removeFavorite()
+                    cell.likeBtn.isSelected = false
+                } else {
+                    self?.addFavorite()
+                    cell.likeBtn.isSelected = true
+                }
+            }
+            
+            // ---------------------------------------------------
         }
         return cell
     }
+    
+    func addFavorite() {
+        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
+        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
+        // Call the function to add liked data
+        firebaseManager.addLikeData(likeData: likeData)
+        // Update the flag to indicate that the user has liked the item
+        isLiked = true
+    }
+    
+    // Remove favorite action
+    func removeFavorite() {
+        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
+        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
+        // Call the function to remove liked data
+        firebaseManager.removeLikeData(likeData: likeData)
+        // Update the flag to indicate that the user has unliked the item
+        isLiked = false
+    }
+    
+}
 
+extension DetailViewController: FirebaseLikeDelegate {
+    func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
+        self.likeData = likeData
+    }
 }

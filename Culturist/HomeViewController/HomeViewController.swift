@@ -95,13 +95,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
            let selectedIndexPath = selectedIndexPaths.first {
             if indexPath.section == 0 {
                 detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
-                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
+//                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
                 
                 
                 
             } else if indexPath.section == 1 {
                 detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
-                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
+//                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
             }
         }
         

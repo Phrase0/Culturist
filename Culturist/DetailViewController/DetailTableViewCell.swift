@@ -20,10 +20,15 @@ class DetailTableViewCell: UITableViewCell {
     
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
+    var likeButtonHandler: ((UIButton) -> Void)?
     
+    @IBOutlet weak var likeBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        likeBtn.setImage(UIImage(named: "heart_normal"), for: .normal)
+        likeBtn.setImage(UIImage(named: "heart_Selected"), for: .selected)
+
     }
 
     @IBAction func searchCoffeeShop(_ sender: UIButton) {
@@ -32,6 +37,11 @@ class DetailTableViewCell: UITableViewCell {
     
     @IBAction func searchBookShop(_ sender: UIButton) {
         searchBookButtonHandler?(sender)
+    }
+    
+    
+    @IBAction func likeButton(_ sender: UIButton) {
+        likeButtonHandler?(sender)
     }
     
 }
