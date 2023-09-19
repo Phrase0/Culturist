@@ -57,7 +57,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-                destinationMapItem.name = "\(coffeeShop.name)"
+                
                 // getDirections method，pass taget MKMapItem
                 self?.getDirections(to: destinationMapItem)
                 print("Button Tapped")
@@ -97,9 +97,11 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                     return
                 }
                 guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "POIViewController") as? POIViewController else { return }
-                //let arclVC = self.createARVC()
                 detailVC.routes = response.routes
-                //self.navigationController?.pushViewController(arclVC, animated: true)
+                detailVC.name = coffeeShop?.name
+                detailVC.latitude = Double(coffeeShop!.latitude)
+                detailVC.longitude = Double(coffeeShop!.longitude)
+                //self.navigationController?.pushViewController(detailVC, animated: true)
                 self.present(detailVC, animated: true)
             }
         })

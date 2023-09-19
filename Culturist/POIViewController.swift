@@ -18,7 +18,6 @@ class POIViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var infoLabel: UILabel!
-    @IBOutlet weak var nodePositionLabel: UILabel!
 
     @IBOutlet var contentView: UIView!
     
@@ -32,6 +31,10 @@ class POIViewController: UIViewController {
 
     var centerMapOnUserLocation: Bool = true
     var routes: [MKRoute]?
+    
+    var name: String?
+    var latitude: Double?
+    var longitude: Double?
 
     // Whether to display some debugging data
     // This currently displays the coordinate of the best location estimate
@@ -41,11 +44,6 @@ class POIViewController: UIViewController {
     let adjustNorthByTappingSidesOfScreen = false
     let addNodeByTappingScreen = true
 
-    class func loadFromStoryboard() -> POIViewController {
-        return UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "ARCLViewController") as! POIViewController
-        // swiftlint:disable:previous force_cast
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,17 +74,16 @@ class POIViewController: UIViewController {
 
         sceneLocationView.showAxesNode = true
         sceneLocationView.showFeaturePoints = displayDebugging
-        sceneLocationView.locationNodeTouchDelegate = self
+//        sceneLocationView.locationNodeTouchDelegate = self
 //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
         sceneLocationView.arViewDelegate = self
-        sceneLocationView.locationNodeTouchDelegate = self
+        // sceneLocationView.locationNodeTouchDelegate = self
 
         // Now add the route or location annotations as appropriate
         addSceneModels()
 
         contentView.addSubview(sceneLocationView)
         sceneLocationView.frame = contentView.bounds
-
 
             updateUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
                 self?.updateUserLocation()
@@ -97,7 +94,7 @@ class POIViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        // navigationController?.setNavigationBarHidden(false, animated: animated)
         restartAnimation()
     }
 
@@ -122,6 +119,36 @@ class POIViewController: UIViewController {
         sceneLocationView.frame = contentView.bounds
     }
 
+    // let map can scale
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let touch = touches.first,
+            let view = touch.view else { return }
+
+        if mapView == view || mapView.recursiveSubviews().contains(view) {
+            centerMapOnUserLocation = false
+        } else {
+            let location = touch.location(in: self.view)
+
+            if location.x <= 40 && adjustNorthByTappingSidesOfScreen {
+                print("left side of the screen")
+                sceneLocationView.moveSceneHeadingAntiClockwise()
+            } else if location.x >= view.frame.size.width - 40 && adjustNorthByTappingSidesOfScreen {
+                print("right side of the screen")
+                sceneLocationView.moveSceneHeadingClockwise()
+            } else if addNodeByTappingScreen {
+                let image = UIImage(named: "pin")!
+                let annotationNode = LocationAnnotationNode(location: nil, image: image)
+                annotationNode.scaleRelativeToDistance = false
+                annotationNode.scalingScheme = .normal
+                DispatchQueue.main.async {
+                    // If we're using the touch delegate, adding a new node in the touch handler sometimes causes a freeze.
+                    // So defer to next pass.
+                    self.sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -178,7 +205,7 @@ extension POIViewController {
 
         // 2. If there is a route, show that
         if let routes = routes {
-            sceneLocationView.addRoutes(routes: routes) { distance -> SCNBox in
+            sceneLocationView.addRoutes(routes: routes) { [self] distance -> SCNBox in
                 let box = SCNBox(width: 1.75, height: 0.5, length: distance, chamferRadius: 0.25)
 
 //                // Option 1: An absolutely terrible box material set (that demonstrates what you can do):
@@ -189,7 +216,12 @@ extension POIViewController {
 //                }
 
                 // Option 2: Something more typical
-                box.firstMaterial?.diffuse.contents = UIColor.blue.withAlphaComponent(0.7)
+                box.firstMaterial?.diffuse.contents = UIColor.systemCyan.withAlphaComponent(0.8)
+                
+                distinationData().forEach {
+                    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
+                }
+ 
                 return box
             }
         } else {
@@ -207,14 +239,23 @@ extension POIViewController {
 
     // Builds the location annotations for a few random objects, scattered across the country
     // - Returns: an array of annotation nodes.
+    func distinationData() -> [LocationAnnotationNode] {
+        var nodes: [LocationAnnotationNode] = []
+        let distinationNeedle = buildNode(latitude: latitude!, longitude: longitude!, altitude: 225, imageName: "pin")
+        nodes.append(distinationNeedle)
+        let schoolBuilding = buildNode(latitude: 25.038635384169808, longitude: 121.53242384738242, altitude: 225, imageName: "pin")
+        nodes.append(schoolBuilding)
+        return nodes
+    }
+       
     func buildDemoData() -> [LocationAnnotationNode] {
         var nodes: [LocationAnnotationNode] = []
 
         let spaceNeedle = buildNode(latitude: 47.6205, longitude: -122.3493, altitude: 225, imageName: "pin")
         nodes.append(spaceNeedle)
 
-        let empireStateBuilding = buildNode(latitude: 40.7484, longitude: -73.9857, altitude: 14.3, imageName: "pin")
-        nodes.append(empireStateBuilding)
+        let schoolBuilding = buildNode(latitude: 40.7484, longitude: -73.9857, altitude: 14.3, imageName: "pin")
+        nodes.append(schoolBuilding)
 
         let canaryWharf = buildNode(latitude: 51.504607, longitude: -0.019592, altitude: 236, imageName: "pin")
         nodes.append(canaryWharf)
@@ -260,6 +301,18 @@ extension POIViewController {
             if self.userAnnotation == nil {
                 self.userAnnotation = MKPointAnnotation()
                 self.mapView.addAnnotation(self.userAnnotation!)
+                
+                // add destinationAnnotation
+                // ---------------------------------------------------
+                let destinationLocation = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+                
+                let destinationAnnotation = MKPointAnnotation()
+                destinationAnnotation.coordinate = destinationLocation
+                destinationAnnotation.title = name!
+                mapView.addAnnotation(destinationAnnotation)
+                
+                // ---------------------------------------------------
+                
             }
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
@@ -344,28 +397,6 @@ extension POIViewController {
 
 }
 
-// MARK: - LNTouchDelegate
-@available(iOS 11.0, *)
-extension POIViewController: LNTouchDelegate {
-
-    func annotationNodeTouched(node: AnnotationNode) {
-        if let node = node.parent as? LocationNode {
-            let coords = "\(node.location.coordinate.latitude.short)° \(node.location.coordinate.longitude.short)°"
-            let altitude = "\(node.location.altitude.short)m"
-            let tag = node.tag ?? ""
-            nodePositionLabel.text = " Annotation node at \(coords), \(altitude) - \(tag)"
-        }
-    }
-
-    func locationNodeTouched(node: LocationNode) {
-        print("Location node touched - tag: \(node.tag ?? "")")
-        let coords = "\(node.location.coordinate.latitude.short)° \(node.location.coordinate.longitude.short)°"
-        let altitude = "\(node.location.altitude.short)m"
-        let tag = node.tag ?? ""
-        nodePositionLabel.text = " Location node at \(coords), \(altitude) - \(tag)"
-    }
-
-}
 
 // MARK: - Helpers
 
