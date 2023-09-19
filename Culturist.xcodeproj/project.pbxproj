@@ -37,6 +37,8 @@
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
+		F8B816F42AB9986C0016F4BB /* POIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F32AB9986C0016F4BB /* POIViewController.swift */; };
+		F8B816F62AB99A250016F4BB /* POIViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* POIViewController+ARSCNViewDelegate.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,8 @@
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8B816F32AB9986C0016F4BB /* POIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIViewController.swift; sourceTree = "<group>"; };
+		F8B816F52AB99A250016F4BB /* POIViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "POIViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +145,8 @@
 				F851F7482AB41F460029C78E /* DetailViewController */,
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
+				F8B816F32AB9986C0016F4BB /* POIViewController.swift */,
+				F8B816F52AB99A250016F4BB /* POIViewController+ARSCNViewDelegate.swift */,
 				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
 				F851F7632AB6C44E0029C78E /* GoogleService-Info.plist */,
@@ -367,6 +373,7 @@
 			files = (
 				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
+				F8B816F42AB9986C0016F4BB /* POIViewController.swift in Sources */,
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,
@@ -387,6 +394,7 @@
 				F851F74E2AB45D880029C78E /* CoffeeMapNavigationViewController.swift in Sources */,
 				F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */,
 				F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */,
+				F8B816F62AB99A250016F4BB /* POIViewController+ARSCNViewDelegate.swift in Sources */,
 				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */,
 				F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */,

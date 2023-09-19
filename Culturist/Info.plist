@@ -22,15 +22,17 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>取得現在位置以便呈現資訊</string>
+	<string>This application will use location for Augmented Reality.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>取得現在位置以便呈現資訊</string>
+	<string>This application will use location for Augmented Reality.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>取得現在位置以便呈現資訊</string>
+	<string>This application will use location for Augmented Reality.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This application will use the camera for Augmented Reality.</string>
 </dict>
 </plist>

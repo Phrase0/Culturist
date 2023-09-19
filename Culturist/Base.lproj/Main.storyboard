@@ -710,20 +710,81 @@
             </objects>
             <point key="canvasLocation" x="4133.5877862595416" y="-182.3943661971831"/>
         </scene>
-        <!--Coffee Map Navigation View Controller-->
+        <!--View Controller-->
         <scene sceneID="SJL-7m-a8B">
             <objects>
-                <viewController storyboardIdentifier="CoffeeMapNavigationViewController" id="Ybv-w7-4c0" customClass="CoffeeMapNavigationViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="POIViewController" id="Ybv-w7-4c0" customClass="POIViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eA1-Nz-3yl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIu-wq-tLe">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OTo-x3-CWD">
+                                <rect key="frame" x="0.0" y="426" width="393" height="426"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </mapView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Tap a node to see location" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6m-Nm-O8F" userLabel="Node Position Label">
+                                <rect key="frame" x="16" y="704" width="361" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qcP-dN-Buf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcJ-dP-gKb" userLabel="Info Label">
+                                <rect key="frame" x="16" y="742" width="361" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="rNV-H5-7V5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KDr-hO-EbM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="q6m-Nm-O8F" firstAttribute="trailing" secondItem="rcJ-dP-gKb" secondAttribute="trailing" id="2RA-hw-vDR"/>
+                            <constraint firstItem="KDr-hO-EbM" firstAttribute="trailing" secondItem="rcJ-dP-gKb" secondAttribute="trailing" constant="16" id="7Dp-GT-17X"/>
+                            <constraint firstItem="OTo-x3-CWD" firstAttribute="height" secondItem="eA1-Nz-3yl" secondAttribute="height" multiplier="1/2" id="FSq-Tr-fp1"/>
+                            <constraint firstItem="xIu-wq-tLe" firstAttribute="leading" secondItem="eA1-Nz-3yl" secondAttribute="leading" id="U7Y-Tv-PyR"/>
+                            <constraint firstItem="OTo-x3-CWD" firstAttribute="leading" secondItem="eA1-Nz-3yl" secondAttribute="leading" id="Yjb-uH-epb"/>
+                            <constraint firstItem="KDr-hO-EbM" firstAttribute="bottom" secondItem="rcJ-dP-gKb" secondAttribute="bottom" constant="20" id="bgF-Jq-dKD"/>
+                            <constraint firstAttribute="trailing" secondItem="xIu-wq-tLe" secondAttribute="trailing" id="h8d-fP-zCb"/>
+                            <constraint firstAttribute="bottom" secondItem="xIu-wq-tLe" secondAttribute="bottom" id="hiz-H7-eIo"/>
+                            <constraint firstAttribute="bottom" secondItem="OTo-x3-CWD" secondAttribute="bottom" id="jge-qK-BvA"/>
+                            <constraint firstAttribute="trailing" secondItem="OTo-x3-CWD" secondAttribute="trailing" id="pk7-Jq-vhj"/>
+                            <constraint firstItem="xIu-wq-tLe" firstAttribute="top" secondItem="eA1-Nz-3yl" secondAttribute="top" id="plH-P5-uQe"/>
+                            <constraint firstItem="rcJ-dP-gKb" firstAttribute="top" secondItem="q6m-Nm-O8F" secondAttribute="bottom" constant="8" symbolic="YES" id="tQl-q5-c79"/>
+                            <constraint firstItem="rcJ-dP-gKb" firstAttribute="leading" secondItem="KDr-hO-EbM" secondAttribute="leading" constant="16" id="vjs-Q2-vZt"/>
+                            <constraint firstItem="q6m-Nm-O8F" firstAttribute="leading" secondItem="rcJ-dP-gKb" secondAttribute="leading" id="x7Z-mX-EUi"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contentView" destination="xIu-wq-tLe" id="7a4-AR-Ocz"/>
+                        <outlet property="infoLabel" destination="rcJ-dP-gKb" id="h1r-yC-4Rx"/>
+                        <outlet property="mapView" destination="OTo-x3-CWD" id="oA0-u9-2cZ"/>
+                        <outlet property="nodePositionLabel" destination="q6m-Nm-O8F" id="ETH-IQ-f5b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Tg-oF-4wm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5203.8167938931292" y="-194.36619718309859"/>
+            <point key="canvasLocation" x="5040" y="-182"/>
         </scene>
         <!--Home-->
         <scene sceneID="ckV-0z-aXN">
