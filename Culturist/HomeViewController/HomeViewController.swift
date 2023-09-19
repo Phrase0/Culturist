@@ -65,7 +65,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return cell
     }
     
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         

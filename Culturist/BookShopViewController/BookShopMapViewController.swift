@@ -5,11 +5,9 @@
 //  Created by Peiyun on 2023/9/14.
 //
 
-
 import UIKit
 import Alamofire
 import MapKit
-import CoreLocation
 
 class BookShopMapViewController: UIViewController {
     
@@ -17,11 +15,10 @@ class BookShopMapViewController: UIViewController {
     var bookShopCollection = [BookShop]()
     var bookShopManager = BookShopManager()
     
-    let latitude = 25.039
-    let longitude = 121.532
+    var latitude: Double?
+    var longitude: Double?
     
     let mapView = MKMapView()
-    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +38,7 @@ class BookShopMapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let initialLocation = CLLocation(latitude: latitude ?? 25.039, longitude: longitude ?? 121.532)
         let regionRadius: CLLocationDistance = 1000
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate,
@@ -51,18 +48,8 @@ class BookShopMapViewController: UIViewController {
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
-        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // askForPositionRequest
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-    }
-    
+ 
 }
 
 // MARK: - BookShopManagerDelegate
@@ -90,16 +77,6 @@ extension BookShopMapViewController: BookShopManagerDelegate {
     }
     
 }
-    // MARK: - CLLocationManagerDelegate
-    extension BookShopMapViewController: CLLocationManagerDelegate {
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.last else { return }
-        }
-        
-        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            print("Location manager error: \(error.localizedDescription)")
-        }
-    }
     
     // MARK: - MKMapViewDelegate
     extension BookShopMapViewController: MKMapViewDelegate {
@@ -112,8 +89,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
                 guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
                 bookShopViewController.bookShop = selectedBookShop
                 //navigationController?.pushViewController(bookShopViewController, animated: true)
-                present(bookShopViewController, animated: true)
-                
+                present(bookShopViewController, animated: true)                
             }
         }
         

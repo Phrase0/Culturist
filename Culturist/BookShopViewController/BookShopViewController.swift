@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import MapKit
 
 class BookShopViewController: UIViewController {
 
@@ -36,6 +37,30 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.introLabel.text = bookShop.intro
             let url = URL(string: bookShop.representImage)
             cell.bookImageView.kf.setImage(with: url)
+            // ---------
+            
+            cell.mapNavigationButtonHandler = { [weak self] sender in
+                
+                let currentLocation: MKMapItem = MKMapItem.forCurrentLocation()
+                let toCoor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: Double(bookShop.latitude)!, longitude: Double(bookShop.longitude)!)
+                let toMKPlacemark: MKPlacemark = MKPlacemark.init(coordinate: toCoor, addressDictionary: nil)
+                let toLocation: MKMapItem = MKMapItem.init(placemark: toMKPlacemark)
+                toLocation.name = "\(bookShop.name)"
+
+                let options: [String : Any] = [
+                    // transpotation
+                    MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,
+                    // mapType
+                    MKLaunchOptionsMapTypeKey: MKMapType.standard.rawValue,
+                    // ShowsTraffic
+                    MKLaunchOptionsShowsTrafficKey: true
+                ]
+                MKMapItem .openMaps(with: [currentLocation,toLocation], launchOptions: options)
+
+            }
+            
+            // ---------
+ 
         }
         return cell
     }

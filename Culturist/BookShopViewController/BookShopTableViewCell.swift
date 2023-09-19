@@ -14,8 +14,9 @@ class BookShopTableViewCell: UITableViewCell {
     @IBOutlet weak var openTimeLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var introLabel: UILabel!
-    
     @IBOutlet weak var bookImageView: UIImageView!
+    
+    var mapNavigationButtonHandler: ((UIButton) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +27,10 @@ class BookShopTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func mapNavigation(_ sender: UIButton) {
+        mapNavigationButtonHandler?(sender)
     }
 
 }

@@ -10,16 +10,15 @@ import Alamofire
 import MapKit
 import CoreLocation
 
-class CoffeeShopMapViewController: UIViewController {
+class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     
     var coffeeShopCollection = [CoffeeShop]()
     var coffeeShopManager = CoffeeShopManager()
-    
-    let latitude = 25.039
-    let longitude = 121.532
-    
-    let mapView = MKMapView()
     let locationManager = CLLocationManager()
+    
+    var latitude: Double?
+    var longitude: Double?
+    let mapView = MKMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +38,7 @@ class CoffeeShopMapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let initialLocation = CLLocation(latitude: latitude ?? 25.039, longitude: longitude ?? 121.532)
         let regionRadius: CLLocationDistance = 500
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate,
@@ -54,13 +53,20 @@ class CoffeeShopMapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // askForPositionRequest
+        // Request user location permission
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        // askForPositionRequest
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.startUpdatingLocation()
+//    }
+
 }
 
 // MARK: - CoffeeShopManagerDelegate
@@ -90,29 +96,17 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-extension CoffeeShopMapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location manager error: \(error.localizedDescription)")
-    }
-}
-
-
 // MARK: - MKMapViewDelegate
 extension CoffeeShopMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         // get user tap mark
         guard let annotation = view.annotation as? MKPointAnnotation else { return }
-        //find the same name in coffeeShopCollection
+        // find the same name in coffeeShopCollection
         if let selectedCoffeeShop = coffeeShopCollection.first(where: { $0.name == annotation.title }) {
             guard let coffeeShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopViewController") as? CoffeeShopViewController else { return }
             coffeeShopViewController.coffeeShop = selectedCoffeeShop
-            //navigationController?.pushViewController(coffeeShopViewController, animated: true)
+            // navigationController?.pushViewController(coffeeShopViewController, animated: true)
             present(coffeeShopViewController, animated: true)
             
         }
