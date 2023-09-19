@@ -10,11 +10,27 @@
 		6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */; };
 		F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */; };
 		F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */; };
-		F82A34F22AB2AC4C004FF247 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34F12AB2AC4C004FF247 /* ViewController.swift */; };
+		F82A34F22AB2AC4C004FF247 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */; };
 		F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F32AB2AC4C004FF247 /* Main.storyboard */; };
 		F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F62AB2AC4D004FF247 /* Assets.xcassets */; };
 		F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */; };
 		F82A35042AB2B672004FF247 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F82A35032AB2B672004FF247 /* GoogleService-Info.plist */; };
+		F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A35052AB2B84C004FF247 /* ArtProductManager.swift */; };
+		F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A35072AB2B8B4004FF247 /* ArtDatum.swift */; };
+		F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350A2AB2B8FD004FF247 /* BookShop.swift */; };
+		F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350C2AB2B916004FF247 /* CoffeeShop.swift */; };
+		F82A35102AB2D34B004FF247 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */; };
+		F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F82A35122AB2DDC5004FF247 /* .swiftlint.yml */; };
+		F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */; };
+		F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */; };
+		F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */; };
+		F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7422AB35F9A0029C78E /* BookShopManager.swift */; };
+		F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7442AB361C50029C78E /* BookShopViewController.swift */; };
+		F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */; };
+		F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7492AB41F690029C78E /* DetailViewController.swift */; };
+		F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */; };
+		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
+		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,12 +40,28 @@
 		F82A34EA2AB2AC4C004FF247 /* Culturist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culturist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F82A34F12AB2AC4C004FF247 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F82A34F42AB2AC4C004FF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F82A34F62AB2AC4D004FF247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F82A34F92AB2AC4D004FF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F82A34FB2AB2AC4D004FF247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F82A35032AB2B672004FF247 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F82A35052AB2B84C004FF247 /* ArtProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtProductManager.swift; sourceTree = "<group>"; };
+		F82A35072AB2B8B4004FF247 /* ArtDatum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDatum.swift; sourceTree = "<group>"; };
+		F82A350A2AB2B8FD004FF247 /* BookShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShop.swift; sourceTree = "<group>"; };
+		F82A350C2AB2B916004FF247 /* CoffeeShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShop.swift; sourceTree = "<group>"; };
+		F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F82A35122AB2DDC5004FF247 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopManager.swift; sourceTree = "<group>"; };
+		F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopMapViewController.swift; sourceTree = "<group>"; };
+		F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopMapViewController.swift; sourceTree = "<group>"; };
+		F851F7422AB35F9A0029C78E /* BookShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopManager.swift; sourceTree = "<group>"; };
+		F851F7442AB361C50029C78E /* BookShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopViewController.swift; sourceTree = "<group>"; };
+		F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopTableViewCell.swift; sourceTree = "<group>"; };
+		F851F7492AB41F690029C78E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
+		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +96,7 @@
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
+				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
 				9A1E41190C6E6F7290373612 /* Pods */,
@@ -84,14 +117,69 @@
 			children = (
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
-				F82A34F12AB2AC4C004FF247 /* ViewController.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
+				F82A35092AB2B8BF004FF247 /* Models */,
+				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
+				F851F7482AB41F460029C78E /* DetailViewController */,
+				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
+				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
 				F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */,
 				F82A35032AB2B672004FF247 /* GoogleService-Info.plist */,
 				F82A34FB2AB2AC4D004FF247 /* Info.plist */,
 			);
 			path = Culturist;
+			sourceTree = "<group>";
+		};
+		F82A35092AB2B8BF004FF247 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F82A35072AB2B8B4004FF247 /* ArtDatum.swift */,
+				F82A350A2AB2B8FD004FF247 /* BookShop.swift */,
+				F82A350C2AB2B916004FF247 /* CoffeeShop.swift */,
+				F82A35052AB2B84C004FF247 /* ArtProductManager.swift */,
+				F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */,
+				F851F7422AB35F9A0029C78E /* BookShopManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F82A350E2AB2D2DD004FF247 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */,
+				F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		F851F7412AB35F5F0029C78E /* BookShopViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */,
+				F851F7442AB361C50029C78E /* BookShopViewController.swift */,
+				F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */,
+			);
+			path = BookShopViewController;
+			sourceTree = "<group>";
+		};
+		F851F7482AB41F460029C78E /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F851F7492AB41F690029C78E /* DetailViewController.swift */,
+				F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */,
+				F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */,
+				F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */,
+			);
+			path = CoffeeShopViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,6 +194,7 @@
 				F82A34E72AB2AC4C004FF247 /* Frameworks */,
 				F82A34E82AB2AC4C004FF247 /* Resources */,
 				FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */,
+				F82A35112AB2DB77004FF247 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -154,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */,
 				F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */,
 				F82A35042AB2B672004FF247 /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
@@ -186,6 +276,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F82A35112AB2DB77004FF247 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,9 +317,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F82A34F22AB2AC4C004FF247 /* ViewController.swift in Sources */,
+				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
+				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
+				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
+				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
+				F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */,
+				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
+				F82A34F22AB2AC4C004FF247 /* HomeViewController.swift in Sources */,
+				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
+				F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */,
+				F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */,
+				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,
+				F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */,
+				F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */,
+				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */,
+				F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */,
+				F82A35102AB2D34B004FF247 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
