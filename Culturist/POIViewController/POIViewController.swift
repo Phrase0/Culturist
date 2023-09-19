@@ -136,17 +136,18 @@ class POIViewController: UIViewController {
             } else if location.x >= view.frame.size.width - 40 && adjustNorthByTappingSidesOfScreen {
                 print("right side of the screen")
                 sceneLocationView.moveSceneHeadingClockwise()
-            } else if addNodeByTappingScreen {
-                let image = UIImage(named: "pin")!
-                let annotationNode = LocationAnnotationNode(location: nil, image: image)
-                annotationNode.scaleRelativeToDistance = false
-                annotationNode.scalingScheme = .normal
-                DispatchQueue.main.async {
-                    // If we're using the touch delegate, adding a new node in the touch handler sometimes causes a freeze.
-                    // So defer to next pass.
-                    self.sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-                }
             }
+//            else if addNodeByTappingScreen {
+//                let image = UIImage(named: "pin")!
+//                let annotationNode = LocationAnnotationNode(location: nil, image: image)
+//                annotationNode.scaleRelativeToDistance = false
+//                annotationNode.scalingScheme = .normal
+//                DispatchQueue.main.async {
+//                    // If we're using the touch delegate, adding a new node in the touch handler sometimes causes a freeze.
+//                    // So defer to next pass.
+//                    self.sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+//                }
+//            }
         }
     }
 }
