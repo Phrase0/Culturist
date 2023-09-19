@@ -14,6 +14,7 @@ target 'Culturist' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'SwiftLint'
+  pod 'ARCL'
   
   source 'https://github.com/CocoaPods/Specs.git'
 
