@@ -44,8 +44,9 @@ class LikeViewController: UIViewController {
         artManager6.getArtProductList(number: "6")
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
+            self.group.leave()
         }
-        group.leave()
+        
         group.notify(queue: .main) {
             var filteredProducts = self.artProducts1 + self.artProducts6
             // compactMap: a map without nil

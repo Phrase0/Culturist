@@ -16,7 +16,6 @@ class BookShopMapViewController: UIViewController {
     
     var latitude: Double?
     var longitude: Double?
-    
     let mapView = MKMapView()
     
     override func viewDidLoad() {
@@ -83,7 +82,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             // get user tap mark
             guard let annotation = view.annotation as? MKPointAnnotation else { return }
-            // 在coffeeShopCollection中查找与标注标题匹配的咖啡店
+            //  find the same name in bookShopCollection
             if let selectedBookShop = bookShopCollection.first(where: { $0.name == annotation.title }) {
                 guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
                 bookShopViewController.bookShop = selectedBookShop
