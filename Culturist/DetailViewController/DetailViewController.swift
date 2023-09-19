@@ -19,21 +19,21 @@ class DetailViewController: UIViewController {
     var likeData = [LikeData]()
     
     @IBOutlet weak var detailTableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTableView.dataSource = self
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
-        
+        isLiked = false
         // create DispatchGroup
         let group = DispatchGroup()
-
+        
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
             group.leave() // leave DispatchGroup
         }
-
+        
         // use DispatchGroup notify
         group.notify(queue: .main) {
             let isLiked = self.likeData.contains { like in
@@ -47,6 +47,7 @@ class DetailViewController: UIViewController {
             }
         }
     }
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -67,7 +68,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-             
+            
             // CoffeeButtonTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
