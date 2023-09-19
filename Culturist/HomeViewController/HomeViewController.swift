@@ -18,7 +18,8 @@ class HomeViewController: UIViewController {
     var artManager6 = ArtProductManager()
     let firebaseManager = FirebaseManager()
     
-    var result: [ArtDatum] = []
+    //searchResult
+    var searchResult: [ArtDatum] = []
     var mySearchController: UISearchController?
      
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
         artManager6.getArtProductList(number: "6")
         settingSearchController()
     }
+
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -47,7 +49,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if (mySearchController?.isActive)! {
-            return result.count
+            return searchResult.count
         } else {
             if section == 0 {
                 print(artProducts1.count)
@@ -64,7 +66,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
 
         if (mySearchController?.isActive)! {
-            let itemData = result[indexPath.item]
+            let itemData = searchResult[indexPath.item]
             let url = URL(string: itemData.imageURL)
             cell.productImage.kf.setImage(with: url)
             cell.productTitle.text = itemData.title
@@ -93,10 +95,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
            let selectedIndexPath = selectedIndexPaths.first {
             if indexPath.section == 0 {
                 detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
-                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid)
+                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
+                
+                
+                
             } else if indexPath.section == 1 {
                 detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
-                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid)
+                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
             }
         }
         
@@ -135,8 +140,6 @@ extension HomeViewController: UISearchResultsUpdating {
         navigationItem.hidesSearchBarWhenScrolling = false
         mySearchController?.searchResultsUpdater = self
         mySearchController?.searchBar.placeholder = "搜尋展覽"
-        //        mySearchController?.searchBar.barTintColor = .blue
-        //        mySearchController?.searchBar.tintColor = .red
         mySearchController?.searchBar.searchBarStyle = .prominent
     }
     
@@ -146,25 +149,17 @@ extension HomeViewController: UISearchResultsUpdating {
             homeCollectionView.reloadData()
         }
     }
-    
+
     func filterContent(for searchText: String) {
-        let filtered1 = artProducts1.filter { artData in
+        var filteredProducts = artProducts1 + artProducts6
+        filteredProducts = filteredProducts.filter { artData in
             let title = artData.title.lowercased()
             let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
             let location = artData.showInfo.first?.location.lowercased() ?? ""
 
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
-
-        let filtered6 = artProducts6.filter { artData in
-            let title = artData.title.lowercased()
-            let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
-            let location = artData.showInfo.first?.location.lowercased() ?? ""
-
-            return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
-        }
-
-        result = filtered1 + filtered6
+        searchResult = filteredProducts
     }
 
 }

@@ -27,7 +27,9 @@ class ArtProductManager {
                 self?.delegate?.manager(self!, didGet: filteredData)
                 
             case .failure(let error):
+                self?.delegate?.manager(self!, didFailWith: error)
                 print("Error fetching JSON data: \(error)")
+                
             }
         }
     }

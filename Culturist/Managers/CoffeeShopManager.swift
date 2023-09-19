@@ -27,6 +27,7 @@ class CoffeeShopManager {
             case .success(let data):
                 self?.delegate?.manager(self!, didGet: data)
             case .failure(let error):
+                self?.delegate?.manager(self!, didFailWith: error)
                 print("Error fetching coffee shop data: \(error)")
             }
         }
