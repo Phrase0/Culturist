@@ -19,6 +19,10 @@ class DetailViewController: UIViewController {
     var isLiked: Bool?
     var likeData = [LikeData]()
     
+    // appCalendar
+    let eventStore = EKEventStore()
+    var appCalendar: EKCalendar?
+    
     @IBOutlet weak var detailTableView: UITableView!
     
     override func viewDidLoad() {
@@ -47,9 +51,17 @@ class DetailViewController: UIViewController {
                 self.detailTableView.reloadData()
             }
         }
+        
+        // ---------------------------------------------------
+        // check if calendar is exist or not
+        if let calendar = findAppCalendar() {
+            appCalendar = calendar
+        } else {
+            // if check if calendar isn't exist, create one
+            appCalendar = createAppCalendar()
+        }
+        // ---------------------------------------------------
     }
-    
-    
     
 }
 
@@ -214,12 +226,43 @@ extension DetailViewController: FirebaseLikeDelegate {
 
 // MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
 extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
+    
+    // check if calendar is exist or not
+    func findAppCalendar() -> EKCalendar? {
+        let calendars = eventStore.calendars(for: .event)
+
+        for calendar in calendars {
+            if calendar.title == "CulturistCalendar" {
+                return calendar
+            }
+        }
+
+        return nil
+    }
+
+    // create a new calendar
+    func createAppCalendar() -> EKCalendar? {
+        let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
+        newCalendar.title = "CulturistCalendar"
+        newCalendar.source = eventStore.defaultCalendarForNewEvents?.source
+
+        do {
+            try eventStore.saveCalendar(newCalendar, commit: true)
+            return newCalendar
+        } catch {
+            print("無法創建日曆：\(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    
     func showEventViewController() {
         let eventVC = EKEventEditViewController()
         eventVC.editViewDelegate = self // don't forget the delegate
         eventVC.eventStore = EKEventStore()
         
         let event = EKEvent(eventStore: eventVC.eventStore)
+        event.calendar = appCalendar
         event.title = detailDesctription?.title
         event.startDate = Date()
         
