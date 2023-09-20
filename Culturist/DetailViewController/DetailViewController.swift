@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import MapKit
+import EventKitUI
 
 class DetailViewController: UIViewController {
     
@@ -48,6 +49,8 @@ class DetailViewController: UIViewController {
         }
     }
     
+    
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -69,7 +72,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
             
-            // CoffeeButtonTapped
+            // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
@@ -110,7 +113,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            // BookButtonTapped
+            // MARK: - BookButtonTapped
             cell.searchBookButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
@@ -151,7 +154,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            // ---------------------------------------------------
+            // MARK: - likeBtnTapped
             if isLiked == false {
                 cell.likeBtn.isSelected = false
             } else {
@@ -170,10 +173,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
+            // MARK: - notificationBtnTapped
+            cell.cellDelegate = self
+            // ---------------------------------------------------
         }
         return cell
     }
     
+ 
+}
+
+// MARK: - likeCollection function
+extension DetailViewController {
     func addFavorite() {
         // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
         let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
@@ -192,11 +203,61 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         // Update the flag to indicate that the user has unliked the item
         isLiked = false
     }
-    
 }
 
+// MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
         self.likeData = likeData
     }
+}
+
+// MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
+extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
+    func showEventViewController() {
+        let eventVC = EKEventEditViewController()
+        eventVC.editViewDelegate = self // don't forget the delegate
+        eventVC.eventStore = EKEventStore()
+        
+        let event = EKEvent(eventStore: eventVC.eventStore)
+        event.title = detailDesctription?.title
+        event.startDate = Date()
+        
+        eventVC.event = event
+
+        present(eventVC, animated: true)
+    }
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+            dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
+
+// MARK: - DetailTableViewCellDelegate
+extension DetailViewController: DetailTableViewCellDelegate {
+    func notificationBtnTapped(sender: UIButton) {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .notDetermined:
+            let eventStore = EKEventStore()
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted {
+                    // do stuff
+                    DispatchQueue.main.async {
+                        self.showEventViewController()
+                    }
+                }
+            }
+        case .authorized:
+            // do stuff
+            DispatchQueue.main.async {
+                self.showEventViewController()
+            }
+        default:
+            break
+        }
+
+    }
+    
 }
