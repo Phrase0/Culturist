@@ -6,24 +6,29 @@
 //
 
 import UIKit
+import FSCalendar_Persian
 
-class CalendarViewController: UIViewController {
-
+class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+    
+    @IBOutlet weak var calendar: FSCalendar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        calendar.dataSource = self
+        calendar.delegate = self
+        calendar.appearance.headerTitleColor = .black
+        calendar.today = nil
+        //calendar.appearance.selectionColor = .blue
+        calendar.appearance.weekdayTextColor = .red
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        calendar.reloadData()
     }
-    */
-
+    
 }
