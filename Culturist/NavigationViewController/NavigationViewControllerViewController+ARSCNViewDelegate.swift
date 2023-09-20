@@ -9,7 +9,7 @@ import ARKit
 import UIKit
 
 @available(iOS 11.0, *)
-extension POIViewController: ARSCNViewDelegate {
+extension NavigationViewController: ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("Added SCNNode: \(node)")    // you probably won't see this fire

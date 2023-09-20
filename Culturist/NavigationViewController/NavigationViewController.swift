@@ -1,10 +1,9 @@
 //
-//  POIViewController.swift
+//  NavigationViewController.swift
 //  Culturist
 //
-//  Created by Peiyun on 2023/9/19.
+//  Created by Peiyun on 2023/9/20.
 //
-
 
 import ARCL
 import ARKit
@@ -14,7 +13,7 @@ import UIKit
 
 @available(iOS 11.0, *)
 
-class POIViewController: UIViewController {
+class NavigationViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var infoLabel: UILabel!
@@ -155,7 +154,7 @@ class POIViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 
 @available(iOS 11.0, *)
-extension POIViewController: MKMapViewDelegate {
+extension NavigationViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -187,7 +186,7 @@ extension POIViewController: MKMapViewDelegate {
 // MARK: - Implementation
 
 @available(iOS 11.0, *)
-extension POIViewController {
+extension NavigationViewController {
 
     /// Adds the appropriate ARKit models to the scene.  Note: that this won't
     /// do anything until the scene has a `currentLocation`.  It "polls" on that
@@ -419,3 +418,4 @@ extension UIView {
         return recursiveSubviews
     }
 }
+

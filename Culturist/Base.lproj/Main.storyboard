@@ -710,11 +710,11 @@
             </objects>
             <point key="canvasLocation" x="4133.5877862595416" y="-182.3943661971831"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="SJL-7m-a8B">
+        <!--Navigation View Controller-->
+        <scene sceneID="IJh-cg-Ynw">
             <objects>
-                <viewController storyboardIdentifier="POIViewController" id="Ybv-w7-4c0" customClass="POIViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eA1-Nz-3yl">
+                <viewController storyboardIdentifier="NavigationViewController" id="bdE-FA-1UE" customClass="NavigationViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZgR-Tz-HeY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -729,7 +729,7 @@
                                 <rect key="frame" x="16" y="742" width="361" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="rNV-H5-7V5"/>
+                                    <constraint firstAttribute="height" constant="56" id="Fmz-ab-cAi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -741,31 +741,31 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="KDr-hO-EbM"/>
+                        <viewLayoutGuide key="safeArea" id="mk5-yi-9Re"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KDr-hO-EbM" firstAttribute="trailing" secondItem="rcJ-dP-gKb" secondAttribute="trailing" constant="16" id="7Dp-GT-17X"/>
-                            <constraint firstItem="OTo-x3-CWD" firstAttribute="height" secondItem="eA1-Nz-3yl" secondAttribute="height" multiplier="1/2" id="FSq-Tr-fp1"/>
-                            <constraint firstItem="xIu-wq-tLe" firstAttribute="leading" secondItem="eA1-Nz-3yl" secondAttribute="leading" id="U7Y-Tv-PyR"/>
-                            <constraint firstItem="OTo-x3-CWD" firstAttribute="leading" secondItem="KDr-hO-EbM" secondAttribute="leading" id="Yjb-uH-epb"/>
-                            <constraint firstItem="KDr-hO-EbM" firstAttribute="bottom" secondItem="rcJ-dP-gKb" secondAttribute="bottom" constant="20" id="bgF-Jq-dKD"/>
-                            <constraint firstAttribute="trailing" secondItem="xIu-wq-tLe" secondAttribute="trailing" id="h8d-fP-zCb"/>
-                            <constraint firstAttribute="bottom" secondItem="xIu-wq-tLe" secondAttribute="bottom" id="hiz-H7-eIo"/>
-                            <constraint firstAttribute="bottom" secondItem="OTo-x3-CWD" secondAttribute="bottom" id="jge-qK-BvA"/>
-                            <constraint firstItem="KDr-hO-EbM" firstAttribute="trailing" secondItem="OTo-x3-CWD" secondAttribute="trailing" id="pk7-Jq-vhj"/>
-                            <constraint firstItem="xIu-wq-tLe" firstAttribute="top" secondItem="eA1-Nz-3yl" secondAttribute="top" id="plH-P5-uQe"/>
-                            <constraint firstItem="rcJ-dP-gKb" firstAttribute="leading" secondItem="KDr-hO-EbM" secondAttribute="leading" constant="16" id="vjs-Q2-vZt"/>
+                            <constraint firstItem="OTo-x3-CWD" firstAttribute="leading" secondItem="ZgR-Tz-HeY" secondAttribute="leading" id="2Rg-W0-LnI"/>
+                            <constraint firstItem="xIu-wq-tLe" firstAttribute="top" secondItem="ZgR-Tz-HeY" secondAttribute="top" id="B3a-PW-FU2"/>
+                            <constraint firstItem="mk5-yi-9Re" firstAttribute="bottom" secondItem="rcJ-dP-gKb" secondAttribute="bottom" constant="20" id="Gh0-es-8Rl"/>
+                            <constraint firstAttribute="trailing" secondItem="xIu-wq-tLe" secondAttribute="trailing" id="Gyg-04-wVA"/>
+                            <constraint firstItem="rcJ-dP-gKb" firstAttribute="leading" secondItem="mk5-yi-9Re" secondAttribute="leading" constant="16" id="Ka8-6k-Dhg"/>
+                            <constraint firstAttribute="trailing" secondItem="OTo-x3-CWD" secondAttribute="trailing" id="OeE-Js-AWd"/>
+                            <constraint firstItem="xIu-wq-tLe" firstAttribute="leading" secondItem="ZgR-Tz-HeY" secondAttribute="leading" id="S3b-VX-MRm"/>
+                            <constraint firstAttribute="bottom" secondItem="xIu-wq-tLe" secondAttribute="bottom" id="TMD-jD-9ew"/>
+                            <constraint firstItem="mk5-yi-9Re" firstAttribute="trailing" secondItem="rcJ-dP-gKb" secondAttribute="trailing" constant="16" id="Y4e-z3-Ass"/>
+                            <constraint firstItem="OTo-x3-CWD" firstAttribute="height" secondItem="xIu-wq-tLe" secondAttribute="height" multiplier="1:2" id="c3S-aq-lDC"/>
+                            <constraint firstAttribute="bottom" secondItem="OTo-x3-CWD" secondAttribute="bottom" id="lGf-OH-8DW"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentView" destination="xIu-wq-tLe" id="7a4-AR-Ocz"/>
-                        <outlet property="infoLabel" destination="rcJ-dP-gKb" id="h1r-yC-4Rx"/>
-                        <outlet property="mapView" destination="OTo-x3-CWD" id="oA0-u9-2cZ"/>
+                        <outlet property="contentView" destination="xIu-wq-tLe" id="mXQ-BX-Yxx"/>
+                        <outlet property="infoLabel" destination="rcJ-dP-gKb" id="ANh-4o-Wxb"/>
+                        <outlet property="mapView" destination="OTo-x3-CWD" id="kMS-aF-7Hh"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Tg-oF-4wm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p7a-sU-8Px" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5040" y="-182"/>
+            <point key="canvasLocation" x="4975" y="-182"/>
         </scene>
         <!--Home-->
         <scene sceneID="ckV-0z-aXN">

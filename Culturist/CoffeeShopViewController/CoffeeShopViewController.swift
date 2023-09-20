@@ -96,7 +96,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let self = self else {
                     return
                 }
-                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "POIViewController") as? POIViewController else { return }
+                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController") as? NavigationViewController else { return }
                 detailVC.routes = response.routes
                 detailVC.name = coffeeShop?.name
                 detailVC.latitude = Double(coffeeShop!.latitude)
