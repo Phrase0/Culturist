@@ -25,6 +25,17 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var detailTableView: UITableView!
     
+    // set Time
+    let dateFormatter = DateFormatter()
+    
+    func changeDateFormatter(dateString: String?) -> Date? {
+        guard let dateString = dateString else {
+            return nil
+        }
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return dateFormatter.date(from: dateString)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTableView.dataSource = self
@@ -192,7 +203,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
- 
+    
 }
 
 // MARK: - likeCollection function
@@ -215,6 +226,9 @@ extension DetailViewController {
         // Update the flag to indicate that the user has unliked the item
         isLiked = false
     }
+    
+    
+
 }
 
 // MARK: - FirebaseLikeDelegate
@@ -230,22 +244,22 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     // check if calendar is exist or not
     func findAppCalendar() -> EKCalendar? {
         let calendars = eventStore.calendars(for: .event)
-
+        
         for calendar in calendars {
             if calendar.title == "CulturistCalendar" {
                 return calendar
             }
         }
-
+        
         return nil
     }
-
+    
     // create a new calendar
     func createAppCalendar() -> EKCalendar? {
         let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
         newCalendar.title = "CulturistCalendar"
         newCalendar.source = eventStore.defaultCalendarForNewEvents?.source
-
+        
         do {
             try eventStore.saveCalendar(newCalendar, commit: true)
             return newCalendar
@@ -254,7 +268,6 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
             return nil
         }
     }
-
     
     func showEventViewController() {
         let eventVC = EKEventEditViewController()
@@ -264,15 +277,18 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         let event = EKEvent(eventStore: eventVC.eventStore)
         event.calendar = appCalendar
         event.title = detailDesctription?.title
-        event.startDate = Date()
-        
+        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.last?.endTime) {
+            // event.startDate = Date()
+            event.startDate = startTime
+            event.endDate = endTime
+        }
         eventVC.event = event
-
+        
         present(eventVC, animated: true)
     }
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-            dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -300,7 +316,7 @@ extension DetailViewController: DetailTableViewCellDelegate {
         default:
             break
         }
-
+        
     }
     
 }
