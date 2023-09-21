@@ -226,9 +226,6 @@ extension DetailViewController {
         // Update the flag to indicate that the user has unliked the item
         isLiked = false
     }
-    
-    
-
 }
 
 // MARK: - FirebaseLikeDelegate
@@ -290,8 +287,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
+
 }
 
 // MARK: - DetailTableViewCellDelegate
