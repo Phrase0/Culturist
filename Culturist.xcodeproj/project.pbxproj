@@ -35,6 +35,8 @@
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
 		F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */; };
 		F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */; };
+		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
+		F88EDD432ABC1DBA0061AA18 /* EventKitExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */; };
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
@@ -76,6 +78,8 @@
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
+		F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitExt.swift; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
+				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
 				9A1E41190C6E6F7290373612 /* Pods */,
@@ -223,6 +228,14 @@
 			path = RecommendViewController;
 			sourceTree = "<group>";
 		};
+		F88EDD412ABC1DA20061AA18 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +243,7 @@
 				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
 				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 				F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */,
+				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -388,6 +402,7 @@
 				F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */,
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
+				F88EDD432ABC1DBA0061AA18 /* EventKitExt.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
 				F82A34F22AB2AC4C004FF247 /* HomeViewController.swift in Sources */,
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
@@ -397,6 +412,7 @@
 				F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */,
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,
 				F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */,
+				F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */,
 				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,
 				F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */,
