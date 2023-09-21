@@ -59,7 +59,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     // ---------------------------------------------------
     func getDirections(to mapLocation: MKMapItem) {
-        //refreshControl.startAnimating()
+        // refreshControl.startAnimating()
 
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
@@ -71,7 +71,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
         directions.calculate(completionHandler: { response, error in
             defer {
                 DispatchQueue.main.async { [weak self] in
-                    //self?.refreshControl.stopAnimating()
+                    // self?.refreshControl.stopAnimating()
                 }
             }
             if let error = error {
@@ -85,12 +85,12 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let self = self else {
                     return
                 }
-                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "POIViewController") as? POIViewController else { return }
+                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController") as? NavigationViewController else { return }
                 detailVC.routes = response.routes
                 detailVC.name = bookShop?.name
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
-                //self.navigationController?.pushViewController(detailVC, animated: true)
+                // self.navigationController?.pushViewController(detailVC, animated: true)
                 self.present(detailVC, animated: true)
             }
         })

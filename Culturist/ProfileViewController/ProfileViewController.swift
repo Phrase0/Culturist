@@ -20,7 +20,12 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
 
         self.navigationController?.pushViewController(detailVC, animated: true)
-        
     }
+    
+    @IBAction func goToCalendarVC(_ sender: UIButton) {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
 
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import MapKit
+import EventKitUI
 
 class DetailViewController: UIViewController {
     
@@ -18,7 +19,22 @@ class DetailViewController: UIViewController {
     var isLiked: Bool?
     var likeData = [LikeData]()
     
+    // appCalendar
+    let eventStore = EKEventStore()
+    var appCalendar: EKCalendar?
+    
     @IBOutlet weak var detailTableView: UITableView!
+    
+    // set Time
+    let dateFormatter = DateFormatter()
+    
+    func changeDateFormatter(dateString: String?) -> Date? {
+        guard let dateString = dateString else {
+            return nil
+        }
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return dateFormatter.date(from: dateString)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +62,16 @@ class DetailViewController: UIViewController {
                 self.detailTableView.reloadData()
             }
         }
+        
+        // ---------------------------------------------------
+        // check if calendar is exist or not
+        if let calendar = findAppCalendar() {
+            appCalendar = calendar
+        } else {
+            // if check if calendar isn't exist, create one
+            appCalendar = createAppCalendar()
+        }
+        // ---------------------------------------------------
     }
     
 }
@@ -69,7 +95,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
             
-            // CoffeeButtonTapped
+            // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
@@ -110,7 +136,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            // BookButtonTapped
+            // MARK: - BookButtonTapped
             cell.searchBookButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
                 // Default semaphore value is 0 (initial value is 0)
@@ -151,7 +177,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            // ---------------------------------------------------
+            // MARK: - likeBtnTapped
             if isLiked == false {
                 cell.likeBtn.isSelected = false
             } else {
@@ -170,10 +196,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
+            // MARK: - notificationBtnTapped
+            cell.cellDelegate = self
+            // ---------------------------------------------------
         }
         return cell
     }
     
+    
+}
+
+// MARK: - likeCollection function
+extension DetailViewController {
     func addFavorite() {
         // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
         let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
@@ -192,11 +226,93 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         // Update the flag to indicate that the user has unliked the item
         isLiked = false
     }
-    
 }
 
+// MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
         self.likeData = likeData
     }
+}
+
+// MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
+extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
+    
+    // check if calendar is exist or not
+    func findAppCalendar() -> EKCalendar? {
+        let calendars = eventStore.calendars(for: .event)
+        
+        for calendar in calendars {
+            if calendar.title == "CulturistCalendar" {
+                return calendar
+            }
+        }
+        
+        return nil
+    }
+    
+    // create a new calendar
+    func createAppCalendar() -> EKCalendar? {
+        let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
+        newCalendar.title = "CulturistCalendar"
+        newCalendar.source = eventStore.defaultCalendarForNewEvents?.source
+        
+        do {
+            try eventStore.saveCalendar(newCalendar, commit: true)
+            return newCalendar
+        } catch {
+            print("無法創建日曆：\(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func showEventViewController() {
+        let eventVC = EKEventEditViewController()
+        eventVC.editViewDelegate = self // don't forget the delegate
+        eventVC.eventStore = EKEventStore()
+        
+        let event = EKEvent(eventStore: eventVC.eventStore)
+        event.calendar = appCalendar
+        event.title = detailDesctription?.title
+        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.last?.endTime) {
+            // event.startDate = Date()
+            event.startDate = startTime
+            event.endDate = endTime
+        }
+        eventVC.event = event
+        
+        present(eventVC, animated: true)
+    }
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - DetailTableViewCellDelegate
+extension DetailViewController: DetailTableViewCellDelegate {
+    func notificationBtnTapped(sender: UIButton) {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .notDetermined:
+            let eventStore = EKEventStore()
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted {
+                    // do stuff
+                    DispatchQueue.main.async {
+                        self.showEventViewController()
+                    }
+                }
+            }
+        case .authorized:
+            // do stuff
+            DispatchQueue.main.async {
+                self.showEventViewController()
+            }
+        default:
+            break
+        }
+        
+    }
+    
 }

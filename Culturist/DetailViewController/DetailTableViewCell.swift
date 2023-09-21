@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailTableViewCellDelegate: AnyObject {
+    func notificationBtnTapped(sender: UIButton)
+}
+
 class DetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var detailImageView: UIImageView!
@@ -21,8 +25,10 @@ class DetailTableViewCell: UITableViewCell {
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
+    weak var cellDelegate: DetailTableViewCellDelegate?
     
     @IBOutlet weak var likeBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,10 +44,14 @@ class DetailTableViewCell: UITableViewCell {
     @IBAction func searchBookShop(_ sender: UIButton) {
         searchBookButtonHandler?(sender)
     }
-    
-    
+        
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
+    }
+    
+    
+    @IBAction func notificationBtnTapped(_ sender: UIButton) {
+        cellDelegate?.notificationBtnTapped(sender: sender)
     }
     
 }

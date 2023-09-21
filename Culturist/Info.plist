@@ -34,5 +34,11 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>This application will use the camera for Augmented Reality.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Please allow access to notificate exhibition</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Please allow access to notificate exhibition</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Please allow access to notificate exhibition</string>
 </dict>
 </plist>

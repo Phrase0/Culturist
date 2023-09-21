@@ -1,0 +1,6 @@
+framework module FSCalendar_Persian {
+  umbrella header "FSCalendar+Persian-umbrella.h"
+
+  export *
+  module * { export * }
+}

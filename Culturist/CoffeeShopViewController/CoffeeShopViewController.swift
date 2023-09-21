@@ -52,8 +52,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.limitTimeLabel.text = coffeeShop.limitedTime
             cell.socketLabel.text = coffeeShop.socket
             cell.standingDeskLabel.text = coffeeShop.standingDesk
-            cell.mapNavigationButtonHandler = { [weak self] sender in
-                
+            cell.mapNavigationButtonHandler = { [weak self] sender in                
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -96,7 +95,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let self = self else {
                     return
                 }
-                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "POIViewController") as? POIViewController else { return }
+                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController") as? NavigationViewController else { return }
                 detailVC.routes = response.routes
                 detailVC.name = coffeeShop?.name
                 detailVC.latitude = Double(coffeeShop!.latitude)
