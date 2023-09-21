@@ -43,7 +43,6 @@ class NavigationViewController: UIViewController {
     let adjustNorthByTappingSidesOfScreen = false
     let addNodeByTappingScreen = true
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
