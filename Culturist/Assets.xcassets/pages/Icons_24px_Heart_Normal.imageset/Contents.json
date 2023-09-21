@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icons_18px_Heart_Selected.png",
+      "filename" : "Icons_24px_Heart_Normal.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icons_18px_Heart_Selected@2x.png",
+      "filename" : "Icons_24px_Heart_Normal@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icons_18px_Heart_Selected@3x.png",
+      "filename" : "Icons_24px_Heart_Normal@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

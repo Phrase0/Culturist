@@ -19,11 +19,16 @@ enum ImageAsset: String {
     case Icons_36px_Recommendation_Selected
     
     // page
-    case Icons_18px_Heart_Selected
-    case Icons_18px_Heart_Normal
-    case Icons_18px_Notification
+    case Icons_24px_Heart_Selected
+    case Icons_24px_Heart_Normal
+    case Icons_24px_Notification
+    case Icons_24px_BookMark_Normal
+    case Icons_24px_BookMark_Selected
+    case Icons_24px_BookMark_Selected_Color
+    
     case Icons_18px_Book
     case Icons_18px_Coffee
+    
 
 }
 

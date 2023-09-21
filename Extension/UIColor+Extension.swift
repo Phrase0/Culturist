@@ -15,7 +15,7 @@ private enum STColor: String {
     case B4
     case B5
     case B6
-    case G1
+    case BL1
     // swiftlint:enable identifier_name
 }
 
@@ -24,9 +24,9 @@ extension UIColor {
     // swiftlint:disable identifier_name
     static let B1 = STColor(.B1)
     static let B2 = STColor(.B2)
+    static let B3 = STColor(.B3)
     static let B4 = STColor(.B4)
-    static let B5 = STColor(.B5)
-    static let G1 = STColor(.G1)
+    static let BL1 = STColor(.BL1)
     // swiftlint:enable identifier_name
     
     private static func STColor(_ color: STColor) -> UIColor? {

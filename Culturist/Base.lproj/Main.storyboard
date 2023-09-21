@@ -428,11 +428,10 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxU-qk-DO3">
                                                     <rect key="frame" x="320" y="272" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="heart_Selected"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="heart_normal"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
                                                     <connections>
                                                         <action selector="likeButton:" destination="eiP-1D-OOg" eventType="touchUpInside" id="VBo-VL-TkS"/>
                                                     </connections>
@@ -889,11 +888,11 @@
             </objects>
             <point key="canvasLocation" x="4975" y="-182"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="ckV-0z-aXN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HOh-nm-YAL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="0g2-yv-RLo"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icons_36px_Home_Selected" selectedImage="Icons_36px_Home_Normal" id="0g2-yv-RLo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="phw-6d-KaS">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -908,10 +907,10 @@
             </objects>
             <point key="canvasLocation" x="123" y="-35"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Culturist Tab Bar Controller-->
         <scene sceneID="Vz4-Tq-0r9">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Taw-Bs-QdT" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="CulturistTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Taw-Bs-QdT" customClass="CulturistTabBarController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Csv-iY-oI9">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -928,11 +927,11 @@
             </objects>
             <point key="canvasLocation" x="-737" y="-35"/>
         </scene>
-        <!--REcommendation-->
+        <!--Navigation Controller-->
         <scene sceneID="0x1-1B-lCI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aQ5-jg-rEo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="REcommendation" id="oz3-Oj-t6x"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icons_36px_Recommendation_Normal" selectedImage="Icons_36px_Recommendation_Selected" id="oz3-Oj-t6x"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9Tu-Fm-dv1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IAd-QO-1kV">
@@ -948,11 +947,11 @@
             </objects>
             <point key="canvasLocation" x="179" y="680"/>
         </scene>
-        <!--Profile-->
+        <!--Navigation Controller-->
         <scene sceneID="8da-c1-NVS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lVw-zd-xOr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="5hM-1E-Shh"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icons_36px_Profile_Normal" selectedImage="Icons_36px_Profile_Selected" id="5hM-1E-Shh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rh8-au-x9n">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -969,9 +968,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icons_36px_Home_Normal" width="36" height="36"/>
+        <image name="Icons_36px_Home_Selected" width="36" height="36"/>
+        <image name="Icons_36px_Profile_Normal" width="36" height="36"/>
+        <image name="Icons_36px_Profile_Selected" width="36" height="36"/>
+        <image name="Icons_36px_Recommendation_Normal" width="36" height="36"/>
+        <image name="Icons_36px_Recommendation_Selected" width="36" height="36"/>
         <image name="coffeeDemo" width="5824" height="3259"/>
         <image name="heart_Selected" width="32" height="32"/>
-        <image name="heart_normal" width="32" height="32"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
