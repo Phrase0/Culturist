@@ -16,6 +16,7 @@ target 'Culturist' do
   pod 'SwiftLint'
   pod 'ARCL'
   pod 'FSCalendar+Persian'
+  pod 'SnapKit'
   
   source 'https://github.com/CocoaPods/Specs.git'
 
