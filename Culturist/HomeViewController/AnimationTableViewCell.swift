@@ -8,21 +8,24 @@
 import UIKit
 
 class AnimationTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var animationCollectionView: UICollectionView!
-    let images = ["coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo"]
+    let images = ["cesar","coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo"]
+    
+    private let pageControl = UIPageControl()
+    // Used to keep track of the currently displayed banner
+    var imageIndex = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
+        setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
-        
     }
-    // Used to keep track of the currently displayed banner
-    var imageIndex = 0
+    
     // Banner auto-scroll animation
     @objc func changeBanner() {
         var indexPath: IndexPath
@@ -33,16 +36,43 @@ class AnimationTableViewCell: UITableViewCell {
             // Actions to perform when adding auto-scroll animation
             animationCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         } else {
-            // If the displayed cell is equal to the total count and there is no next image, select the first one and immediately call itself
-            imageIndex = 0
-            indexPath = IndexPath(item: imageIndex, section: 0)
+            // If the displayed cell is equal to the total count and there is no next image, select the first one
+            imageIndex = -1
+            indexPath = IndexPath(item: 0, section: 0)
             // Actions to perform when adding auto-scroll animation
             animationCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
-            changeBanner()
+        }
+        pageControl.currentPage = imageIndex
+    }
+    
+    // MARK: - PageControl
+    func setupPageControl() {
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = imageIndex
+        pageControl.currentPageIndicatorTintColor = UIColor.B1
+        pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
+        // pageControl.backgroundStyle = .prominent
+        addSubview(pageControl)
+        pageControl.snp.makeConstraints { make in
+            make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
+            make.trailing.equalTo(animationCollectionView.snp.trailing)
         }
     }
-
 }
+extension AnimationTableViewCell: UIScrollViewDelegate {
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == animationCollectionView {
+            // currentpage index
+            let xOffset = scrollView.contentOffset.x
+            let pageWidth = scrollView.frame.width
+            let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
+            // update pageControl
+            pageControl.currentPage = currentPage
+        }
+    }
+}
+
 
 extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,7 +88,7 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
             make.top.equalToSuperview()
             make.width.equalTo(animationCollectionView.bounds.width)
             make.height.equalTo(animationCollectionView.bounds.width).multipliedBy(222.0/390.0)
-            }
+        }
         
         return cell
     }
@@ -67,7 +97,7 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension AnimationTableViewCell: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Set item size to match the collection view's bounds
         return collectionView.bounds.size

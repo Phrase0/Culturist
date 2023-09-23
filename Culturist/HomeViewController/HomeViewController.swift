@@ -13,13 +13,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTitleLabel: UILabel!
     var mySearchController = UISearchController(searchResultsController: nil)
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
         settingSearchController()
-        
     }
+
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -60,12 +62,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func headerView(title: String) -> UIView {
         // create view
         let headerView = UIView()
-        headerView.backgroundColor = .gray
+        headerView.backgroundColor = .white
         
         // add title
         let label = UILabel()
         label.text = "\(title)"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = UIColor.black
         headerView.addSubview(label)
         
@@ -79,26 +81,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Apply Auto Layout constraints using SnapKit
         label.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-6)
             make.leading.equalToSuperview().offset(16)
         }
         
         button.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-20)
-            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-6)
+            make.trailing.equalToSuperview().offset(-20)
         }
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 0
+            return 0.01
         } else {
-            return 80
+            return 30
         }
         
     }
-    
+
     // MARK: - Button Action
     
     @objc func buttonTapped(_ sender: UIButton) {
@@ -108,7 +110,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
 
 
 extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
@@ -130,7 +131,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(homeTitleLabel.snp.bottom).offset(10)
+            make.top.equalTo(homeTitleLabel.snp.bottom).offset(6)
             
         }
     }

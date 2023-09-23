@@ -97,7 +97,7 @@ extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
     // Number of items per row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
-        return configureCellSize(interitemSpace: 15, lineSpace: 15, columnCount: 2)
+        return configureCellSize(interitemSpace: 10, lineSpace: 10, columnCount: 2)
     }
     
     // Configure cell size and header size
@@ -109,7 +109,7 @@ extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
         flowLayout.estimatedItemSize = .zero
         flowLayout.minimumInteritemSpacing = interitemSpace
         flowLayout.minimumLineSpacing = lineSpace
-        flowLayout.itemSize = CGSize(width: width, height: width * 12/7)
+        flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
         productCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)

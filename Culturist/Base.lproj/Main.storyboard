@@ -39,12 +39,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6Tn-Mg-Kvu">
-                                <rect key="frame" x="0.0" y="212.66666666666669" width="375" height="516.33333333333326"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6Tn-Mg-Kvu">
+                                <rect key="frame" x="0.0" y="202.66666666666669" width="375" height="526.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnimationTableViewCell" id="wfM-Cc-dH9" customClass="AnimationTableViewCell" customModule="Culturist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="213.33332824707031"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="213.33332824707031"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wfM-Cc-dH9" id="8qv-AY-evk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="213.33332824707031"/>
@@ -86,17 +86,17 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductTableViewCell" id="LRM-as-BeI" customClass="ProductTableViewCell" customModule="Culturist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="263.33332824707031" width="375" height="317.33334350585938"/>
+                                        <rect key="frame" x="0.0" y="268.66666030883789" width="375" height="288.33334350585938"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LRM-as-BeI" id="dyF-W7-vru">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="317.33334350585938"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="288.33334350585938"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sLH-xT-4kl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="317.33333333333331"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sLH-xT-4kl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="288.33333333333331"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="390:330" id="NZU-Ux-AAH"/>
+                                                        <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="390:300" id="NZU-Ux-AAH"/>
                                                     </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
                                                         <size key="itemSize" width="147" height="250"/>
@@ -106,7 +106,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="9zf-rY-EIm" customClass="ProductCollectionViewCell" customModule="Culturist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="33.666666666666664" width="147" height="250"/>
+                                                            <rect key="frame" x="0.0" y="19" width="147" height="250"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SAw-Or-tIS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="147" height="250"/>
@@ -130,7 +130,7 @@ Label</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="3rA-l7-3vj" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" id="P8C-lI-bAl"/>
                                                                             <constraint firstItem="6mE-hg-BKt" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" constant="16" id="gEo-vh-gR4"/>
@@ -142,6 +142,7 @@ Label</string>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="XUm-ku-lUh" firstAttribute="top" secondItem="SAw-Or-tIS" secondAttribute="top" id="6qC-az-ahv"/>
                                                                     <constraint firstItem="XUm-ku-lUh" firstAttribute="leading" secondItem="SAw-Or-tIS" secondAttribute="leading" id="Dud-5T-QEY"/>
@@ -149,6 +150,7 @@ Label</string>
                                                                     <constraint firstAttribute="bottom" secondItem="XUm-ku-lUh" secondAttribute="bottom" constant="10" id="lcL-st-7Z8"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <size key="customSize" width="147" height="250"/>
                                                             <connections>
                                                                 <outlet property="productImage" destination="3rA-l7-3vj" id="oNF-fr-4aV"/>
@@ -177,7 +179,7 @@ Label</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Tn-Mg-Kvu" secondAttribute="bottom" id="DW9-qc-ldb"/>
-                            <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="top" secondItem="KsP-zL-hTv" secondAttribute="bottom" constant="80" id="Txj-HK-7v3"/>
+                            <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="top" secondItem="KsP-zL-hTv" secondAttribute="bottom" constant="70" id="Txj-HK-7v3"/>
                             <constraint firstItem="KsP-zL-hTv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZC7-iE-eXK"/>
                             <constraint firstItem="KsP-zL-hTv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="faB-pV-WUS"/>
                             <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pCa-VO-hf4"/>
@@ -1109,9 +1111,6 @@ Label</string>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
