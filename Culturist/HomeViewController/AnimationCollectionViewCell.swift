@@ -19,8 +19,5 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         addSubview(animationImage)
-        
-
-            
         }
     }

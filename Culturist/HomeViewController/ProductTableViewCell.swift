@@ -11,6 +11,7 @@ import Kingfisher
 class ProductTableViewCell: UITableViewCell {
     
     @IBOutlet weak var productCollectionView: UICollectionView!
+    var productIndexPath: Int?
     
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
@@ -34,11 +35,11 @@ class ProductTableViewCell: UITableViewCell {
 extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
+        if productIndexPath == 1 {
             print(artProducts1.count)
             return artProducts1.count
         } else {
@@ -49,12 +50,12 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = productCollectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell else { return UICollectionViewCell() }
-        if indexPath.section == 0 {
+        if productIndexPath == 1 {
             let itemData = artProducts1[indexPath.item]
             let url = URL(string: itemData.imageURL)
             cell.productImage.kf.setImage(with: url)
             cell.productTitle.text = itemData.title
-        } else if indexPath.section == 1 {
+        } else if productIndexPath == 2 {
             let itemData = artProducts6[indexPath.item]
             let url = URL(string: itemData.imageURL)
             cell.productImage.kf.setImage(with: url)
@@ -62,8 +63,6 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         }
         return cell
     }
-    
-
 
     func parentViewController() -> HomeViewController? {
         var parentResponder: UIResponder? = self
@@ -79,9 +78,9 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         if let homeViewController = parentViewController() {
             guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
 
-            if indexPath.section == 0 {
+            if productIndexPath == 1 {
                 detailVC.detailDesctription = artProducts1[indexPath.item]
-            } else if indexPath.section == 1 {
+            } else if productIndexPath == 2 {
                 detailVC.detailDesctription = artProducts6[indexPath.item]
             }
 

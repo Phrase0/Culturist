@@ -9,17 +9,14 @@ import UIKit
 import SnapKit
 class HomeViewController: UIViewController {
     
-    
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var homeTitleLabel: UILabel!
     var mySearchController = UISearchController(searchResultsController: nil)
-    let images = ["coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-
         settingSearchController()
         
     }
@@ -27,17 +24,24 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnimationTableViewCell") as? AnimationTableViewCell else { return UITableViewCell() }
             return cell
-        } else {
+        } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
+            cell.productIndexPath = 1
+            return cell
+        } else if indexPath.row == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
+            cell.productIndexPath = 2
             return cell
         }
+        
+        return UITableViewCell()
     }
 }
 
