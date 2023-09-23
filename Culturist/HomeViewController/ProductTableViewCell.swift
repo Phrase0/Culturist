@@ -8,15 +8,9 @@
 import UIKit
 import Kingfisher
 
-protocol ProductTableViewCellDelegate: AnyObject {
-    func didSelectItemInProductTableViewCell(_ cell: ProductTableViewCell, at indexPath: IndexPath)
-}
-
 class ProductTableViewCell: UITableViewCell {
     
     @IBOutlet weak var productCollectionView: UICollectionView!
-    
-    weak var delegate: ProductTableViewCellDelegate?
     
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
@@ -69,11 +63,33 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
+
+
+    func parentViewController() -> HomeViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? HomeViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectItemInProductTableViewCell(self, at: indexPath)
+        if let homeViewController = parentViewController() {
+            guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+
+            if indexPath.section == 0 {
+                detailVC.detailDesctription = artProducts1[indexPath.item]
+            } else if indexPath.section == 1 {
+                detailVC.detailDesctription = artProducts6[indexPath.item]
+            }
+
+            homeViewController.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 
-    
+
 }
 
 

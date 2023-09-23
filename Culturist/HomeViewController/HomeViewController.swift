@@ -7,10 +7,7 @@
 
 import UIKit
 import SnapKit
-class HomeViewController: UIViewController, ProductTableViewCellDelegate {
-    func didSelectItemInProductTableViewCell(_ cell: ProductTableViewCell, at indexPath: IndexPath) {
-        
-    }
+class HomeViewController: UIViewController {
     
     
     @IBOutlet weak var homeTableView: UITableView!
@@ -22,7 +19,9 @@ class HomeViewController: UIViewController, ProductTableViewCellDelegate {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+
         settingSearchController()
+        
     }
 }
 
@@ -37,7 +36,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
-            cell.delegate = self
             return cell
         }
     }
