@@ -27,6 +27,7 @@
 		F83E4C272ABEC65B000E2DAC /* AnimationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */; };
 		F83E4C292ABEC66A000E2DAC /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */; };
 		F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */; };
+		F83E4C2D2ABED454000E2DAC /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C2C2ABED454000E2DAC /* ProductHeaderView.swift */; };
 		F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */; };
 		F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */; };
 		F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */; };
@@ -77,6 +78,7 @@
 		F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTableViewCell.swift; sourceTree = "<group>"; };
 		F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCollectionViewCell.swift; sourceTree = "<group>"; };
+		F83E4C2C2ABED454000E2DAC /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopManager.swift; sourceTree = "<group>"; };
 		F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopMapViewController.swift; sourceTree = "<group>"; };
 		F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopMapViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
+				F82A34F12AB2AC4C004FF247 /* ProductViewController.swift */,
 				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
@@ -193,7 +196,7 @@
 				F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */,
 				F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */,
 				F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */,
-				F82A34F12AB2AC4C004FF247 /* ProductViewController.swift */,
+				F83E4C2C2ABED454000E2DAC /* ProductHeaderView.swift */,
 				F82A350F2AB2D34B004FF247 /* ProductCollectionViewCell.swift */,
 			);
 			path = HomeViewController;
@@ -417,6 +420,7 @@
 				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
+				F83E4C2D2ABED454000E2DAC /* ProductHeaderView.swift in Sources */,
 				F83E4C252ABEC4E4000E2DAC /* HomeViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,

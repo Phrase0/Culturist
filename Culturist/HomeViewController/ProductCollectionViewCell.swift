@@ -7,9 +7,29 @@
 
 import UIKit
 
+import SnapKit
+
 class ProductCollectionViewCell: UICollectionViewCell {
+    lazy var productTitle: UILabel = {
+        let productTitle = UILabel()
+        return productTitle
+    }()
     
-    @IBOutlet weak var productImage: UIImageView!
+    lazy var productImage: UIImageView = {
+        let productImage = UIImageView()
+        return productImage
+    }()
     
-    @IBOutlet weak var productTitle: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addSubview(productTitle)
+        addSubview(productImage)
+        productImage.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+
 }
