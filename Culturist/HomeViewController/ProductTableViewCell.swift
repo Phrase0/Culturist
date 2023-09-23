@@ -27,7 +27,6 @@ class ProductTableViewCell: UITableViewCell {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
-        productCollectionView.register(ProductHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
     }
     
 }
@@ -80,38 +79,25 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
 
             if productIndexPath == 1 {
                 detailVC.detailDesctription = artProducts1[indexPath.item]
+                //                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
             } else if productIndexPath == 2 {
                 detailVC.detailDesctription = artProducts6[indexPath.item]
+                //                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
             }
 
             homeViewController.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 
-
 }
-
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
-    // Header content
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header", for: indexPath) as? ProductHeaderView {
-            if indexPath.section == 0 {
-                headerView.titleLabel.text = "音樂"
-            } else if indexPath.section == 1 {
-                headerView.titleLabel.text = "展覽"
-            }
-            // You can set different titles for different sections
-            return headerView
-        }
-        return UICollectionReusableView()
-    }
     
     // Number of items per row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
-        return configureCellSize(interitemSpace: 10, lineSpace: 25, columnCount: 2)
+        return configureCellSize(interitemSpace: 15, lineSpace: 15, columnCount: 2)
     }
     
     // Configure cell size and header size
@@ -119,13 +105,11 @@ extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
         
         guard let flowLayout = productCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
         
-        let width = floor((productCollectionView.bounds.width - 32 - interitemSpace * (columnCount-1)) / columnCount)
+        let width = floor((productCollectionView.bounds.width - 32 - interitemSpace * (columnCount - 1)) / columnCount)
         flowLayout.estimatedItemSize = .zero
         flowLayout.minimumInteritemSpacing = interitemSpace
         flowLayout.minimumLineSpacing = lineSpace
-        flowLayout.itemSize = CGSize(width: width, height: width * 230/173)
-        // Header height
-        flowLayout.headerReferenceSize = CGSize(width: 0, height: 100)
+        flowLayout.itemSize = CGSize(width: width, height: width * 12/7)
         
         // Set content insets
         productCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)

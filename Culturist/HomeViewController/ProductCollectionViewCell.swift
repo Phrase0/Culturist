@@ -10,26 +10,31 @@ import UIKit
 import SnapKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
-    lazy var productTitle: UILabel = {
-        let productTitle = UILabel()
-        return productTitle
-    }()
     
-    lazy var productImage: UIImageView = {
-        let productImage = UIImageView()
-        return productImage
-    }()
+    @IBOutlet weak var productView: UIView!
+    @IBOutlet weak var productTitle: UILabel!
+    @IBOutlet weak var productImage: UIImageView!
+    
+    //    lazy var productTitle: UILabel = {
+//        let productTitle = UILabel()
+//        return productTitle
+//    }()
+//
+//    lazy var productImage: UIImageView = {
+//        let productImage = UIImageView()
+//        return productImage
+//    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addSubview(productTitle)
-        addSubview(productImage)
-        productImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
+//        addSubview(productTitle)
+//        addSubview(productImage)
+//        productImage.snp.makeConstraints { make in
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//            make.top.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//        }
     }
 
 }

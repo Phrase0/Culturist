@@ -17,7 +17,29 @@ class AnimationTableViewCell: UITableViewCell {
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
+        // Auto scroll animation, set to switch every 2 seconds
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
         
+    }
+    // Used to keep track of the currently displayed banner
+    var imageIndex = 0
+    // Banner auto-scroll animation
+    @objc func changeBanner() {
+        var indexPath: IndexPath
+        imageIndex += 1
+        if imageIndex < images.count {
+            // If the displayed cell is less than the total count, display the next one
+            indexPath = IndexPath(item: imageIndex, section: 0)
+            // Actions to perform when adding auto-scroll animation
+            animationCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        } else {
+            // If the displayed cell is equal to the total count and there is no next image, select the first one and immediately call itself
+            imageIndex = 0
+            indexPath = IndexPath(item: imageIndex, section: 0)
+            // Actions to perform when adding auto-scroll animation
+            animationCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+            changeBanner()
+        }
     }
 
 }
