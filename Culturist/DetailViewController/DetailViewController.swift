@@ -72,7 +72,14 @@ class DetailViewController: UIViewController {
             appCalendar = createAppCalendar()
         }
         // ---------------------------------------------------
+        navigationItem.leftBarButtonItem?.tintColor = .B2
     }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
+
     
 }
 
@@ -202,7 +209,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
     
 }
 

@@ -35,7 +35,6 @@ class SearchViewController: UIViewController {
 }
 
 
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
