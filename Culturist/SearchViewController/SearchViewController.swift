@@ -9,15 +9,12 @@ import UIKit
 import Kingfisher
 
 class SearchViewController: UIViewController {
-
+    
     @IBOutlet weak var searchCollectionView: UICollectionView!
     
-    var artProducts1 = [ArtDatum]()
-    var artProducts6 = [ArtDatum]()
-    var artManager1 = ArtProductManager()
-    var artManager6 = ArtProductManager()
     let firebaseManager = FirebaseManager()
     
+    var allProducts: [ArtDatum] = []
     // searchResult
     var searchResult: [ArtDatum] = []
     var mySearchController: UISearchController?
@@ -26,32 +23,18 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
-        artManager1.delegate = self
-        artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
         settingSearchController()
-        setupCustomNavigationBarButton()
-        self.tabBarController?.tabBar.isHidden = true
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .B2
     }
     
-    // MARK: - custom navigationItem button
-    private func setupCustomNavigationBarButton() {
-        let customButton = UIButton(type: .custom)
-        customButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        customButton.tintColor = .B2
-        customButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        customButton.addTarget(self, action: #selector(customButtonTapped), for: .touchUpInside)
-
-        let customBarButtonItem = UIBarButtonItem(customView: customButton)
-        navigationItem.leftBarButtonItem = customBarButtonItem
-    }
-
-    @objc private func customButtonTapped() {
+    @objc private func backButtonTapped() {
         navigationController?.popToRootViewController(animated: true)
     }
-
 }
+
+
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -113,33 +96,8 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        searchCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 12.0)
+        searchCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 12.0)
         return flowLayout.itemSize
-    }
-    
-    
-
-}
-
-// MARK: - ProductManagerDelegate
-extension SearchViewController: ArtManagerDelegate {
-    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
-            if artProductList.isEmpty {
-                print("no api data")
-            } else {
-                if manager === self.artManager1 {
-                    self.artProducts1 = artProductList
-                } else if manager === self.artManager6 {
-                    self.artProducts6 = artProductList
-                }
-                self.searchCollectionView.reloadData()
-            }
-        }
-    }
-    
-    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
     }
     
 }
@@ -163,15 +121,15 @@ extension SearchViewController: UISearchResultsUpdating {
     }
     
     func filterContent(for searchText: String) {
-        var filteredProducts = artProducts1 + artProducts6
-        filteredProducts = filteredProducts.filter { artData in
+        // copy allProducts to searchResult
+        searchResult = allProducts
+        searchResult = searchResult.filter { artData in
             let title = artData.title.lowercased()
             let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
             let location = artData.showInfo.first?.location.lowercased() ?? ""
             
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
-        searchResult = filteredProducts
     }
-    
+
 }

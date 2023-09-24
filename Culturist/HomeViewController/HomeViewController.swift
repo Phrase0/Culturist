@@ -13,11 +13,22 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTitleLabel: UILabel!
     var mySearchController = UISearchController(searchResultsController: nil)
 
+    var artProducts1 = [ArtDatum]()
+    var artProducts6 = [ArtDatum]()
+    var artManager1 = ArtProductManager()
+    var artManager6 = ArtProductManager()
+    var buttonTag: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
         settingSearchController()
+        
+        artManager1.delegate = self
+        artManager6.delegate = self
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
     }
 
 }
@@ -50,8 +61,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
+            buttonTag = 1
             return headerView(title: "音樂")
         } else if section == 2 {
+            buttonTag = 2
             return headerView(title: "展覽")
         }
         return UIView()
@@ -74,6 +87,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         button.setTitleColor(UIColor.BL1, for: .normal)
         button.setTitle("查看更多", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.tag = buttonTag ?? 0
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(button)
         
@@ -103,14 +117,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func buttonTapped(_ sender: UIButton) {
         guard let checkMoreVC = self.storyboard?.instantiateViewController(withIdentifier: "CheckMoreViewController") as? CheckMoreViewController else { return }
-        // add sender tag
         let section = sender.tag
-        print(section)
+        if section == 1 {
+            checkMoreVC.result = artProducts1
+            checkMoreVC.navigationItemTitle = "音樂"
+        } else {
+            checkMoreVC.result = artProducts6
+            checkMoreVC.navigationItemTitle = "展覽"
+        }
+
         navigationController?.pushViewController(checkMoreVC, animated: true)
     }
     
 }
 
+// MARK: - searchBar
 extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
     }
@@ -136,8 +157,33 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return false }
-        navigationController?.pushViewController(searchVC, animated: true)  
+        navigationController?.pushViewController(searchVC, animated: true)
+        var allProducts = self.artProducts1 + self.artProducts6
+        searchVC.allProducts = allProducts
+        searchVC.hidesBottomBarWhenPushed = true
         // Return false to prevent the search bar from being edited
         return false
     }
+}
+
+// MARK: - ProductManagerDelegate
+extension HomeViewController: ArtManagerDelegate {
+    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
+        DispatchQueue.main.async {
+            if artProductList.isEmpty {
+                print("no api data")
+            } else {
+                if manager === self.artManager1 {
+                    self.artProducts1 = artProductList
+                } else if manager === self.artManager6 {
+                    self.artProducts6 = artProductList
+                }
+            }
+        }
+    }
+    
+    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
+        print(error.localizedDescription)
+    }
+    
 }
