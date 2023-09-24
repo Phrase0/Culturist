@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Raz-Jg-dh5">
                                 <rect key="frame" x="0.0" y="50" width="375" height="728"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dwm-Lf-jje">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dwm-Lf-jje">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -129,7 +129,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="390:300" id="NZU-Ux-AAH"/>
                                                     </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
                                                         <size key="itemSize" width="147" height="250"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -153,7 +153,7 @@
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mE-hg-BKt">
-                                                                                <rect key="frame" x="16" y="168" width="105" height="67"/>
+                                                                                <rect key="frame" x="5" y="168" width="127" height="67"/>
                                                                                 <string key="text">Label
 Label</string>
                                                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
@@ -164,12 +164,12 @@ Label</string>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="3rA-l7-3vj" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" id="P8C-lI-bAl"/>
-                                                                            <constraint firstItem="6mE-hg-BKt" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" constant="16" id="gEo-vh-gR4"/>
+                                                                            <constraint firstItem="6mE-hg-BKt" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" constant="5" id="gEo-vh-gR4"/>
                                                                             <constraint firstAttribute="trailing" secondItem="3rA-l7-3vj" secondAttribute="trailing" id="le8-9g-AF7"/>
                                                                             <constraint firstItem="6mE-hg-BKt" firstAttribute="top" secondItem="3rA-l7-3vj" secondAttribute="bottom" constant="5" id="mGj-LF-vCr"/>
                                                                             <constraint firstItem="3rA-l7-3vj" firstAttribute="top" secondItem="XUm-ku-lUh" secondAttribute="top" id="myp-ek-q4L"/>
                                                                             <constraint firstAttribute="bottom" secondItem="6mE-hg-BKt" secondAttribute="bottom" constant="5" id="o7N-bH-MJM"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="6mE-hg-BKt" secondAttribute="trailing" constant="16" id="ohv-QX-vSm"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="6mE-hg-BKt" secondAttribute="trailing" constant="5" id="ohv-QX-vSm"/>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>

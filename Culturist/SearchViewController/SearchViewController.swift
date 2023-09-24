@@ -31,8 +31,26 @@ class SearchViewController: UIViewController {
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
         settingSearchController()
+        setupCustomNavigationBarButton()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
+    // MARK: - custom navigationItem button
+    private func setupCustomNavigationBarButton() {
+        let customButton = UIButton(type: .custom)
+        customButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        customButton.tintColor = .B2
+        customButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        customButton.addTarget(self, action: #selector(customButtonTapped), for: .touchUpInside)
+
+        let customBarButtonItem = UIBarButtonItem(customView: customButton)
+        navigationItem.leftBarButtonItem = customBarButtonItem
+    }
+
+    @objc private func customButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -98,6 +116,8 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         searchCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 12.0)
         return flowLayout.itemSize
     }
+    
+    
 
 }
 

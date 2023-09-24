@@ -63,15 +63,15 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         productTitle.snp.makeConstraints { make in
-            make.leading.equalTo(productView).offset(16)
-            make.trailing.equalTo(productView).offset(-16)
+            make.leading.equalTo(productView).offset(5)
+            make.trailing.equalTo(productView).offset(-5)
             make.top.equalTo(productImage.snp.bottom).offset(5)
             make.bottom.equalTo(productView).offset(-5)
         }
         
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView)
-            make.height.equalTo(productView).multipliedBy(21.0/29.0)
+            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
         }
     }
     
