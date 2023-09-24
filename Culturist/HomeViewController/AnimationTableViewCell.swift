@@ -69,10 +69,10 @@ extension AnimationTableViewCell: UIScrollViewDelegate {
             let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
             // update pageControl
             pageControl.currentPage = currentPage
+            imageIndex = currentPage
         }
     }
 }
-
 
 extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,14 +82,6 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
         cell.animationImage.image = UIImage(named: images[indexPath.row])
-        
-        cell.animationImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview()
-            make.width.equalTo(animationCollectionView.bounds.width)
-            make.height.equalTo(animationCollectionView.bounds.width).multipliedBy(222.0/390.0)
-        }
-        
         return cell
     }
     

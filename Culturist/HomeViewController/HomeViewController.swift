@@ -12,9 +12,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var homeTitleLabel: UILabel!
     var mySearchController = UISearchController(searchResultsController: nil)
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
@@ -111,7 +109,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
 extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -137,9 +134,9 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // 處理跳轉到下一頁的操作，例如：
-        //        let searchVC = ProfileViewController() // 創建下一頁的視圖控制器
-        //        navigationController?.pushViewController(searchVC, animated: true) // 執行跳轉
-        return false // 返回false以防止搜索欄進行編輯
+        guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return false }
+        navigationController?.pushViewController(searchVC, animated: true)
+        // Return false to prevent the search bar from being edited
+        return false
     }
 }
