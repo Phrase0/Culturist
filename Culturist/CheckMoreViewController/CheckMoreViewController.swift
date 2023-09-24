@@ -21,7 +21,7 @@ class CheckMoreViewController: UIViewController {
         super.viewDidLoad()
         checkMoreCollectionView.delegate = self
         checkMoreCollectionView.dataSource = self
-        
+
         navigationItem.title = "\(navigationItemTitle!)"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .B2
@@ -86,4 +86,3 @@ extension CheckMoreViewController: UICollectionViewDelegateFlowLayout {
     }
 
 }
-

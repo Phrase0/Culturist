@@ -19,8 +19,7 @@ class LikeViewController: UIViewController {
     
     // create DispatchGroup
     let group = DispatchGroup()
-    
-    
+
     // products in likeCollection
     var likeEXProducts = [ArtDatum]()
     
@@ -34,8 +33,16 @@ class LikeViewController: UIViewController {
         likeCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
+        
+        navigationItem.title = "我的收藏"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .B2
     }
-    
+
+    @objc private func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
+ 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         group.enter()
@@ -76,8 +83,8 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikeCollectionViewCell", for: indexPath) as? LikeCollectionViewCell else {return UICollectionViewCell()}
         let itemData = likeEXProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.imageView.kf.setImage(with: url)
-        cell.titleLabel.text = itemData.title
+        cell.productImage.kf.setImage(with: url)
+        cell.productTitle.text = itemData.title
         return cell
     }
     
@@ -92,6 +99,34 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension LikeViewController: UICollectionViewDelegateFlowLayout {
+    
+    // Number of items per row
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
+        return configureCellSize(interitemSpace: 10, lineSpace: 20, columnCount: 2)
+    }
+    
+    // Configure cell size and header size
+    func configureCellSize(interitemSpace: CGFloat, lineSpace: CGFloat, columnCount: CGFloat) -> CGSize {
+        
+        guard let flowLayout = likeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
+        
+        let width = floor((likeCollectionView.bounds.width - 32 - interitemSpace * (columnCount - 1)) / columnCount)
+        flowLayout.estimatedItemSize = .zero
+        flowLayout.minimumInteritemSpacing = interitemSpace
+        flowLayout.minimumLineSpacing = lineSpace
+        flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
+        
+        // Set content insets
+        likeCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 12.0)
+        return flowLayout.itemSize
+    }
+
+}
+
 
 // MARK: - FirebaseLikeDelegate
 extension LikeViewController: FirebaseLikeDelegate {
@@ -117,10 +152,10 @@ extension LikeViewController: ArtManagerDelegate {
             }
         }
     }
-    
-    
+
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
     }
     
 }
+

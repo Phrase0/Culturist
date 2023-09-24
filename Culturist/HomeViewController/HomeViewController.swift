@@ -10,7 +10,6 @@ import SnapKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
-    @IBOutlet weak var homeTitleLabel: UILabel!
     var mySearchController = UISearchController(searchResultsController: nil)
 
     var artProducts1 = [ArtDatum]()
@@ -29,6 +28,16 @@ class HomeViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
+
+        navigationItem.title = "Culcurist"
+//        if let navigationBar = self.navigationController?.navigationBar {
+//            let titleTextAttributes: [NSAttributedString.Key: Any] = [
+//                .font: UIFont.boldSystemFont(ofSize: 24)
+//            ]
+//            navigationBar.titleTextAttributes = titleTextAttributes
+//        }
+//
+//        self.navigationController?.navigationBar.topItem?.title = "Culcurist"
     }
 
 }
@@ -150,7 +159,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(homeTitleLabel.snp.bottom).offset(6)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(9)
             
         }
     }

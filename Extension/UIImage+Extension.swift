@@ -28,6 +28,7 @@ enum ImageAsset: String {
     
     case Icons_18px_Book
     case Icons_18px_Coffee
+    case Icons_36px_Close
     
 
 }
