@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXv-ke-pD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="-35"/>
+            <point key="canvasLocation" x="1833" y="-379"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -226,6 +226,52 @@ Label</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="935.20000000000005" y="-35.467980295566505"/>
+        </scene>
+        <!--Check More View Controller-->
+        <scene sceneID="y94-kR-Urk">
+            <objects>
+                <viewController storyboardIdentifier="CheckMoreViewController" id="Pd1-1a-GRU" customClass="CheckMoreViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aAS-pw-Zs7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-eL-oci">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p93-m9-tae">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CheckMoreCollectionViewCell" id="tFf-2t-5fT" customClass="CheckMoreCollectionViewCell" customModule="Culturist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7Xv-IV-F3i">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MlG-Z0-b9g"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="zi3-eL-oci" secondAttribute="bottom" id="DGn-Pb-plN"/>
+                            <constraint firstAttribute="trailing" secondItem="zi3-eL-oci" secondAttribute="trailing" id="PoO-go-t0U"/>
+                            <constraint firstItem="zi3-eL-oci" firstAttribute="leading" secondItem="aAS-pw-Zs7" secondAttribute="leading" id="Vdj-4f-dGY"/>
+                            <constraint firstItem="zi3-eL-oci" firstAttribute="top" secondItem="aAS-pw-Zs7" secondAttribute="top" id="xlJ-i4-aCW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="checkMoreCollectionView" destination="zi3-eL-oci" id="sb8-Er-YmC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5a-74-RhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1812" y="281"/>
         </scene>
         <!--Recommend View Controller-->
         <scene sceneID="fWH-rb-grt">
@@ -644,7 +690,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kb-oh-hEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2455" y="-52"/>
+            <point key="canvasLocation" x="4090" y="-35"/>
         </scene>
         <!--Coffee Shop Map View Controller-->
         <scene sceneID="aY8-sH-Pro">
@@ -659,7 +705,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1P-ok-kcE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3416" y="-182"/>
+            <point key="canvasLocation" x="5951" y="-214"/>
         </scene>
         <!--Book Shop Map View Controller-->
         <scene sceneID="sAk-E7-bdo">
@@ -674,7 +720,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-aZ-n1k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3415" y="539"/>
+            <point key="canvasLocation" x="5950" y="508"/>
         </scene>
         <!--Book Shop View Controller-->
         <scene sceneID="UmK-Du-0yr">
@@ -775,7 +821,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfl-g0-IWc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4134" y="539"/>
+            <point key="canvasLocation" x="6670" y="508"/>
         </scene>
         <!--Coffee Shop View Controller-->
         <scene sceneID="hic-NN-cdv">
@@ -987,7 +1033,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrU-Ol-zDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4133.5877862595416" y="-182.3943661971831"/>
+            <point key="canvasLocation" x="6668" y="-214"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="IJh-cg-Ynw">
@@ -1044,7 +1090,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7a-sU-8Px" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4975" y="-182"/>
+            <point key="canvasLocation" x="7510" y="-214"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ckV-0z-aXN">

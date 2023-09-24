@@ -10,6 +10,8 @@
 		6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */; };
 		F80D8D5C2ABFF32A009195B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D5B2ABFF32A009195B2 /* SearchViewController.swift */; };
 		F80D8D5E2ABFF600009195B2 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */; };
+		F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */; };
+		F80D8D652AC02850009195B2 /* CheckMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */; };
 		F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */; };
 		F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */; };
 		F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */; };
@@ -59,6 +61,8 @@
 		CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.release.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.release.xcconfig"; sourceTree = "<group>"; };
 		F80D8D5B2ABFF32A009195B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreViewController.swift; sourceTree = "<group>"; };
+		F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTabBarController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,15 @@
 			path = SearchViewController;
 			sourceTree = "<group>";
 		};
+		F80D8D612AC0281B009195B2 /* CheckMoreViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */,
+				F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */,
+			);
+			path = CheckMoreViewController;
+			sourceTree = "<group>";
+		};
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +186,7 @@
 				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
 				F80D8D5A2ABFF304009195B2 /* SearchViewController */,
+				F80D8D612AC0281B009195B2 /* CheckMoreViewController */,
 				F851F7542AB6B4680029C78E /* RecommendViewController */,
 				F851F7482AB41F460029C78E /* DetailViewController */,
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
@@ -429,6 +443,7 @@
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
 				F83E4C252ABEC4E4000E2DAC /* HomeViewController.swift in Sources */,
+				F80D8D652AC02850009195B2 /* CheckMoreCollectionViewCell.swift in Sources */,
 				F80D8D5C2ABFF32A009195B2 /* SearchViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,
@@ -445,6 +460,7 @@
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
 				F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */,
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
+				F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */,
 				F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */,
 				F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */,
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,

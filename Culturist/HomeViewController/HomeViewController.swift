@@ -102,16 +102,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - Button Action
     
     @objc func buttonTapped(_ sender: UIButton) {
-        // 處理按鈕點擊事件
+        guard let checkMoreVC = self.storyboard?.instantiateViewController(withIdentifier: "CheckMoreViewController") as? CheckMoreViewController else { return }
+        // add sender tag
         let section = sender.tag
-        print("Button tapped in section \(section)")
+        print(section)
+        navigationController?.pushViewController(checkMoreVC, animated: true)
     }
     
 }
 
 extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        
     }
     
     func settingSearchController() {
