@@ -111,7 +111,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 90.0, right: 0.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 90.0, right: 20.0)
         return flowLayout.itemSize
     }
 
