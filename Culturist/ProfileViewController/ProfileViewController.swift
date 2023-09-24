@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
       
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
         navVC.navigationBar.standardAppearance = navBarAppearance
         navVC.navigationBar.scrollEdgeAppearance = navBarAppearance
         self.present(navVC, animated: true)

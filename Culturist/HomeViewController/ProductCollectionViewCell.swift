@@ -23,7 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     func setShadowColor() {
         // Set corner radius for rounded corners
-        productView.layer.cornerRadius = 10
+        productView.layer.cornerRadius = 8
         // Add shadow to the view
         productView.layer.shadowColor = UIColor.black.cgColor
         productView.layer.shadowOpacity = 0.2
@@ -32,7 +32,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         // Disable view's boundary restrictions for shadow to appear
         productView.layer.masksToBounds = false
         // Set corner radius for the image view
-        productImage.layer.cornerRadius = 10
+        productImage.layer.cornerRadius = 8
         // Mask the specified corners of the image view with rounded corners
         productImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         // Clip the image to make the rounded corners effective

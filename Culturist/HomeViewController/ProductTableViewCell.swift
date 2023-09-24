@@ -27,6 +27,7 @@ class ProductTableViewCell: UITableViewCell {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
+        
     }
     
 }
@@ -39,10 +40,8 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if productIndexPath == 1 {
-            print(artProducts1.count)
             return artProducts1.count
         } else {
-            print(artProducts6.count)
             return artProducts6.count
         }
     }
