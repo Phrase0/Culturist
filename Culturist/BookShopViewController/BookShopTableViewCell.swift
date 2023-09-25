@@ -16,6 +16,9 @@ class BookShopTableViewCell: UITableViewCell {
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var bookImageView: UIImageView!
     
+    // bookshop intro title
+    @IBOutlet weak var shopIntro: UILabel!
+    
     var mapNavigationButtonHandler: ((UIButton) -> Void)?
     
     override func awakeFromNib() {
