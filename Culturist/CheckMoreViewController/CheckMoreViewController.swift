@@ -28,7 +28,7 @@ class CheckMoreViewController: UIViewController {
     }
 
     @objc private func backButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }

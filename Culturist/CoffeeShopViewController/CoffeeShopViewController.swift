@@ -52,7 +52,9 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.limitTimeLabel.text = coffeeShop.limitedTime
             cell.socketLabel.text = coffeeShop.socket
             cell.standingDeskLabel.text = coffeeShop.standingDesk
-            cell.mapNavigationButtonHandler = { [weak self] sender in                
+            let random = Int.random(in: 1...27)
+            cell.coffeeImageView.image = UIImage(named: "\(random)")
+            cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -60,8 +62,8 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 // getDirections method，pass taget MKMapItem
                 self?.getDirections(to: destinationMapItem)
                 print("Button Tapped")
-//                detailVC.routes = response.routes
-//                self?.present(detailVC, animated: true)
+                //                detailVC.routes = response.routes
+                //                self?.present(detailVC, animated: true)
             }
         }
         return cell
@@ -70,14 +72,14 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     // ---------------------------------------------------
     func getDirections(to mapLocation: MKMapItem) {
         //refreshControl.startAnimating()
-
+        
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
         request.destination = mapLocation
         request.requestsAlternateRoutes = false
-
+        
         let directions = MKDirections(request: request)
-
+        
         directions.calculate(completionHandler: { response, error in
             defer {
                 DispatchQueue.main.async { [weak self] in
@@ -90,7 +92,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             guard let response = response else {
                 return assertionFailure("No error, but no response, either.")
             }
-
+            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
@@ -115,8 +117,8 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
 
 @available(iOS 11.0, *)
 extension CoffeeShopViewController: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
+        
     }
 }

@@ -48,6 +48,14 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
+        
+        // backBtn
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .B2
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
