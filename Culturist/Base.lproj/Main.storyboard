@@ -509,12 +509,12 @@ Label</string>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="Hsj-pZ-Au2" customClass="DetailViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" hidesBottomBarWhenPushed="YES" id="Hsj-pZ-Au2" customClass="DetailViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fhj-D0-ljC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="709" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RKk-mN-4Mc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RKk-mN-4Mc">
                                 <rect key="frame" x="0.0" y="50" width="375" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -531,71 +531,79 @@ Label</string>
                                                         <constraint firstAttribute="width" secondItem="JeH-8q-b7M" secondAttribute="height" multiplier="356:224" id="A1C-Ob-tsw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZo-2i-FAa">
-                                                    <rect key="frame" x="16" y="256.66666666666669" width="343" height="172.66666666666669"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" horizontalCompressionResistancePriority="740" text="title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-9q-HJp">
+                                                    <rect key="frame" x="25" y="256.66666666666669" width="247" height="25.333333333333314"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" horizontalCompressionResistancePriority="760" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Adl-Up-zoS" userLabel="Icon Stack View">
+                                                    <rect key="frame" x="287" y="256.66666666666669" width="63" height="24"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WJU-ax-n0q">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="38"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvq-7y-oEN">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Tvq-7y-oEN" secondAttribute="height" multiplier="1:1" id="uWb-Z3-elO"/>
+                                                            </constraints>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="Icons_24px_Notification"/>
+                                                            <connections>
+                                                                <action selector="notificationBtnTapped:" destination="eiP-1D-OOg" eventType="touchUpInside" id="aWW-y5-uCu"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-JD-L1Z">
+                                                            <rect key="frame" x="39" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="KNd-JD-L1Z" secondAttribute="height" multiplier="1:1" id="7a8-HN-W3U"/>
+                                                            </constraints>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="Icons_24px_BookMark_Normal"/>
+                                                            <connections>
+                                                                <action selector="likeButton:" destination="eiP-1D-OOg" eventType="touchUpInside" id="IIk-FY-rSC"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZo-2i-FAa" userLabel="Sescrip Stack View">
+                                                    <rect key="frame" x="25" y="297" width="325" height="93.666666666666686"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbQ-oS-GFs" userLabel="Time Stack View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="214" height="19.666666666666668"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-9q-HJp">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="245" height="38"/>
-                                                                    <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Time Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cO2-Pv-l6m">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="19.666666666666668"/>
+                                                                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Adl-Up-zoS">
-                                                                    <rect key="frame" x="245" y="0.0" width="98" height="38"/>
-                                                                    <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvq-7y-oEN">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="48" height="38"/>
-                                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                            <state key="normal" image="Icons_24px_Notification"/>
-                                                                            <buttonConfiguration key="configuration" style="plain" image="Icons_24px_Notification"/>
-                                                                            <connections>
-                                                                                <action selector="notificationBtnTapped:" destination="eiP-1D-OOg" eventType="touchUpInside" id="aWW-y5-uCu"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNd-JD-L1Z">
-                                                                            <rect key="frame" x="50" y="0.0" width="48" height="38"/>
-                                                                            <state key="normal" title="Button"/>
-                                                                            <buttonConfiguration key="configuration" style="plain" image="Icons_24px_BookMark_Normal"/>
-                                                                        </button>
-                                                                    </subviews>
-                                                                </stackView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text=" - " textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-Ot-utv">
+                                                                    <rect key="frame" x="107" y="0.0" width="18" height="19.666666666666668"/>
+                                                                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endtime" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGF-Gu-guP">
+                                                                    <rect key="frame" x="125" y="0.0" width="89" height="19.666666666666668"/>
+                                                                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="locationName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLB-fj-jlp">
-                                                            <rect key="frame" x="0.0" y="43" width="343" height="17"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="12"/>
+                                                            <rect key="frame" x="0.0" y="24.666666666666686" width="325" height="19.666666666666671"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BH5-HT-2Nh">
-                                                            <rect key="frame" x="0.0" y="65" width="343" height="17"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="12"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cO2-Pv-l6m">
-                                                            <rect key="frame" x="0.0" y="87" width="343" height="17"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="12"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-Ot-utv">
-                                                            <rect key="frame" x="0.0" y="109" width="2.3333333333333335" height="17"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="12"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endtime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGF-Gu-guP">
-                                                            <rect key="frame" x="0.0" y="131" width="343" height="17"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="12"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BH5-HT-2Nh">
+                                                            <rect key="frame" x="0.0" y="49.333333333333314" width="325" height="19.666666666666671"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQk-Xd-gUq">
-                                                            <rect key="frame" x="0.0" y="153" width="343" height="19.666666666666657"/>
+                                                            <rect key="frame" x="0.0" y="74" width="325" height="19.666666666666671"/>
                                                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -603,25 +611,15 @@ Label</string>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="BLB-fj-jlp" secondAttribute="trailing" id="3kQ-UA-1sC"/>
-                                                        <constraint firstAttribute="trailing" secondItem="cO2-Pv-l6m" secondAttribute="trailing" id="Qxz-zG-bot"/>
-                                                        <constraint firstAttribute="trailing" secondItem="uGF-Gu-guP" secondAttribute="trailing" id="T8w-4p-0eB"/>
                                                         <constraint firstAttribute="trailing" secondItem="cQk-Xd-gUq" secondAttribute="trailing" id="hlH-Hd-9Qi"/>
                                                         <constraint firstAttribute="trailing" secondItem="BH5-HT-2Nh" secondAttribute="trailing" id="nf0-Wb-gMm"/>
-                                                        <constraint firstAttribute="trailing" secondItem="WJU-ax-n0q" secondAttribute="trailing" id="nvZ-xG-kPz"/>
                                                     </constraints>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-ue-cTV">
-                                                    <rect key="frame" x="28" y="547" width="341" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Tyf-JE-JUz">
-                                                    <rect key="frame" x="25" y="449.33333333333331" width="325" height="34.333333333333314"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Tyf-JE-JUz" userLabel="Button Stack View">
+                                                    <rect key="frame" x="25" y="410.66666666666669" width="325" height="34.333333333333314"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7E-Uv-1dp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="34.333333333333336"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="34.333333333333336"/>
                                                             <color key="tintColor" name="B1"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="gray" image="Icons_18px_Coffee" title="   探索咖啡店"/>
@@ -630,28 +628,43 @@ Label</string>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oab-pH-xdy">
-                                                            <rect key="frame" x="177.66666666666663" y="0.0" width="147.33333333333337" height="34.333333333333336"/>
+                                                            <rect key="frame" x="175" y="0.0" width="150" height="34.333333333333336"/>
                                                             <color key="tintColor" name="B1"/>
                                                             <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="gray" image="Icons_18px_Book" title="   探索書店   "/>
+                                                            <buttonConfiguration key="configuration" style="gray" image="Icons_18px_Book" title="   探索書店 "/>
                                                             <connections>
                                                                 <action selector="searchBookShop:" destination="eiP-1D-OOg" eventType="touchUpInside" id="GfQ-nb-eGt"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-ue-cTV">
+                                                    <rect key="frame" x="25" y="465" width="325" height="224"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Adl-Up-zoS" firstAttribute="leading" secondItem="ndJ-9q-HJp" secondAttribute="trailing" constant="15" id="0tY-5x-hd1"/>
                                                 <constraint firstItem="JeH-8q-b7M" firstAttribute="top" secondItem="tfJ-OX-yIS" secondAttribute="top" constant="16" id="7tG-Ij-K1Y"/>
                                                 <constraint firstItem="Tyf-JE-JUz" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="8I0-lH-LXv"/>
+                                                <constraint firstItem="ndJ-9q-HJp" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="ASq-Bn-RBd"/>
                                                 <constraint firstItem="JeH-8q-b7M" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="16" id="B6A-m2-TQN"/>
                                                 <constraint firstAttribute="trailing" secondItem="Tyf-JE-JUz" secondAttribute="trailing" constant="25" id="BFU-ar-Vzb"/>
-                                                <constraint firstItem="HZo-2i-FAa" firstAttribute="top" secondItem="JeH-8q-b7M" secondAttribute="bottom" constant="25" id="Hq3-yz-0oy"/>
+                                                <constraint firstItem="HZo-2i-FAa" firstAttribute="top" secondItem="ndJ-9q-HJp" secondAttribute="bottom" constant="15" id="GiH-Pb-6mf"/>
                                                 <constraint firstAttribute="trailing" secondItem="JeH-8q-b7M" secondAttribute="trailing" constant="16" id="Jhb-Ys-FC2"/>
-                                                <constraint firstItem="HZo-2i-FAa" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="16" id="Xkd-B1-bKb"/>
+                                                <constraint firstAttribute="bottom" secondItem="waa-ue-cTV" secondAttribute="bottom" constant="20" id="ROW-zB-QMM"/>
+                                                <constraint firstItem="waa-ue-cTV" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="Vad-Nh-Ne2"/>
+                                                <constraint firstAttribute="trailing" secondItem="Adl-Up-zoS" secondAttribute="trailing" constant="25" id="VxS-1o-uoh"/>
+                                                <constraint firstItem="HZo-2i-FAa" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="Xkd-B1-bKb"/>
+                                                <constraint firstItem="ndJ-9q-HJp" firstAttribute="top" secondItem="JeH-8q-b7M" secondAttribute="bottom" constant="25" id="b6J-jf-KUR"/>
                                                 <constraint firstItem="JeH-8q-b7M" firstAttribute="centerX" secondItem="tfJ-OX-yIS" secondAttribute="centerX" id="h4X-eD-jog"/>
-                                                <constraint firstAttribute="trailing" secondItem="HZo-2i-FAa" secondAttribute="trailing" constant="16" id="hTL-JS-WAP"/>
+                                                <constraint firstItem="Adl-Up-zoS" firstAttribute="top" secondItem="JeH-8q-b7M" secondAttribute="bottom" constant="25" id="hLL-Tz-ycP"/>
+                                                <constraint firstAttribute="trailing" secondItem="HZo-2i-FAa" secondAttribute="trailing" constant="25" id="hTL-JS-WAP"/>
+                                                <constraint firstAttribute="trailing" secondItem="waa-ue-cTV" secondAttribute="trailing" constant="25" id="ihD-hV-WwJ"/>
                                                 <constraint firstItem="Tyf-JE-JUz" firstAttribute="top" secondItem="HZo-2i-FAa" secondAttribute="bottom" constant="20" id="irc-6d-C1G"/>
+                                                <constraint firstItem="waa-ue-cTV" firstAttribute="top" secondItem="Tyf-JE-JUz" secondAttribute="bottom" constant="20" id="uzj-1a-SPW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -659,6 +672,7 @@ Label</string>
                                             <outlet property="descriptionLabel" destination="waa-ue-cTV" id="OfG-1Q-Igg"/>
                                             <outlet property="detailImageView" destination="JeH-8q-b7M" id="E9h-Hc-Nxm"/>
                                             <outlet property="endTimeLabel" destination="uGF-Gu-guP" id="as3-uJ-aIr"/>
+                                            <outlet property="likeBtn" destination="KNd-JD-L1Z" id="SaK-zd-ZlA"/>
                                             <outlet property="locationLabel" destination="BLB-fj-jlp" id="lCx-6K-1nO"/>
                                             <outlet property="priceLabel" destination="cQk-Xd-gUq" id="mtY-xs-wzP"/>
                                             <outlet property="startTimeLabel" destination="cO2-Pv-l6m" id="2nf-US-jOQ"/>

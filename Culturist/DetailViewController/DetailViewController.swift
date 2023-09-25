@@ -72,15 +72,14 @@ class DetailViewController: UIViewController {
             appCalendar = createAppCalendar()
         }
         // ---------------------------------------------------
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .B2
     }
     
     @objc private func backButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
-
-    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
