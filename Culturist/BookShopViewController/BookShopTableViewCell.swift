@@ -16,6 +16,9 @@ class BookShopTableViewCell: UITableViewCell {
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var bookImageView: UIImageView!
     
+    
+    @IBOutlet weak var backgroundColorView: UIView!
+    
     // bookshop intro title
     @IBOutlet weak var shopIntro: UILabel!
     
@@ -24,6 +27,7 @@ class BookShopTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setBackgroundColor()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,6 +38,15 @@ class BookShopTableViewCell: UITableViewCell {
     
     @IBAction func mapNavigation(_ sender: UIButton) {
         mapNavigationButtonHandler?(sender)
+    }
+    
+    func setBackgroundColor() {
+        backgroundColorView.backgroundColor = .white
+        backgroundColorView.layer.cornerRadius = 15
+        // Mask the specified corners of the image view with rounded corners
+        backgroundColorView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        // Clip the image to make the rounded corners effective
+        backgroundColorView.clipsToBounds = true
     }
 
 }

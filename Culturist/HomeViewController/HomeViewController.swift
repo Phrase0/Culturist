@@ -29,7 +29,8 @@ class HomeViewController: UIViewController {
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
 
-        navigationItem.title = "Culturist"
+        navigationItem.backButtonTitle = "Culturist"
+ 
 //        if let navigationBar = self.navigationController?.navigationBar {
 //            let titleTextAttributes: [NSAttributedString.Key: Any] = [
 //                .font: UIFont.boldSystemFont(ofSize: 24)
@@ -159,7 +160,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(9)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             
         }
     }

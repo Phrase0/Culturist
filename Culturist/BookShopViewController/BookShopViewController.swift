@@ -66,15 +66,23 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.shopIntro.text = ""
                 cell.introLabel.text = ""
             }
-
-            // change place holder when imageView is empty
-            if bookShop.representImage.isEmpty || bookShop.representImage == "http://cloud.culture.tw/e_new_upload/cms/image/A0/B0/C0/D23/E233/F3/6f7fab47-3bc4-484e-906b-47599ba124ee.gif" {
+            
+            // change place holder when imageView is empty or gif
+            if bookShop.representImage.isEmpty || bookShop.representImage.lowercased().hasSuffix(".gif") {
                 cell.bookImageView.image = UIImage(named: "bookImage")
             } else {
                 let url = URL(string: bookShop.representImage)
-                cell.bookImageView.kf.setImage(with: url)
+                cell.bookImageView.kf.setImage(with: url) { result in
+                    switch result {
+                    case .success:
+                      print("successs")
+                    case .failure:
+                        print("fail")
+                        cell.bookImageView.image = UIImage(named: "bookImage")
+                    }
+                }
             }
-            
+        
             cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(bookShop.latitude)!, longitude: Double(bookShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
