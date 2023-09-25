@@ -737,23 +737,20 @@ Label</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="793" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-l7-vnw">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="793" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-l7-vnw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="BookShopTableViewCell" id="UeP-M9-fdd" customClass="BookShopTableViewCell" customModule="Culturist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="793"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="793"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UeP-M9-fdd" id="DAT-y8-zWO">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="793"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uhz-kh-CAG">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uhz-kh-CAG">
                                                     <rect key="frame" x="0.0" y="96" width="393" height="224"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Uhz-kh-CAG" secondAttribute="height" multiplier="393:224" id="sCL-gu-1MD"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-Wk-NrT">
                                                     <rect key="frame" x="22" y="355" width="267" height="21"/>
@@ -800,12 +797,6 @@ Label</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Uhz-kh-CAG" firstAttribute="top" secondItem="DAT-y8-zWO" secondAttribute="top" constant="96" id="1nW-aN-eOu"/>
-                                                <constraint firstAttribute="trailing" secondItem="Uhz-kh-CAG" secondAttribute="trailing" id="cEW-1N-Ckn"/>
-                                                <constraint firstItem="Uhz-kh-CAG" firstAttribute="leading" secondItem="DAT-y8-zWO" secondAttribute="leading" id="hrK-S7-omH"/>
-                                                <constraint firstItem="Uhz-kh-CAG" firstAttribute="centerX" secondItem="DAT-y8-zWO" secondAttribute="centerX" id="vBM-N5-j3W"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="RVB-Od-RM1" id="ZMz-Rd-Rj3"/>
@@ -821,6 +812,12 @@ Label</string>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b2M-59-ZgH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="SPh-l7-vnw" secondAttribute="bottom" id="PDs-be-yN0"/>
+                            <constraint firstItem="SPh-l7-vnw" firstAttribute="top" secondItem="CRc-ws-PG8" secondAttribute="top" id="PhU-Ii-P37"/>
+                            <constraint firstAttribute="trailing" secondItem="SPh-l7-vnw" secondAttribute="trailing" id="R53-lw-SLm"/>
+                            <constraint firstItem="SPh-l7-vnw" firstAttribute="leading" secondItem="CRc-ws-PG8" secondAttribute="leading" id="elk-Yj-wV3"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="bookShopTableView" destination="SPh-l7-vnw" id="M5f-CO-zvy"/>
@@ -1146,41 +1143,22 @@ Label</string>
                                 <rect key="frame" x="0.0" y="541.33333333333337" width="375" height="270.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </mapView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcJ-dP-gKb" userLabel="Info Label">
-                                <rect key="frame" x="16" y="702" width="343" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Fmz-ab-cAi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="10"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mk5-yi-9Re"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OTo-x3-CWD" firstAttribute="leading" secondItem="ZgR-Tz-HeY" secondAttribute="leading" id="2Rg-W0-LnI"/>
                             <constraint firstItem="xIu-wq-tLe" firstAttribute="top" secondItem="ZgR-Tz-HeY" secondAttribute="top" id="B3a-PW-FU2"/>
-                            <constraint firstItem="mk5-yi-9Re" firstAttribute="bottom" secondItem="rcJ-dP-gKb" secondAttribute="bottom" constant="20" id="Gh0-es-8Rl"/>
                             <constraint firstAttribute="trailing" secondItem="xIu-wq-tLe" secondAttribute="trailing" id="Gyg-04-wVA"/>
-                            <constraint firstItem="rcJ-dP-gKb" firstAttribute="leading" secondItem="mk5-yi-9Re" secondAttribute="leading" constant="16" id="Ka8-6k-Dhg"/>
                             <constraint firstAttribute="trailing" secondItem="OTo-x3-CWD" secondAttribute="trailing" id="OeE-Js-AWd"/>
                             <constraint firstItem="xIu-wq-tLe" firstAttribute="leading" secondItem="ZgR-Tz-HeY" secondAttribute="leading" id="S3b-VX-MRm"/>
                             <constraint firstAttribute="bottom" secondItem="xIu-wq-tLe" secondAttribute="bottom" id="TMD-jD-9ew"/>
-                            <constraint firstItem="mk5-yi-9Re" firstAttribute="trailing" secondItem="rcJ-dP-gKb" secondAttribute="trailing" constant="16" id="Y4e-z3-Ass"/>
                             <constraint firstItem="OTo-x3-CWD" firstAttribute="height" secondItem="xIu-wq-tLe" secondAttribute="height" multiplier="1:3" id="c3S-aq-lDC"/>
                             <constraint firstAttribute="bottom" secondItem="OTo-x3-CWD" secondAttribute="bottom" id="lGf-OH-8DW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="xIu-wq-tLe" id="mXQ-BX-Yxx"/>
-                        <outlet property="infoLabel" destination="rcJ-dP-gKb" id="ANh-4o-Wxb"/>
                         <outlet property="mapView" destination="OTo-x3-CWD" id="kMS-aF-7Hh"/>
                     </connections>
                 </viewController>

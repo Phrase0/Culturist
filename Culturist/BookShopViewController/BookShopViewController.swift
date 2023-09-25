@@ -91,7 +91,14 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
                 // self.navigationController?.pushViewController(detailVC, animated: true)
-                self.present(detailVC, animated: true)
+                let navVC = UINavigationController(rootViewController: detailVC)
+                navVC.modalPresentationStyle = .fullScreen
+              
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
+                navVC.navigationBar.standardAppearance = navBarAppearance
+                self.present(navVC, animated: true)
             }
         })
     }
