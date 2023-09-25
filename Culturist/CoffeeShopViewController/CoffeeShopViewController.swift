@@ -42,7 +42,12 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         if let coffeeShop = coffeeShop {
             cell.titleLabel.text = coffeeShop.name
             cell.addressLabel.text = coffeeShop.address
-            cell.openTimeLabel.text = coffeeShop.openTime
+            
+            if !coffeeShop.openTime.isEmpty {
+                cell.openTimeLabel.text = "營業時間：\(coffeeShop.openTime)"
+            } else {
+                cell.openTimeLabel.text = coffeeShop.openTime
+            }
             cell.wifiLabel.text = "\(coffeeShop.wifi) ★"
             cell.seatLabel.text = "\(coffeeShop.seat) ★"
             cell.quietLabel.text = "\(coffeeShop.quiet) ★"
