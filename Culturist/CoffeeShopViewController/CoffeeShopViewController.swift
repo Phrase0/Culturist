@@ -54,20 +54,26 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             cell.tastyLabel.text = "\(coffeeShop.tasty) ★"
             cell.cheapLabel.text = "\(coffeeShop.cheap) ★"
             cell.musicLabel.text = "\(coffeeShop.music) ★"
-            cell.limitTimeLabel.text = coffeeShop.limitedTime
-            cell.socketLabel.text = coffeeShop.socket
+            
+            if !coffeeShop.limitedTime.isEmpty {
+                cell.limitTimeLabel.text = coffeeShop.limitedTime
+            } else {
+                cell.limitTimeLabel.text = "暫無資料"
+            }
+            
+            if !coffeeShop.socket.isEmpty {
+                cell.socketLabel.text = coffeeShop.socket
+            } else {
+                cell.socketLabel.text = "暫無資料"
+            }
             let random = Int.random(in: 1...27)
             cell.coffeeImageView.image = UIImage(named: "\(random)")
             cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-                
                 // getDirections method，pass taget MKMapItem
                 self?.getDirections(to: destinationMapItem)
-                print("Button Tapped")
-                //                detailVC.routes = response.routes
-                //                self?.present(detailVC, animated: true)
             }
         }
         return cell
@@ -115,7 +121,6 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     // ---------------------------------------------------
     
 }
-
 
 // MARK: - CLLocationManagerDelegate
 
