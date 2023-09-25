@@ -64,7 +64,6 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
-    
 
 }
 

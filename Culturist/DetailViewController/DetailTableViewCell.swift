@@ -54,8 +54,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func setCorner() {
-        detailImageView.layer.cornerRadius = 8
-        // Clip the image to make the rounded corners effective
+        detailImageView.layer.cornerRadius = 6
         detailImageView.clipsToBounds = true
     }
 }
