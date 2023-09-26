@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let navigationBarAppearance = UINavigationBarAppearance()
+        
         navigationBarAppearance.configureWithTransparentBackground()
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance

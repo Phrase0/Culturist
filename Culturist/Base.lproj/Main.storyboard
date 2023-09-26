@@ -515,30 +515,24 @@ Label</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="RKk-mN-4Mc">
-                                <rect key="frame" x="0.0" y="50" width="375" height="762"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DetailTableViewCell" id="eiP-1D-OOg" customClass="DetailTableViewCell" customModule="Culturist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="481.33334350585938"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="750.66668701171875"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eiP-1D-OOg" id="tfJ-OX-yIS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="481.33334350585938"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="750.66668701171875"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8q-b7M">
-                                                    <rect key="frame" x="20" y="20" width="335" height="188.33333333333334"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="JeH-8q-b7M" secondAttribute="height" multiplier="16:9" id="9FX-Ks-cUW"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="740" ambiguous="YES" text="title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-9q-HJp">
-                                                    <rect key="frame" x="25" y="233.33333333333334" width="247" height="25.333333333333343"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="240" horizontalCompressionResistancePriority="740" text="title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndJ-9q-HJp">
+                                                    <rect key="frame" x="25" y="462.66666666666669" width="247" height="25.333333333333314"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" horizontalCompressionResistancePriority="760" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Adl-Up-zoS" userLabel="Icon Stack View">
-                                                    <rect key="frame" x="287" y="233.33333333333334" width="63" height="24.000000000000028"/>
+                                                    <rect key="frame" x="287" y="462.66666666666669" width="63" height="24"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tvq-7y-oEN">
                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -564,8 +558,8 @@ Label</string>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" ambiguous="YES" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZo-2i-FAa" userLabel="Sescrip Stack View">
-                                                    <rect key="frame" x="25" y="273.66666666666669" width="325" height="93.666666666666686"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZo-2i-FAa" userLabel="Sescrip Stack View">
+                                                    <rect key="frame" x="25" y="503.00000000000006" width="325" height="93.666666666666686"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbQ-oS-GFs" userLabel="Time Stack View">
                                                             <rect key="frame" x="0.0" y="0.0" width="214" height="19.666666666666668"/>
@@ -597,7 +591,7 @@ Label</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BH5-HT-2Nh">
-                                                            <rect key="frame" x="0.0" y="49.333333333333314" width="325" height="19.666666666666671"/>
+                                                            <rect key="frame" x="0.0" y="49.333333333333371" width="325" height="19.666666666666671"/>
                                                             <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -615,8 +609,8 @@ Label</string>
                                                         <constraint firstAttribute="trailing" secondItem="BH5-HT-2Nh" secondAttribute="trailing" id="nf0-Wb-gMm"/>
                                                     </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="260" verticalCompressionResistancePriority="760" ambiguous="YES" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Tyf-JE-JUz" userLabel="Button Stack View">
-                                                    <rect key="frame" x="25" y="387.33333333333331" width="325" height="34.333333333333314"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="260" verticalCompressionResistancePriority="760" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Tyf-JE-JUz" userLabel="Button Stack View">
+                                                    <rect key="frame" x="25" y="616.66666666666663" width="325" height="34.333333333333371"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7E-Uv-1dp">
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="34.333333333333336"/>
@@ -642,23 +636,30 @@ Label</string>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="240" verticalCompressionResistancePriority="740" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-ue-cTV">
-                                                    <rect key="frame" x="25" y="441.66666666666669" width="325" height="19.666666666666686"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-ue-cTV">
+                                                    <rect key="frame" x="25" y="671" width="325" height="19.666666666666629"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8q-b7M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="437.66666666666669"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="JeH-8q-b7M" secondAttribute="height" multiplier="30:35" id="FHb-uz-FwZ"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Adl-Up-zoS" firstAttribute="leading" secondItem="ndJ-9q-HJp" secondAttribute="trailing" constant="15" id="0tY-5x-hd1"/>
-                                                <constraint firstAttribute="bottom" secondItem="waa-ue-cTV" secondAttribute="bottom" constant="20" id="2UZ-d7-YdE"/>
-                                                <constraint firstItem="JeH-8q-b7M" firstAttribute="top" secondItem="tfJ-OX-yIS" secondAttribute="top" constant="20" id="7tG-Ij-K1Y"/>
+                                                <constraint firstItem="JeH-8q-b7M" firstAttribute="top" secondItem="tfJ-OX-yIS" secondAttribute="top" id="7tG-Ij-K1Y"/>
                                                 <constraint firstItem="Tyf-JE-JUz" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="8I0-lH-LXv"/>
                                                 <constraint firstItem="ndJ-9q-HJp" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="ASq-Bn-RBd"/>
-                                                <constraint firstItem="JeH-8q-b7M" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="20" id="B6A-m2-TQN"/>
+                                                <constraint firstItem="JeH-8q-b7M" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" id="B6A-m2-TQN"/>
                                                 <constraint firstAttribute="trailing" secondItem="Tyf-JE-JUz" secondAttribute="trailing" constant="25" id="BFU-ar-Vzb"/>
+                                                <constraint firstAttribute="bottom" secondItem="waa-ue-cTV" secondAttribute="bottom" constant="60" id="Brz-lq-Bwq"/>
+                                                <constraint firstItem="Tyf-JE-JUz" firstAttribute="top" secondItem="HZo-2i-FAa" secondAttribute="bottom" constant="20" id="J6B-T9-EUg"/>
                                                 <constraint firstItem="waa-ue-cTV" firstAttribute="top" secondItem="Tyf-JE-JUz" secondAttribute="bottom" constant="20" id="JYf-27-tS7"/>
-                                                <constraint firstAttribute="trailing" secondItem="JeH-8q-b7M" secondAttribute="trailing" constant="20" id="Jhb-Ys-FC2"/>
+                                                <constraint firstAttribute="trailing" secondItem="JeH-8q-b7M" secondAttribute="trailing" id="Jhb-Ys-FC2"/>
                                                 <constraint firstItem="Adl-Up-zoS" firstAttribute="top" secondItem="JeH-8q-b7M" secondAttribute="bottom" constant="25" id="P6d-Qr-jjS"/>
                                                 <constraint firstItem="waa-ue-cTV" firstAttribute="leading" secondItem="tfJ-OX-yIS" secondAttribute="leading" constant="25" id="Vad-Nh-Ne2"/>
                                                 <constraint firstAttribute="trailing" secondItem="Adl-Up-zoS" secondAttribute="trailing" constant="25" id="VxS-1o-uoh"/>
@@ -668,7 +669,6 @@ Label</string>
                                                 <constraint firstAttribute="trailing" secondItem="HZo-2i-FAa" secondAttribute="trailing" constant="25" id="hTL-JS-WAP"/>
                                                 <constraint firstAttribute="trailing" secondItem="waa-ue-cTV" secondAttribute="trailing" constant="25" id="ihD-hV-WwJ"/>
                                                 <constraint firstItem="HZo-2i-FAa" firstAttribute="top" secondItem="ndJ-9q-HJp" secondAttribute="bottom" constant="15" id="nAE-Js-lpJ"/>
-                                                <constraint firstItem="Tyf-JE-JUz" firstAttribute="top" secondItem="HZo-2i-FAa" secondAttribute="bottom" constant="20" id="uW1-9b-B9a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -689,9 +689,9 @@ Label</string>
                         <viewLayoutGuide key="safeArea" id="dXq-u8-eWF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="RKk-mN-4Mc" firstAttribute="top" secondItem="dXq-u8-eWF" secondAttribute="top" id="DKJ-uB-Wds"/>
                             <constraint firstAttribute="trailing" secondItem="RKk-mN-4Mc" secondAttribute="trailing" id="JFa-hd-yu7"/>
                             <constraint firstItem="RKk-mN-4Mc" firstAttribute="leading" secondItem="fhj-D0-ljC" secondAttribute="leading" id="MoD-8E-MQM"/>
+                            <constraint firstItem="RKk-mN-4Mc" firstAttribute="top" secondItem="fhj-D0-ljC" secondAttribute="top" id="YXe-bO-vpd"/>
                             <constraint firstAttribute="bottom" secondItem="RKk-mN-4Mc" secondAttribute="bottom" id="jJ6-dw-7vK"/>
                         </constraints>
                     </view>
