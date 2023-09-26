@@ -94,7 +94,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         // add button
         let button = UIButton()
-        button.setTitleColor(UIColor.BL1, for: .normal)
+        button.setTitleColor(UIColor.GR1, for: .normal)
         button.setTitle("查看更多", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tag = buttonTag ?? 0

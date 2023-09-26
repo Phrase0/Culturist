@@ -72,6 +72,11 @@ class RecommendCollectionViewCell: UICollectionViewCell {
             make.leading.trailing.top.equalTo(productView)
             make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
         }
+        
+        productImage.snp.makeConstraints { make in
+            make.leading.trailing.top.equalTo(productView)
+            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
+        }
     }
     
     func setShadowColor() {
