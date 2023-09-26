@@ -264,6 +264,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
         newCalendar.title = "CulturistCalendar"
         newCalendar.source = eventStore.defaultCalendarForNewEvents?.source
+        newCalendar.cgColor = UIColor.GR2?.cgColor
         
         do {
             try eventStore.saveCalendar(newCalendar, commit: true)

@@ -58,7 +58,6 @@ class CalendarViewController: UIViewController {
                 let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
                 let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                 events = eventStore.events(matching: predicate)
-                print("My:\(events)")
             }
         }
     }
