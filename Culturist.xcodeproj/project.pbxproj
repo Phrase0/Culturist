@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */; };
+		F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */; };
+		F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */; };
+		F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */; };
 		F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */; };
 		F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */; };
-		F82A34F22AB2AC4C004FF247 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */; };
+		F82A34F22AB2AC4C004FF247 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34F12AB2AC4C004FF247 /* ProductViewController.swift */; };
 		F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F32AB2AC4C004FF247 /* Main.storyboard */; };
 		F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F62AB2AC4D004FF247 /* Assets.xcassets */; };
 		F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */; };
@@ -18,8 +21,12 @@
 		F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A35072AB2B8B4004FF247 /* ArtDatum.swift */; };
 		F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350A2AB2B8FD004FF247 /* BookShop.swift */; };
 		F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350C2AB2B916004FF247 /* CoffeeShop.swift */; };
-		F82A35102AB2D34B004FF247 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */; };
+		F82A35102AB2D34B004FF247 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A350F2AB2D34B004FF247 /* ProductCollectionViewCell.swift */; };
 		F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F82A35122AB2DDC5004FF247 /* .swiftlint.yml */; };
+		F83E4C252ABEC4E4000E2DAC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C242ABEC4E4000E2DAC /* HomeViewController.swift */; };
+		F83E4C272ABEC65B000E2DAC /* AnimationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */; };
+		F83E4C292ABEC66A000E2DAC /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */; };
+		F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */; };
 		F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */; };
 		F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */; };
 		F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */; };
@@ -36,7 +43,7 @@
 		F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */; };
 		F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */; };
 		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
-		F88EDD432ABC1DBA0061AA18 /* EventKitExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */; };
+		F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */; };
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
@@ -49,10 +56,13 @@
 		02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.debug.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.debug.xcconfig"; sourceTree = "<group>"; };
 		4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Culturist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.release.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.release.xcconfig"; sourceTree = "<group>"; };
+		F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTabBarController.swift; sourceTree = "<group>"; };
 		F82A34EA2AB2AC4C004FF247 /* Culturist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culturist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F82A34F12AB2AC4C004FF247 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		F82A34F42AB2AC4C004FF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F82A34F62AB2AC4D004FF247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F82A34F92AB2AC4D004FF247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,8 +71,12 @@
 		F82A35072AB2B8B4004FF247 /* ArtDatum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDatum.swift; sourceTree = "<group>"; };
 		F82A350A2AB2B8FD004FF247 /* BookShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShop.swift; sourceTree = "<group>"; };
 		F82A350C2AB2B916004FF247 /* CoffeeShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShop.swift; sourceTree = "<group>"; };
-		F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F82A350F2AB2D34B004FF247 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		F82A35122AB2DDC5004FF247 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		F83E4C242ABEC4E4000E2DAC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTableViewCell.swift; sourceTree = "<group>"; };
+		F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCollectionViewCell.swift; sourceTree = "<group>"; };
 		F851F73B2AB32FA80029C78E /* CoffeeShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopManager.swift; sourceTree = "<group>"; };
 		F851F73D2AB330870029C78E /* CoffeeShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopMapViewController.swift; sourceTree = "<group>"; };
 		F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShopMapViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +93,7 @@
 		F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
-		F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitExt.swift; sourceTree = "<group>"; };
+		F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extension.swift"; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -121,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
+				F82A34F12AB2AC4C004FF247 /* ProductViewController.swift */,
 				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
@@ -145,6 +160,7 @@
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
 				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
+				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
 				F851F7542AB6B4680029C78E /* RecommendViewController */,
 				F851F7482AB41F460029C78E /* DetailViewController */,
@@ -174,8 +190,11 @@
 		F82A350E2AB2D2DD004FF247 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				F82A34F12AB2AC4C004FF247 /* HomeViewController.swift */,
-				F82A350F2AB2D34B004FF247 /* HomeCollectionViewCell.swift */,
+				F83E4C242ABEC4E4000E2DAC /* HomeViewController.swift */,
+				F83E4C262ABEC65B000E2DAC /* AnimationTableViewCell.swift */,
+				F83E4C2A2ABECB82000E2DAC /* AnimationCollectionViewCell.swift */,
+				F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */,
+				F82A350F2AB2D34B004FF247 /* ProductCollectionViewCell.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
@@ -231,7 +250,9 @@
 		F88EDD412ABC1DA20061AA18 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F88EDD422ABC1DBA0061AA18 /* EventKitExt.swift */,
+				F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */,
+				F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */,
+				F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -396,15 +417,20 @@
 				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
+				F83E4C252ABEC4E4000E2DAC /* HomeViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,
 				F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */,
+				F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */,
 				F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */,
+				F83E4C272ABEC65B000E2DAC /* AnimationTableViewCell.swift in Sources */,
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
+				F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */,
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
-				F88EDD432ABC1DBA0061AA18 /* EventKitExt.swift in Sources */,
+				F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */,
+				F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
-				F82A34F22AB2AC4C004FF247 /* HomeViewController.swift in Sources */,
+				F82A34F22AB2AC4C004FF247 /* ProductViewController.swift in Sources */,
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
 				F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */,
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
@@ -418,11 +444,13 @@
 				F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */,
 				F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */,
 				F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */,
+				F83E4C292ABEC66A000E2DAC /* ProductTableViewCell.swift in Sources */,
 				F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift in Sources */,
+				F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */,
 				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */,
 				F851F7472AB361DC0029C78E /* BookShopTableViewCell.swift in Sources */,
-				F82A35102AB2D34B004FF247 /* HomeCollectionViewCell.swift in Sources */,
+				F82A35102AB2D34B004FF247 /* ProductCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,11 +601,18 @@
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notificate exhibition";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,11 +637,18 @@
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notificate exhibition";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

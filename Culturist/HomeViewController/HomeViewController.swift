@@ -2,164 +2,144 @@
 //  HomeViewController.swift
 //  Culturist
 //
-//  Created by Peiyun on 2023/9/13.
+//  Created by Peiyun on 2023/9/23.
 //
 
 import UIKit
-import Kingfisher
-
+import SnapKit
 class HomeViewController: UIViewController {
-  
-    @IBOutlet weak var homeCollectionView: UICollectionView!
     
-    var artProducts1 = [ArtDatum]()
-    var artProducts6 = [ArtDatum]()
-    var artManager1 = ArtProductManager()
-    var artManager6 = ArtProductManager()
-    let firebaseManager = FirebaseManager()
+    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var homeTitleLabel: UILabel!
+    var mySearchController = UISearchController(searchResultsController: nil)
     
-    //searchResult
-    var searchResult: [ArtDatum] = []
-    var mySearchController: UISearchController?
-     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeCollectionView.delegate = self
-        homeCollectionView.dataSource = self
-        artManager1.delegate = self
-        artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
+        homeTableView.delegate = self
+        homeTableView.dataSource = self
         settingSearchController()
     }
 
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if (mySearchController?.isActive)! {
-            return 1
-        } else {
-            return 2
-        }
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        3
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnimationTableViewCell") as? AnimationTableViewCell else { return UITableViewCell() }
+            return cell
+        } else if indexPath.section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
+            cell.productIndexPath = 1
+            return cell
+        } else if indexPath.section == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
+            cell.productIndexPath = 2
+            return cell
+        }
         
-        if (mySearchController?.isActive)! {
-            return searchResult.count
-        } else {
-            if section == 0 {
-                print(artProducts1.count)
-                return artProducts1.count
-            } else if section == 1 {
-                print(artProducts6.count)
-                return artProducts6.count
-            }
-            return 0
-        }
+        return UITableViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            return headerView(title: "音樂")
+        } else if section == 2 {
+            return headerView(title: "展覽")
+        }
+        return UIView()
+    }
+    
+    func headerView(title: String) -> UIView {
+        // create view
+        let headerView = UIView()
+        headerView.backgroundColor = .white
+        
+        // add title
+        let label = UILabel()
+        label.text = "\(title)"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = UIColor.black
+        headerView.addSubview(label)
+        
+        // add button
+        let button = UIButton()
+        button.setTitleColor(UIColor.BL1, for: .normal)
+        button.setTitle("查看更多", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        headerView.addSubview(button)
+        
+        // Apply Auto Layout constraints using SnapKit
+        label.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-6)
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-6)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.01
+        } else {
+            return 30
+        }
+        
+    }
 
-        if (mySearchController?.isActive)! {
-            let itemData = searchResult[indexPath.item]
-            let url = URL(string: itemData.imageURL)
-            cell.productImage.kf.setImage(with: url)
-            cell.productTitle.text = itemData.title
-            
-        } else {
-            
-            if indexPath.section == 0 {
-                let itemData = artProducts1[indexPath.item]
-                let url = URL(string: itemData.imageURL)
-                cell.productImage.kf.setImage(with: url)
-                cell.productTitle.text = itemData.title
-            } else if indexPath.section == 1 {
-                let itemData = artProducts6[indexPath.item]
-                let url = URL(string: itemData.imageURL)
-                cell.productImage.kf.setImage(with: url)
-                cell.productTitle.text = itemData.title
-            }
-        }
-        return cell
-    }
+    // MARK: - Button Action
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
-        
-        if let selectedIndexPaths = self.homeCollectionView.indexPathsForSelectedItems,
-           let selectedIndexPath = selectedIndexPaths.first {
-            if indexPath.section == 0 {
-                detailVC.detailDesctription = artProducts1[selectedIndexPath.row]
-//                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
-                
-                
-                
-            } else if indexPath.section == 1 {
-                detailVC.detailDesctription = artProducts6[selectedIndexPath.row]
-//                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
-            }
-        }
-        
-        self.navigationController?.pushViewController(detailVC, animated: true)
-    }
-}
-
-// MARK: - ProductManagerDelegate
-extension HomeViewController: ArtManagerDelegate {
-    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
-            if artProductList.isEmpty {
-                print("no api data")
-            } else {
-                if manager === self.artManager1 {
-                    self.artProducts1 = artProductList
-                } else if manager === self.artManager6 {
-                    self.artProducts6 = artProductList
-                }
-                self.homeCollectionView.reloadData()
-            }
-        }
-    }
-    
-    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+    @objc func buttonTapped(_ sender: UIButton) {
+        // 處理按鈕點擊事件
+        let section = sender.tag
+        print("Button tapped in section \(section)")
     }
     
 }
 
-// MARK: - UISearchResultsUpdating
-extension HomeViewController: UISearchResultsUpdating {
-    func settingSearchController() {
-        mySearchController = UISearchController(searchResultsController: nil)
-        navigationItem.searchController = mySearchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        mySearchController?.searchResultsUpdater = self
-        mySearchController?.searchBar.placeholder = "搜尋展覽"
-        mySearchController?.searchBar.searchBarStyle = .prominent
-    }
-    
+
+extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text {
-            filterContent(for: searchText)
-            homeCollectionView.reloadData()
+        
+    }
+    
+    func settingSearchController() {
+        let searchBar = mySearchController.searchBar
+        // navigationItem.searchController = mySearchController
+        // navigationItem.hidesSearchBarWhenScrolling = false
+        // mySearchController.searchResultsUpdater = self
+        searchBar.placeholder = "搜尋展覽"
+        searchBar.searchBarStyle = .prominent
+        searchBar.delegate = self
+        searchBar.backgroundImage = UIImage()
+        // add Autolayout
+        view.addSubview(searchBar)
+        searchBar.snp.makeConstraints { make in
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            make.top.equalTo(homeTitleLabel.snp.bottom).offset(6)
+            
         }
     }
-
-    func filterContent(for searchText: String) {
-        var filteredProducts = artProducts1 + artProducts6
-        filteredProducts = filteredProducts.filter { artData in
-            let title = artData.title.lowercased()
-            let locationName = artData.showInfo.first?.locationName.lowercased() ?? ""
-            let location = artData.showInfo.first?.location.lowercased() ?? ""
-
-            return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
-        }
-        searchResult = filteredProducts
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        // 處理跳轉到下一頁的操作，例如：
+        //        let searchVC = ProfileViewController() // 創建下一頁的視圖控制器
+        //        navigationController?.pushViewController(searchVC, animated: true) // 執行跳轉
+        return false // 返回false以防止搜索欄進行編輯
     }
-
 }

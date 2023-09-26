@@ -32,8 +32,8 @@ class DetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        likeBtn.setImage(UIImage(named: "heart_normal"), for: .normal)
-        likeBtn.setImage(UIImage(named: "heart_Selected"), for: .selected)
+        likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Normal), for: .normal)
+        likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Selected_Color), for: .selected)
 
     }
 
