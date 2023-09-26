@@ -64,14 +64,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsP-zL-hTv">
-                                <rect key="frame" x="16.000000000000007" y="99" width="106.66666666666669" height="33.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6Tn-Mg-Kvu">
-                                <rect key="frame" x="0.0" y="202.66666666666669" width="375" height="526.33333333333326"/>
+                                <rect key="frame" x="0.0" y="174" width="375" height="555"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnimationTableViewCell" id="wfM-Cc-dH9" customClass="AnimationTableViewCell" customModule="Culturist" customModuleProvider="target">
@@ -209,18 +203,15 @@ Label</string>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="Crf-Mm-NhU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6Tn-Mg-Kvu" secondAttribute="bottom" id="DW9-qc-ldb"/>
-                            <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="top" secondItem="KsP-zL-hTv" secondAttribute="bottom" constant="70" id="Txj-HK-7v3"/>
-                            <constraint firstItem="KsP-zL-hTv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZC7-iE-eXK"/>
-                            <constraint firstItem="KsP-zL-hTv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="faB-pV-WUS"/>
                             <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pCa-VO-hf4"/>
                             <constraint firstItem="6Tn-Mg-Kvu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uZA-Jv-c01"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="18N-Om-hwV"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="18N-Om-hwV"/>
                     <connections>
                         <outlet property="homeTableView" destination="6Tn-Mg-Kvu" id="DeA-pM-i7W"/>
-                        <outlet property="homeTitleLabel" destination="KsP-zL-hTv" id="i9I-xE-FWm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -391,9 +382,8 @@ Label</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
+                                <rect key="frame" x="0.0" y="50" width="375" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nyo-lR-e9N">
                                     <size key="itemSize" width="180" height="200"/>
@@ -408,30 +398,19 @@ Label</string>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tdo-dL-e3S">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6K-cQ-8Fm">
-                                                    <rect key="frame" x="8" y="0.0" width="164" height="130"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOc-ee-4p1">
-                                                    <rect key="frame" x="8" y="138" width="164" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </collectionViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageView" destination="c6K-cQ-8Fm" id="2KX-hy-ohn"/>
-                                            <outlet property="titleLabel" destination="SOc-ee-4p1" id="zcM-ol-neK"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="58j-rJ-fMb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="52K-Os-cd3" secondAttribute="trailing" id="BM8-sb-pPO"/>
+                            <constraint firstAttribute="bottom" secondItem="52K-Os-cd3" secondAttribute="bottom" id="IVA-p9-WmB"/>
+                            <constraint firstItem="52K-Os-cd3" firstAttribute="top" secondItem="58j-rJ-fMb" secondAttribute="top" id="kBA-aA-Rz1"/>
+                            <constraint firstItem="52K-Os-cd3" firstAttribute="leading" secondItem="TyY-KY-lIH" secondAttribute="leading" id="kk4-As-ER5"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="likeCollectionView" destination="52K-Os-cd3" id="ApC-vs-sNf"/>
@@ -439,7 +418,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEv-xo-R60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="1389"/>
+            <point key="canvasLocation" x="1693.5999999999999" y="1387.6847290640394"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="aww-N3-9lE">
@@ -690,7 +669,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kb-oh-hEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4090" y="-35"/>
+            <point key="canvasLocation" x="2706" y="-55"/>
         </scene>
         <!--Coffee Shop Map View Controller-->
         <scene sceneID="aY8-sH-Pro">
