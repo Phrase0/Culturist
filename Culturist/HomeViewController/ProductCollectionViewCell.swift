@@ -14,7 +14,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productImage: UIImageView!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()

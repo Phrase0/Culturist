@@ -72,17 +72,23 @@ class DetailViewController: UIViewController {
             appCalendar = createAppCalendar()
         }
         // ---------------------------------------------------
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_44px_Back), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .GR1
         
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        // navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+
     }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -296,7 +302,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
 // MARK: - DetailTableViewCellDelegate

@@ -29,7 +29,7 @@ class CalendarViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .B2
     }
-
+        
     @objc private func backButtonTapped() {
         self.dismiss(animated: true)
     }
