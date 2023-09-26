@@ -301,7 +301,7 @@ Label</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="為你推薦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPM-SI-CNq">
                                 <rect key="frame" x="30" y="124" width="96" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="GR0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -414,13 +414,13 @@ Label</string>
         <!--Calendar View Controller-->
         <scene sceneID="aww-N3-9lE">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="ayS-dU-bum" customClass="CalendarViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" hidesBottomBarWhenPushed="YES" id="ayS-dU-bum" customClass="CalendarViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Keq-mv-GMy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aRd-ho-wGK">
-                                <rect key="frame" x="30" y="419" width="315" height="309"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aRd-ho-wGK">
+                                <rect key="frame" x="30" y="448.66666666666669" width="315" height="249.33333333333331"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventsTableViewCell" id="AKm-Vj-V3a" customClass="EventsTableViewCell" customModule="Culturist" customModuleProvider="target">
@@ -437,7 +437,7 @@ Label</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFQ-5k-ttL">
-                                                    <rect key="frame" x="16" y="34" width="10" height="10"/>
+                                                    <rect key="frame" x="16" y="35" width="10" height="10"/>
                                                     <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="10" id="EMm-dp-8hd"/>
@@ -456,7 +456,7 @@ Label</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="all-day" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKF-ys-qLa">
-                                                    <rect key="frame" x="274" y="57.666666666666664" width="36" height="13.333333333333336"/>
+                                                    <rect key="frame" x="269" y="57.666666666666664" width="36" height="13.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
@@ -467,9 +467,9 @@ Label</string>
                                                 <constraint firstItem="lKF-ys-qLa" firstAttribute="top" secondItem="lEe-Pd-bZN" secondAttribute="bottom" constant="5" id="8ao-5y-m9n"/>
                                                 <constraint firstAttribute="trailing" secondItem="lEe-Pd-bZN" secondAttribute="trailing" constant="16" id="E0f-H2-gMr"/>
                                                 <constraint firstItem="lEe-Pd-bZN" firstAttribute="leading" secondItem="IFQ-5k-ttL" secondAttribute="trailing" constant="5" id="R16-5f-Yml"/>
-                                                <constraint firstAttribute="trailing" secondItem="lKF-ys-qLa" secondAttribute="trailing" constant="5" id="WxW-xv-9JM"/>
+                                                <constraint firstAttribute="trailing" secondItem="lKF-ys-qLa" secondAttribute="trailing" constant="10" id="WxW-xv-9JM"/>
                                                 <constraint firstAttribute="bottom" secondItem="lKF-ys-qLa" secondAttribute="bottom" constant="5" id="Z70-W2-tfo"/>
-                                                <constraint firstItem="IFQ-5k-ttL" firstAttribute="top" secondItem="hum-Vs-p4g" secondAttribute="bottom" constant="17" id="ZhN-74-WYJ"/>
+                                                <constraint firstItem="IFQ-5k-ttL" firstAttribute="top" secondItem="hum-Vs-p4g" secondAttribute="bottom" constant="18" id="ZhN-74-WYJ"/>
                                                 <constraint firstItem="hum-Vs-p4g" firstAttribute="leading" secondItem="8QN-pE-bCV" secondAttribute="leading" constant="16" id="cfu-sW-Qzj"/>
                                                 <constraint firstItem="IFQ-5k-ttL" firstAttribute="leading" secondItem="8QN-pE-bCV" secondAttribute="leading" constant="16" id="ofa-1O-KxL"/>
                                                 <constraint firstItem="hum-Vs-p4g" firstAttribute="top" secondItem="8QN-pE-bCV" secondAttribute="top" constant="5" id="ojB-9A-D1U"/>
@@ -486,45 +486,49 @@ Label</string>
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的行事曆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z10-zY-o7q">
-                                <rect key="frame" x="30" y="80" width="120" height="34"/>
+                                <rect key="frame" x="30" y="80" width="120" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="GR0"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f0-Vw-SGw" customClass="FSCalendar">
-                                <rect key="frame" x="30" y="164" width="315" height="255"/>
+                                <rect key="frame" x="30" y="133.66666666666663" width="315" height="315"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="4f0-Vw-SGw" secondAttribute="height" multiplier="21:17" id="a5s-Vz-N5U"/>
+                                    <constraint firstAttribute="width" secondItem="4f0-Vw-SGw" secondAttribute="height" multiplier="1:1" id="a5s-Vz-N5U"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="headerMinimumDissolvedAlpha">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
-                                        <real key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="weekdayTextSize">
-                                        <real key="value" value="18"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="headerTitleTextSize">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dte-An-pO7">
+                                <rect key="frame" x="288" y="78.666666666666671" width="47" height="35"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Today">
+                                    <color key="titleColor" name="GR1"/>
+                                </state>
+                                <connections>
+                                    <action selector="todayBtn:" destination="ayS-dU-bum" eventType="touchUpInside" id="vOl-h0-iuu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Gm-JX-PmR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Gm-JX-PmR" firstAttribute="trailing" secondItem="4f0-Vw-SGw" secondAttribute="trailing" constant="30" id="4AZ-hs-F2D"/>
-                            <constraint firstItem="9Gm-JX-PmR" firstAttribute="bottom" secondItem="aRd-ho-wGK" secondAttribute="bottom" constant="50" id="4fJ-xJ-uer"/>
+                            <constraint firstItem="4f0-Vw-SGw" firstAttribute="top" secondItem="dte-An-pO7" secondAttribute="bottom" constant="20" id="4J0-uS-scN"/>
+                            <constraint firstItem="9Gm-JX-PmR" firstAttribute="bottom" secondItem="aRd-ho-wGK" secondAttribute="bottom" constant="80" id="4fJ-xJ-uer"/>
                             <constraint firstItem="aRd-ho-wGK" firstAttribute="top" secondItem="4f0-Vw-SGw" secondAttribute="bottom" id="BU5-tb-yCz"/>
+                            <constraint firstItem="9Gm-JX-PmR" firstAttribute="trailing" secondItem="dte-An-pO7" secondAttribute="trailing" constant="40" id="C99-ox-LGu"/>
                             <constraint firstItem="Z10-zY-o7q" firstAttribute="top" secondItem="9Gm-JX-PmR" secondAttribute="top" constant="30" id="L3u-Qg-hGo"/>
                             <constraint firstItem="4f0-Vw-SGw" firstAttribute="leading" secondItem="9Gm-JX-PmR" secondAttribute="leading" constant="30" id="TxS-rq-5bz"/>
                             <constraint firstItem="Z10-zY-o7q" firstAttribute="leading" secondItem="9Gm-JX-PmR" secondAttribute="leading" constant="30" id="Za7-Gy-1nv"/>
                             <constraint firstItem="aRd-ho-wGK" firstAttribute="leading" secondItem="Keq-mv-GMy" secondAttribute="leading" constant="30" id="dkz-za-2me"/>
-                            <constraint firstItem="4f0-Vw-SGw" firstAttribute="top" secondItem="Z10-zY-o7q" secondAttribute="bottom" constant="50" id="eJI-MZ-mzo"/>
+                            <constraint firstItem="4f0-Vw-SGw" firstAttribute="top" secondItem="Z10-zY-o7q" secondAttribute="bottom" constant="20" id="eJI-MZ-mzo"/>
                             <constraint firstAttribute="trailing" secondItem="aRd-ho-wGK" secondAttribute="trailing" constant="30" id="yTc-ns-Hap"/>
                         </constraints>
                     </view>
@@ -1342,6 +1346,12 @@ Label</string>
         </namedColor>
         <namedColor name="B4">
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GR0">
+            <color red="0.27058823529411763" green="0.32941176470588235" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GR1">
+            <color red="0.36862745098039218" green="0.50588235294117645" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

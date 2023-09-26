@@ -24,8 +24,9 @@ class ProfileViewController: UIViewController {
     
     @IBAction func goToCalendarVC(_ sender: UIButton) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
-
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        let navVC = UINavigationController(rootViewController: detailVC)
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true)
     }
     
 }

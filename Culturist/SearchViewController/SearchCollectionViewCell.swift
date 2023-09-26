@@ -20,7 +20,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
         productTitle.numberOfLines = 2
-        if let pingFangFont = UIFont(name: "PingFangSC-Regular", size: 15) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
             productTitle.font = pingFangFont
         } else {
             productTitle.font = UIFont.systemFont(ofSize: 15)

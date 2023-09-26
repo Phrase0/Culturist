@@ -17,7 +17,7 @@ class RecommendCollectionViewCell: UICollectionViewCell {
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
         productTitle.numberOfLines = 2
-        if let pingFangFont = UIFont(name: "PingFangSC-Regular", size: 16) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 16) {
             productTitle.font = pingFangFont
         } else {
             productTitle.font = UIFont.systemFont(ofSize: 16)
