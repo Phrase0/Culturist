@@ -10,6 +10,8 @@ import SnapKit
 
 class AnimationCollectionViewCell: UICollectionViewCell {
     
+    let width = UIScreen.main.bounds.width
+    
     lazy var animationImage: UIImageView = {
         let animationImage = UIImageView()
         animationImage.contentMode = .scaleAspectFill
@@ -19,5 +21,11 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         addSubview(animationImage)
+        animationImage.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview()
+            make.width.equalTo(width)
+            make.height.equalTo(width).multipliedBy(222.0/390.0)
+        }
         }
     }

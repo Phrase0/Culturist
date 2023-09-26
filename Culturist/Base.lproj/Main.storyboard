@@ -10,20 +10,51 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="EKr-Lc-OWv">
             <objects>
-                <viewController id="Ydu-kK-lBW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="Ydu-kK-lBW" customClass="SearchViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tsb-Mn-4vV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Raz-Jg-dh5">
+                                <rect key="frame" x="0.0" y="50" width="375" height="728"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dwm-Lf-jje">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCollectionViewCell" id="VdT-ve-ye2" customClass="SearchCollectionViewCell" customModule="Culturist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2i8-9P-JAF">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WEY-B2-OW4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Raz-Jg-dh5" firstAttribute="leading" secondItem="Tsb-Mn-4vV" secondAttribute="leading" id="Kx4-p2-EP0"/>
+                            <constraint firstAttribute="trailing" secondItem="Raz-Jg-dh5" secondAttribute="trailing" id="QiT-cj-9rz"/>
+                            <constraint firstItem="Raz-Jg-dh5" firstAttribute="top" secondItem="WEY-B2-OW4" secondAttribute="top" id="QvJ-sD-5Pl"/>
+                            <constraint firstItem="WEY-B2-OW4" firstAttribute="bottom" secondItem="Raz-Jg-dh5" secondAttribute="bottom" id="xdr-mF-Gpq"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchCollectionView" destination="Raz-Jg-dh5" id="tsQ-CD-DWA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXv-ke-pD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947" y="-744"/>
+            <point key="canvasLocation" x="1694" y="-35"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -98,7 +129,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="390:300" id="NZU-Ux-AAH"/>
                                                     </constraints>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
                                                         <size key="itemSize" width="147" height="250"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -115,14 +146,14 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUm-ku-lUh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="137" height="240"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rA-l7-3vj">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rA-l7-3vj">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="163"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="3rA-l7-3vj" secondAttribute="height" multiplier="21:25" id="Urb-rl-qQa"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mE-hg-BKt">
-                                                                                <rect key="frame" x="16" y="168" width="105" height="67"/>
+                                                                                <rect key="frame" x="5" y="168" width="127" height="67"/>
                                                                                 <string key="text">Label
 Label</string>
                                                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="15"/>
@@ -133,12 +164,12 @@ Label</string>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="3rA-l7-3vj" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" id="P8C-lI-bAl"/>
-                                                                            <constraint firstItem="6mE-hg-BKt" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" constant="16" id="gEo-vh-gR4"/>
+                                                                            <constraint firstItem="6mE-hg-BKt" firstAttribute="leading" secondItem="XUm-ku-lUh" secondAttribute="leading" constant="5" id="gEo-vh-gR4"/>
                                                                             <constraint firstAttribute="trailing" secondItem="3rA-l7-3vj" secondAttribute="trailing" id="le8-9g-AF7"/>
                                                                             <constraint firstItem="6mE-hg-BKt" firstAttribute="top" secondItem="3rA-l7-3vj" secondAttribute="bottom" constant="5" id="mGj-LF-vCr"/>
                                                                             <constraint firstItem="3rA-l7-3vj" firstAttribute="top" secondItem="XUm-ku-lUh" secondAttribute="top" id="myp-ek-q4L"/>
                                                                             <constraint firstAttribute="bottom" secondItem="6mE-hg-BKt" secondAttribute="bottom" constant="5" id="o7N-bH-MJM"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="6mE-hg-BKt" secondAttribute="trailing" constant="16" id="ohv-QX-vSm"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="6mE-hg-BKt" secondAttribute="trailing" constant="5" id="ohv-QX-vSm"/>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
@@ -613,7 +644,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kb-oh-hEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1774.8091603053435" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="2455" y="-52"/>
         </scene>
         <!--Coffee Shop Map View Controller-->
         <scene sceneID="aY8-sH-Pro">
