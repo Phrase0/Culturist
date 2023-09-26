@@ -42,26 +42,38 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         if let coffeeShop = coffeeShop {
             cell.titleLabel.text = coffeeShop.name
             cell.addressLabel.text = coffeeShop.address
-            cell.openTimeLabel.text = coffeeShop.openTime
-            cell.wifiLabel.text = "\(coffeeShop.wifi)"
-            cell.seatLabel.text = "\(coffeeShop.seat)"
-            cell.quietLabel.text = "\(coffeeShop.quiet)"
-            cell.tastyLabel.text = "\(coffeeShop.tasty)"
-            cell.cheapLabel.text = "\(coffeeShop.cheap)"
-            cell.musicLabel.text = "\(coffeeShop.music)"
-            cell.limitTimeLabel.text = coffeeShop.limitedTime
-            cell.socketLabel.text = coffeeShop.socket
-            cell.standingDeskLabel.text = coffeeShop.standingDesk
-            cell.mapNavigationButtonHandler = { [weak self] sender in                
+            
+            if !coffeeShop.openTime.isEmpty {
+                cell.openTimeLabel.text = "營業時間：\(coffeeShop.openTime)"
+            } else {
+                cell.openTimeLabel.text = coffeeShop.openTime
+            }
+            cell.wifiLabel.text = "\(coffeeShop.wifi) ★"
+            cell.seatLabel.text = "\(coffeeShop.seat) ★"
+            cell.quietLabel.text = "\(coffeeShop.quiet) ★"
+            cell.tastyLabel.text = "\(coffeeShop.tasty) ★"
+            cell.cheapLabel.text = "\(coffeeShop.cheap) ★"
+            cell.musicLabel.text = "\(coffeeShop.music) ★"
+            
+            if !coffeeShop.limitedTime.isEmpty {
+                cell.limitTimeLabel.text = coffeeShop.limitedTime
+            } else {
+                cell.limitTimeLabel.text = "暫無資料"
+            }
+            
+            if !coffeeShop.socket.isEmpty {
+                cell.socketLabel.text = coffeeShop.socket
+            } else {
+                cell.socketLabel.text = "暫無資料"
+            }
+            let random = Int.random(in: 1...27)
+            cell.coffeeImageView.image = UIImage(named: "\(random)")
+            cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-                
                 // getDirections method，pass taget MKMapItem
                 self?.getDirections(to: destinationMapItem)
-                print("Button Tapped")
-//                detailVC.routes = response.routes
-//                self?.present(detailVC, animated: true)
             }
         }
         return cell
@@ -70,14 +82,14 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     // ---------------------------------------------------
     func getDirections(to mapLocation: MKMapItem) {
         //refreshControl.startAnimating()
-
+        
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
         request.destination = mapLocation
         request.requestsAlternateRoutes = false
-
+        
         let directions = MKDirections(request: request)
-
+        
         directions.calculate(completionHandler: { response, error in
             defer {
                 DispatchQueue.main.async { [weak self] in
@@ -90,7 +102,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             guard let response = response else {
                 return assertionFailure("No error, but no response, either.")
             }
-
+            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
@@ -110,13 +122,12 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
 // MARK: - CLLocationManagerDelegate
 
 @available(iOS 11.0, *)
 extension CoffeeShopViewController: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
+        
     }
 }

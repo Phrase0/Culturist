@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
 
-        navigationItem.title = "Culcurist"
+        navigationItem.title = "Culturist"
 //        if let navigationBar = self.navigationController?.navigationBar {
 //            let titleTextAttributes: [NSAttributedString.Key: Any] = [
 //                .font: UIFont.boldSystemFont(ofSize: 24)
