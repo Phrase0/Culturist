@@ -23,19 +23,29 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         calendar.dataSource = self
         calendar.delegate = self
-        calendar.appearance.headerTitleColor = .black
-        calendar.today = Date()
-        calendar.appearance.todayColor = .systemRed
-        calendar.appearance.selectionColor = .blue
-        calendar.appearance.weekdayTextColor = .red
-        
+        setCalendarAppearance()
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .B2
+    }
+        
+    @objc private func backButtonTapped() {
+        self.dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
+    }
+    
+    @IBAction func todayBtn(_ sender: UIButton) {
+        // Get the current date
+        let today = Date()
+        // Use the `select` method of FSCalendar to select the current month
+        calendar.select(today)
+        // Scroll to the current month
+        calendar.setCurrentPage(today, animated: true)
     }
     
     func requestAccess() {
@@ -58,7 +68,6 @@ class CalendarViewController: UIViewController {
                 let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
                 let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                 events = eventStore.events(matching: predicate)
-                print("My:\(events)")
             }
         }
     }
@@ -75,6 +84,23 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         selectedDate = date
         eventsTableView.reloadData()
+    }
+    
+    func setCalendarAppearance() {
+        calendar.today = Date()
+        calendar.appearance.headerTitleColor = .GR1
+        calendar.appearance.todayColor = .GR2
+        calendar.appearance.selectionColor = .R1
+        calendar.appearance.weekdayTextColor = .GR2
+        calendar.appearance.eventDefaultColor = .GR1
+        calendar.appearance.eventSelectionColor = .R1
+        calendar.appearance.headerTitleFont = UIFont(name: "PingFangTC-Medium", size: 20)
+        calendar.appearance.weekdayFont = UIFont(name: "PingFangTC", size: 18)
+        calendar.appearance.titleFont = UIFont(name: "PingFangTC", size: 18)
+        // In month mode, only the current month is displayed
+        calendar.placeholderType = .fillHeadTail
+        calendar.appearance.borderRadius = 1
+        
     }
 }
 

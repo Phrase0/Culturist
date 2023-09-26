@@ -61,9 +61,9 @@ class NavigationViewController: UIViewController {
             self?.restartAnimation()
         }
         
-//        updateInfoLabelTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-//            self?.updateInfoLabel()
-//        }
+        updateInfoLabelTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            // self?.updateInfoLabel()
+        }
         
         // Set to true to display an arrow which points north.
         // Checkout the comments in the property description and on the readme on this.
@@ -229,7 +229,7 @@ extension NavigationViewController {
                 //                }
                 
                 // Option 2: Something more typical
-                box.firstMaterial?.diffuse.contents = UIColor.systemCyan.withAlphaComponent(0.8)
+                box.firstMaterial?.diffuse.contents = UIColor.GR1!.withAlphaComponent(0.8)
                 
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)

@@ -35,8 +35,8 @@ class LikeViewController: UIViewController {
         artManager6.delegate = self
         
         navigationItem.title = "我的收藏"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .B2
     }
 
     @objc private func backButtonTapped() {
