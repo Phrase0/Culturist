@@ -23,12 +23,15 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         calendar.dataSource = self
         calendar.delegate = self
-        calendar.appearance.headerTitleColor = .black
+        calendar.appearance.headerTitleColor = .GR1
         calendar.today = Date()
-        calendar.appearance.todayColor = .systemRed
-        calendar.appearance.selectionColor = .blue
-        calendar.appearance.weekdayTextColor = .red
+        calendar.appearance.todayColor = .GR2
+        calendar.appearance.selectionColor = .R1
+        calendar.appearance.weekdayTextColor = .GR2
+        calendar.appearance.eventDefaultColor = .GR1
+        calendar.appearance.eventSelectionColor = .R1
         
+
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
     }
