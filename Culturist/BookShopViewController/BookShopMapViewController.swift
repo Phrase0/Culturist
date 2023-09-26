@@ -8,11 +8,13 @@
 import UIKit
 import Alamofire
 import MapKit
+import CoreLocation
 
-class BookShopMapViewController: UIViewController {
+class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
 
     var bookShopCollection = [BookShop]()
     var bookShopManager = BookShopManager()
+    let locationManager = CLLocationManager()
     
     var latitude: Double?
     var longitude: Double?
@@ -46,6 +48,21 @@ class BookShopMapViewController: UIViewController {
         
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
+        
+        // backBtn
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .GR1
+    }
+
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Request user location permission
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
     }
  
 }

@@ -663,6 +663,7 @@ PODS:
     - "gRPC-C++ (~> 1.50.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - "FSCalendar+Persian (2.9.3)"
   - GoogleUtilities/AppDelegateSwizzler (7.11.5):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -751,6 +752,7 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
+  - SnapKit (5.6.0)
   - SwiftLint (0.52.4)
 
 DEPENDENCIES:
@@ -758,9 +760,11 @@ DEPENDENCIES:
   - ARCL
   - FirebaseAuth
   - FirebaseFirestore
+  - "FSCalendar+Persian"
   - IQKeyboardManager
   - Kingfisher (~> 7.0)
   - MJRefresh
+  - SnapKit
   - SwiftLint
 
 SPEC REPOS:
@@ -774,6 +778,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - "FSCalendar+Persian"
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -785,6 +790,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - RecaptchaInterop
+    - SnapKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -797,6 +803,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 6fc17ac9f03509d51c131298aacb3ee5698b4f02
   FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
   FirebaseFirestore: 808dd08cbc1c7be9052055f62ab312fdae611e37
+  "FSCalendar+Persian": 8e76849435b6afafbfa2bcd5e05ae308f81272e2
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
@@ -808,8 +815,9 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: dc4b2fed83a701c5e16dfbf687c41b449319a54e
+PODFILE CHECKSUM: 62c961b616cad85ac7a34942c7708e56778aa470
 
 COCOAPODS: 1.12.1

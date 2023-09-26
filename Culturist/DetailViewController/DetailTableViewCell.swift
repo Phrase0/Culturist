@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailTableViewCellDelegate: AnyObject {
+    func notificationBtnTapped(sender: UIButton)
+}
+
 class DetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var detailImageView: UIImageView!
@@ -21,14 +25,16 @@ class DetailTableViewCell: UITableViewCell {
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
+    weak var cellDelegate: DetailTableViewCellDelegate?
     
     @IBOutlet weak var likeBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        likeBtn.setImage(UIImage(named: "heart_normal"), for: .normal)
-        likeBtn.setImage(UIImage(named: "heart_Selected"), for: .selected)
-
+        likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Normal), for: .normal)
+        likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Selected_Color), for: .selected)
+        setCorner()
     }
 
     @IBAction func searchCoffeeShop(_ sender: UIButton) {
@@ -38,10 +44,19 @@ class DetailTableViewCell: UITableViewCell {
     @IBAction func searchBookShop(_ sender: UIButton) {
         searchBookButtonHandler?(sender)
     }
-    
-    
+        
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
     }
+
+    @IBAction func notificationBtnTapped(_ sender: UIButton) {
+        cellDelegate?.notificationBtnTapped(sender: sender)
+    }
     
+    func setCorner() {
+        detailImageView.layer.cornerRadius = 100
+        detailImageView.clipsToBounds = true
+        detailImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
+        
+    }
 }

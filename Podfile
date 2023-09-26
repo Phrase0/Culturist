@@ -15,6 +15,8 @@ target 'Culturist' do
   pod 'FirebaseFirestore'
   pod 'SwiftLint'
   pod 'ARCL'
+  pod 'FSCalendar+Persian'
+  pod 'SnapKit'
   
   source 'https://github.com/CocoaPods/Specs.git'
 
