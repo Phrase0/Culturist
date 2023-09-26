@@ -42,6 +42,7 @@ class RecommendViewController: UIViewController {
                 self.recommendCollectionView.reloadData()
             }
         }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

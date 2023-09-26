@@ -28,8 +28,9 @@ class HomeViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
-
-        navigationItem.title = "Culturist"
+        
+        navigationItem.backButtonTitle = "Culturist"
+ 
 //        if let navigationBar = self.navigationController?.navigationBar {
 //            let titleTextAttributes: [NSAttributedString.Key: Any] = [
 //                .font: UIFont.boldSystemFont(ofSize: 24)
@@ -93,7 +94,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         // add button
         let button = UIButton()
-        button.setTitleColor(UIColor.BL1, for: .normal)
+        button.setTitleColor(UIColor.GR1, for: .normal)
         button.setTitle("查看更多", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tag = buttonTag ?? 0
@@ -159,7 +160,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(9)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             
         }
     }

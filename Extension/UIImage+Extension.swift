@@ -28,9 +28,10 @@ enum ImageAsset: String {
     
     case Icons_18px_Book
     case Icons_18px_Coffee
-    case Icons_36px_Close
     
-
+    // close and back
+    case Icons_36px_Close
+    case Icons_44px_Back
 }
 
 extension UIImage {

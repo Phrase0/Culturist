@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 class BookShopViewController: UIViewController {
-
+    
     @IBOutlet weak var bookShopTableView: UITableView!
     var bookShop: BookShop?
     var locationManager = CLLocationManager()
@@ -40,12 +40,49 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookShopTableViewCell", for: indexPath) as? BookShopTableViewCell else {return UITableViewCell()}
         if let bookShop = bookShop {
             cell.titleLabel.text = bookShop.name
-            cell.addressLabel.text = bookShop.address
-            cell.openTimeLabel.text = bookShop.openTime
-            cell.phoneLabel.text = bookShop.phone
-            cell.introLabel.text = bookShop.intro
-            let url = URL(string: bookShop.representImage)
-            cell.bookImageView.kf.setImage(with: url)
+            
+            if !bookShop.cityName.isEmpty {
+                cell.addressLabel.text = "\(bookShop.cityName) \(bookShop.address)"
+            } else {
+                cell.addressLabel.text = "地址：暫無資訊"
+            }
+            
+            if !bookShop.openTime.isEmpty {
+                cell.openTimeLabel.text = "營業時間：\(bookShop.openTime)"
+            } else {
+                cell.openTimeLabel.text = "營業時間：暫無資料"
+            }
+            
+            if !bookShop.phone.isEmpty {
+                cell.phoneLabel.text = "電話：\(bookShop.phone)"
+            } else {
+                cell.phoneLabel.text = "電話：暫無資料“"
+            }
+            
+            if !bookShop.intro.isEmpty {
+                cell.shopIntro.text = "店家資料"
+                cell.introLabel.text = bookShop.intro
+            } else {
+                cell.shopIntro.text = ""
+                cell.introLabel.text = ""
+            }
+            
+            // change place holder when imageView is empty or gif
+            if bookShop.representImage.isEmpty || bookShop.representImage.lowercased().hasSuffix(".gif") {
+                cell.bookImageView.image = UIImage(named: "bookImage")
+            } else {
+                let url = URL(string: bookShop.representImage)
+                cell.bookImageView.kf.setImage(with: url) { result in
+                    switch result {
+                    case .success:
+                      print("successs")
+                    case .failure:
+                        print("fail")
+                        cell.bookImageView.image = UIImage(named: "bookImage")
+                    }
+                }
+            }
+        
             cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(bookShop.latitude)!, longitude: Double(bookShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
@@ -60,14 +97,14 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
     // ---------------------------------------------------
     func getDirections(to mapLocation: MKMapItem) {
         // refreshControl.startAnimating()
-
+        
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
         request.destination = mapLocation
         request.requestsAlternateRoutes = false
-
+        
         let directions = MKDirections(request: request)
-
+        
         directions.calculate(completionHandler: { response, error in
             defer {
                 DispatchQueue.main.async { [weak self] in
@@ -80,7 +117,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             guard let response = response else {
                 return assertionFailure("No error, but no response, either.")
             }
-
+            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
@@ -91,7 +128,9 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
                 // self.navigationController?.pushViewController(detailVC, animated: true)
-                self.present(detailVC, animated: true)
+                let navVC = UINavigationController(rootViewController: detailVC)
+                navVC.modalPresentationStyle = .fullScreen
+                self.present(navVC, animated: true)
             }
         })
     }
@@ -103,8 +142,8 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
 
 @available(iOS 11.0, *)
 extension BookShopViewController: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
+        
     }
 }

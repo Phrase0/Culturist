@@ -54,7 +54,9 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func setCorner() {
-        detailImageView.layer.cornerRadius = 6
+        detailImageView.layer.cornerRadius = 100
         detailImageView.clipsToBounds = true
+        detailImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
+        
     }
 }

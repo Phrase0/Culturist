@@ -50,7 +50,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.delegate = self
         
         // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_44px_Back), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .B2
     }
 
