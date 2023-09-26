@@ -58,8 +58,8 @@ class RecommendViewController: UIViewController {
     }
     
 }
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -74,9 +74,8 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionViewCell", for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
         let itemData = recommendProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.imageView.kf.setImage(with: url)
-        cell.titleLabel.text = itemData.title
-        cell.descripLabel.text = itemData.descriptionFilterHTML
+        cell.productImage.kf.setImage(with: url)
+        cell.productTitle.text = itemData.title
         
         return cell
     }
@@ -89,6 +88,33 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
+    
+    // Number of items per row
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
+        return configureCellSize(interitemSpace: 30, lineSpace: 20, columnCount: 1)
+    }
+    
+    // Configure cell size and header size
+    func configureCellSize(interitemSpace: CGFloat, lineSpace: CGFloat, columnCount: CGFloat) -> CGSize {
+        
+        guard let flowLayout = recommendCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
+        
+        let width = floor((recommendCollectionView.bounds.width - 100 - interitemSpace * (columnCount - 1)) / columnCount)
+        flowLayout.estimatedItemSize = .zero
+        flowLayout.minimumInteritemSpacing = interitemSpace
+        flowLayout.minimumLineSpacing = lineSpace
+        flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
+        
+        // Set content insets
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 90.0, right: 20.0)
+        return flowLayout.itemSize
+    }
+
 }
 
 // MARK: - ArtManagerDelegate

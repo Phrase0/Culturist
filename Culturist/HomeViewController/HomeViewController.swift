@@ -167,7 +167,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return false }
         navigationController?.pushViewController(searchVC, animated: true)
-        var allProducts = self.artProducts1 + self.artProducts6
+        let allProducts = self.artProducts1 + self.artProducts6
         searchVC.allProducts = allProducts
         searchVC.hidesBottomBarWhenPushed = true
         // Return false to prevent the search bar from being edited

@@ -10,7 +10,7 @@ import UIKit
 class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
-    let images = ["cesar","coffeeDemo","coffeeDemo","coffeeDemo","coffeeDemo"]
+    let images = ["cesar","alessio","dave","mymind","luke"]
     
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
