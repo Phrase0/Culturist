@@ -169,7 +169,6 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         navigationController?.pushViewController(searchVC, animated: true)
         let allProducts = self.artProducts1 + self.artProducts6
         searchVC.allProducts = allProducts
-        searchVC.hidesBottomBarWhenPushed = true
         // Return false to prevent the search bar from being edited
         return false
     }

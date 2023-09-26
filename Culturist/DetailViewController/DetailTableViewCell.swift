@@ -34,7 +34,7 @@ class DetailTableViewCell: UITableViewCell {
         // Initialization code
         likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Normal), for: .normal)
         likeBtn.setImage(UIImage.asset(.Icons_24px_BookMark_Selected_Color), for: .selected)
-
+        setCorner()
     }
 
     @IBAction func searchCoffeeShop(_ sender: UIButton) {
@@ -48,10 +48,14 @@ class DetailTableViewCell: UITableViewCell {
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
     }
-    
-    
+
     @IBAction func notificationBtnTapped(_ sender: UIButton) {
         cellDelegate?.notificationBtnTapped(sender: sender)
     }
     
+    func setCorner() {
+        detailImageView.layer.cornerRadius = 8
+        // Clip the image to make the rounded corners effective
+        detailImageView.clipsToBounds = true
+    }
 }
