@@ -44,23 +44,23 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             if !bookShop.cityName.isEmpty {
                 cell.addressLabel.text = "\(bookShop.cityName) \(bookShop.address)"
             } else {
-                cell.addressLabel.text = bookShop.address
+                cell.addressLabel.text = "地址：暫無資訊"
             }
             
             if !bookShop.openTime.isEmpty {
                 cell.openTimeLabel.text = "營業時間：\(bookShop.openTime)"
             } else {
-                cell.openTimeLabel.text = bookShop.openTime
+                cell.openTimeLabel.text = "營業時間：暫無資料"
             }
             
             if !bookShop.phone.isEmpty {
                 cell.phoneLabel.text = "電話：\(bookShop.phone)"
             } else {
-                cell.phoneLabel.text = bookShop.phone
+                cell.phoneLabel.text = "電話：暫無資料“"
             }
             
             if !bookShop.intro.isEmpty {
-                cell.shopIntro.text = "店家資訊"
+                cell.shopIntro.text = "店家資料"
                 cell.introLabel.text = bookShop.intro
             } else {
                 cell.shopIntro.text = ""
@@ -130,11 +130,6 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 // self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
-                
-                let navBarAppearance = UINavigationBarAppearance()
-                navBarAppearance.configureWithOpaqueBackground()
-                navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
-                navVC.navigationBar.standardAppearance = navBarAppearance
                 self.present(navVC, animated: true)
             }
         })

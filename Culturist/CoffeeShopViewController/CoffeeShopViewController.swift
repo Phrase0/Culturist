@@ -46,7 +46,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             if !coffeeShop.openTime.isEmpty {
                 cell.openTimeLabel.text = "營業時間：\(coffeeShop.openTime)"
             } else {
-                cell.openTimeLabel.text = coffeeShop.openTime
+                cell.openTimeLabel.text = "營業時間：暫無資料"
             }
             cell.wifiLabel.text = "\(coffeeShop.wifi) ★"
             cell.seatLabel.text = "\(coffeeShop.seat) ★"
@@ -58,14 +58,15 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             if !coffeeShop.limitedTime.isEmpty {
                 cell.limitTimeLabel.text = coffeeShop.limitedTime
             } else {
-                cell.limitTimeLabel.text = "暫無資料"
+                cell.limitTimeLabel.text = "-"
             }
             
             if !coffeeShop.socket.isEmpty {
                 cell.socketLabel.text = coffeeShop.socket
             } else {
-                cell.socketLabel.text = "暫無資料"
+                cell.socketLabel.text = "-"
             }
+            
             let random = Int.random(in: 1...27)
             cell.coffeeImageView.image = UIImage(named: "\(random)")
             cell.mapNavigationButtonHandler = { [weak self] sender in
@@ -112,14 +113,9 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.name = coffeeShop?.name
                 detailVC.latitude = Double(coffeeShop!.latitude)
                 detailVC.longitude = Double(coffeeShop!.longitude)
-                //self.navigationController?.pushViewController(detailVC, animated: true)
+                self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
-              
-                let navBarAppearance = UINavigationBarAppearance()
-                navBarAppearance.configureWithOpaqueBackground()
-                navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
-                navVC.navigationBar.standardAppearance = navBarAppearance
                 self.present(navVC, animated: true)
             }
         })

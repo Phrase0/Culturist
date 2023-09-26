@@ -8,7 +8,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +19,6 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
-      
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = UIColor.white.withAlphaComponent(1)
-        navVC.navigationBar.standardAppearance = navBarAppearance
-        navVC.navigationBar.scrollEdgeAppearance = navBarAppearance
         self.present(navVC, animated: true)
     }
     

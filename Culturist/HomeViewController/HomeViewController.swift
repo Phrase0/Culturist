@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
-
+        
         navigationItem.backButtonTitle = "Culturist"
  
 //        if let navigationBar = self.navigationController?.navigationBar {
