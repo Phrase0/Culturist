@@ -751,7 +751,7 @@ Label</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8q-b7M">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8q-b7M">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="437.66666666666669"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="JeH-8q-b7M" secondAttribute="height" multiplier="30:35" id="FHb-uz-FwZ"/>

@@ -31,6 +31,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     
     lazy var productImage: UIImageView = {
         let productImage = UIImageView()
+        productImage.contentMode = .scaleAspectFill
         return productImage
     }()
     
@@ -68,6 +69,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(productImage.snp.bottom).offset(5)
             make.bottom.equalTo(productView).offset(-5)
         }
+        
         
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView)
