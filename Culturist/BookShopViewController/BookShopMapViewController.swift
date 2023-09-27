@@ -88,7 +88,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
     }
     
     func manager(_ manager: BookShopManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        // print(error.localizedDescription)
     }
     
 }

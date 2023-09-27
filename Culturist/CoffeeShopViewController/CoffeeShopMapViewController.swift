@@ -90,7 +90,7 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
     }
     
     func manager(_ manager: CoffeeShopManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        // print(error.localizedDescription)
     }
 }
 

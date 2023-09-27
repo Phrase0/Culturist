@@ -191,7 +191,7 @@ extension HomeViewController: ArtManagerDelegate {
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        // print(error.localizedDescription)
     }
     
 }

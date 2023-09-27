@@ -17,7 +17,8 @@ target 'Culturist' do
   pod 'ARCL'
   pod 'FSCalendar+Persian'
   pod 'SnapKit'
-  
+  pod "ESTabBarController-swift"
+
   source 'https://github.com/CocoaPods/Specs.git'
 
 post_install do |installer|
