@@ -29,6 +29,7 @@ class RecommendCollectionViewCell: UICollectionViewCell {
     
     lazy var productImage: UIImageView = {
         let productImage = UIImageView()
+        productImage.contentMode = .scaleAspectFill
         return productImage
     }()
     

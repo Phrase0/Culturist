@@ -19,7 +19,8 @@ class CoffeeShopManager {
     
     func loadCoffeeShops() {
         // ask for coffeeShop request
-        let baseUrl = "https://cafenomad.tw/api/v1.2/cafes"
+        // testMode: less"h" in the baseUrl now
+        let baseUrl = "ttps://cafenomad.tw/api/v1.2/cafes"
         
         AF.request(baseUrl).responseDecodable(of: [CoffeeShop].self) {
             [weak self] response in
@@ -29,7 +30,27 @@ class CoffeeShopManager {
             case .failure(let error):
                 self?.delegate?.manager(self!, didFailWith: error)
                 print("Error fetching coffee shop data: \(error)")
+                self?.getCoffeeShopsListFromAsset(filename: JsonName.coffeeshop.rawValue)
+                print("success use coffee local data")
             }
+        }
+    }
+    
+    // if api fetch failure
+    func getCoffeeShopsListFromAsset(filename: String) {
+        let jsonData: [CoffeeShop] = load(filename)
+        self.delegate?.manager(self, didGet: jsonData)
+    }
+
+    func load<T: Decodable>(_ filename: String) -> T {
+        guard let data = NSDataAsset(name: filename)?.data else {
+            fatalError("Couldn't load \(filename) from asset")
+        }
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
         }
     }
     

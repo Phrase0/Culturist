@@ -53,6 +53,7 @@
 		F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
+		F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,8 +105,10 @@
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationViewControllerViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
+		F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistRelease.entitlements; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
+		F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonNameEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,7 @@
 		F82A34EC2AB2AC4C004FF247 /* Culturist */ = {
 			isa = PBXGroup;
 			children = (
+				F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */,
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
@@ -275,6 +279,7 @@
 		F88EDD412ABC1DA20061AA18 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */,
 				F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */,
 				F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */,
 				F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */,
@@ -450,6 +455,7 @@
 				F851F7452AB361C50029C78E /* BookShopViewController.swift in Sources */,
 				F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */,
 				F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */,
+				F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */,
 				F83E4C272ABEC65B000E2DAC /* AnimationTableViewCell.swift in Sources */,
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
 				F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */,
@@ -625,7 +631,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
@@ -639,7 +645,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -648,9 +654,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = peiyun.Culturist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -660,8 +669,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
@@ -675,7 +685,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -684,9 +694,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = peiyun.Culturist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -28,6 +28,7 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
     
     lazy var productImage: UIImageView = {
         let productImage = UIImageView()
+        productImage.contentMode = .scaleAspectFill
         return productImage
     }()
     
@@ -68,7 +69,7 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView)
-            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
+            make.height.equalTo(productView.snp.width).multipliedBy(25.0/21.0)
         }
     }
     
@@ -91,4 +92,3 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         productImage.clipsToBounds = true
     }
 }
-
