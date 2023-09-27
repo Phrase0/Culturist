@@ -76,17 +76,10 @@ class NavigationViewController: UIViewController {
         //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
         sceneLocationView.arViewDelegate = self
         // sceneLocationView.locationNodeTouchDelegate = self
-        
-        // Now add the route or location annotations as appropriate
-        addSceneModels()
-        
+    
         contentView.addSubview(sceneLocationView)
         sceneLocationView.frame = contentView.bounds
-        
-        updateUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            self?.updateUserLocation()
-        }
-        
+
         routes?.forEach { mapView.addOverlay($0.polyline) }
         
         // backBtn
@@ -100,10 +93,17 @@ class NavigationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // navigationController?.setNavigationBarHidden(false, animated: animated)
+        // Now add the route or location annotations as appropriate
         restartAnimation()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        addSceneModels()
+        updateUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            self?.updateUserLocation()
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         print(#function)
         pauseAnimation()
@@ -166,7 +166,7 @@ extension NavigationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.lineWidth = 3
-        renderer.strokeColor = UIColor.GR1!.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.systemCyan.withAlphaComponent(0.5)
         
         return renderer
     }
@@ -229,16 +229,19 @@ extension NavigationViewController {
                 //                }
                 
                 // Option 2: Something more typical
-                box.firstMaterial?.diffuse.contents = UIColor.GR1!.withAlphaComponent(0.8)
+                box.firstMaterial?.diffuse.contents = UIColor.systemCyan.withAlphaComponent(0.8)
                 
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
                 }
-                
+                print("routes:\(routes)")
                 return box
             }
         } else {
             // 3. If not, then show the
+            
+            print("讀不到gps資料")
+            
             buildDemoData().forEach {
                 sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
             }
@@ -249,7 +252,7 @@ extension NavigationViewController {
         sceneLocationView.autoenablesDefaultLighting = true
         
     }
-    
+
     // Builds the location annotations for a few random objects, scattered across the country
     // - Returns: an array of annotation nodes.
     func distinationData() -> [LocationAnnotationNode] {

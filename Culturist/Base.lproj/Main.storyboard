@@ -141,7 +141,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUm-ku-lUh">
                                                                         <rect key="frame" x="0.0" y="0.0" width="137" height="240"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rA-l7-3vj">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3rA-l7-3vj">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="163"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="3rA-l7-3vj" secondAttribute="height" multiplier="21:25" id="Urb-rl-qQa"/>

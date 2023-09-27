@@ -18,14 +18,31 @@ class AnimationCollectionViewCell: UICollectionViewCell {
         return animationImage
     }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        addSubview(animationImage)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSubviews()
+        setupConstraints()
+
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
+        contentView.addSubview(animationImage)
+    }
+    
+    func setupConstraints() {
         animationImage.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalToSuperview()
             make.width.equalTo(width)
             make.height.equalTo(width).multipliedBy(222.0/390.0)
         }
-        }
     }
+
+}
+

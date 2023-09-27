@@ -53,7 +53,6 @@ class DetailViewController: UIViewController {
         // use DispatchGroup notify
         group.notify(queue: .main) {
             let isLiked = self.likeData.contains { like in
-                print(like.exhibitionUid!)
                 return like.exhibitionUid == self.detailDesctription?.uid
             }
             

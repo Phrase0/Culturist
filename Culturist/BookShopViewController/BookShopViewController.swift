@@ -56,7 +56,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             if !bookShop.phone.isEmpty {
                 cell.phoneLabel.text = "電話：\(bookShop.phone)"
             } else {
-                cell.phoneLabel.text = "電話：暫無資料“"
+                cell.phoneLabel.text = "電話：暫無資料"
             }
             
             if !bookShop.intro.isEmpty {

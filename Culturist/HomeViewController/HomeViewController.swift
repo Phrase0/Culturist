@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
         
-        navigationItem.backButtonTitle = "Culturist"
+        
  
 //        if let navigationBar = self.navigationController?.navigationBar {
 //            let titleTextAttributes: [NSAttributedString.Key: Any] = [
@@ -155,13 +155,12 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.searchBarStyle = .prominent
         searchBar.delegate = self
         searchBar.backgroundImage = UIImage()
-        // add Autolayout
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            
+
         }
     }
     

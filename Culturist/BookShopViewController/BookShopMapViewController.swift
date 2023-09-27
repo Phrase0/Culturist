@@ -103,7 +103,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
             if let selectedBookShop = bookShopCollection.first(where: { $0.name == annotation.title }) {
                 guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
                 bookShopViewController.bookShop = selectedBookShop
-                //navigationController?.pushViewController(bookShopViewController, animated: true)
+                // navigationController?.pushViewController(bookShopViewController, animated: true)
                 present(bookShopViewController, animated: true)                
             }
         }
