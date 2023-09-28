@@ -17,6 +17,9 @@ class RecommendViewController: UIViewController {
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
     
+    let concertDataManager = ConcertDataManager()
+    let exhibitionDataManager = ExhibitionDataManager()
+    
     // 6 recommendProducts
     var recommendProducts = [ArtDatum]()
     
@@ -32,10 +35,17 @@ class RecommendViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
-    
+        
+        // use firebase to get data
+        concertDataManager.concertDelegate = self
+        exhibitionDataManager.exhibitionDelegate = self
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
+        
         DispatchQueue.global().async {
             // wait data load
             self.semaphore.wait()
+//            self.semaphore.wait()
             // load data
             self.filterContent()
             DispatchQueue.main.async {
@@ -56,6 +66,7 @@ class RecommendViewController: UIViewController {
         filteredProducts.sort { $0.hitRate > $1.hitRate }
         // Get the first 6 items of data
         recommendProducts = Array(filteredProducts.prefix(6))
+        print(recommendProducts)
     }
     
 }
@@ -141,4 +152,20 @@ extension RecommendViewController: ArtManagerDelegate {
         print(error.localizedDescription)
     }
     
+}
+
+// MARK: - FirebaseDataDelegate
+extension RecommendViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
+        self.artProducts1 = concertData
+        self.semaphore.signal()
+    }
+
+}
+
+extension RecommendViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
+        self.artProducts6 = exhibitionData
+        self.semaphore.signal()
+    }
 }

@@ -32,7 +32,9 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupSubviews() {
+        contentView.backgroundColor = .black
         contentView.addSubview(animationImage)
+        
     }
     
     func setupConstraints() {
@@ -45,4 +47,3 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     }
 
 }
-

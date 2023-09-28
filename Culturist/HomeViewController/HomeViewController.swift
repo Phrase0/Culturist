@@ -28,24 +28,18 @@ class HomeViewController: UIViewController {
         homeTableView.dataSource = self
         settingSearchController()
         
+        // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
-//        artManager1.getArtProductList(number: "1")
-//        artManager6.getArtProductList(number: "6")
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         
+        // use firebase to get data
         concertDataManager.concertDelegate = self
-        concertDataManager.fetchConcertData()
         exhibitionDataManager.exhibitionDelegate = self
-        exhibitionDataManager.fetchExhibitionData()
- 
-//        if let navigationBar = self.navigationController?.navigationBar {
-//            let titleTextAttributes: [NSAttributedString.Key: Any] = [
-//                .font: UIFont.boldSystemFont(ofSize: 24)
-//            ]
-//            navigationBar.titleTextAttributes = titleTextAttributes
-//        }
-//
-//        self.navigationController?.navigationBar.topItem?.title = "Culcurist"
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
+
     }
 
 }
@@ -62,14 +56,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnimationTableViewCell") as? AnimationTableViewCell else { return UITableViewCell() }
+            cell.allData = self.artProducts1 + self.artProducts6
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
             cell.productIndexPath = 1
+            cell.artProducts1 = self.artProducts1
+            cell.artProducts6 = self.artProducts6
             return cell
         } else if indexPath.section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
             cell.productIndexPath = 2
+            cell.artProducts1 = self.artProducts1
+            cell.artProducts6 = self.artProducts6
             return cell
         }
         
@@ -166,7 +165,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide)
 
         }
     }
@@ -194,6 +193,9 @@ extension HomeViewController: ArtManagerDelegate {
                     self.artProducts6 = artProductList
                 }
             }
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
+            }
         }
     }
     
@@ -203,10 +205,13 @@ extension HomeViewController: ArtManagerDelegate {
     
 }
 
+// MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        self.homeTableView.reloadData()
+        DispatchQueue.main.async {
+            self.homeTableView.reloadData()
+        }
     }
 
 }
@@ -214,6 +219,8 @@ extension HomeViewController: FirebaseConcertDelegate {
 extension HomeViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        self.homeTableView.reloadData()
+        DispatchQueue.main.async {
+            self.homeTableView.reloadData()
+        }
     }
 }
