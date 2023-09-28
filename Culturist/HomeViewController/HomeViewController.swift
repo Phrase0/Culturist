@@ -54,6 +54,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnimationTableViewCell") as? AnimationTableViewCell else { return UITableViewCell() }
+            cell.allData = self.artProducts1 + self.artProducts6
             return cell
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
@@ -162,7 +163,7 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
         searchBar.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide)
 
         }
     }
@@ -189,7 +190,6 @@ extension HomeViewController: ArtManagerDelegate {
                     print(artProductList)
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                    //print(artProductList)
                 }
             }
             DispatchQueue.main.async {

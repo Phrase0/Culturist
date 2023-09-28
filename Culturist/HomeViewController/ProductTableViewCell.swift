@@ -24,27 +24,10 @@ class ProductTableViewCell: UITableViewCell {
             productCollectionView.reloadData()
         }
     }
-    
-    var artManager1 = ArtProductManager()
-    var artManager6 = ArtProductManager()
-    
-    let concertDataManager = ConcertDataManager()
-    let exhibitionDataManager = ExhibitionDataManager()
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
-        artManager1.delegate = self
-        artManager6.delegate = self
-//        artManager1.getArtProductList(number: "1")
-//        artManager6.getArtProductList(number: "6")
-        
-        concertDataManager.concertDelegate = self
-        //concertDataManager.fetchConcertData()
-        exhibitionDataManager.exhibitionDelegate = self
-        //exhibitionDataManager.fetchExhibitionData()
-        print(artProducts1)
     }
     
 }
@@ -131,43 +114,5 @@ extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
         productCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 10.0)
         
         return flowLayout.itemSize
-    }
-}
-
-// MARK: - ProductManagerDelegate
-extension ProductTableViewCell: ArtManagerDelegate {
-    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
-            if artProductList.isEmpty {
-                print("no api data")
-            } else {
-                if manager === self.artManager1 {
-                    self.artProducts1 = artProductList
-                } else if manager === self.artManager6 {
-                    self.artProducts6 = artProductList
-                }
-                self.productCollectionView.reloadData()
-            }
-        }
-    }
-    
-    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
-    }
-    
-}
-
-extension ProductTableViewCell: FirebaseConcertDelegate {
-    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
-        self.artProducts1 = concertData
-        self.productCollectionView.reloadData()
-    }
-
-}
-
-extension ProductTableViewCell: FirebaseExhibitionDelegate {
-    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
-        self.artProducts6 = exhibitionData
-        self.productCollectionView.reloadData()
     }
 }

@@ -10,24 +10,18 @@ import UIKit
 class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
-    //let images = ["cesar","alessio","dave","mymind","luke"]
     
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
-    
-    var artProducts1 = [ArtDatum]()
-    var artProducts6 = [ArtDatum]()
-    var artManager1 = ArtProductManager()
-    var artManager6 = ArtProductManager()
-    let firebaseManager = FirebaseManager()
-    
-    let group = DispatchGroup()
-    
-    var allData = [ArtDatum]()
-    // Use the `shuffled()` method to shuffle the order of the array
-    var randomSixItems =  ["cesar","alessio","dave","mymind","luke"]
-    
+
+    var allData: [ArtDatum] = [] {
+        didSet {
+            updateRandomSixItems()
+        }
+    }
+// Use the `shuffled()` method to shuffle the order of the array
+    var randomSixItems: [ArtDatum] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,21 +32,16 @@ class AnimationTableViewCell: UITableViewCell {
         // Auto scroll animation, set to switch every 2 seconds
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
         
-        
-//        artManager1.delegate = self
-//        artManager6.delegate = self
-//        group.enter()
-//        artManager1.getArtProductList(number: "1")
-//        group.enter()
-//        artManager6.getArtProductList(number: "6")
-//        group.notify(queue: .main) {
-//            self.allData = self.artProducts1 + self.artProducts6
-//            let shuffledData = self.allData.shuffled()
-//            // Get the first six items, and it's okay if the array length is less than six
-//            let randomSixItems = Array(shuffledData.prefix(6))
-//        }
     }
     
+    func updateRandomSixItems() {
+        let shuffledData = self.allData.shuffled()
+        // Get the first six items, and it's okay if the array length is less than six
+        self.randomSixItems = Array(shuffledData.prefix(6))
+        // Reload the collection view to display the new data
+        animationCollectionView.reloadData()
+    }
+
     // Banner auto-scroll animation
     @objc func changeBanner() {
         var indexPath: IndexPath
@@ -78,8 +67,9 @@ class AnimationTableViewCell: UITableViewCell {
         pageControl.currentPage = imageIndex
         pageControl.currentPageIndicatorTintColor = UIColor.B1
         pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
-        // pageControl.backgroundStyle = .prominent
+         pageControl.backgroundStyle = .prominent
         addSubview(pageControl)
+        bringSubviewToFront(pageControl)
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
             make.trailing.equalTo(animationCollectionView.snp.trailing)
@@ -108,12 +98,31 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
-//        let itemData = randomSixItems[indexPath.item]
-//        let url = URL(string: itemData.imageURL)
-//        cell.animationImage.kf.setImage(with: url)
+        let itemData = randomSixItems[indexPath.item]
+        let url = URL(string: itemData.imageURL)
+        cell.animationImage.kf.setImage(with: url)
         
         return cell
     }
+    
+    func parentViewController() -> HomeViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? HomeViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let homeViewController = parentViewController() {
+            guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+                detailVC.detailDesctription = randomSixItems[indexPath.item]
+            homeViewController.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
+
     
 }
 
@@ -140,29 +149,4 @@ extension AnimationTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.zero
     }
-}
-
-
-// MARK: - ProductManagerDelegate
-extension AnimationTableViewCell: ArtManagerDelegate {
-    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
-            if artProductList.isEmpty {
-                print("no api data")
-            } else {
-                if manager === self.artManager1 {
-                    self.artProducts1 = artProductList
-                } else if manager === self.artManager6 {
-                    self.artProducts6 = artProductList
-                }
-                self.group.leave()
-            }
-        }
-    }
-
-    
-    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
-    }
-    
 }

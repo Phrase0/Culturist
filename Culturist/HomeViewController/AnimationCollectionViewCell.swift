@@ -14,7 +14,7 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     
     lazy var animationImage: UIImageView = {
         let animationImage = UIImageView()
-        animationImage.contentMode = .scaleAspectFill
+        animationImage.contentMode = .scaleAspectFit
         return animationImage
     }()
     
@@ -32,7 +32,9 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupSubviews() {
+        contentView.backgroundColor = .black
         contentView.addSubview(animationImage)
+        
     }
     
     func setupConstraints() {
