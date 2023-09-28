@@ -14,7 +14,7 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     
     lazy var animationImage: UIImageView = {
         let animationImage = UIImageView()
-        animationImage.contentMode = .scaleAspectFit
+        animationImage.contentMode = .scaleAspectFill
         return animationImage
     }()
     

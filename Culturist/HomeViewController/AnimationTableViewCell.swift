@@ -14,13 +14,13 @@ class AnimationTableViewCell: UITableViewCell {
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
-
+    
     var allData: [ArtDatum] = [] {
         didSet {
             updateRandomSixItems()
         }
     }
-// Use the `shuffled()` method to shuffle the order of the array
+    // Use the `shuffled()` method to shuffle the order of the array
     var randomSixItems: [ArtDatum] = []
     
     override func awakeFromNib() {
@@ -39,9 +39,11 @@ class AnimationTableViewCell: UITableViewCell {
         // Get the first six items, and it's okay if the array length is less than six
         self.randomSixItems = Array(shuffledData.prefix(6))
         // Reload the collection view to display the new data
-        animationCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.animationCollectionView.reloadData()
+        }
     }
-
+    
     // Banner auto-scroll animation
     @objc func changeBanner() {
         var indexPath: IndexPath
@@ -67,7 +69,7 @@ class AnimationTableViewCell: UITableViewCell {
         pageControl.currentPage = imageIndex
         pageControl.currentPageIndicatorTintColor = UIColor.GR2
         pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
-        //pageControl.backgroundStyle = .minimal
+        // pageControl.backgroundStyle = .minimal
         addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
@@ -117,11 +119,10 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let homeViewController = parentViewController() {
             guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-                detailVC.detailDesctription = randomSixItems[indexPath.item]
+            detailVC.detailDesctription = randomSixItems[indexPath.item]
             homeViewController.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-
     
 }
 

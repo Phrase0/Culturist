@@ -28,15 +28,17 @@ class HomeViewController: UIViewController {
         homeTableView.dataSource = self
         settingSearchController()
         
+        // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
-//        artManager1.getArtProductList(number: "1")
-//        artManager6.getArtProductList(number: "6")
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         
+        // use firebase to get data
         concertDataManager.concertDelegate = self
-        concertDataManager.fetchConcertData()
         exhibitionDataManager.exhibitionDelegate = self
-        exhibitionDataManager.fetchExhibitionData()
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
 
     }
 
@@ -187,7 +189,6 @@ extension HomeViewController: ArtManagerDelegate {
             } else {
                 if manager === self.artManager1 {
                     self.artProducts1 = artProductList
-                    print(artProductList)
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
@@ -204,6 +205,7 @@ extension HomeViewController: ArtManagerDelegate {
     
 }
 
+// MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
