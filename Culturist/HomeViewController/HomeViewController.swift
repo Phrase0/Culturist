@@ -16,6 +16,10 @@ class HomeViewController: UIViewController {
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
+    
+    let concertDataManager = ConcertDataManager()
+    let exhibitionDataManager = ExhibitionDataManager()
+    
     var buttonTag: Int?
     
     override func viewDidLoad() {
@@ -26,10 +30,13 @@ class HomeViewController: UIViewController {
         
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
+//        artManager1.getArtProductList(number: "1")
+//        artManager6.getArtProductList(number: "6")
         
-        
+        concertDataManager.concertDelegate = self
+        concertDataManager.fetchConcertData()
+        exhibitionDataManager.exhibitionDelegate = self
+        exhibitionDataManager.fetchExhibitionData()
  
 //        if let navigationBar = self.navigationController?.navigationBar {
 //            let titleTextAttributes: [NSAttributedString.Key: Any] = [
@@ -194,4 +201,19 @@ extension HomeViewController: ArtManagerDelegate {
         // print(error.localizedDescription)
     }
     
+}
+
+extension HomeViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
+        self.artProducts1 = concertData
+        self.homeTableView.reloadData()
+    }
+
+}
+
+extension HomeViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
+        self.artProducts6 = exhibitionData
+        self.homeTableView.reloadData()
+    }
 }

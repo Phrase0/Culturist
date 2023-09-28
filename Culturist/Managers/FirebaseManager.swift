@@ -11,16 +11,17 @@ import FirebaseFirestore
 
 protocol FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData])
-    func manager(_ manager: FirebaseManager, didFailWith error: Error)
 }
 
 protocol FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData])
 }
+
 class FirebaseManager {
     
     var collectionDelegate:FirebaseCollectionDelegate?
     var likeDelegate: FirebaseLikeDelegate?
+
     
     // Get the Firestore database reference
     let db = Firestore.firestore()
@@ -271,5 +272,6 @@ class FirebaseManager {
             }
         }
     }
+
 
 }
