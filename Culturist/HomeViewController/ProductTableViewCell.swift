@@ -17,7 +17,9 @@ class ProductTableViewCell: UITableViewCell {
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
-    let firebaseManager = FirebaseManager()
+    
+    let concertDataManager = ConcertDataManager()
+    let exhibitionDataManager = ExhibitionDataManager()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,9 +27,13 @@ class ProductTableViewCell: UITableViewCell {
         productCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
+//        artManager1.getArtProductList(number: "1")
+//        artManager6.getArtProductList(number: "6")
         
+        concertDataManager.concertDelegate = self
+        concertDataManager.fetchConcertData()
+        exhibitionDataManager.exhibitionDelegate = self
+        exhibitionDataManager.fetchExhibitionData()
     }
     
 }
@@ -138,4 +144,19 @@ extension ProductTableViewCell: ArtManagerDelegate {
         print(error.localizedDescription)
     }
     
+}
+
+extension ProductTableViewCell: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
+        self.artProducts1 = concertData
+        self.productCollectionView.reloadData()
+    }
+
+}
+
+extension ProductTableViewCell: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
+        self.artProducts6 = exhibitionData
+        self.productCollectionView.reloadData()
+    }
 }
