@@ -20,7 +20,7 @@ class CoffeeShopManager {
     func loadCoffeeShops() {
         // ask for coffeeShop request
         // testMode: less"h" in the baseUrl now
-        let baseUrl = "ttps://cafenomad.tw/api/v1.2/cafes"
+        let baseUrl = "https://cafenomad.tw/api/v1.2/cafes"
         
         AF.request(baseUrl).responseDecodable(of: [CoffeeShop].self) {
             [weak self] response in

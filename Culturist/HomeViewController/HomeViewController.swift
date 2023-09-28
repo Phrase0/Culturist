@@ -183,8 +183,10 @@ extension HomeViewController: ArtManagerDelegate {
             } else {
                 if manager === self.artManager1 {
                     self.artProducts1 = artProductList
+                    print(artProductList)
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
+                    //print(artProductList)
                 }
             }
         }

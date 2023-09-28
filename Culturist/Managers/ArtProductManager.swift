@@ -18,14 +18,13 @@ class ArtProductManager {
     
     func getArtProductList(number:String) {
         // testMode: less"h" in the baseUrl now
-        let urlString = "ttps://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
+        let urlString = "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
         AF.request(urlString).responseDecodable(of: [ArtDatum].self) {
             [weak self] response in
             switch response.result {
             case .success(let data):
                 let filteredData = data.filter { !$0.imageURL.isEmpty }
                 self?.delegate?.manager(self!, didGet: filteredData)
-                
             case .failure(let error):
                 self?.delegate?.manager(self!, didFailWith: error)
                  print("Error fetching JSON data: \(error)")

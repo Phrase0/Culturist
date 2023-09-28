@@ -20,7 +20,7 @@ class BookShopManager {
     func loadBookShops() {
         // ask for coffeeShop request
         // testMode: less"h" in the baseUrl now
-        let baseUrl = "ttps://cloud.culture.tw/frontsite/trans/emapOpenDataAction.do?method=exportEmapJson&typeId=M"
+        let baseUrl = "https://cloud.culture.tw/frontsite/trans/emapOpenDataAction.do?method=exportEmapJson&typeId=M"
         AF.request(baseUrl).responseDecodable(of: [BookShop].self) {
             [weak self] response in
             switch response.result {

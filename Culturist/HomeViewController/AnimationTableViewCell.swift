@@ -10,11 +10,24 @@ import UIKit
 class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
-    let images = ["cesar","alessio","dave","mymind","luke"]
+    //let images = ["cesar","alessio","dave","mymind","luke"]
     
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
+    
+    var artProducts1 = [ArtDatum]()
+    var artProducts6 = [ArtDatum]()
+    var artManager1 = ArtProductManager()
+    var artManager6 = ArtProductManager()
+    let firebaseManager = FirebaseManager()
+    
+    let group = DispatchGroup()
+    
+    var allData = [ArtDatum]()
+    // Use the `shuffled()` method to shuffle the order of the array
+    var randomSixItems =  ["cesar","alessio","dave","mymind","luke"]
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,13 +37,27 @@ class AnimationTableViewCell: UITableViewCell {
         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
+        
+        
+//        artManager1.delegate = self
+//        artManager6.delegate = self
+//        group.enter()
+//        artManager1.getArtProductList(number: "1")
+//        group.enter()
+//        artManager6.getArtProductList(number: "6")
+//        group.notify(queue: .main) {
+//            self.allData = self.artProducts1 + self.artProducts6
+//            let shuffledData = self.allData.shuffled()
+//            // Get the first six items, and it's okay if the array length is less than six
+//            let randomSixItems = Array(shuffledData.prefix(6))
+//        }
     }
     
     // Banner auto-scroll animation
     @objc func changeBanner() {
         var indexPath: IndexPath
         imageIndex += 1
-        if imageIndex < images.count {
+        if imageIndex < randomSixItems.count {
             // If the displayed cell is less than the total count, display the next one
             indexPath = IndexPath(item: imageIndex, section: 0)
             // Actions to perform when adding auto-scroll animation
@@ -47,7 +74,7 @@ class AnimationTableViewCell: UITableViewCell {
     
     // MARK: - PageControl
     func setupPageControl() {
-        pageControl.numberOfPages = images.count
+        pageControl.numberOfPages = randomSixItems.count
         pageControl.currentPage = imageIndex
         pageControl.currentPageIndicatorTintColor = UIColor.B1
         pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
@@ -76,12 +103,15 @@ extension AnimationTableViewCell: UIScrollViewDelegate {
 
 extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return randomSixItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
-        cell.animationImage.image = UIImage(named: images[indexPath.row])
+//        let itemData = randomSixItems[indexPath.item]
+//        let url = URL(string: itemData.imageURL)
+//        cell.animationImage.kf.setImage(with: url)
+        
         return cell
     }
     
@@ -110,4 +140,29 @@ extension AnimationTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.zero
     }
+}
+
+
+// MARK: - ProductManagerDelegate
+extension AnimationTableViewCell: ArtManagerDelegate {
+    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
+        DispatchQueue.main.async {
+            if artProductList.isEmpty {
+                print("no api data")
+            } else {
+                if manager === self.artManager1 {
+                    self.artProducts1 = artProductList
+                } else if manager === self.artManager6 {
+                    self.artProducts6 = artProductList
+                }
+                self.group.leave()
+            }
+        }
+    }
+
+    
+    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
+        print(error.localizedDescription)
+    }
+    
 }
