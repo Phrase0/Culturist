@@ -37,15 +37,7 @@ class HomeViewController: UIViewController {
         concertDataManager.fetchConcertData()
         exhibitionDataManager.exhibitionDelegate = self
         exhibitionDataManager.fetchExhibitionData()
- 
-//        if let navigationBar = self.navigationController?.navigationBar {
-//            let titleTextAttributes: [NSAttributedString.Key: Any] = [
-//                .font: UIFont.boldSystemFont(ofSize: 24)
-//            ]
-//            navigationBar.titleTextAttributes = titleTextAttributes
-//        }
-//
-//        self.navigationController?.navigationBar.topItem?.title = "Culcurist"
+
     }
 
 }
@@ -66,10 +58,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
             cell.productIndexPath = 1
+            cell.artProducts1 = self.artProducts1
+            cell.artProducts6 = self.artProducts6
             return cell
         } else if indexPath.section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell") as? ProductTableViewCell else { return UITableViewCell() }
             cell.productIndexPath = 2
+            cell.artProducts1 = self.artProducts1
+            cell.artProducts6 = self.artProducts6
             return cell
         }
         
@@ -196,6 +192,9 @@ extension HomeViewController: ArtManagerDelegate {
                     //print(artProductList)
                 }
             }
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
+            }
         }
     }
     
@@ -208,7 +207,9 @@ extension HomeViewController: ArtManagerDelegate {
 extension HomeViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        self.homeTableView.reloadData()
+        DispatchQueue.main.async {
+            self.homeTableView.reloadData()
+        }
     }
 
 }
@@ -216,6 +217,8 @@ extension HomeViewController: FirebaseConcertDelegate {
 extension HomeViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        self.homeTableView.reloadData()
+        DispatchQueue.main.async {
+            self.homeTableView.reloadData()
+        }
     }
 }

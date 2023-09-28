@@ -13,8 +13,18 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var productCollectionView: UICollectionView!
     var productIndexPath: Int?
     
-    var artProducts1 = [ArtDatum]()
-    var artProducts6 = [ArtDatum]()
+    var artProducts1: [ArtDatum] = [] {
+        didSet {
+            productCollectionView.reloadData()
+        }
+    }
+    
+    var artProducts6: [ArtDatum] = [] {
+        didSet {
+            productCollectionView.reloadData()
+        }
+    }
+    
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
     
@@ -31,9 +41,10 @@ class ProductTableViewCell: UITableViewCell {
 //        artManager6.getArtProductList(number: "6")
         
         concertDataManager.concertDelegate = self
-        concertDataManager.fetchConcertData()
+        //concertDataManager.fetchConcertData()
         exhibitionDataManager.exhibitionDelegate = self
-        exhibitionDataManager.fetchExhibitionData()
+        //exhibitionDataManager.fetchExhibitionData()
+        print(artProducts1)
     }
     
 }
