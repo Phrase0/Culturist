@@ -63,13 +63,12 @@ class AnimationTableViewCell: UITableViewCell {
     
     // MARK: - PageControl
     func setupPageControl() {
-        pageControl.numberOfPages = randomSixItems.count
+        pageControl.numberOfPages = 6
         pageControl.currentPage = imageIndex
-        pageControl.currentPageIndicatorTintColor = UIColor.B1
-        pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
-         pageControl.backgroundStyle = .prominent
+        pageControl.currentPageIndicatorTintColor = UIColor.GR2
+        pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
+        //pageControl.backgroundStyle = .minimal
         addSubview(pageControl)
-        bringSubviewToFront(pageControl)
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
             make.trailing.equalTo(animationCollectionView.snp.trailing)
