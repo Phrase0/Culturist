@@ -25,9 +25,11 @@ class ProductTableViewCell: UITableViewCell {
         productCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
+//        artManager1.getArtProductList(number: "1")
+//        artManager6.getArtProductList(number: "6")
         
+        firebaseManager.concertDelegate = self
+        firebaseManager.fetchConcertData()
     }
     
 }
@@ -136,6 +138,16 @@ extension ProductTableViewCell: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
+    }
+    
+}
+
+extension ProductTableViewCell: FirebaseConcertDelegate {
+    func manager(_ manager: FirebaseManager, didGet concertData: [ArtDatum]) {
+        self.artProducts1 = concertData
+        print(artProducts1)
+        print("sucess get firebase data")
+        self.productCollectionView.reloadData()
     }
     
 }
