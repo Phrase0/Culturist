@@ -28,7 +28,7 @@ class RecommendViewController: UIViewController {
         // Get the first 6 items of data
         return Array(filteredProducts.prefix(10))
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,16 +37,22 @@ class RecommendViewController: UIViewController {
         
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
         
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-//        concertDataManager.fetchConcertData()
-//        exhibitionDataManager.fetchExhibitionData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
+        //        concertDataManager.fetchConcertData()
+        //        exhibitionDataManager.fetchExhibitionData()
     }
 }
+
+
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
