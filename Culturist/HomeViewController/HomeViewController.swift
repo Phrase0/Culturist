@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
         //        exhibitionDataManager.fetchExhibitionData()
         
     }
+
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

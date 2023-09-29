@@ -21,13 +21,14 @@ class RecommendViewController: UIViewController {
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
-    // 10 recommendProducts
+    // recommendProducts
     var recommendProducts: [ArtDatum] {
-        var filteredProducts = artProducts1 + artProducts6
+        let filteredProducts = artProducts1 + artProducts6
         // sort by hitRate
-        filteredProducts.sort { $0.hitRate > $1.hitRate }
-        // Get the first 6 items of data
-        return Array(filteredProducts.prefix(15))
+        let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
+        // Get the first 15 items of data, or return an empty array if there is no data
+        let result = Array(sortedProducts.prefix(15))
+        return result
     }
     
     override func viewDidLoad() {

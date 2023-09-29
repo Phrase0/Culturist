@@ -11,18 +11,29 @@ class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
     
+    var timer: Timer?
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
+//    var allData: [ArtDatum] = [] {
+//        didSet {
+//            updateRandomSixItems()
+//        }
+//    }
+    
     var allData: [ArtDatum] = [] {
         didSet {
-            updateRandomSixItems()
+            animationCollectionView.reloadData()
         }
     }
-    // Use the `shuffled()` method to shuffle the order of the array
-    var randomSixItems: [ArtDatum] = []
-    
+
+    var randomSixItems: [ArtDatum] {
+        let shuffledData = self.allData.shuffled()
+        // Get the first six items, and it's okay if the array length is less than six
+        return Array(shuffledData.prefix(6))
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         animationCollectionView.dataSource = self
@@ -30,22 +41,22 @@ class AnimationTableViewCell: UITableViewCell {
         animationCollectionView.isPagingEnabled = true
         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
         
     }
-    
-    func updateRandomSixItems() {
-        let shuffledData = self.allData.shuffled()
-        // Get the first six items, and it's okay if the array length is less than six
-        self.randomSixItems = Array(shuffledData.prefix(6))
-        // Reload the collection view to display the new data
-        DispatchQueue.main.async {
-            self.animationCollectionView.reloadData()
-        }
+
+    deinit {
+        // Stop the timer when the view is deallocated
+        timer?.invalidate()
     }
-    
+
     // Banner auto-scroll animation
     @objc func changeBanner() {
+        guard !randomSixItems.isEmpty else {
+            // if randomSixItems isEmpty，don't animate
+            return
+        }
+        
         var indexPath: IndexPath
         imageIndex += 1
         if imageIndex < randomSixItems.count {
