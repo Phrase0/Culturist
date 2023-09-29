@@ -89,16 +89,12 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
-//        if let selectedIndexPaths = self.recommendCollectionView.indexPathsForSelectedItems,
-//           let selectedIndexPath = selectedIndexPaths.first {
             detailVC.detailDesctription = recommendProducts[indexPath.row]
-//        }
+
         self.navigationController?.hero.isEnabled = true
         self.navigationController?.heroNavigationAnimationType = .zoom
         self.navigationController?.pushViewController(detailVC, animated: true)
     
-        // ---------------------------------------------------
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

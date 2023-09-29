@@ -129,6 +129,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
                         // No need to wait, proceed to navigation directly
                         DispatchQueue.main.async {
+                            self?.navigationController?.hero.isEnabled = true
+                            self?.navigationController?.heroNavigationAnimationType = .cover(direction: .up)
                             self?.navigationController?.pushViewController(detailVC, animated: true)
                         }
                     } else {
@@ -153,6 +155,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     semaphore.wait()
                     
                     DispatchQueue.main.async {
+                        self?.navigationController?.hero.isEnabled = true
+                        self?.navigationController?.heroNavigationAnimationType = .cover(direction: .up)
                         self?.navigationController?.pushViewController(detailVC, animated: true)
                     }
                 }
@@ -170,6 +174,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
                         // No need to wait, proceed to navigation directly
                         DispatchQueue.main.async {
+                            self?.navigationController?.hero.isEnabled = true
+                            self?.navigationController?.heroNavigationAnimationType = .cover(direction: .up)
                             self?.navigationController?.pushViewController(detailVC, animated: true)
                         }
                     } else {
@@ -194,6 +200,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     semaphore.wait()
                     
                     DispatchQueue.main.async {
+                        self?.navigationController?.hero.isEnabled = true
+                        self?.navigationController?.heroNavigationAnimationType = .cover(direction: .up)
                         self?.navigationController?.pushViewController(detailVC, animated: true)
                     }
                 }

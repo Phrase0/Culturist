@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import MapKit
 import CoreLocation
+import Hero
 
 class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -50,11 +51,13 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.delegate = self
         
         // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR1
+        // backBtn
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .GR3
     }
 
     @objc private func backButtonTapped() {
+        navigationController?.heroNavigationAnimationType = .uncover(direction: .down)
         navigationController?.popViewController(animated: true)
     }
     
