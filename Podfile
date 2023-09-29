@@ -18,7 +18,8 @@ target 'Culturist' do
   pod 'FSCalendar+Persian'
   pod 'SnapKit'
   pod "ESTabBarController-swift"
-pod 'Gemini'
+  pod 'Gemini'
+  pod 'Hero'
 
   source 'https://github.com/CocoaPods/Specs.git'
 

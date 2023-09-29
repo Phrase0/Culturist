@@ -321,6 +321,9 @@ Label</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QZb-we-2nf"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="recommendCollectionView" destination="5oF-bs-e3W" id="Be9-eF-8Gx"/>
                     </connections>
@@ -804,6 +807,9 @@ Label</string>
                             <constraint firstAttribute="bottom" secondItem="RKk-mN-4Mc" secondAttribute="bottom" id="jJ6-dw-7vK"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="detailTableView" destination="RKk-mN-4Mc" id="rqL-49-bfl"/>
                     </connections>

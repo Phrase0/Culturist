@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import MapKit
 import EventKitUI
+import Hero
 
 class DetailViewController: UIViewController {
     
@@ -86,9 +87,11 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func backButtonTapped() {
+        navigationController?.heroNavigationAnimationType = .zoomOut
         navigationController?.popViewController(animated: true)
+        
     }
-    
+
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -109,6 +112,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
+            
+            // Hero move
+            view.heroID = detailDesctription.uid
+            cell.detailImageView.heroID =  detailDesctription.imageURL
             
             // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
