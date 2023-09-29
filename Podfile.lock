@@ -665,6 +665,7 @@ PODS:
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - "FSCalendar+Persian (2.9.3)"
+  - Gemini (1.4.0)
   - GoogleUtilities/AppDelegateSwizzler (7.11.5):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -763,6 +764,7 @@ DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
   - "FSCalendar+Persian"
+  - Gemini
   - IQKeyboardManager
   - Kingfisher (~> 7.0)
   - MJRefresh
@@ -782,6 +784,7 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseFirestore
     - "FSCalendar+Persian"
+    - Gemini
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -808,6 +811,7 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
   FirebaseFirestore: 808dd08cbc1c7be9052055f62ab312fdae611e37
   "FSCalendar+Persian": 8e76849435b6afafbfa2bcd5e05ae308f81272e2
+  Gemini: 4ad915cca8805577fe3021e02feeca2b77dcdbfc
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
@@ -822,6 +826,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: f39a910a52ad0cd28c0ab6a5017e4ad30a51ba7e
+PODFILE CHECKSUM: 4ab883eae11511c264d0bbefa75e7b2b77749591
 
 COCOAPODS: 1.12.1

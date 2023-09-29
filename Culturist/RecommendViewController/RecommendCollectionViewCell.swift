@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Gemini
 
-class RecommendCollectionViewCell: UICollectionViewCell {
+class RecommendCollectionViewCell: GeminiCell {
 
     lazy var productView: UIView = {
         let productView = UIView()
@@ -46,6 +47,8 @@ class RecommendCollectionViewCell: UICollectionViewCell {
         setupConstraints()
         setShadowColor()
     }
+    
+
     
     private func setupSubviews() {
         contentView.addSubview(productView)

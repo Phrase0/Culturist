@@ -47,7 +47,8 @@ class DetailViewController: UIViewController {
         
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
-            group.leave() // leave DispatchGroup
+             // leave DispatchGroup
+            group.leave()
         }
         
         // use DispatchGroup notify
@@ -207,6 +208,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.addFavorite()
                     cell.likeBtn.isSelected = true
                 }
+              
             }
             
             // ---------------------------------------------------

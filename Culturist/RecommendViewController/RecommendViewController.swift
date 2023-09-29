@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Gemini
 
 class RecommendViewController: UIViewController {
     
-    @IBOutlet weak var recommendCollectionView: UICollectionView!
+    @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
     
     // total products
     var artProducts1 = [ArtDatum]()
@@ -26,7 +27,7 @@ class RecommendViewController: UIViewController {
         // sort by hitRate
         filteredProducts.sort { $0.hitRate > $1.hitRate }
         // Get the first 6 items of data
-        return Array(filteredProducts.prefix(10))
+        return Array(filteredProducts.prefix(15))
     }
     
     override func viewDidLoad() {
@@ -34,13 +35,18 @@ class RecommendViewController: UIViewController {
         
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
-        
+        //recommendCollectionView.isPagingEnabled = true
         artManager1.delegate = self
         artManager6.delegate = self
         
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
+        
+        recommendCollectionView.gemini
+            .scaleAnimation()
+            .scale(0.75)
+            .scaleEffect(.scaleUp) // or .scaleDown
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +77,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         let url = URL(string: itemData.imageURL)
         cell.productImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
-        
+        self.recommendCollectionView.animateCell(cell)
         return cell
     }
     
@@ -83,6 +89,17 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Animate
+        self.recommendCollectionView.animateVisibleCells()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? GeminiCell {
+            self.recommendCollectionView.animateCell(cell)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -91,7 +108,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
     // Number of items per row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
-        return configureCellSize(interitemSpace: 30, lineSpace: 20, columnCount: 1)
+        return configureCellSize(interitemSpace: 15, lineSpace: 20, columnCount: 1)
     }
     
     // Configure cell size and header size
@@ -99,14 +116,14 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         
         guard let flowLayout = recommendCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
         
-        let width = floor((recommendCollectionView.bounds.width - 100 - interitemSpace * (columnCount - 1)) / columnCount)
+        let width = floor((recommendCollectionView.bounds.width - 80 - interitemSpace * (columnCount - 1)) / columnCount)
         flowLayout.estimatedItemSize = .zero
         flowLayout.minimumInteritemSpacing = interitemSpace
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 30.0, bottom: 90.0, right: 20.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 90.0, right: 40.0)
         return flowLayout.itemSize
     }
     
