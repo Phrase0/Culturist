@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 class LikeViewController: UIViewController {
     
@@ -52,7 +53,7 @@ class LikeViewController: UIViewController {
         
         navigationItem.title = "我的收藏"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem?.tintColor = .GR3
     }
     
     @objc private func backButtonTapped() {

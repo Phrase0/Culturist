@@ -9,7 +9,6 @@ import UIKit
 import Alamofire
 import MapKit
 import CoreLocation
-import Hero
 
 class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -56,8 +55,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     @objc private func backButtonTapped() {
-        navigationController?.heroNavigationAnimationType = .uncover(direction: .down)
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

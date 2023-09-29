@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 import CoreLocation
 import MapKit
-import Hero
 
 class BookShopViewController: UIViewController {
     
@@ -128,7 +127,6 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.name = bookShop?.name
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
-                // self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
                 self.present(navVC, animated: true)

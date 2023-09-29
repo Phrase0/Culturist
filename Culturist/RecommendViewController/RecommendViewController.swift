@@ -7,7 +7,6 @@
 
 import UIKit
 import Gemini
-import Hero
 
 class RecommendViewController: UIViewController {
     
@@ -37,7 +36,6 @@ class RecommendViewController: UIViewController {
         
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
-        //recommendCollectionView.isPagingEnabled = true
         artManager1.delegate = self
         artManager6.delegate = self
         
@@ -60,7 +58,6 @@ class RecommendViewController: UIViewController {
     }
 }
 
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -80,19 +77,12 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.productImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
         self.recommendCollectionView.animateCell(cell)
-        
-        // Hero move
-        cell.productImage.heroID = itemData.imageURL
-        cell.productView.heroID = itemData.uid
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
             detailVC.detailDesctription = recommendProducts[indexPath.row]
-
-        self.navigationController?.hero.isEnabled = true
-        self.navigationController?.heroNavigationAnimationType = .zoom
         self.navigationController?.pushViewController(detailVC, animated: true)
     
     }

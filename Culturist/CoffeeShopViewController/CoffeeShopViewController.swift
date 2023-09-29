@@ -113,7 +113,6 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.name = coffeeShop?.name
                 detailVC.latitude = Double(coffeeShop!.latitude)
                 detailVC.longitude = Double(coffeeShop!.longitude)
-                self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
                 self.present(navVC, animated: true)

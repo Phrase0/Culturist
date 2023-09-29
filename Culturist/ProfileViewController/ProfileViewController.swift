@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Hero
 
 class ProfileViewController: UIViewController {
 
@@ -22,12 +23,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setCorner()
     }
     @IBAction func goToLikecollection(_ sender: UIButton) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
+        navVC.hero.isEnabled = true
+        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
         self.present(navVC, animated: true)
     }
     
@@ -35,6 +39,8 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
+        navVC.hero.isEnabled = true
+        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
         self.present(navVC, animated: true)
     }
     

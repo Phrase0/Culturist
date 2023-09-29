@@ -24,7 +24,7 @@ class CheckMoreViewController: UIViewController {
 
         navigationItem.title = "\(navigationItemTitle!)"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem?.tintColor = .GR3
     }
 
     @objc private func backButtonTapped() {
