@@ -16,38 +16,37 @@ class AnimationTableViewCell: UITableViewCell {
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
-//    var allData: [ArtDatum] = [] {
-//        didSet {
-//            updateRandomSixItems()
-//        }
-//    }
-    
+
     var allData: [ArtDatum] = [] {
         didSet {
+            randomSixItems = getRandomSixItems()
             animationCollectionView.reloadData()
         }
     }
 
-    var randomSixItems: [ArtDatum] {
-        let shuffledData = self.allData.shuffled()
-        // Get the first six items, and it's okay if the array length is less than six
-        return Array(shuffledData.prefix(6))
-    }
+    var randomSixItems: [ArtDatum] = []
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
-        
+
     }
 
     deinit {
         // Stop the timer when the view is deallocated
         timer?.invalidate()
+    }
+    
+    func getRandomSixItems() -> [ArtDatum] {
+        let shuffledData = self.allData.shuffled()
+        // Get the first six items, and it's okay if the array length is less than six
+        return Array(shuffledData.prefix(6))
     }
 
     // Banner auto-scroll animation
