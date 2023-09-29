@@ -100,6 +100,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
             self.recommendCollectionView.animateCell(cell)
         }
     }
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

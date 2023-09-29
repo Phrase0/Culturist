@@ -152,20 +152,20 @@ extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func settingSearchController() {
         let searchBar = mySearchController.searchBar
-        // navigationItem.searchController = mySearchController
-        // navigationItem.hidesSearchBarWhenScrolling = false
-        // mySearchController.searchResultsUpdater = self
+         navigationItem.searchController = mySearchController
+         navigationItem.hidesSearchBarWhenScrolling = true
+         mySearchController.searchResultsUpdater = self
         searchBar.placeholder = "搜尋展覽"
         searchBar.searchBarStyle = .prominent
         searchBar.delegate = self
         searchBar.backgroundImage = UIImage()
         view.addSubview(searchBar)
-        searchBar.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide)
-
-        }
+//        searchBar.snp.makeConstraints { make in
+//            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+//            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+//            make.top.equalTo(view.safeAreaLayoutGuide)
+//
+//        }
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
