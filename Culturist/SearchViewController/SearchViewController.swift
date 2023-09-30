@@ -21,6 +21,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         settingSearchController()

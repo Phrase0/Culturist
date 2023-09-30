@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
@@ -21,12 +22,12 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
+    //var searchButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        settingSearchController()
         
         // use api to get data
         artManager1.delegate = self
@@ -40,8 +41,22 @@ class HomeViewController: UIViewController {
         //        concertDataManager.fetchConcertData()
         //        exhibitionDataManager.fetchExhibitionData()
         
+        
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton.tintColor = .GR2
+        navigationItem.rightBarButtonItem = searchButton
+        
     }
+    
+    
+    @objc func searchButtonTapped() {
+        guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let allProducts = self.artProducts1 + self.artProducts6
+        searchVC.allProducts = allProducts
+        navigationController?.pushViewController(searchVC, animated: true)
 
+    }
+    
 }
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -146,38 +161,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: - searchBar
-extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-    }
-    
-    func settingSearchController() {
-        let searchBar = mySearchController.searchBar
-         navigationItem.searchController = mySearchController
-         navigationItem.hidesSearchBarWhenScrolling = true
-         mySearchController.searchResultsUpdater = self
-        searchBar.placeholder = "搜尋展覽"
-        searchBar.searchBarStyle = .prominent
-        searchBar.delegate = self
-        searchBar.backgroundImage = UIImage()
-        view.addSubview(searchBar)
-//        searchBar.snp.makeConstraints { make in
-//            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-//            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-//            make.top.equalTo(view.safeAreaLayoutGuide)
-//
-//        }
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return false }
-        navigationController?.pushViewController(searchVC, animated: true)
-        let allProducts = self.artProducts1 + self.artProducts6
-        searchVC.allProducts = allProducts
-        // Return false to prevent the search bar from being edited
-        return false
-    }
-}
 
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
