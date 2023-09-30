@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import NVActivityIndicatorView
+import MJRefresh
 
 class HomeViewController: UIViewController {
     
@@ -41,14 +42,28 @@ class HomeViewController: UIViewController {
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
+//                concertDataManager.fetchConcertData()
+//                exhibitionDataManager.fetchExhibitionData()
         
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // pullToRefresh Header
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+                self.homeTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.homeTableView)
+    }
+    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in

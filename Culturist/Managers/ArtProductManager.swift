@@ -23,7 +23,7 @@ class ArtProductManager {
             [weak self] response in
             switch response.result {
             case .success(let data):
-                let filteredData = data.filter { !$0.imageURL.isEmpty }
+                let filteredData = data.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
                 self?.delegate?.manager(self!, didGet: filteredData)
             case .failure(let error):
                 self?.delegate?.manager(self!, didFailWith: error)
@@ -42,7 +42,7 @@ class ArtProductManager {
     // if api fetch failure
     func getArtProductListFromAsset(filename: String) {
         let jsonData: [ArtDatum] = load(filename)
-        let filteredData = jsonData.filter { !$0.imageURL.isEmpty }
+        let filteredData = jsonData.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
         self.delegate?.manager(self, didGet: filteredData)
     }
 

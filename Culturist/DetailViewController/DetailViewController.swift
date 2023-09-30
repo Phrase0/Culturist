@@ -43,6 +43,7 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
+        
         // create DispatchGroup
         let group = DispatchGroup()
         
@@ -83,7 +84,7 @@ class DetailViewController: UIViewController {
         navigationBarAppearance.configureWithDefaultBackground()
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         // navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     @objc private func backButtonTapped() {
@@ -356,4 +357,11 @@ extension DetailViewController: DetailTableViewCellDelegate {
         
     }
     
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

@@ -28,6 +28,8 @@ class SearchViewController: UIViewController {
         navigationItem.title = "搜尋"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .GR2
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     @objc private func backButtonTapped() {
@@ -144,4 +146,11 @@ extension SearchViewController: UISearchResultsUpdating {
         }
     }
     
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension SearchViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

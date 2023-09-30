@@ -8,6 +8,7 @@
 import UIKit
 import Hero
 import NVActivityIndicatorView
+import MJRefresh
 
 class LikeViewController: UIViewController {
     
@@ -73,8 +74,17 @@ class LikeViewController: UIViewController {
         //        concertDataManager.fetchConcertData()
         //        exhibitionDataManager.fetchExhibitionData()
         firebaseManager.fetchUserLikeData { _ in
-            
         }
+        
+        // pullToRefresh Header
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+                self.likeCollectionView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.likeCollectionView)
     }
     
     func setAnimation() {

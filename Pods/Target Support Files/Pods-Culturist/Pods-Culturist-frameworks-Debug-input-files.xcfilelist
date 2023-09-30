@@ -2,7 +2,6 @@ ${PODS_ROOT}/Target Support Files/Pods-Culturist/Pods-Culturist-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
-${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework
 ${BUILT_PRODUCTS_DIR}/FSCalendar+Persian/FSCalendar_Persian.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework

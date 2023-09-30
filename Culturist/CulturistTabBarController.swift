@@ -18,9 +18,9 @@ class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate 
         feedbackGenerator.prepare()
     }
     
-
     // touch feedback
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         feedbackGenerator.impactOccurred()
     }
+    
 }

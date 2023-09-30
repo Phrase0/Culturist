@@ -636,7 +636,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - ESTabBarController-swift (2.8.0)
   - FirebaseAppCheckInterop (10.14.0)
   - FirebaseAuth (10.14.0):
     - FirebaseAppCheckInterop (~> 10.0)
@@ -764,7 +763,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - ARCL
-  - ESTabBarController-swift
   - FirebaseAuth
   - FirebaseFirestore
   - "FSCalendar+Persian"
@@ -783,7 +781,6 @@ SPEC REPOS:
     - Alamofire
     - ARCL
     - BoringSSL-GRPC
-    - ESTabBarController-swift
     - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseCore
@@ -812,7 +809,6 @@ SPEC CHECKSUMS:
   Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
   ARCL: db48b6927d6f3f49f29568295ed91c94ab8d4aab
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   FirebaseAppCheckInterop: c87f1d5421c852413dd936b2b2340b21e62501a0
   FirebaseAuth: bd1ae3d28beb83bfe9247e50eb82688b683dd770
   FirebaseCore: 6fc17ac9f03509d51c131298aacb3ee5698b4f02
@@ -836,6 +832,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: a0d25d86a9fe793f04e465a12693b683d15b76f7
+PODFILE CHECKSUM: 5d84a517d3b1f53926cd9fdab7b289493949b244
 
 COCOAPODS: 1.12.1
