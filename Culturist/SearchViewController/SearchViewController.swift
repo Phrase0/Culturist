@@ -25,9 +25,9 @@ class SearchViewController: UIViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         settingSearchController()
-        
+        navigationItem.title = "搜尋"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        navigationItem.leftBarButtonItem?.tintColor = .GR2
     }
     
     @objc private func backButtonTapped() {
@@ -69,7 +69,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
-                detailVC.detailDesctription = searchResult[indexPath.item]
+        detailVC.detailDesctription = searchResult[indexPath.item]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -106,12 +106,25 @@ extension SearchViewController: UISearchResultsUpdating {
     func settingSearchController() {
         mySearchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = mySearchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        mySearchController?.hidesNavigationBarDuringPresentation = false
         mySearchController?.searchResultsUpdater = self
-        mySearchController?.searchBar.placeholder = "搜尋展覽"
+        mySearchController?.searchBar.placeholder = "音樂會或展覽"
         mySearchController?.searchBar.searchBarStyle = .prominent
+
+        // Configure the appearance of the search bar
+        // Color for the search bar's cursor and icons
+        mySearchController?.searchBar.tintColor = .GR2
+        // Adjust the position of the search text
+        mySearchController?.searchBar.searchTextPositionAdjustment = UIOffset(horizontal: 8, vertical: 0)
+
+        // Configure the appearance of the cancel button
+        // Color for the cancel button
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .GR2
+        // Customize the title of the cancel button
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "取消"
+
     }
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
             filterContent(for: searchText)
@@ -130,5 +143,5 @@ extension SearchViewController: UISearchResultsUpdating {
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
     }
-
+    
 }
