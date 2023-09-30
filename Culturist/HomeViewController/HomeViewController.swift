@@ -22,7 +22,6 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
-    //var searchButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +40,11 @@ class HomeViewController: UIViewController {
         //        concertDataManager.fetchConcertData()
         //        exhibitionDataManager.fetchExhibitionData()
         
-        
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
         
     }
-    
     
     @objc func searchButtonTapped() {
         guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }

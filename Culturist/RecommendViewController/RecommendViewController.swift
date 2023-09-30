@@ -7,6 +7,7 @@
 
 import UIKit
 import Gemini
+// import Hero
 
 class RecommendViewController: UIViewController {
     
@@ -45,7 +46,7 @@ class RecommendViewController: UIViewController {
         
         recommendCollectionView.gemini
             .scaleAnimation()
-            .scale(0.75)
+            .scale(0.7)
             .scaleEffect(.scaleUp) // or .scaleDown
     }
 
@@ -76,6 +77,11 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         let url = URL(string: itemData.imageURL)
         cell.productImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
+        // ---------
+//        cell.productImage.heroID = itemData.imageURL
+//        cell.productView.heroID = itemData.uid
+//        self.hero.isEnabled = true
+        // ---------
         self.recommendCollectionView.animateCell(cell)
         return cell
     }
@@ -83,7 +89,11 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
             detailVC.detailDesctription = recommendProducts[indexPath.row]
-
+        // ---------
+//        self.navigationController?.hero.isEnabled = true
+//        self.hero.modalAnimationType = .selectBy(presenting:.zoom, dismissing:.zoomOut)
+        // ---------
+        
         self.navigationController?.pushViewController(detailVC, animated: true)
     
     }
