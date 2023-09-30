@@ -83,6 +83,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
             detailVC.detailDesctription = recommendProducts[indexPath.row]
+
         self.navigationController?.pushViewController(detailVC, animated: true)
     
     }
