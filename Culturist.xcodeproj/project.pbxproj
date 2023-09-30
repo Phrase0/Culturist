@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */; };
+		F8077DA92AC830E600E490FF /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8077DA82AC830E600E490FF /* ActivityIndicatorManager.swift */; };
 		F80D8D5C2ABFF32A009195B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D5B2ABFF32A009195B2 /* SearchViewController.swift */; };
 		F80D8D5E2ABFF600009195B2 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */; };
 		F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */; };
@@ -61,6 +62,7 @@
 		02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.debug.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.debug.xcconfig"; sourceTree = "<group>"; };
 		4AC179CAA68583C2FC0200B3 /* Pods_Culturist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Culturist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE761BC94AA21908482550CA /* Pods-Culturist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.release.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.release.xcconfig"; sourceTree = "<group>"; };
+		F8077DA82AC830E600E490FF /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		F80D8D5B2ABFF32A009195B2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		F82A35092AB2B8BF004FF247 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F8077DA82AC830E600E490FF /* ActivityIndicatorManager.swift */,
 				F851F7652AB709250029C78E /* FirebaseData.swift */,
 				F82A35072AB2B8B4004FF247 /* ArtDatum.swift */,
 				F82A350A2AB2B8FD004FF247 /* BookShop.swift */,
@@ -466,6 +469,7 @@
 				F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */,
 				F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
+				F8077DA92AC830E600E490FF /* ActivityIndicatorManager.swift in Sources */,
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
 				F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */,
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,

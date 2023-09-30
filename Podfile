@@ -20,6 +20,7 @@ target 'Culturist' do
   pod "ESTabBarController-swift"
   pod 'Gemini'
   pod 'Hero'
+  pod 'NVActivityIndicatorView'
 
   source 'https://github.com/CocoaPods/Specs.git'
 

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import NVActivityIndicatorView
 
 class HomeViewController: UIViewController {
     
@@ -22,12 +23,15 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
-    
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        
+        setAnimation()
+        loading.startAnimating()
+
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
@@ -43,7 +47,16 @@ class HomeViewController: UIViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
-        
+
+    }
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
     }
     
     @objc func searchButtonTapped() {
@@ -174,12 +187,14 @@ extension HomeViewController: ArtManagerDelegate {
             }
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
+                self.loading.stopAnimating()
             }
         }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         // print(error.localizedDescription)
+        self.loading.stopAnimating()
     }
     
 }
@@ -190,6 +205,7 @@ extension HomeViewController: FirebaseConcertDelegate {
         self.artProducts1 = concertData
         DispatchQueue.main.async {
             self.homeTableView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 
@@ -200,6 +216,7 @@ extension HomeViewController: FirebaseExhibitionDelegate {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {
             self.homeTableView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 }

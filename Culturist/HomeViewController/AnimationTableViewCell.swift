@@ -16,7 +16,6 @@ class AnimationTableViewCell: UITableViewCell {
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
-
     var allData: [ArtDatum] = [] {
         didSet {
             randomSixItems = getRandomSixItems()
