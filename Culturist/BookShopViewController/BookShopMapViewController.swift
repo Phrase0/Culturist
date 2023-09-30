@@ -49,10 +49,9 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
         
-        // backBtn
-        // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
 
     @objc private func backButtonTapped() {

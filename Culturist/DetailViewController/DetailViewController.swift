@@ -72,9 +72,10 @@ class DetailViewController: UIViewController {
             // if check if calendar isn't exist, create one
             appCalendar = createAppCalendar()
         }
-        // ---------------------------------------------------
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        // ---------------------------------------------------        
+        let backImage = UIImage.asset(.Icons_36px_Back)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
+
         
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
