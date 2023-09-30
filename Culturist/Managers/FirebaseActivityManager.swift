@@ -7,10 +7,12 @@
 
 protocol FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum])
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error)
 }
 
 protocol FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum])
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error)
 }
 
 import Foundation
@@ -30,6 +32,7 @@ class ConcertDataManager {
         artDataCollection.whereField("imageUrl", isNotEqualTo: "").getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error fetching ConcertData: \(error)")
+                self.concertDelegate?.manager(self, didFailWith: error)
                 return
             }
             
@@ -87,6 +90,7 @@ class ExhibitionDataManager {
         artDataCollection.whereField("imageUrl", isNotEqualTo: "").getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error fetching ConcertData: \(error)")
+                self.exhibitionDelegate?.manager(self, didFailWith: error)
                 return
             }
             

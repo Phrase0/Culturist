@@ -60,6 +60,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func searchButtonTapped() {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
         let allProducts = self.artProducts1 + self.artProducts6
         searchVC.allProducts = allProducts
@@ -171,7 +172,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
@@ -201,6 +201,12 @@ extension HomeViewController: ArtManagerDelegate {
 
 // MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
         DispatchQueue.main.async {
@@ -212,6 +218,12 @@ extension HomeViewController: FirebaseConcertDelegate {
 }
 
 extension HomeViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {

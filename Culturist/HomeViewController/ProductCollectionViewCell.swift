@@ -18,6 +18,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setShadowColor()
+        productTitle.textColor = .black
     }
     
     func setShadowColor() {

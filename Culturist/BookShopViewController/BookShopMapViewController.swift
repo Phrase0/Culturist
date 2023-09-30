@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
 class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -20,9 +21,12 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
     var longitude: Double?
     let mapView = MKMapView()
     
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setAnimation()
+        loading.startAnimating()
         bookShopManager.delegate = self
         bookShopManager.loadBookShops()
         
@@ -64,6 +68,16 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
+    }
  
 }
 
@@ -84,11 +98,14 @@ extension BookShopMapViewController: BookShopManagerDelegate {
                     self.mapView.addAnnotation(annotation)
                 }
             }
+            
+            self.loading.stopAnimating()
         }
     }
     
     func manager(_ manager: BookShopManager, didFailWith error: Error) {
         // print(error.localizedDescription)
+        self.loading.stopAnimating()
     }
     
 }

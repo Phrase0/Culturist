@@ -27,8 +27,10 @@ class BookShopViewController: UIViewController {
         locationManager.delegate = self
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
+        
+        // set tableView.contentInset fill the screen
+        bookShopTableView.contentInsetAdjustmentBehavior = .never
     }
-    
 }
 
 extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {

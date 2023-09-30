@@ -7,6 +7,7 @@
 
 import UIKit
 import Gemini
+import NVActivityIndicatorView
 // import Hero
 
 class RecommendViewController: UIViewController {
@@ -22,6 +23,8 @@ class RecommendViewController: UIViewController {
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     // recommendProducts
     var recommendProducts: [ArtDatum] {
         let filteredProducts = artProducts1 + artProducts6
@@ -34,6 +37,8 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAnimation()
+        loading.startAnimating()
         
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
@@ -56,6 +61,16 @@ class RecommendViewController: UIViewController {
         artManager6.getArtProductList(number: "6")
         //        concertDataManager.fetchConcertData()
         //        exhibitionDataManager.fetchExhibitionData()
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
     }
 }
 
@@ -153,6 +168,7 @@ extension RecommendViewController: ArtManagerDelegate {
                 }
                 DispatchQueue.main.async {
                     self.recommendCollectionView.reloadData()
+                    self.loading.stopAnimating()
                 }
             }
         }
@@ -166,20 +182,34 @@ extension RecommendViewController: ArtManagerDelegate {
 
 // MARK: - FirebaseDataDelegate
 extension RecommendViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
         DispatchQueue.main.async {
             self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
         }
     }
     
 }
 
 extension RecommendViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {
             self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 }

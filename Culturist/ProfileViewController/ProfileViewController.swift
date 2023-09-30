@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController {
         setCorner()
     }
     @IBAction func goToLikecollection(_ sender: UIButton) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
@@ -36,6 +37,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func goToCalendarVC(_ sender: UIButton) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen

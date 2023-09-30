@@ -47,10 +47,12 @@ class DetailTableViewCell: UITableViewCell {
         
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
     @IBAction func notificationBtnTapped(_ sender: UIButton) {
         cellDelegate?.notificationBtnTapped(sender: sender)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
     
     func setCorner() {

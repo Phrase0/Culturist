@@ -7,6 +7,7 @@
 
 import UIKit
 import Hero
+import NVActivityIndicatorView
 
 class LikeViewController: UIViewController {
     
@@ -20,6 +21,8 @@ class LikeViewController: UIViewController {
     
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
+    
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
     
     // products in likeCollection
     var likeEXProducts: [ArtDatum] {
@@ -41,6 +44,8 @@ class LikeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAnimation()
+        loading.startAnimating()
         
         firebaseManager.likeDelegate = self
         likeCollectionView.dataSource = self
@@ -62,13 +67,23 @@ class LikeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        artManager1.getArtProductList(number: "1")
-        //        artManager6.getArtProductList(number: "6")
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         // use firebase to get data
-        concertDataManager.fetchConcertData()
-        exhibitionDataManager.fetchExhibitionData()
+        //        concertDataManager.fetchConcertData()
+        //        exhibitionDataManager.fetchExhibitionData()
         firebaseManager.fetchUserLikeData { _ in
             
+        }
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
     }
     
@@ -152,6 +167,7 @@ extension LikeViewController: ArtManagerDelegate {
                 }
                 DispatchQueue.main.async {
                     self.likeCollectionView.reloadData()
+                    self.loading.stopAnimating()
                 }
             }
         }
@@ -159,26 +175,43 @@ extension LikeViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
     }
     
 }
 
 // MARK: - FirebaseDataDelegate
 extension LikeViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
         DispatchQueue.main.async {
             self.likeCollectionView.reloadData()
+            self.loading.stopAnimating()
         }
     }
     
 }
 
 extension LikeViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {
             self.likeCollectionView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 }

@@ -35,6 +35,7 @@ class BookShopTableViewCell: UITableViewCell {
     }
     
     @IBAction func mapNavigation(_ sender: UIButton) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         mapNavigationButtonHandler?(sender)
     }
     
