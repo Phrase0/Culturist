@@ -12,6 +12,7 @@
 		F80D8D5E2ABFF600009195B2 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */; };
 		F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */; };
 		F80D8D652AC02850009195B2 /* CheckMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */; };
+		F81E8C792AC95FAF002AED22 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E8C782AC95FAF002AED22 /* SignInViewController.swift */; };
 		F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */; };
 		F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */; };
 		F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */; };
@@ -65,6 +66,7 @@
 		F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreViewController.swift; sourceTree = "<group>"; };
 		F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreCollectionViewCell.swift; sourceTree = "<group>"; };
+		F81E8C782AC95FAF002AED22 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTabBarController.swift; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			path = CheckMoreViewController;
 			sourceTree = "<group>";
 		};
+		F81E8C772AC95F8D002AED22 /* SignInViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F81E8C782AC95FAF002AED22 /* SignInViewController.swift */,
+			);
+			path = SignInViewController;
+			sourceTree = "<group>";
+		};
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F8447A232AB9CE0B00471552 /* NavigationViewController */,
 				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
+				F81E8C772AC95F8D002AED22 /* SignInViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
 				F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */,
 				F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */,
@@ -470,6 +481,7 @@
 				F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */,
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
 				F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */,
+				F81E8C792AC95FAF002AED22 /* SignInViewController.swift in Sources */,
 				F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */,
 				F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */,
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,
