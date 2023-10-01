@@ -37,6 +37,8 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .GR3
+        
         setAnimation()
         loading.startAnimating()
         
@@ -132,7 +134,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
     // Number of items per row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
-        return configureCellSize(interitemSpace: 15, lineSpace: 20, columnCount: 1)
+        return configureCellSize(interitemSpace: 10, lineSpace: 10, columnCount: 1)
     }
     
     // Configure cell size and header size
@@ -147,7 +149,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 90.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     
