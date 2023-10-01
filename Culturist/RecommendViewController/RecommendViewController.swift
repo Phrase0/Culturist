@@ -37,7 +37,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .GR3
+        view.backgroundColor = .B4
         
         setAnimation()
         loading.startAnimating()
