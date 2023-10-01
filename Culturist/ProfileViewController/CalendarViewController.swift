@@ -27,7 +27,7 @@ class CalendarViewController: UIViewController {
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem?.tintColor = .GR3
     }
         
     @objc private func backButtonTapped() {

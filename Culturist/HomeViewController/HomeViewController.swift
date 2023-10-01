@@ -7,11 +7,14 @@
 
 import UIKit
 import SnapKit
+import NVActivityIndicatorView
+import MJRefresh
+
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
     var mySearchController = UISearchController(searchResultsController: nil)
-
+    
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
@@ -21,13 +24,15 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
-    
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        settingSearchController()
-        
+        setAnimation()
+        loading.startAnimating()
+
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
@@ -37,13 +42,48 @@ class HomeViewController: UIViewController {
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-//        concertDataManager.fetchConcertData()
-//        exhibitionDataManager.fetchExhibitionData()
+//                concertDataManager.fetchConcertData()
+//                exhibitionDataManager.fetchExhibitionData()
+        
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton.tintColor = .GR2
+        navigationItem.rightBarButtonItem = searchButton
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // pullToRefresh Header
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+                self.homeTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.homeTableView)
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
+    }
+    
+    @objc func searchButtonTapped() {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        let allProducts = self.artProducts1 + self.artProducts6
+        searchVC.allProducts = allProducts
+        navigationController?.pushViewController(searchVC, animated: true)
 
+    }
+    
 }
-
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         3
@@ -147,39 +187,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: - searchBar
-extension HomeViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-    }
-    
-    func settingSearchController() {
-        let searchBar = mySearchController.searchBar
-        // navigationItem.searchController = mySearchController
-        // navigationItem.hidesSearchBarWhenScrolling = false
-        // mySearchController.searchResultsUpdater = self
-        searchBar.placeholder = "搜尋展覽"
-        searchBar.searchBarStyle = .prominent
-        searchBar.delegate = self
-        searchBar.backgroundImage = UIImage()
-        view.addSubview(searchBar)
-        searchBar.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide)
-
-        }
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        guard let searchVC = self.storyboard?.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return false }
-        navigationController?.pushViewController(searchVC, animated: true)
-        let allProducts = self.artProducts1 + self.artProducts6
-        searchVC.allProducts = allProducts
-        // Return false to prevent the search bar from being edited
-        return false
-    }
-}
-
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
@@ -195,32 +202,48 @@ extension HomeViewController: ArtManagerDelegate {
             }
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
+                self.loading.stopAnimating()
             }
         }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         // print(error.localizedDescription)
+        self.loading.stopAnimating()
     }
     
 }
 
 // MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
         DispatchQueue.main.async {
             self.homeTableView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 
 }
 
 extension HomeViewController: FirebaseExhibitionDelegate {
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {
             self.homeTableView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 }

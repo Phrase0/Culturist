@@ -11,41 +11,50 @@ class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
     
+    var timer: Timer?
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
     var allData: [ArtDatum] = [] {
         didSet {
-            updateRandomSixItems()
+            randomSixItems = getRandomSixItems()
+            animationCollectionView.reloadData()
         }
     }
-    // Use the `shuffled()` method to shuffle the order of the array
+
     var randomSixItems: [ArtDatum] = []
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
-        
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
+
+    }
+
+    deinit {
+        // Stop the timer when the view is deallocated
+        timer?.invalidate()
     }
     
-    func updateRandomSixItems() {
+    func getRandomSixItems() -> [ArtDatum] {
         let shuffledData = self.allData.shuffled()
         // Get the first six items, and it's okay if the array length is less than six
-        self.randomSixItems = Array(shuffledData.prefix(6))
-        // Reload the collection view to display the new data
-        DispatchQueue.main.async {
-            self.animationCollectionView.reloadData()
-        }
+        return Array(shuffledData.prefix(6))
     }
-    
+
     // Banner auto-scroll animation
     @objc func changeBanner() {
+        guard !randomSixItems.isEmpty else {
+            // if randomSixItems isEmpty，don't animate
+            return
+        }
+        
         var indexPath: IndexPath
         imageIndex += 1
         if imageIndex < randomSixItems.count {

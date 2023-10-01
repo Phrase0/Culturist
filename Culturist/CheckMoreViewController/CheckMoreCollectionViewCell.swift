@@ -19,8 +19,10 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         productTitle.numberOfLines = 2
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
             productTitle.font = pingFangFont
+            productTitle.textColor = .black
         } else {
             productTitle.font = UIFont.systemFont(ofSize: 15)
+            productTitle.textColor = .black
             print("no font type")
         }
         return productTitle

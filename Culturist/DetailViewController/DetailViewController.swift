@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import MapKit
 import EventKitUI
+import Hero
 
 class DetailViewController: UIViewController {
     
@@ -42,12 +43,14 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
+        
         // create DispatchGroup
         let group = DispatchGroup()
         
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
-            group.leave() // leave DispatchGroup
+             // leave DispatchGroup
+            group.leave()
         }
         
         // use DispatchGroup notify
@@ -70,10 +73,10 @@ class DetailViewController: UIViewController {
             // if check if calendar isn't exist, create one
             appCalendar = createAppCalendar()
         }
-        // ---------------------------------------------------
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR1
-        
+        // ---------------------------------------------------        
+        let backImage = UIImage.asset(.Icons_36px_Back)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
+
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
         
@@ -81,13 +84,14 @@ class DetailViewController: UIViewController {
         navigationBarAppearance.configureWithDefaultBackground()
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         // navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+        
     }
-    
+
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -108,6 +112,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
+            // ---------            
+//            cell.detailImageView.heroID = detailDesctription.imageURL
+//            self.view.heroID = detailDesctription.uid
+//            self.hero.isEnabled = true
+            // ---------
             
             // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
@@ -121,7 +130,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
                         // No need to wait, proceed to navigation directly
                         DispatchQueue.main.async {
-                            self?.navigationController?.pushViewController(detailVC, animated: true)
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.hero.isEnabled = true
+                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            self?.present(navVC, animated: true)
                         }
                     } else {
                         let geoCoder = CLGeocoder()
@@ -140,13 +153,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                                 semaphore.signal()
                             }
                         }
+                        // Wait for the semaphore to ensure geocoding is completed before navigation
+                        semaphore.wait()
+                        
+                        DispatchQueue.main.async {
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.hero.isEnabled = true
+                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            self?.present(navVC, animated: true)
+                        }
                     }
-                    // Wait for the semaphore to ensure geocoding is completed before navigation
-                    semaphore.wait()
-                    
-                    DispatchQueue.main.async {
-                        self?.navigationController?.pushViewController(detailVC, animated: true)
-                    }
+
                 }
             }
             
@@ -162,7 +180,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
                         // No need to wait, proceed to navigation directly
                         DispatchQueue.main.async {
-                            self?.navigationController?.pushViewController(detailVC, animated: true)
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.hero.isEnabled = true
+                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            self?.present(navVC, animated: true)
                         }
                     } else {
                         let geoCoder = CLGeocoder()
@@ -181,12 +203,17 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                                 semaphore.signal()
                             }
                         }
-                    }
-                    // Wait for the semaphore to ensure geocoding is completed before navigation
-                    semaphore.wait()
-                    
-                    DispatchQueue.main.async {
-                        self?.navigationController?.pushViewController(detailVC, animated: true)
+                        
+                        // Wait for the semaphore to ensure geocoding is completed before navigation
+                        semaphore.wait()
+                        
+                        DispatchQueue.main.async {
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.hero.isEnabled = true
+                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            self?.present(navVC, animated: true)
+                        }
                     }
                 }
             }
@@ -207,6 +234,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                     self?.addFavorite()
                     cell.likeBtn.isSelected = true
                 }
+              
             }
             
             // ---------------------------------------------------
@@ -329,4 +357,11 @@ extension DetailViewController: DetailTableViewCellDelegate {
         
     }
     
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

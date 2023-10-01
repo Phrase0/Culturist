@@ -17,7 +17,9 @@ target 'Culturist' do
   pod 'ARCL'
   pod 'FSCalendar+Persian'
   pod 'SnapKit'
-  pod "ESTabBarController-swift"
+  pod 'Gemini'
+  pod 'Hero'
+  pod 'NVActivityIndicatorView'
 
   source 'https://github.com/CocoaPods/Specs.git'
 

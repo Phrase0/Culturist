@@ -22,17 +22,16 @@ class AnimationCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupSubviews()
         setupConstraints()
-
+        
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
         setupConstraints()
     }
-
+    
     private func setupSubviews() {
-        contentView.backgroundColor = .black
         contentView.addSubview(animationImage)
         
     }
@@ -45,5 +44,5 @@ class AnimationCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(width).multipliedBy(222.0/390.0)
         }
     }
-
+    
 }

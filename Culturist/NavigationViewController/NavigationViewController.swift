@@ -10,6 +10,7 @@ import ARKit
 import MapKit
 import SceneKit
 import UIKit
+import NVActivityIndicatorView
 
 @available(iOS 11.0, *)
 
@@ -42,8 +43,13 @@ class NavigationViewController: UIViewController {
     let adjustNorthByTappingSidesOfScreen = false
     let addNodeByTappingScreen = true
     
+    // activity indicator
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAnimation()
+        loading.startAnimating()
         
         mapView.delegate = self
         setCorner()
@@ -83,11 +89,21 @@ class NavigationViewController: UIViewController {
         routes?.forEach { mapView.addOverlay($0.polyline) }
         // backBtn
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem?.tintColor = .GR3
     }
     
     @objc private func backButtonTapped() {
         self.dismiss(animated: true)
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -238,7 +254,6 @@ extension NavigationViewController {
             }
         } else {
             // 3. If not, then show the
-            
             print("讀不到gps資料")
             
             buildDemoData().forEach {
@@ -249,6 +264,9 @@ extension NavigationViewController {
         // There are many different ways to add lighting to a scene, but even this mechanism (the absolute simplest)
         // keeps 3D objects fron looking flat
         sceneLocationView.autoenablesDefaultLighting = true
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
         
     }
 

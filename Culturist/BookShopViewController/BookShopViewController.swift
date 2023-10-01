@@ -27,8 +27,10 @@ class BookShopViewController: UIViewController {
         locationManager.delegate = self
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
+        
+        // set tableView.contentInset fill the screen
+        bookShopTableView.contentInsetAdjustmentBehavior = .never
     }
-    
 }
 
 extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
@@ -127,7 +129,6 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.name = bookShop?.name
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
-                // self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
                 self.present(navVC, animated: true)
