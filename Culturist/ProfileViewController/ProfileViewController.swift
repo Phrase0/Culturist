@@ -44,6 +44,14 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
     
+    
+    @IBAction func signOutButtonPressed(_ sender: UIButton) {
+        KeychainItem.deleteUserIdentifierFromKeychain()
+        guard let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
+        present(signinVC, animated: true)
+        
+    }
+    
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white
         backgroundWhiteView.layer.cornerRadius = 15

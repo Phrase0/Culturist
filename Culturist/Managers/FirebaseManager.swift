@@ -22,15 +22,46 @@ class FirebaseManager {
     var collectionDelegate:FirebaseCollectionDelegate?
     var likeDelegate: FirebaseLikeDelegate?
 
-    
     // Get the Firestore database reference
     let db = Firestore.firestore()
     // Assuming a User object
     let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [], likeData: [])
     
+    // MARK: -  UserData
+    func addUserData(id: String, fullName: String?, email: String?) {
+        // Use id as the document identifier
+        let document = db.collection("users").document(id)
+        // Use the getDocument method to check if the document already exists
+        document.getDocument { (snapshot, error) in
+            if let error = error {
+                print("Failed to retrieve the document: \(error.localizedDescription)")
+                return
+            }
+            
+            // If the document doesn't exist, add new data
+            if snapshot?.exists == false {
+                let data: [String: Any] = [
+                    "id": id as Any,
+                    "fullName": fullName as Any,
+                    "email": email as Any,
+                    "createdTime": Date().timeIntervalSince1970
+                ]
+                
+                document.setData(data) { error in
+                    if let error = error {
+                        print("Failed to add data: \(error.localizedDescription)")
+                    } else {
+                        print("Data added successfully")
+                    }
+                }
+            }
+        }
+    }
+
+
     
     // MARK: - Recommendation
-    func addData(exhibitionUid: String, title: String, location: String, locationName: String) {
+    func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
         let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
         // Get the user's document reference

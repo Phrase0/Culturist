@@ -13,6 +13,7 @@
 		F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */; };
 		F80D8D652AC02850009195B2 /* CheckMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */; };
 		F81E8C792AC95FAF002AED22 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E8C782AC95FAF002AED22 /* SignInViewController.swift */; };
+		F81E8CE72ACA6E76002AED22 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */; };
 		F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */; };
 		F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */; };
 		F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */; };
@@ -67,6 +68,7 @@
 		F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreViewController.swift; sourceTree = "<group>"; };
 		F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		F81E8C782AC95FAF002AED22 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
 		F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTabBarController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				F81E8C782AC95FAF002AED22 /* SignInViewController.swift */,
+				F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */,
 			);
 			path = SignInViewController;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
 				F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */,
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
+				F81E8CE72ACA6E76002AED22 /* KeychainItem.swift in Sources */,
 				F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */,
 				F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
