@@ -743,7 +743,6 @@ PODS:
   - gRPC-Core/Interface (1.50.1)
   - GTMSessionFetcher/Core (3.1.1)
   - Hero (1.6.2)
-  - IQKeyboardManager (6.5.12)
   - Kingfisher (7.9.1)
   - leveldb-library (1.22.2)
   - MJRefresh (3.7.5)
@@ -758,7 +757,6 @@ PODS:
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
   - SnapKit (5.6.0)
-  - SwiftEntryKit (2.0.0)
   - SwiftLint (0.52.4)
 
 DEPENDENCIES:
@@ -769,12 +767,10 @@ DEPENDENCIES:
   - "FSCalendar+Persian"
   - Gemini
   - Hero
-  - IQKeyboardManager
   - Kingfisher (~> 7.0)
   - MJRefresh
   - NVActivityIndicatorView
   - SnapKit
-  - SwiftEntryKit (= 2.0.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -795,7 +791,6 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - Hero
-    - IQKeyboardManager
     - Kingfisher
     - leveldb-library
     - MJRefresh
@@ -804,7 +799,6 @@ SPEC REPOS:
     - PromisesObjC
     - RecaptchaInterop
     - SnapKit
-    - SwiftEntryKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -824,7 +818,6 @@ SPEC CHECKSUMS:
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
-  IQKeyboardManager: b1fd66ccf7a79095bdcc4a2735231586f744216e
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -833,9 +826,8 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: b82102240766326dd786d9312248c98d9ef1babb
+PODFILE CHECKSUM: b07ed762d8208d310c21dfa04784b2ceb43f5153
 
 COCOAPODS: 1.12.1

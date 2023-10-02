@@ -198,12 +198,13 @@ extension HomeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
+                    DispatchQueue.main.async {
+                        self.homeTableView.reloadData()
+                        self.loading.stopAnimating()
+                    }
                 }
             }
-            DispatchQueue.main.async {
-                self.homeTableView.reloadData()
-                self.loading.stopAnimating()
-            }
+
         }
     }
     

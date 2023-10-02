@@ -10,7 +10,6 @@ target 'Culturist' do
   pod 'Kingfisher', '~> 7.0'
   pod 'MJRefresh'
   pod 'Alamofire'
-  pod 'IQKeyboardManager'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'SwiftLint'
@@ -20,7 +19,7 @@ target 'Culturist' do
   pod 'Gemini'
   pod 'Hero'
   pod 'NVActivityIndicatorView'
-  pod 'SwiftEntryKit', '2.0.0'
+
 
   source 'https://github.com/CocoaPods/Specs.git'
 
