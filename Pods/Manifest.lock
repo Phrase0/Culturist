@@ -758,6 +758,7 @@ PODS:
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
   - SnapKit (5.6.0)
+  - SwiftEntryKit (2.0.0)
   - SwiftLint (0.52.4)
 
 DEPENDENCIES:
@@ -773,6 +774,7 @@ DEPENDENCIES:
   - MJRefresh
   - NVActivityIndicatorView
   - SnapKit
+  - SwiftEntryKit (= 2.0.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -802,6 +804,7 @@ SPEC REPOS:
     - PromisesObjC
     - RecaptchaInterop
     - SnapKit
+    - SwiftEntryKit
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -830,8 +833,9 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftEntryKit: 61b5fa36f34a97dd8013e48a7345bc4c4720be9a
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: 5d84a517d3b1f53926cd9fdab7b289493949b244
+PODFILE CHECKSUM: b82102240766326dd786d9312248c98d9ef1babb
 
 COCOAPODS: 1.12.1

@@ -51,6 +51,7 @@
 		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
 		F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */; };
 		F8A532EA2ACAC9AA00250389 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A532E92ACAC9AA00250389 /* SettingViewController.swift */; };
+		F8A532EE2ACAF9B000250389 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A532ED2ACAF9B000250389 /* Font.swift */; };
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
@@ -110,6 +111,7 @@
 		F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extension.swift"; sourceTree = "<group>"; };
 		F8A532E82ACAADC900250389 /* CulturistDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistDebug.entitlements; sourceTree = "<group>"; };
 		F8A532E92ACAC9AA00250389 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		F8A532ED2ACAF9B000250389 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */,
 				F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */,
 				F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */,
+				F8A532ED2ACAF9B000250389 /* Font.swift */,
 				F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
@@ -492,6 +495,7 @@
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
 				F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */,
 				F81E8C792AC95FAF002AED22 /* SignInViewController.swift in Sources */,
+				F8A532EE2ACAF9B000250389 /* Font.swift in Sources */,
 				F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */,
 				F851F7582AB6B4C70029C78E /* RecommendViewController.swift in Sources */,
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,

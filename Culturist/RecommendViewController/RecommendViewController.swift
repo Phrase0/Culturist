@@ -34,7 +34,7 @@ class RecommendViewController: UIViewController {
         let result = Array(sortedProducts.prefix(15))
         return result
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .B4
@@ -46,24 +46,20 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-        
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-        
+        //        concertDataManager.fetchConcertData()
+        //        exhibitionDataManager.fetchExhibitionData()
         recommendCollectionView.gemini
             .scaleAnimation()
             .scale(0.7)
             .scaleEffect(.scaleUp) // or .scaleDown
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
-    }
+
     
     func setAnimation() {
         view.addSubview(loading)
@@ -90,15 +86,10 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionViewCell", for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
-        let itemData = recommendProducts[indexPath.item]
-        let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url)
-        cell.productTitle.text = itemData.title
-        // ---------
-//        cell.productImage.heroID = itemData.imageURL
-//        cell.productView.heroID = itemData.uid
-//        self.hero.isEnabled = true
-        // ---------
+            let itemData = recommendProducts[indexPath.item]
+            let url = URL(string: itemData.imageURL)
+            cell.productImage.kf.setImage(with: url)
+            cell.productTitle.text = itemData.title
         self.recommendCollectionView.animateCell(cell)
         return cell
     }
@@ -167,11 +158,12 @@ extension RecommendViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
+                    DispatchQueue.main.async {
+                        self.recommendCollectionView.reloadData()
+                        self.loading.stopAnimating()
+                    }
                 }
-                DispatchQueue.main.async {
-                    self.recommendCollectionView.reloadData()
-                    self.loading.stopAnimating()
-                }
+                
             }
         }
     }
