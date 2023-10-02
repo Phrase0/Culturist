@@ -25,7 +25,7 @@ class FirebaseManager {
     // Get the Firestore database reference
     let db = Firestore.firestore()
     // Assuming a User object
-    let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [], likeData: [])
+    let user = User(id: KeychainItem.currentUserIdentifier, name: KeychainItem.currentUserFullName, email: KeychainItem.currentUserEmail, recommendationData: [], likeData: [])
     
     // MARK: -  UserData
     func addUserData(id: String, fullName: String?, email: String?) {

@@ -7,18 +7,18 @@
 
 import UIKit
 import AuthenticationServices
+import Hero
 
 class SignInViewController: UIViewController {
     
     let firebaseManager = FirebaseManager()
-    
+
     @IBOutlet weak var signInBtn: ASAuthorizationAppleIDButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setCorner()
         performExistingAccountSetupFlows()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func didTapSignIn(_ sender: Any) {
@@ -64,10 +64,19 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             firebaseManager.addUserData(id: userIdentifier, fullName: fullName, email: email)
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
             self.saveUserInKeychain(userIdentifier)
+            self.saveFullName(fullName)
+            self.saveEmail(email ?? "")
             
-            guard let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-            present(homeVC, animated: true)
-            
+            // Create an instance of the tab bar controller
+            let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
+
+            // set the selected index of the tab bar to determine the initial tab
+            tabBarController.selectedIndex = 0 // 0 is the index of the first tab
+
+            // Switch to the main interface using the tab bar controller
+            UIApplication.shared.windows.first?.rootViewController = tabBarController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+
         case let passwordCredential as ASPasswordCredential:
             
             // Sign in using an existing iCloud Keychain credential.
@@ -86,13 +95,34 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
     
     private func saveUserInKeychain(_ userIdentifier: String) {
         do {
-            try KeychainItem(service: "culturist", account: "userIdentifier").saveItem(userIdentifier)
+            try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").saveItem(userIdentifier)
+            print("ID:\(KeychainItem.currentUserIdentifier)")
         } catch {
             print("Unable to save userIdentifier to keychain.")
         }
     }
     
+    // ---------------------------------------------------
+    private func saveEmail(_ email: String) {
+        do {
+            try KeychainItem(service: "peiyun.Culturist", account: "email").saveItem(email)
+            print("Email:\(KeychainItem.currentUserEmail)")
+        } catch {
+            print("Unable to save email to keychain")
+        }
+    }
     
+    private func saveFullName(_ fullName: String) {
+        do {
+            try KeychainItem(service: "peiyun.Culturist", account: "fullName").saveItem(fullName)
+            print("Name:\(KeychainItem.currentUserFullName)")
+        } catch {
+            print("Unable to save full name to keychain")
+        }
+    }
+    
+    // ---------------------------------------------------
+
     private func showPasswordCredentialAlert(username: String, password: String) {
         let message = "The app has received your selected credential from the keychain. \n\n Username: \(username)\n Password: \(password)"
         let alertController = UIAlertController(title: "Keychain Credential Received",
@@ -104,10 +134,9 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Show error
-        print("failed!")
+        print(error.localizedDescription)
     }
 }
-
 
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

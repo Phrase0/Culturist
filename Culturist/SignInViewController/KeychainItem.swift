@@ -132,16 +132,37 @@ struct KeychainItem {
      */
     static var currentUserIdentifier: String {
         do {
-            let storedIdentifier = try KeychainItem(service: "culturist", account: "userIdentifier").readItem()
+            let storedIdentifier = try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").readItem()
             return storedIdentifier
         } catch {
             return ""
         }
     }
     
+    // ---------------------------------------------------
+    static var currentUserEmail: String {
+        do {
+            let storedEmail = try KeychainItem(service: "peiyun.Culturist", account: "email").readItem()
+            return storedEmail
+        } catch {
+            return ""
+        }
+    }
+    
+    static var currentUserFullName: String {
+        do {
+            let storedFullName = try KeychainItem(service: "peiyun.Culturist", account: "fullName").readItem()
+            return storedFullName
+        } catch {
+            return ""
+        }
+    }
+    
+    // ---------------------------------------------------
+    
     static func deleteUserIdentifierFromKeychain() {
         do {
-            try KeychainItem(service: "culturist", account: "userIdentifier").deleteItem()
+            try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").deleteItem()
         } catch {
             print("Unable to delete userIdentifier from keychain")
         }

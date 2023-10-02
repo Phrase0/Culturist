@@ -107,6 +107,7 @@
 		F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extension.swift"; sourceTree = "<group>"; };
+		F8A532E82ACAADC900250389 /* CulturistDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistDebug.entitlements; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 		F82A34EC2AB2AC4C004FF247 /* Culturist */ = {
 			isa = PBXGroup;
 			children = (
+				F8A532E82ACAADC900250389 /* CulturistDebug.entitlements */,
 				F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */,
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
@@ -650,6 +652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
@@ -691,9 +694,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistRelease.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notificate exhibition";
@@ -716,6 +722,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = peiyun.Culturist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Culturist;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;

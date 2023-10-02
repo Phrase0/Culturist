@@ -9,7 +9,7 @@ import UIKit
 import Hero
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     @IBOutlet weak var backgroundWhiteView: UIView!
@@ -44,11 +44,14 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
     
-    
     @IBAction func signOutButtonPressed(_ sender: UIButton) {
+        // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
-        guard let signinVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController else { return }
-        present(signinVC, animated: true)
+        // checkout to SignInViewController
+        if let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") {
+            UIApplication.shared.windows.first?.rootViewController = signInViewController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        }
         
     }
     
