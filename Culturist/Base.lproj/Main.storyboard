@@ -395,17 +395,6 @@ Label</string>
                                     <action selector="goToCalendarVC:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="TIt-Yu-VgL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2td-iR-w6b">
-                                <rect key="frame" x="144" y="659" width="87" height="40"/>
-                                <color key="tintColor" name="B1"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="LogOut">
-                                    <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="signOutButtonPressed:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="WOT-mf-yQj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dzO-pN-0Fh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -414,9 +403,7 @@ Label</string>
                             <constraint firstItem="mYy-1W-7Gk" firstAttribute="leading" secondItem="WbB-Tf-pdW" secondAttribute="leading" id="CZ0-RY-mmz"/>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="DMv-VX-NdV"/>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="top" secondItem="HuM-sN-Xgw" secondAttribute="bottom" constant="15" id="Fiy-f2-BmO"/>
-                            <constraint firstItem="dzO-pN-0Fh" firstAttribute="bottom" secondItem="2td-iR-w6b" secondAttribute="bottom" constant="30" id="II0-jI-D1k"/>
                             <constraint firstItem="mRl-u2-UEa" firstAttribute="top" secondItem="LcT-qI-n2R" secondAttribute="bottom" constant="45" id="P50-jx-IPq"/>
-                            <constraint firstItem="2td-iR-w6b" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="RPC-eS-fmF"/>
                             <constraint firstAttribute="trailing" secondItem="mYy-1W-7Gk" secondAttribute="trailing" id="SUh-sc-2bL"/>
                             <constraint firstItem="HuM-sN-Xgw" firstAttribute="top" secondItem="dzO-pN-0Fh" secondAttribute="top" constant="50" id="YYW-ru-2uX"/>
                             <constraint firstItem="BVj-Gc-lty" firstAttribute="leading" secondItem="dzO-pN-0Fh" secondAttribute="leading" id="ZVM-yS-UhK"/>
@@ -442,6 +429,70 @@ Label</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOc-Cg-mCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="935.20000000000005" y="1387.6847290640394"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="SPU-ax-9Zj">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" id="lbY-ye-D3u" customClass="SettingViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Yd-aL-KxU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帳戶設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncL-i8-QDq">
+                                <rect key="frame" x="30" y="200" width="160" height="56"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="40"/>
+                                <color key="textColor" name="B4"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2td-iR-w6b">
+                                <rect key="frame" x="62.666666666666657" y="568" width="249.99999999999997" height="60"/>
+                                <color key="backgroundColor" name="B4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1pv-8I-ok6"/>
+                                    <constraint firstAttribute="width" constant="250" id="aCX-m7-Lhw"/>
+                                </constraints>
+                                <color key="tintColor" name="B1"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="登出">
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="signOutButtonPressed:" destination="lbY-ye-D3u" eventType="touchUpInside" id="tVj-UW-7td"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0G4-pc-a9U">
+                                <rect key="frame" x="62.666666666666657" y="658" width="249.99999999999997" height="60"/>
+                                <color key="backgroundColor" name="B4"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="EfY-GM-WsF"/>
+                                    <constraint firstAttribute="height" constant="60" id="bHm-Om-PWk"/>
+                                </constraints>
+                                <color key="tintColor" name="B1"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="刪除帳號">
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DoZ-nP-hzE"/>
+                        <color key="backgroundColor" name="GR2"/>
+                        <constraints>
+                            <constraint firstItem="DoZ-nP-hzE" firstAttribute="bottom" secondItem="0G4-pc-a9U" secondAttribute="bottom" constant="60" id="49D-uo-LE0"/>
+                            <constraint firstItem="ncL-i8-QDq" firstAttribute="top" secondItem="DoZ-nP-hzE" secondAttribute="top" constant="150" id="HSa-qX-ApC"/>
+                            <constraint firstItem="2td-iR-w6b" firstAttribute="centerX" secondItem="0Yd-aL-KxU" secondAttribute="centerX" id="Oqu-5C-E2R"/>
+                            <constraint firstItem="ncL-i8-QDq" firstAttribute="leading" secondItem="DoZ-nP-hzE" secondAttribute="leading" constant="30" id="mMK-nO-hZJ"/>
+                            <constraint firstItem="0G4-pc-a9U" firstAttribute="top" secondItem="2td-iR-w6b" secondAttribute="bottom" constant="30" id="nsf-ke-mZc"/>
+                            <constraint firstItem="0G4-pc-a9U" firstAttribute="centerX" secondItem="0Yd-aL-KxU" secondAttribute="centerX" id="uLa-Qw-Sq1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deleteBtn" destination="0G4-pc-a9U" id="aQX-Vk-uN5"/>
+                        <outlet property="logOutBtn" destination="2td-iR-w6b" id="gcl-3e-1fp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1je-90-BrS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1693.5999999999999" y="2732.5123152709361"/>
         </scene>
         <!--Like View Controller-->
         <scene sceneID="TzA-IQ-8P6">
@@ -618,7 +669,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLg-j4-Ngx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2455.1999999999998" y="1388.423645320197"/>
+            <point key="canvasLocation" x="1694" y="2053"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="fFo-GH-bNC">
@@ -635,7 +686,7 @@ Label</string>
                                     <constraint firstAttribute="width" constant="250" id="2tg-UI-naC"/>
                                     <constraint firstAttribute="height" constant="60" id="LrL-O3-eo6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
                                 <color key="tintColor" name="B1"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="  Sign in with Apple">
@@ -647,27 +698,27 @@ Label</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSA-US-cpN">
-                                <rect key="frame" x="151.66666666666666" y="573" width="72" height="40"/>
-                                <color key="tintColor" name="B1"/>
+                                <rect key="frame" x="157.66666666666666" y="588" width="60" height="40"/>
+                                <color key="tintColor" name="B4"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="LogIn">
+                                <buttonConfiguration key="configuration" style="plain" title="登入">
                                     <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDr-ZM-uHO">
-                                <rect key="frame" x="30" y="200" width="161" height="56"/>
-                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="40"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="30" y="200" width="163" height="48"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" name="B4"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qTO-Pm-Pfn"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="GR2"/>
                         <constraints>
                             <constraint firstItem="DSA-US-cpN" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="A4R-Rj-w0P"/>
                             <constraint firstItem="qTO-Pm-Pfn" firstAttribute="bottom" secondItem="vQ3-M4-lug" secondAttribute="bottom" constant="60" id="Bwb-cx-LS9"/>
                             <constraint firstItem="vQ3-M4-lug" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="EEJ-mf-Gmz"/>
-                            <constraint firstItem="vQ3-M4-lug" firstAttribute="top" secondItem="DSA-US-cpN" secondAttribute="bottom" constant="45" id="TC9-52-ZTZ"/>
+                            <constraint firstItem="vQ3-M4-lug" firstAttribute="top" secondItem="DSA-US-cpN" secondAttribute="bottom" constant="30" id="TC9-52-ZTZ"/>
                             <constraint firstItem="TDr-ZM-uHO" firstAttribute="top" secondItem="qTO-Pm-Pfn" secondAttribute="top" constant="150" id="aMA-Mf-2r5"/>
                             <constraint firstItem="TDr-ZM-uHO" firstAttribute="leading" secondItem="qTO-Pm-Pfn" secondAttribute="leading" constant="30" id="uZ3-eJ-6aD"/>
                         </constraints>
@@ -678,7 +729,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IT-wY-KoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1894" y="-35"/>
+            <point key="canvasLocation" x="487" y="2543"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
@@ -1500,6 +1551,9 @@ Label</string>
         </namedColor>
         <namedColor name="GR1">
             <color red="0.36862745098039218" green="0.50588235294117645" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GR2">
+            <color red="0.54900002479553223" green="0.6470000147819519" blue="0.52499997615814209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

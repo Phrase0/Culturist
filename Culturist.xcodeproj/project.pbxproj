@@ -50,6 +50,7 @@
 		F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */; };
 		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
 		F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */; };
+		F8A532EA2ACAC9AA00250389 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A532E92ACAC9AA00250389 /* SettingViewController.swift */; };
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
@@ -108,6 +109,7 @@
 		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extension.swift"; sourceTree = "<group>"; };
 		F8A532E82ACAADC900250389 /* CulturistDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistDebug.entitlements; sourceTree = "<group>"; };
+		F8A532E92ACAC9AA00250389 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 				F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
+				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,
 				F83E4C252ABEC4E4000E2DAC /* HomeViewController.swift in Sources */,
 				F80D8D652AC02850009195B2 /* CheckMoreCollectionViewCell.swift in Sources */,
+				F8A532EA2ACAC9AA00250389 /* SettingViewController.swift in Sources */,
 				F80D8D5C2ABFF32A009195B2 /* SearchViewController.swift in Sources */,
 				F851F73E2AB330870029C78E /* CoffeeShopMapViewController.swift in Sources */,
 				F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */,

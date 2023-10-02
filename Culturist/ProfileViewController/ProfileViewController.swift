@@ -25,7 +25,18 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setCorner()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
+        navigationItem.rightBarButtonItem?.tintColor = .B1
     }
+    
+    @objc private func goToSetting() {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
+        let navVC = UINavigationController(rootViewController: detailVC)
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true)
+    }
+
+    
     @IBAction func goToLikecollection(_ sender: UIButton) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
@@ -44,21 +55,7 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
     
-    @IBAction func signOutButtonPressed(_ sender: UIButton) {
-        // clean user data
-        KeychainItem.deleteUserIdentifierFromKeychain()
-        // checkout to SignInViewController
-        if let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                let window = UIWindow(windowScene: windowScene)
-                window.rootViewController = signInViewController
-                window.makeKeyAndVisible()
-                sceneDelegate.window = window
-            }
-        }
-        
-    }
+
     
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white
