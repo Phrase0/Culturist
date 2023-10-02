@@ -109,7 +109,6 @@ struct KeychainItem {
     }
     
     // MARK: Convenience
-    
     private static func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String: AnyObject] {
         var query = [String: AnyObject]()
         query[kSecClass as String] = kSecClassGenericPassword
@@ -125,11 +124,7 @@ struct KeychainItem {
         
         return query
     }
-    
-    /*
-     For the purpose of this demo app, the user identifier will be stored in the device keychain.
-     You should store the user identifier in your account management system.
-     */
+
     static var currentUserIdentifier: String {
         do {
             let storedIdentifier = try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").readItem()
@@ -138,27 +133,6 @@ struct KeychainItem {
             return ""
         }
     }
-    
-    // ---------------------------------------------------
-    static var currentUserEmail: String {
-        do {
-            let storedEmail = try KeychainItem(service: "peiyun.Culturist", account: "email").readItem()
-            return storedEmail
-        } catch {
-            return ""
-        }
-    }
-    
-    static var currentUserFullName: String {
-        do {
-            let storedFullName = try KeychainItem(service: "peiyun.Culturist", account: "fullName").readItem()
-            return storedFullName
-        } catch {
-            return ""
-        }
-    }
-    
-    // ---------------------------------------------------
     
     static func deleteUserIdentifierFromKeychain() {
         do {

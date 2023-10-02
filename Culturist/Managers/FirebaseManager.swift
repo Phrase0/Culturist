@@ -21,11 +21,9 @@ class FirebaseManager {
     
     var collectionDelegate:FirebaseCollectionDelegate?
     var likeDelegate: FirebaseLikeDelegate?
-
+    
     // Get the Firestore database reference
     let db = Firestore.firestore()
-    // Assuming a User object
-    let user = User(id: KeychainItem.currentUserIdentifier, name: KeychainItem.currentUserFullName, email: KeychainItem.currentUserEmail, recommendationData: [], likeData: [])
     
     // MARK: -  UserData
     func addUserData(id: String, fullName: String?, email: String?) {
@@ -57,15 +55,14 @@ class FirebaseManager {
             }
         }
     }
-
-
+    
     
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
         let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
         // Get the user's document reference
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for recommendationData
         let recommendationDataCollection = userRef.collection("recommendationData")
         
@@ -85,28 +82,12 @@ class FirebaseManager {
                 print("RecommendationData added successfully.")
             }
         }
-        
-        // Update user document data with id, name, and email
-        let userData: [String: Any] = [
-            "id": user.id,
-            "name": user.name,
-            "email": user.email
-        ]
-        
-        // Set the user's document data with merge option to update existing data
-        userRef.setData(userData, merge: true) { (error) in
-            if let error = error {
-                print("Error updating user data: \(error)")
-            } else {
-                print("User data updated successfully.")
-            }
-        }
     }
     
     
     // ---------------------------------------------------
     func readRecommendationData() {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
         // search "recommendationData" documents
@@ -134,7 +115,7 @@ class FirebaseManager {
     
     // ---------------------------------------------------
     func readFilterRecommendationData() {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
         // search "recommendationData" documents
@@ -195,7 +176,7 @@ class FirebaseManager {
     // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {
         // Get the user's document reference
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for likeData
         let likeCollection = userRef.collection("likeCollection")
         
@@ -219,27 +200,11 @@ class FirebaseManager {
                 print("LikeData added successfully.")
             }
         }
-        
-        // Update user document data with id, name, and email
-        let userData: [String: Any] = [
-            "id": user.id,
-            "name": user.name,
-            "email": user.email
-        ]
-        
-        // Set the user's document data with merge option to update existing data
-        userRef.setData(userData, merge: true) { (error) in
-            if let error = error {
-                print("Error updating user data: \(error)")
-            } else {
-                print("User data updated successfully.")
-            }
-        }
     }
     
     // ---------------------------------------------------
     func removeLikeData(likeData: LikeData) {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
         
         // Create a query to find documents matching likeCollection data
@@ -278,7 +243,7 @@ class FirebaseManager {
     }
     // ---------------------------------------------------
     func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
         
         likeCollection.getDocuments { (querySnapshot, error) in
@@ -296,12 +261,12 @@ class FirebaseManager {
                     let likeData = LikeData(exhibitionUid: exhibitionUid, coffeeShopUid: coffeeShopUid, bookShopUid: bookShopUid)
                     userLikes.append(likeData)
                 }
-
-                 self.likeDelegate?.manager(self, didGet: userLikes)
+                
+                self.likeDelegate?.manager(self, didGet: userLikes)
                 completion(userLikes)
- 
+                
             }
         }
     }
-
+    
 }

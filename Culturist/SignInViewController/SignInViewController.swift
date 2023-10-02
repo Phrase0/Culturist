@@ -64,8 +64,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             firebaseManager.addUserData(id: userIdentifier, fullName: fullName, email: email)
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
             self.saveUserInKeychain(userIdentifier)
-            self.saveFullName(fullName)
-            self.saveEmail(email ?? "")
             
             // Create an instance of the tab bar controller
             let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
@@ -102,27 +100,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         }
     }
     
-    // ---------------------------------------------------
-    private func saveEmail(_ email: String) {
-        do {
-            try KeychainItem(service: "peiyun.Culturist", account: "email").saveItem(email)
-            print("Email:\(KeychainItem.currentUserEmail)")
-        } catch {
-            print("Unable to save email to keychain")
-        }
-    }
-    
-    private func saveFullName(_ fullName: String) {
-        do {
-            try KeychainItem(service: "peiyun.Culturist", account: "fullName").saveItem(fullName)
-            print("Name:\(KeychainItem.currentUserFullName)")
-        } catch {
-            print("Unable to save full name to keychain")
-        }
-    }
-    
-    // ---------------------------------------------------
-
     private func showPasswordCredentialAlert(username: String, password: String) {
         let message = "The app has received your selected credential from the keychain. \n\n Username: \(username)\n Password: \(password)"
         let alertController = UIAlertController(title: "Keychain Credential Received",
