@@ -33,6 +33,8 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
+        navVC.hero.isEnabled = true
+        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
         self.present(navVC, animated: true)
     }
 
