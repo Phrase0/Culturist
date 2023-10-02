@@ -454,7 +454,7 @@ Label</string>
                                 <color key="tintColor" name="B1"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="登出">
-                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="signOutButtonPressed:" destination="lbY-ye-D3u" eventType="touchUpInside" id="tVj-UW-7td"/>
@@ -470,7 +470,7 @@ Label</string>
                                 <color key="tintColor" name="B1"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="刪除帳號">
-                                    <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="deleteAccountTapped:" destination="lbY-ye-D3u" eventType="touchUpInside" id="a6J-g8-9vq"/>

@@ -14,6 +14,7 @@ class RecommendViewController: UIViewController {
     
     @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
     
+    
     // total products
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()

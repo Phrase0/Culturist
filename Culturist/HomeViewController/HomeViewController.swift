@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTableView: UITableView!
     var mySearchController = UISearchController(searchResultsController: nil)
     
+    static let shared = HomeViewController()
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()

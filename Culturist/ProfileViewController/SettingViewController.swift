@@ -27,13 +27,30 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func signOutButtonPressed(_ sender: UIButton) {
-        goBackToRootVC()
+        let alertController = UIAlertController(title: "登出",
+                                                message: "您確定要登出嗎？",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+            self.goBackToRootVC()
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
-    
+ 
     @IBAction func deleteAccountTapped(_ sender: UIButton) {
-        firebaseManager.removeUserData()
-        goBackToRootVC()
+        let alertController = UIAlertController(title: "刪除帳號",
+                                                message: "您確定要刪除帳號嗎？",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+            self.firebaseManager.removeUserData()
+            self.goBackToRootVC()
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
+
     
     func goBackToRootVC() {
         // clean user data
@@ -50,7 +67,7 @@ class SettingViewController: UIViewController {
             }
         }
     }
-
+    
     func setCorner() {
         logOutBtn.layer.cornerRadius = 30
         logOutBtn.clipsToBounds = true
