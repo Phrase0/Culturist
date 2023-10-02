@@ -12,6 +12,7 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var logOutBtn: UIButton!
     @IBOutlet weak var deleteBtn: UIButton!
     
+    let firebaseManager = FirebaseManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +27,15 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func signOutButtonPressed(_ sender: UIButton) {
+        goBackToRootVC()
+    }
+    
+    @IBAction func deleteAccountTapped(_ sender: UIButton) {
+        firebaseManager.removeUserData()
+        goBackToRootVC()
+    }
+    
+    func goBackToRootVC() {
         // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
         print("KeychainItem:\(KeychainItem.currentUserIdentifier)")
@@ -40,9 +50,7 @@ class SettingViewController: UIViewController {
             }
         }
     }
-    
-    
-    
+
     func setCorner() {
         logOutBtn.layer.cornerRadius = 30
         logOutBtn.clipsToBounds = true
