@@ -71,9 +71,14 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             // set the selected index of the tab bar to determine the initial tab
             tabBarController.selectedIndex = 0 // 0 is the index of the first tab
 
-            // Switch to the main interface using the tab bar controller
-            UIApplication.shared.windows.first?.rootViewController = tabBarController
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            // Switch to the main interface using the tab bar controller            
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                let window = UIWindow(windowScene: windowScene)
+                window.rootViewController = tabBarController
+                window.makeKeyAndVisible()
+                sceneDelegate.window = window
+            }
 
         case let passwordCredential as ASPasswordCredential:
             

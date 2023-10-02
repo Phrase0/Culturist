@@ -47,11 +47,15 @@ class ProfileViewController: UIViewController {
     @IBAction func signOutButtonPressed(_ sender: UIButton) {
         // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
-        print("delete:\(KeychainItem.currentUserIdentifier)")
         // checkout to SignInViewController
         if let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") {
-            UIApplication.shared.windows.first?.rootViewController = signInViewController
-            UIApplication.shared.windows.first?.makeKeyAndVisible()
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                let window = UIWindow(windowScene: windowScene)
+                window.rootViewController = signInViewController
+                window.makeKeyAndVisible()
+                sceneDelegate.window = window
+            }
         }
         
     }
