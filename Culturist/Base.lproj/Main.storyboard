@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -623,13 +624,58 @@ Label</string>
                     <view key="view" contentMode="scaleToFill" id="WvL-r4-A00">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQ3-M4-lug">
+                                <rect key="frame" x="62.666666666666657" y="668" width="249.99999999999997" height="50"/>
+                                <color key="backgroundColor" name="B4"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="2tg-UI-naC"/>
+                                    <constraint firstAttribute="height" constant="50" id="LrL-O3-eo6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="19"/>
+                                <color key="tintColor" name="B1"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="  Sign in with Apple">
+                                    <color key="titleColor" name="B1"/>
+                                    <imageReference key="image" image="apple.logo" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapSignIn:" destination="dM6-V9-3Od" eventType="touchUpInside" id="eG5-e0-jua"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSA-US-cpN">
+                                <rect key="frame" x="151.66666666666666" y="583" width="72" height="40"/>
+                                <color key="tintColor" name="B1"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="LogIn">
+                                    <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
+                                </buttonConfiguration>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDr-ZM-uHO">
+                                <rect key="frame" x="30" y="200" width="161" height="56"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="40"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="qTO-Pm-Pfn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DSA-US-cpN" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="A4R-Rj-w0P"/>
+                            <constraint firstItem="qTO-Pm-Pfn" firstAttribute="bottom" secondItem="vQ3-M4-lug" secondAttribute="bottom" constant="60" id="Bwb-cx-LS9"/>
+                            <constraint firstItem="vQ3-M4-lug" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="EEJ-mf-Gmz"/>
+                            <constraint firstItem="vQ3-M4-lug" firstAttribute="top" secondItem="DSA-US-cpN" secondAttribute="bottom" constant="45" id="TC9-52-ZTZ"/>
+                            <constraint firstItem="TDr-ZM-uHO" firstAttribute="top" secondItem="qTO-Pm-Pfn" secondAttribute="top" constant="150" id="aMA-Mf-2r5"/>
+                            <constraint firstItem="TDr-ZM-uHO" firstAttribute="leading" secondItem="qTO-Pm-Pfn" secondAttribute="leading" constant="30" id="uZ3-eJ-6aD"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="signInBtn" destination="vQ3-M4-lug" id="Mxd-Js-QFP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IT-wY-KoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="2133"/>
+            <point key="canvasLocation" x="935" y="2134"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
@@ -1436,6 +1482,7 @@ Label</string>
         <image name="Icons_32px_Recommendation_Normal" width="32" height="32"/>
         <image name="Icons_32px_Recommendation_Selected" width="32" height="32"/>
         <image name="IrisProfile" width="600" height="600"/>
+        <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="bookImage" width="5086" height="3389"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="greenBackground" width="4000" height="6000"/>
