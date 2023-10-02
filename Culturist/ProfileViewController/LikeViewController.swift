@@ -176,10 +176,10 @@ extension LikeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                }
-                DispatchQueue.main.async {
-                    self.likeCollectionView.reloadData()
-                    self.loading.stopAnimating()
+                    DispatchQueue.main.async {
+                        self.likeCollectionView.reloadData()
+                        self.loading.stopAnimating()
+                    }
                 }
             }
         }

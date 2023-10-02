@@ -439,8 +439,8 @@ Label</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帳戶設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncL-i8-QDq">
-                                <rect key="frame" x="30" y="200" width="160" height="56"/>
-                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="40"/>
+                                <rect key="frame" x="30" y="200" width="136" height="47.666666666666657"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="34"/>
                                 <color key="textColor" name="B4"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -732,7 +732,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IT-wY-KoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="487" y="2543"/>
+            <point key="canvasLocation" x="986" y="2733"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
