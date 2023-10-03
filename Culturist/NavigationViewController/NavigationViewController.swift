@@ -87,9 +87,10 @@ class NavigationViewController: UIViewController {
         sceneLocationView.frame = contentView.bounds
 
         routes?.forEach { mapView.addOverlay($0.polyline) }
-        // backBtn
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .GR3
+        
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
     
     @objc private func backButtonTapped() {
