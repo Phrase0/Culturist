@@ -66,7 +66,6 @@ class HomeViewController: UIViewController {
     }
     
 
-    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in

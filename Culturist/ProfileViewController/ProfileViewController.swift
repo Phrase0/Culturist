@@ -20,12 +20,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var calendarBtn: UIButton!
     
     let firebaseManager = FirebaseManager()
+    let userDefault = UserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         firebaseManager.readUserData { fullName in
             if let fullName = fullName {
+                self.userDefault.set(fullName, forKey: "fullName")
                 self.nameLabel.text = fullName
             } else {
                 print("Full Name not found.")
@@ -46,6 +48,11 @@ class ProfileViewController: UIViewController {
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .B1
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
     
     @IBAction func imageViewTapped(_ sender: UIButton) {

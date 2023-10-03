@@ -88,8 +88,8 @@ class NavigationViewController: UIViewController {
 
         routes?.forEach { mapView.addOverlay($0.polyline) }
         // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .GR3
     }
     
     @objc private func backButtonTapped() {
