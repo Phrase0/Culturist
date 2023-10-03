@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     
     var buttonTag: Int?
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTableView.delegate = self
@@ -65,6 +65,7 @@ class HomeViewController: UIViewController {
         }.autoChangeTransparency(true).link(to: self.homeTableView)
     }
     
+
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in

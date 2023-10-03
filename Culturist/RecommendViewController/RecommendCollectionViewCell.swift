@@ -10,6 +10,12 @@ import Gemini
 
 class RecommendCollectionViewCell: GeminiCell {
 
+
+    lazy var productBackView: UIView = {
+        let productView = UIView()
+        return productView
+    }()
+    
     lazy var productView: UIView = {
         let productView = UIView()
         return productView
@@ -17,13 +23,27 @@ class RecommendCollectionViewCell: GeminiCell {
  
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
-        productTitle.numberOfLines = 2
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 16) {
+        productTitle.numberOfLines = 1
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 5) {
             productTitle.font = pingFangFont
         } else {
-            productTitle.font = UIFont.systemFont(ofSize: 16)
+            productTitle.font = UIFont.systemFont(ofSize: 5)
             print("no font type")
         }
+        productTitle.textAlignment = .center
+        return productTitle
+    }()
+    
+    lazy var productTime: UILabel = {
+        let productTitle = UILabel()
+        productTitle.numberOfLines = 1
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 5) {
+            productTitle.font = pingFangFont
+        } else {
+            productTitle.font = UIFont.systemFont(ofSize: 5)
+            print("no font type")
+        }
+        productTitle.textAlignment = .center
         return productTitle
     }()
 
@@ -51,54 +71,52 @@ class RecommendCollectionViewCell: GeminiCell {
 
     
     private func setupSubviews() {
+        contentView.addSubview(productBackView)
         contentView.addSubview(productView)
         contentView.addSubview(productTitle)
+        contentView.addSubview(productTime)
         contentView.addSubview(productImage)
     }
     
     private func setupConstraints() {
         
-        productView.snp.makeConstraints { make in
+        productBackView.snp.makeConstraints { make in
             make.leading.top.equalToSuperview()
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-10)
             
         }
         
+        productView.snp.makeConstraints { make in
+            make.leading.top.trailing.bottom.equalTo(productBackView).inset(5)
+            
+        }
+        
         productTitle.snp.makeConstraints { make in
-            make.leading.equalTo(productView).offset(10)
-            make.trailing.equalTo(productView).offset(-10)
-            make.top.equalTo(productImage.snp.bottom).offset(10)
-            make.bottom.equalTo(productView).offset(-10)
+            make.centerX.equalTo(productImage)
+            make.top.equalTo(productImage.snp.bottom).offset(20)
+        }
+        
+        productTime.snp.makeConstraints { make in
+            make.centerX.equalTo(productImage)
+            make.top.equalTo(productTitle.snp.bottom).offset(4)
         }
 
         productImage.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(productView)
-            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
-        }
-        
-        productImage.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(productView)
-            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
+            make.leading.trailing.top.equalTo(productView).inset(40)
+            make.bottom.equalTo(productView).inset(70)
         }
     }
     
     func setShadowColor() {
-        // Set corner radius for rounded corners
+        productBackView.backgroundColor = .GR3
+        //productBackView.backgroundColor = UIColor(red: 142/255, green: 121/255, blue: 84/255, alpha: 1)
         productView.backgroundColor = .white
-        productView.layer.cornerRadius = 15
-        // Add shadow to the view
-        productView.layer.shadowColor = UIColor.black.cgColor
-        productView.layer.shadowOpacity = 0.2
-        productView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        productView.layer.shadowRadius = 4
-        // Disable view's boundary restrictions for shadow to appear
-        productView.layer.masksToBounds = false
-        // Set corner radius for the image view
-        productImage.layer.cornerRadius = 15
-        // Mask the specified corners of the image view with rounded corners
-        productImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        // Clip the image to make the rounded corners effective
+        productBackView.layer.shadowColor = UIColor.black.cgColor
+        productBackView.layer.shadowOpacity = 0.4
+        productBackView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        productBackView.layer.shadowRadius = 4
+        productBackView.layer.masksToBounds = false
         productImage.clipsToBounds = true
     }
     

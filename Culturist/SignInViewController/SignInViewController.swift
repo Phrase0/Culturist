@@ -64,11 +64,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             firebaseManager.addUserData(id: userIdentifier, fullName: fullName, email: email)
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
             self.saveUserIdentifierInKeychain(userIdentifier)
-            
-            let trimmedFullName = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmedFullName.isEmpty {
-                self.saveUserNameInKeychain(trimmedFullName)
-            }
 
             // Create an instance of the tab bar controller
             let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
@@ -105,15 +100,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         do {
             try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").saveItem(userIdentifier)
             print("ID:\(KeychainItem.currentUserIdentifier)")
-        } catch {
-            print("Unable to save userIdentifier to keychain.")
-        }
-    }
-    
-    private func saveUserNameInKeychain(_ userName: String) {
-        do {
-            try KeychainItem(service: "peiyun.Culturist", account: "userName").saveItem(userName)
-            print("UserName:\(KeychainItem.currentUserName)")
         } catch {
             print("Unable to save userIdentifier to keychain.")
         }

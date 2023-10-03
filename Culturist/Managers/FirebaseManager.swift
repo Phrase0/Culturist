@@ -85,10 +85,29 @@ class FirebaseManager {
         }
     }
     
+    func readUserData(completion: @escaping (String?) -> Void) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Get the single document from the subcollection
+        userRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error getting document: \(error.localizedDescription)")
+                completion(nil)
+            } else {
+                // Check if the document exists and contains a fullName field
+                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
+                    completion(fullName)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
-
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -100,6 +119,16 @@ class FirebaseManager {
         }
         let likeCollection = userRef.collection("likeCollection")
         likeCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
+        let imageData = userRef.collection("imageData")
+        imageData.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {

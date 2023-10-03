@@ -82,13 +82,12 @@ class DetailViewController: UIViewController {
         
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
-        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        // navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

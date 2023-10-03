@@ -223,13 +223,13 @@ Label</string>
         <!--Check More View Controller-->
         <scene sceneID="y94-kR-Urk">
             <objects>
-                <viewController storyboardIdentifier="CheckMoreViewController" hidesBottomBarWhenPushed="YES" id="Pd1-1a-GRU" customClass="CheckMoreViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckMoreViewController" id="Pd1-1a-GRU" customClass="CheckMoreViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aAS-pw-Zs7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-eL-oci">
-                                <rect key="frame" x="0.0" y="50" width="375" height="762"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zi3-eL-oci">
+                                <rect key="frame" x="0.0" y="134" width="375" height="678"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p93-m9-tae">
                                     <size key="itemSize" width="128" height="128"/>
@@ -248,18 +248,27 @@ Label</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="音樂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2O-8s-Peo">
+                                <rect key="frame" x="25" y="80" width="48" height="34"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
+                                <color key="textColor" name="GR0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MlG-Z0-b9g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="zi3-eL-oci" secondAttribute="bottom" id="DGn-Pb-plN"/>
                             <constraint firstAttribute="trailing" secondItem="zi3-eL-oci" secondAttribute="trailing" id="PoO-go-t0U"/>
+                            <constraint firstItem="zi3-eL-oci" firstAttribute="top" secondItem="A2O-8s-Peo" secondAttribute="bottom" constant="20" id="Sez-jf-MqF"/>
                             <constraint firstItem="zi3-eL-oci" firstAttribute="leading" secondItem="aAS-pw-Zs7" secondAttribute="leading" id="Vdj-4f-dGY"/>
-                            <constraint firstItem="zi3-eL-oci" firstAttribute="top" secondItem="MlG-Z0-b9g" secondAttribute="top" id="lPv-17-gKk"/>
+                            <constraint firstItem="A2O-8s-Peo" firstAttribute="leading" secondItem="MlG-Z0-b9g" secondAttribute="leading" constant="25" id="pgT-bc-G8u"/>
+                            <constraint firstItem="A2O-8s-Peo" firstAttribute="top" secondItem="MlG-Z0-b9g" secondAttribute="top" constant="30" id="wMZ-lb-B7l"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="checkMoreCollectionView" destination="zi3-eL-oci" id="sb8-Er-YmC"/>
+                        <outlet property="checkMoretitleLabel" destination="A2O-8s-Peo" id="BU6-ao-DPQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5a-74-RhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -274,7 +283,7 @@ Label</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-wv-GD4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-wv-GD4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5oF-bs-e3W" customClass="GeminiCollectionView" customModule="Gemini">
@@ -300,7 +309,7 @@ Label</string>
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="為你推薦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPM-SI-CNq">
-                                <rect key="frame" x="30" y="124" width="96" height="34"/>
+                                <rect key="frame" x="25" y="124" width="96" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
                                 <color key="textColor" name="GR0"/>
                                 <nil key="highlightedColor"/>
@@ -313,7 +322,7 @@ Label</string>
                             <constraint firstItem="5oF-bs-e3W" firstAttribute="top" secondItem="vPM-SI-CNq" secondAttribute="bottom" id="5i7-AA-huC"/>
                             <constraint firstItem="Cmh-wv-GD4" firstAttribute="leading" secondItem="FTL-Xe-7cj" secondAttribute="leading" id="E4K-e1-AFe"/>
                             <constraint firstAttribute="bottom" secondItem="Cmh-wv-GD4" secondAttribute="bottom" id="Pnn-uX-3kN"/>
-                            <constraint firstItem="vPM-SI-CNq" firstAttribute="leading" secondItem="Zyn-1H-WP3" secondAttribute="leading" constant="30" id="Ujg-e1-rHV"/>
+                            <constraint firstItem="vPM-SI-CNq" firstAttribute="leading" secondItem="Zyn-1H-WP3" secondAttribute="leading" constant="25" id="Ujg-e1-rHV"/>
                             <constraint firstItem="Cmh-wv-GD4" firstAttribute="top" secondItem="FTL-Xe-7cj" secondAttribute="top" id="bs4-SJ-6UP"/>
                             <constraint firstItem="5oF-bs-e3W" firstAttribute="leading" secondItem="FTL-Xe-7cj" secondAttribute="leading" id="nTK-hK-m6L"/>
                             <constraint firstItem="vPM-SI-CNq" firstAttribute="top" secondItem="Zyn-1H-WP3" secondAttribute="top" constant="30" id="sno-x9-sIx"/>
@@ -323,6 +332,7 @@ Label</string>
                     </view>
                     <navigationItem key="navigationItem" id="QZb-we-2nf"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="Cmh-wv-GD4" id="b5A-e5-cEe"/>
                         <outlet property="recommendCollectionView" destination="5oF-bs-e3W" id="Be9-eF-8Gx"/>
                     </connections>
                 </viewController>
@@ -514,13 +524,13 @@ Label</string>
         <!--Like View Controller-->
         <scene sceneID="TzA-IQ-8P6">
             <objects>
-                <viewController storyboardIdentifier="LikeViewController" id="zKE-vo-gJM" customClass="LikeViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LikeViewController" hidesBottomBarWhenPushed="YES" id="zKE-vo-gJM" customClass="LikeViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TyY-KY-lIH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
-                                <rect key="frame" x="0.0" y="50" width="375" height="762"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
+                                <rect key="frame" x="0.0" y="134" width="375" height="678"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nyo-lR-e9N">
                                     <size key="itemSize" width="180" height="200"/>
@@ -539,14 +549,22 @@ Label</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbT-DR-eco">
+                                <rect key="frame" x="25" y="80" width="96" height="34"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
+                                <color key="textColor" name="GR0"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="58j-rJ-fMb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="52K-Os-cd3" secondAttribute="trailing" id="BM8-sb-pPO"/>
                             <constraint firstAttribute="bottom" secondItem="52K-Os-cd3" secondAttribute="bottom" id="IVA-p9-WmB"/>
-                            <constraint firstItem="52K-Os-cd3" firstAttribute="top" secondItem="58j-rJ-fMb" secondAttribute="top" id="kBA-aA-Rz1"/>
+                            <constraint firstItem="52K-Os-cd3" firstAttribute="top" secondItem="wbT-DR-eco" secondAttribute="bottom" constant="20" id="jia-rl-4ID"/>
+                            <constraint firstItem="wbT-DR-eco" firstAttribute="leading" secondItem="58j-rJ-fMb" secondAttribute="leading" constant="25" id="kh3-IA-Kkd"/>
                             <constraint firstItem="52K-Os-cd3" firstAttribute="leading" secondItem="TyY-KY-lIH" secondAttribute="leading" id="kk4-As-ER5"/>
+                            <constraint firstItem="wbT-DR-eco" firstAttribute="top" secondItem="58j-rJ-fMb" secondAttribute="top" constant="30" id="ncs-Qo-VYf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -688,6 +706,21 @@ Label</string>
             </objects>
             <point key="canvasLocation" x="1694" y="2053"/>
         </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="oHE-Cj-wPB">
+            <objects>
+                <viewController id="o4E-XR-Ho9" customClass="LaunchScreenViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rcd-yN-OVh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6R5-85-UD1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDW-2j-tgU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2370" y="-35"/>
+        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="fFo-GH-bNC">
             <objects>
@@ -746,7 +779,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IT-wY-KoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="986" y="2733"/>
+            <point key="canvasLocation" x="-1538" y="-35"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
@@ -880,8 +913,8 @@ Label</string>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-ue-cTV">
                                                     <rect key="frame" x="25" y="671" width="325" height="19.666666666666629"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                                    <color key="textColor" name="B1"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JeH-8q-b7M">
@@ -1564,7 +1597,7 @@ Label</string>
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GR0">
-            <color red="0.27058823529411763" green="0.32941176470588235" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.26666666666666666" green="0.35294117647058826" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GR1">
             <color red="0.36862745098039218" green="0.50588235294117645" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

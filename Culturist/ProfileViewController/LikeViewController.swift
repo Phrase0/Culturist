@@ -8,7 +8,6 @@
 import UIKit
 import Hero
 import NVActivityIndicatorView
-import MJRefresh
 
 class LikeViewController: UIViewController {
     
@@ -57,9 +56,8 @@ class LikeViewController: UIViewController {
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
         
-        navigationItem.title = "我的收藏"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .B2
     }
     
     @objc private func backButtonTapped() {
@@ -75,17 +73,6 @@ class LikeViewController: UIViewController {
         //        exhibitionDataManager.fetchExhibitionData()
         firebaseManager.fetchUserLikeData { _ in
         }
-        
-        // pullToRefresh Header
-        let header = MJRefreshNormalHeader {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-                guard let self = self else { return }
-                self.artManager1.getArtProductList(number: "1")
-                self.artManager6.getArtProductList(number: "6")
-                self.likeCollectionView.mj_header?.endRefreshing()
-                
-            }
-        }.autoChangeTransparency(true).link(to: self.likeCollectionView)
         
     }
     
@@ -123,7 +110,6 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
            let selectedIndexPath = selectedIndexPaths.first {
             detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]
         }
-        
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -149,7 +135,7 @@ extension LikeViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        likeCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 12.0)
+        likeCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 20.0, right: 12.0)
         return flowLayout.itemSize
     }
     

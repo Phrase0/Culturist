@@ -11,6 +11,8 @@ class CheckMoreViewController: UIViewController {
 
     @IBOutlet weak var checkMoreCollectionView: UICollectionView!
 
+    @IBOutlet weak var checkMoretitleLabel: UILabel!
+    
     let firebaseManager = FirebaseManager()
     
     // result
@@ -22,9 +24,16 @@ class CheckMoreViewController: UIViewController {
         checkMoreCollectionView.delegate = self
         checkMoreCollectionView.dataSource = self
 
-        navigationItem.title = "\(navigationItemTitle!)"
+        checkMoretitleLabel.text = navigationItemTitle
+
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+
+    
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        navigationItem.leftBarButtonItem?.tintColor = .B2
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -83,7 +92,7 @@ extension CheckMoreViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        checkMoreCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 12.0)
+        checkMoreCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 20.0, right: 12.0)
         return flowLayout.itemSize
     }
 

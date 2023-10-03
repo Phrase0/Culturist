@@ -134,15 +134,6 @@ struct KeychainItem {
         }
     }
     
-    static var currentUserName: String {
-        do {
-            let storedName = try KeychainItem(service: "peiyun.Culturist", account: "userName").readItem()
-            return storedName
-        } catch {
-            return ""
-        }
-    }
-    
     static func deleteUserIdentifierFromKeychain() {
         do {
             try KeychainItem(service: "peiyun.Culturist", account: "userIdentifier").deleteItem()
