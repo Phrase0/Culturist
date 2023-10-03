@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeTableView: UITableView!
     var mySearchController = UISearchController(searchResultsController: nil)
     
+    static let shared = HomeViewController()
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
@@ -44,7 +45,7 @@ class HomeViewController: UIViewController {
         exhibitionDataManager.exhibitionDelegate = self
 //                concertDataManager.fetchConcertData()
 //                exhibitionDataManager.fetchExhibitionData()
-        
+
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
@@ -141,7 +142,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // add button
         let button = UIButton()
         button.setTitleColor(UIColor.GR1, for: .normal)
-        button.setTitle("查看更多", for: .normal)
+        button.setTitle("查看更多 >", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tag = buttonTag ?? 0
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
@@ -198,12 +199,13 @@ extension HomeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
+                    DispatchQueue.main.async {
+                        self.homeTableView.reloadData()
+                        self.loading.stopAnimating()
+                    }
                 }
             }
-            DispatchQueue.main.async {
-                self.homeTableView.reloadData()
-                self.loading.stopAnimating()
-            }
+
         }
     }
     

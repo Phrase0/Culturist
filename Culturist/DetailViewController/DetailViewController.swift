@@ -89,7 +89,6 @@ class DetailViewController: UIViewController {
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
-        
     }
 
 }

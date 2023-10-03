@@ -14,6 +14,7 @@ class RecommendViewController: UIViewController {
     
     @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
     
+    
     // total products
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
@@ -34,9 +35,11 @@ class RecommendViewController: UIViewController {
         let result = Array(sortedProducts.prefix(15))
         return result
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .B4
+        
         setAnimation()
         loading.startAnimating()
         
@@ -44,24 +47,20 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-        
+        artManager1.getArtProductList(number: "1")
+        artManager6.getArtProductList(number: "6")
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-        
+        //        concertDataManager.fetchConcertData()
+        //        exhibitionDataManager.fetchExhibitionData()
         recommendCollectionView.gemini
             .scaleAnimation()
             .scale(0.7)
             .scaleEffect(.scaleUp) // or .scaleDown
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
-    }
+
     
     func setAnimation() {
         view.addSubview(loading)
@@ -88,15 +87,10 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionViewCell", for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
-        let itemData = recommendProducts[indexPath.item]
-        let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url)
-        cell.productTitle.text = itemData.title
-        // ---------
-//        cell.productImage.heroID = itemData.imageURL
-//        cell.productView.heroID = itemData.uid
-//        self.hero.isEnabled = true
-        // ---------
+            let itemData = recommendProducts[indexPath.item]
+            let url = URL(string: itemData.imageURL)
+            cell.productImage.kf.setImage(with: url)
+            cell.productTitle.text = itemData.title
         self.recommendCollectionView.animateCell(cell)
         return cell
     }
@@ -132,7 +126,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
     // Number of items per row
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Use the floor function to round down the decimal places, as having decimal places might cause the total width to exceed the screen width
-        return configureCellSize(interitemSpace: 15, lineSpace: 20, columnCount: 1)
+        return configureCellSize(interitemSpace: 10, lineSpace: 10, columnCount: 1)
     }
     
     // Configure cell size and header size
@@ -147,7 +141,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 90.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     
@@ -165,11 +159,12 @@ extension RecommendViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
+                    DispatchQueue.main.async {
+                        self.recommendCollectionView.reloadData()
+                        self.loading.stopAnimating()
+                    }
                 }
-                DispatchQueue.main.async {
-                    self.recommendCollectionView.reloadData()
-                    self.loading.stopAnimating()
-                }
+                
             }
         }
     }
