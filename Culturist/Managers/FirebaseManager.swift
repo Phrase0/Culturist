@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseStorage
 
 protocol FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData])
@@ -24,6 +25,7 @@ class FirebaseManager {
     
     // Get the Firestore database reference
     let db = Firestore.firestore()
+    let storage = Storage.storage().reference()
     
     // MARK: - UserData
     func addUserData(id: String, fullName: String?, email: String?) {
@@ -104,6 +106,25 @@ class FirebaseManager {
                 for document in querySnapshot!.documents {
                     document.reference.delete()
                 }
+            }
+        }
+    }
+    
+    // MARK: -  storeProfileImage
+    func storeImage(imageData: Data) {
+        storage.child("images/file.png").putData(imageData) { _, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            self.storage.child("images/file.png").downloadURL { url, error in
+                guard let url = url, error == nil else {
+                    return
+                }
+                let urlString = url.absoluteString
+                print("Download URL: \(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "url")
+                self.addImage(imageUrl: urlString)
             }
         }
     }

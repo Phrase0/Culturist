@@ -7,7 +7,6 @@
 
 import UIKit
 import Hero
-import FirebaseStorage
 import Kingfisher
 
 class ProfileViewController: UIViewController {
@@ -19,8 +18,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var likeCollectionBtn: UIButton!
     @IBOutlet weak var calendarBtn: UIButton!
-    
-    let storage = Storage.storage().reference()
+
     let firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
@@ -97,9 +95,7 @@ class ProfileViewController: UIViewController {
         calendarBtn.layer.cornerRadius = 30
         calendarBtn.clipsToBounds = true
     }
-    
-    
-    
+  
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -108,25 +104,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationC
         picker.dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             guard let imageData = image.pngData() else { return }
-            
-            storage.child("images/file.png").putData(imageData) { _, error in
-                guard error == nil else {
-                    print("Failed to upload")
-                    return
-                }
-                self.storage.child("images/file.png").downloadURL { url, error in
-                    guard let url = url, error == nil else {
-                        return
-                    }
-                    let urlString = url.absoluteString
-                    print("Download URL: \(urlString)")
-                    UserDefaults.standard.set(urlString, forKey: "url")
-                    self.firebaseManager.addImage(imageUrl: urlString)
-                    DispatchQueue.main.async {
-                        self.profileImageView.image = image
-                    }
-                }
+            DispatchQueue.main.async {
+                self.profileImageView.image = image
             }
+            firebaseManager.storeImage(imageData: imageData)
         }
     }
     
