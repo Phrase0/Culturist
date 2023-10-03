@@ -123,7 +123,6 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
            let selectedIndexPath = selectedIndexPaths.first {
             detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]
         }
-        
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

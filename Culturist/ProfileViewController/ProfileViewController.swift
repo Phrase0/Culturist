@@ -23,7 +23,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = KeychainItem.currentUserName
+        
+        firebaseManager.readUserData { fullName in
+            if let fullName = fullName {
+                self.nameLabel.text = fullName
+            } else {
+                print("Full Name not found.")
+            }
+        }
+
         firebaseManager.readImage { imageUrl in
             if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
                 DispatchQueue.main.async {
@@ -64,8 +72,7 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
-        navVC.hero.isEnabled = true
-        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+        navVC.modalTransitionStyle = .crossDissolve
         self.present(navVC, animated: true)
     }
     
