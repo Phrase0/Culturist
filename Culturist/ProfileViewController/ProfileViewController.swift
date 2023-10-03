@@ -24,11 +24,26 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = KeychainItem.currentUserName
+        profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        profileImageView.tintColor = .GR3
+        profileImageView.backgroundColor = .white
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .B1
     }
+
+    @IBAction func imageViewTapped(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+          let imagePickerController = UIImagePickerController()
+          // check image resource
+          imagePickerController.sourceType = .photoLibrary
+          imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
+          present(imagePickerController, animated: true, completion: nil)
+        }
+    }
     
+
     @objc private func goToSetting() {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
@@ -71,4 +86,20 @@ class ProfileViewController: UIViewController {
         calendarBtn.layer.cornerRadius = 30
         calendarBtn.clipsToBounds = true
     }
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    // close ImagePickerController
+    picker.dismiss(animated: true, completion: nil)
+    if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+    //get user Image
+    profileImageView.image = image
+    }
+  }
+
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    // close ImagePickerController
+    picker.dismiss(animated: true, completion: nil)
+  }
 }

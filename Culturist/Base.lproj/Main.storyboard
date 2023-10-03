@@ -395,14 +395,25 @@ Label</string>
                                     <action selector="goToCalendarVC:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="TIt-Yu-VgL"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrD-Rs-e7v">
+                                <rect key="frame" x="122.66666666666669" y="144" width="130" height="130"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="imageViewTapped:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="eIb-6b-KOh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dzO-pN-0Fh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rrD-Rs-e7v" firstAttribute="centerX" secondItem="HuM-sN-Xgw" secondAttribute="centerX" id="0dJ-xH-VDd"/>
                             <constraint firstAttribute="trailing" secondItem="BVj-Gc-lty" secondAttribute="trailing" id="3S2-dz-RBi"/>
                             <constraint firstItem="mYy-1W-7Gk" firstAttribute="leading" secondItem="WbB-Tf-pdW" secondAttribute="leading" id="CZ0-RY-mmz"/>
+                            <constraint firstItem="rrD-Rs-e7v" firstAttribute="height" secondItem="HuM-sN-Xgw" secondAttribute="height" id="DAY-8U-bCb"/>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="DMv-VX-NdV"/>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="top" secondItem="HuM-sN-Xgw" secondAttribute="bottom" constant="15" id="Fiy-f2-BmO"/>
+                            <constraint firstItem="rrD-Rs-e7v" firstAttribute="centerY" secondItem="HuM-sN-Xgw" secondAttribute="centerY" id="Hzm-86-9ax"/>
                             <constraint firstItem="mRl-u2-UEa" firstAttribute="top" secondItem="LcT-qI-n2R" secondAttribute="bottom" constant="45" id="P50-jx-IPq"/>
                             <constraint firstAttribute="trailing" secondItem="mYy-1W-7Gk" secondAttribute="trailing" id="SUh-sc-2bL"/>
                             <constraint firstItem="HuM-sN-Xgw" firstAttribute="top" secondItem="dzO-pN-0Fh" secondAttribute="top" constant="50" id="YYW-ru-2uX"/>
@@ -412,6 +423,7 @@ Label</string>
                             <constraint firstItem="BVj-Gc-lty" firstAttribute="top" secondItem="mYy-1W-7Gk" secondAttribute="bottom" constant="-15" id="ep2-mF-jh4"/>
                             <constraint firstItem="5ev-mf-sBi" firstAttribute="top" secondItem="mRl-u2-UEa" secondAttribute="bottom" constant="40" id="frw-Um-zhy"/>
                             <constraint firstItem="mYy-1W-7Gk" firstAttribute="top" secondItem="WbB-Tf-pdW" secondAttribute="top" id="jdM-A1-fNc"/>
+                            <constraint firstItem="rrD-Rs-e7v" firstAttribute="width" secondItem="HuM-sN-Xgw" secondAttribute="width" id="mRu-aX-z72"/>
                             <constraint firstItem="HuM-sN-Xgw" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="sCf-vr-Wtg"/>
                             <constraint firstItem="mRl-u2-UEa" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="seM-r6-6gu"/>
                         </constraints>
