@@ -35,14 +35,41 @@ class FirebaseManager {
                 print("Failed to retrieve the document: \(error.localizedDescription)")
                 return
             }
-            
+            // ---------------------------------------------------
+            // If the document exists, update the data
+            if snapshot?.exists == true {
+                var updatedData: [String: Any] = [:]
+                
+                // Check if fullName is not empty and not just whitespace
+                if let fullName = fullName, !fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    updatedData["fullName"] = fullName
+                }
+                
+                // Update email if it's not nil
+                if let email = email {
+                    updatedData["email"] = email
+                }
+                
+                // Update createdTime (if needed)
+                updatedData["createdTime"] = FieldValue.serverTimestamp()
+                
+                document.updateData(updatedData) { error in
+                    if let error = error {
+                        print("Failed to update data: \(error.localizedDescription)")
+                    } else {
+                        print("Data updated successfully")
+                    }
+                }
+            }
+        
+            // ---------------------------------------------------
             // If the document doesn't exist, add new data
             if snapshot?.exists == false {
                 let data: [String: Any] = [
                     "id": id as Any,
                     "fullName": fullName as Any,
                     "email": email as Any,
-                    "createdTime": Date().timeIntervalSince1970
+                    "createdTime": FieldValue.serverTimestamp()
                 ]
                 
                 document.setData(data) { error in
@@ -80,7 +107,7 @@ class FirebaseManager {
             }
         }
     }
-    
+
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData

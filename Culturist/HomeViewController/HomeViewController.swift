@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         exhibitionDataManager.exhibitionDelegate = self
 //                concertDataManager.fetchConcertData()
 //                exhibitionDataManager.fetchExhibitionData()
-        
+
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
