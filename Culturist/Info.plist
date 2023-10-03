@@ -26,5 +26,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>please allow access to change profile photos</string>
 </dict>
 </plist>

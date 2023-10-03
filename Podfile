@@ -12,6 +12,7 @@ target 'Culturist' do
   pod 'Alamofire'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+  pod 'FirebaseStorage'
   pod 'SwiftLint'
   pod 'ARCL'
   pod 'FSCalendar+Persian'

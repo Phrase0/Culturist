@@ -108,6 +108,56 @@ class FirebaseManager {
         }
     }
 
+    // MARK: - addProfileImage
+    func addImage(imageUrl: String) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Create a new collection reference for imageData
+        let imageDocRef = userRef.collection("imageData").document("imageUrl")
+        
+        // Create a data dictionary for imageData
+        let imageData: [String: Any] = [
+            "imageUrl": imageUrl
+        ]
+        
+        // Set the data with merge option to update or create
+        imageDocRef.setData(imageData, merge: true) { error in
+            if let error = error {
+                print("Failed to add data: \(error.localizedDescription)")
+            } else {
+                print("Data added successfully")
+            }
+        }
+    }
+    
+    // read image data
+    func readImage(completion: @escaping (String?) -> Void) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Create a reference to the subcollection
+        let imageDataCollection = userRef.collection("imageData")
+        
+        // Get the single document from the subcollection
+        imageDataCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error.localizedDescription)")
+                completion(nil)
+            } else {
+                // Check if there is a document
+                if let document = querySnapshot?.documents.first {
+                    // Get the imageUrl field from the document
+                    let imageUrl = document.data()["imageUrl"] as? String
+                    completion(imageUrl)
+                } else {
+                    // No documents found
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+
+
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
