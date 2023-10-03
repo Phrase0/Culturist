@@ -86,18 +86,18 @@ class RecommendCollectionViewCell: GeminiCell {
     func setShadowColor() {
         // Set corner radius for rounded corners
         productView.backgroundColor = .white
-        productView.layer.cornerRadius = 15
+        //productView.layer.cornerRadius = 15
         // Add shadow to the view
         productView.layer.shadowColor = UIColor.black.cgColor
-        productView.layer.shadowOpacity = 0.2
-        productView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        productView.layer.shadowOpacity = 0.3
+        productView.layer.shadowOffset = CGSize(width: 5, height: 5)
         productView.layer.shadowRadius = 4
         // Disable view's boundary restrictions for shadow to appear
         productView.layer.masksToBounds = false
         // Set corner radius for the image view
-        productImage.layer.cornerRadius = 15
+        //productImage.layer.cornerRadius = 15
         // Mask the specified corners of the image view with rounded corners
-        productImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        //productImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         // Clip the image to make the rounded corners effective
         productImage.clipsToBounds = true
     }

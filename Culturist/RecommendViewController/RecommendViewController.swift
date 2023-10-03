@@ -14,6 +14,7 @@ class RecommendViewController: UIViewController {
     
     @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // total products
     var artProducts1 = [ArtDatum]()
@@ -38,7 +39,7 @@ class RecommendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .B4
+        //view.backgroundColor = .GR0
         
         setAnimation()
         loading.startAnimating()
@@ -58,10 +59,11 @@ class RecommendViewController: UIViewController {
             .scaleAnimation()
             .scale(0.7)
             .scaleEffect(.scaleUp) // or .scaleDown
+        
+        backgroundImageView.image = UIImage(named: "background")
+        backgroundImageView.contentMode = .scaleAspectFill
     }
 
-
-    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in
@@ -141,7 +143,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 40.0, left: 40.0, bottom: 40.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 30.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     

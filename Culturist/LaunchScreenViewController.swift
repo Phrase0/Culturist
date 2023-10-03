@@ -6,22 +6,29 @@
 //
 
 import UIKit
-
+import Lottie
 class LaunchScreenViewController: UIViewController {
 
+    let width = UIScreen.main.bounds.width
     
+    let animationView = LottieAnimationView(asset: "launchAnimation", bundle: .main)
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .GR2
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        view.addSubview(animationView)
+        animationView.play()
+        setUpAutolayout()
     }
     
-//
-//    private func runningPropertyAnimator() {
-//        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 5, delay: 0, options: .curveEaseInOut) {
-//            [unowned .self] in
-//        
-//        }
-//    }
-
+    func setUpAutolayout() {
+        animationView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(width)
+            make.height.equalTo(width)
+        }
+    }
+    
 }

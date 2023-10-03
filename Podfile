@@ -20,6 +20,7 @@ target 'Culturist' do
   pod 'Gemini'
   pod 'Hero'
   pod 'NVActivityIndicatorView'
+  pod 'lottie-ios'
 
 
   source 'https://github.com/CocoaPods/Specs.git'
