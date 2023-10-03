@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var likeCollectionBtn: UIButton!
     @IBOutlet weak var calendarBtn: UIButton!
-
+    
     let firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
                 print("Full Name not found.")
             }
         }
-
+        
         firebaseManager.readImage { imageUrl in
             if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
                 DispatchQueue.main.async {
@@ -42,7 +42,7 @@ class ProfileViewController: UIViewController {
                 self.profileImageView.tintColor = .GR3
             }
         }
-
+        
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .B1
@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController {
         calendarBtn.layer.cornerRadius = 30
         calendarBtn.clipsToBounds = true
     }
-  
+    
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
