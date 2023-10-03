@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nameLabel.text = KeychainItem.currentUserName
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .B1
@@ -38,7 +38,6 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
 
-    
     @IBAction func goToLikecollection(_ sender: UIButton) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
@@ -56,8 +55,6 @@ class ProfileViewController: UIViewController {
         navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
         self.present(navVC, animated: true)
     }
-    
-
     
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white

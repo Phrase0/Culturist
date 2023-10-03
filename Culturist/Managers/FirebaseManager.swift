@@ -79,10 +79,7 @@ class FirebaseManager {
                 }
             }
         }
-        
-
     }
-    
     
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {

@@ -51,7 +51,6 @@ class SettingViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    
     func goBackToRootVC() {
         // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
