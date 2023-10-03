@@ -10,6 +10,7 @@ import ARKit
 import MapKit
 import SceneKit
 import UIKit
+import NVActivityIndicatorView
 
 @available(iOS 11.0, *)
 
@@ -42,8 +43,13 @@ class NavigationViewController: UIViewController {
     let adjustNorthByTappingSidesOfScreen = false
     let addNodeByTappingScreen = true
     
+    // activity indicator
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAnimation()
+        loading.startAnimating()
         
         mapView.delegate = self
         setCorner()
@@ -76,34 +82,44 @@ class NavigationViewController: UIViewController {
         //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
         sceneLocationView.arViewDelegate = self
         // sceneLocationView.locationNodeTouchDelegate = self
-        
-        // Now add the route or location annotations as appropriate
-        addSceneModels()
-        
+    
         contentView.addSubview(sceneLocationView)
         sceneLocationView.frame = contentView.bounds
-        
-        updateUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            self?.updateUserLocation()
-        }
-        
+
         routes?.forEach { mapView.addOverlay($0.polyline) }
         
-        // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.asset(.Icons_36px_Close), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
     
     @objc private func backButtonTapped() {
         self.dismiss(animated: true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // navigationController?.setNavigationBarHidden(false, animated: animated)
-        restartAnimation()
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Now add the route or location annotations as appropriate
+        restartAnimation()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        addSceneModels()
+        updateUserLocationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            self?.updateUserLocation()
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         print(#function)
         pauseAnimation()
@@ -166,7 +182,7 @@ extension NavigationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.lineWidth = 3
-        renderer.strokeColor = UIColor.GR1!.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.systemCyan.withAlphaComponent(0.5)
         
         return renderer
     }
@@ -229,16 +245,18 @@ extension NavigationViewController {
                 //                }
                 
                 // Option 2: Something more typical
-                box.firstMaterial?.diffuse.contents = UIColor.GR1!.withAlphaComponent(0.8)
+                box.firstMaterial?.diffuse.contents = UIColor.systemCyan.withAlphaComponent(0.8)
                 
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
                 }
-                
+                print("routes:\(routes)")
                 return box
             }
         } else {
             // 3. If not, then show the
+            print("讀不到gps資料")
+            
             buildDemoData().forEach {
                 sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
             }
@@ -247,9 +265,12 @@ extension NavigationViewController {
         // There are many different ways to add lighting to a scene, but even this mechanism (the absolute simplest)
         // keeps 3D objects fron looking flat
         sceneLocationView.autoenablesDefaultLighting = true
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
         
     }
-    
+
     // Builds the location annotations for a few random objects, scattered across the country
     // - Returns: an array of annotation nodes.
     func distinationData() -> [LocationAnnotationNode] {

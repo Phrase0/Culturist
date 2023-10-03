@@ -27,8 +27,10 @@ class BookShopViewController: UIViewController {
         locationManager.delegate = self
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
+        
+        // set tableView.contentInset fill the screen
+        bookShopTableView.contentInsetAdjustmentBehavior = .never
     }
-    
 }
 
 extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,7 +58,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             if !bookShop.phone.isEmpty {
                 cell.phoneLabel.text = "電話：\(bookShop.phone)"
             } else {
-                cell.phoneLabel.text = "電話：暫無資料“"
+                cell.phoneLabel.text = "電話：暫無資料"
             }
             
             if !bookShop.intro.isEmpty {
@@ -127,7 +129,6 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 detailVC.name = bookShop?.name
                 detailVC.latitude = Double(bookShop!.latitude)
                 detailVC.longitude = Double(bookShop!.longitude)
-                // self.navigationController?.pushViewController(detailVC, animated: true)
                 let navVC = UINavigationController(rootViewController: detailVC)
                 navVC.modalPresentationStyle = .fullScreen
                 self.present(navVC, animated: true)

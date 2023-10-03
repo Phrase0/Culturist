@@ -15,8 +15,6 @@ class BookShopTableViewCell: UITableViewCell {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var introLabel: UILabel!
     @IBOutlet weak var bookImageView: UIImageView!
-    
-    
     @IBOutlet weak var backgroundColorView: UIView!
     
     // bookshop intro title
@@ -37,6 +35,7 @@ class BookShopTableViewCell: UITableViewCell {
     }
     
     @IBAction func mapNavigation(_ sender: UIButton) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         mapNavigationButtonHandler?(sender)
     }
     

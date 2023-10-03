@@ -7,22 +7,20 @@
 
 import UIKit
 
-class CulturistTabBarController: UITabBarController {
+class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = UIColor.GR2
-        // Do any additional setup after loading the view.
+        self.delegate = self
+        feedbackGenerator.prepare()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // touch feedback
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        feedbackGenerator.impactOccurred()
     }
-    */
-
+    
 }

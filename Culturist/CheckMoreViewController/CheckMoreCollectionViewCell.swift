@@ -9,6 +9,7 @@ import UIKit
 
 class CheckMoreCollectionViewCell: UICollectionViewCell {
     
+    
     lazy var productView: UIView = {
         let productView = UIView()
         return productView
@@ -19,8 +20,10 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         productTitle.numberOfLines = 2
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
             productTitle.font = pingFangFont
+            productTitle.textColor = .black
         } else {
             productTitle.font = UIFont.systemFont(ofSize: 15)
+            productTitle.textColor = .black
             print("no font type")
         }
         return productTitle
@@ -28,6 +31,7 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
     
     lazy var productImage: UIImageView = {
         let productImage = UIImageView()
+        productImage.contentMode = .scaleAspectFill
         return productImage
     }()
     
@@ -68,7 +72,7 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView)
-            make.height.equalTo(productImage.snp.width).multipliedBy(25.0/21.0)
+            make.height.equalTo(productView.snp.width).multipliedBy(25.0/21.0)
         }
     }
     
@@ -91,4 +95,3 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         productImage.clipsToBounds = true
     }
 }
-

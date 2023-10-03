@@ -10,27 +10,54 @@ import UIKit
 class AnimationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var animationCollectionView: UICollectionView!
-    let images = ["cesar","alessio","dave","mymind","luke"]
     
+    var timer: Timer?
     private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
+    var allData: [ArtDatum] = [] {
+        didSet {
+            randomSixItems = getRandomSixItems()
+            animationCollectionView.reloadData()
+        }
+    }
+
+    var randomSixItems: [ArtDatum] = []
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
+
+    }
+
+    deinit {
+        // Stop the timer when the view is deallocated
+        timer?.invalidate()
     }
     
+    func getRandomSixItems() -> [ArtDatum] {
+        let shuffledData = self.allData.shuffled()
+        // Get the first six items, and it's okay if the array length is less than six
+        return Array(shuffledData.prefix(6))
+    }
+
     // Banner auto-scroll animation
     @objc func changeBanner() {
+        guard !randomSixItems.isEmpty else {
+            // if randomSixItems isEmpty，don't animate
+            return
+        }
+        
         var indexPath: IndexPath
         imageIndex += 1
-        if imageIndex < images.count {
+        if imageIndex < randomSixItems.count {
             // If the displayed cell is less than the total count, display the next one
             indexPath = IndexPath(item: imageIndex, section: 0)
             // Actions to perform when adding auto-scroll animation
@@ -47,11 +74,11 @@ class AnimationTableViewCell: UITableViewCell {
     
     // MARK: - PageControl
     func setupPageControl() {
-        pageControl.numberOfPages = images.count
+        pageControl.numberOfPages = 6
         pageControl.currentPage = imageIndex
-        pageControl.currentPageIndicatorTintColor = UIColor.B1
-        pageControl.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.8)
-        // pageControl.backgroundStyle = .prominent
+        pageControl.currentPageIndicatorTintColor = UIColor.GR2
+        pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
+        // pageControl.backgroundStyle = .minimal
         addSubview(pageControl)
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
@@ -76,13 +103,34 @@ extension AnimationTableViewCell: UIScrollViewDelegate {
 
 extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return randomSixItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
-        cell.animationImage.image = UIImage(named: images[indexPath.row])
+        let itemData = randomSixItems[indexPath.item]
+        let url = URL(string: itemData.imageURL)
+        cell.animationImage.kf.setImage(with: url)
+        
         return cell
+    }
+    
+    func parentViewController() -> HomeViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? HomeViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let homeViewController = parentViewController() {
+            guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            detailVC.detailDesctription = randomSixItems[indexPath.item]
+            homeViewController.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
 }

@@ -32,4 +32,3 @@ struct BookShop: Codable {
         case mainTypeName, cityName, groupTypeName, mainTypePk, version, hitRate, type
     }
 }
-

@@ -13,21 +13,21 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var productCollectionView: UICollectionView!
     var productIndexPath: Int?
     
-    var artProducts1 = [ArtDatum]()
-    var artProducts6 = [ArtDatum]()
-    var artManager1 = ArtProductManager()
-    var artManager6 = ArtProductManager()
-    let firebaseManager = FirebaseManager()
+    var artProducts1: [ArtDatum] = [] {
+        didSet {
+            productCollectionView.reloadData()
+        }
+    }
     
+    var artProducts6: [ArtDatum] = [] {
+        didSet {
+            productCollectionView.reloadData()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         productCollectionView.dataSource = self
         productCollectionView.delegate = self
-        artManager1.delegate = self
-        artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
-        
     }
     
 }
@@ -115,27 +115,4 @@ extension ProductTableViewCell: UICollectionViewDelegateFlowLayout {
         
         return flowLayout.itemSize
     }
-}
-
-// MARK: - ProductManagerDelegate
-extension ProductTableViewCell: ArtManagerDelegate {
-    func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
-            if artProductList.isEmpty {
-                print("no api data")
-            } else {
-                if manager === self.artManager1 {
-                    self.artProducts1 = artProductList
-                } else if manager === self.artManager6 {
-                    self.artProducts6 = artProductList
-                }
-                self.productCollectionView.reloadData()
-            }
-        }
-    }
-    
-    func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
-    }
-    
 }

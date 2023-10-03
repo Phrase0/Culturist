@@ -10,14 +10,18 @@ target 'Culturist' do
   pod 'Kingfisher', '~> 7.0'
   pod 'MJRefresh'
   pod 'Alamofire'
-  pod 'IQKeyboardManager'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+  pod 'FirebaseStorage'
   pod 'SwiftLint'
   pod 'ARCL'
   pod 'FSCalendar+Persian'
   pod 'SnapKit'
-  
+  pod 'Gemini'
+  pod 'Hero'
+  pod 'NVActivityIndicatorView'
+
+
   source 'https://github.com/CocoaPods/Specs.git'
 
 post_install do |installer|

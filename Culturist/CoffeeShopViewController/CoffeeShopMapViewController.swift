@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
 class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -20,8 +21,12 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     var longitude: Double?
     let mapView = MKMapView()
     
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAnimation()
+        loading.startAnimating()
         
         coffeeShopManager.delegate = self
         coffeeShopManager.loadCoffeeShops()
@@ -49,13 +54,10 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
         
-        // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR1
-    }
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +66,21 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
+    }
 
+    @objc private func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
 }
 
 // MARK: - CoffeeShopManagerDelegate
@@ -85,12 +101,13 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
                     self.mapView.addAnnotation(annotation)
                 }
             }
-            
+            self.loading.stopAnimating()
         }
     }
     
     func manager(_ manager: CoffeeShopManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        // print(error.localizedDescription)
+        self.loading.stopAnimating()
     }
 }
 

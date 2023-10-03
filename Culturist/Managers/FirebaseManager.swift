@@ -8,15 +8,16 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseStorage
 
 protocol FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData])
-    func manager(_ manager: FirebaseManager, didFailWith error: Error)
 }
 
 protocol FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData])
 }
+
 class FirebaseManager {
     
     var collectionDelegate:FirebaseCollectionDelegate?
@@ -24,16 +25,195 @@ class FirebaseManager {
     
     // Get the Firestore database reference
     let db = Firestore.firestore()
-    // Assuming a User object
-    let user = User(id: "user_id", name: "user_name", email: "user_email", recommendationData: [], likeData: [])
+    let storage = Storage.storage().reference()
     
+    // MARK: - UserData
+    func addUserData(id: String, fullName: String?, email: String?) {
+        // Use id as the document identifier
+        let document = db.collection("users").document(id)
+        // Use the getDocument method to check if the document already exists
+        document.getDocument { (snapshot, error) in
+            if let error = error {
+                print("Failed to retrieve the document: \(error.localizedDescription)")
+                return
+            }
+            // ---------------------------------------------------
+            // If the document exists, update the data
+            if snapshot?.exists == true {
+                var updatedData: [String: Any] = [:]
+                
+                // Check if fullName is not empty and not just whitespace
+                if let fullName = fullName, !fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    updatedData["fullName"] = fullName
+                }
+                
+                // Update email if it's not nil
+                if let email = email {
+                    updatedData["email"] = email
+                }
+                
+                // Update createdTime (if needed)
+                updatedData["createdTime"] = FieldValue.serverTimestamp()
+                
+                document.updateData(updatedData) { error in
+                    if let error = error {
+                        print("Failed to update data: \(error.localizedDescription)")
+                    } else {
+                        print("Data updated successfully")
+                    }
+                }
+            }
+        
+            // ---------------------------------------------------
+            // If the document doesn't exist, add new data
+            if snapshot?.exists == false {
+                let data: [String: Any] = [
+                    "id": id as Any,
+                    "fullName": fullName as Any,
+                    "email": email as Any,
+                    "createdTime": FieldValue.serverTimestamp()
+                ]
+                
+                document.setData(data) { error in
+                    if let error = error {
+                        print("Failed to add data: \(error.localizedDescription)")
+                    } else {
+                        print("Data added successfully")
+                    }
+                }
+            }
+        }
+    }
     
+    func readUserData(completion: @escaping (String?) -> Void) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Get the single document from the subcollection
+        userRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print("Error getting document: \(error.localizedDescription)")
+                completion(nil)
+            } else {
+                // Check if the document exists and contains a fullName field
+                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
+                    completion(fullName)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+    
+    func removeUserData() {
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        let recommendationDataCollection = userRef.collection("recommendationData")
+        recommendationDataCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
+        let likeCollection = userRef.collection("likeCollection")
+        likeCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
+        let imageData = userRef.collection("imageData")
+        imageData.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+            }
+        }
+    }
+    
+    // MARK: -  storeProfileImage
+    func storeImage(imageData: Data) {
+        storage.child("images/file.png").putData(imageData) { _, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            self.storage.child("images/file.png").downloadURL { url, error in
+                guard let url = url, error == nil else {
+                    return
+                }
+                let urlString = url.absoluteString
+                print("Download URL: \(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "url")
+                self.addImage(imageUrl: urlString)
+            }
+        }
+    }
+
+    // MARK: - addProfileImage
+    func addImage(imageUrl: String) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Create a new collection reference for imageData
+        let imageDocRef = userRef.collection("imageData").document("imageUrl")
+        
+        // Create a data dictionary for imageData
+        let imageData: [String: Any] = [
+            "imageUrl": imageUrl
+        ]
+        
+        // Set the data with merge option to update or create
+        imageDocRef.setData(imageData, merge: true) { error in
+            if let error = error {
+                print("Failed to add data: \(error.localizedDescription)")
+            } else {
+                print("Data added successfully")
+            }
+        }
+    }
+    
+    // read image data
+    func readImage(completion: @escaping (String?) -> Void) {
+        // Get the user's document reference
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        // Create a reference to the subcollection
+        let imageDataCollection = userRef.collection("imageData")
+        
+        // Get the single document from the subcollection
+        imageDataCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error.localizedDescription)")
+                completion(nil)
+            } else {
+                // Check if there is a document
+                if let document = querySnapshot?.documents.first {
+                    // Get the imageUrl field from the document
+                    let imageUrl = document.data()["imageUrl"] as? String
+                    completion(imageUrl)
+                } else {
+                    // No documents found
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+
+
     // MARK: - Recommendation
-    func addData(exhibitionUid: String, title: String, location: String, locationName: String) {
+    func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
         let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
         // Get the user's document reference
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for recommendationData
         let recommendationDataCollection = userRef.collection("recommendationData")
         
@@ -53,28 +233,12 @@ class FirebaseManager {
                 print("RecommendationData added successfully.")
             }
         }
-        
-        // Update user document data with id, name, and email
-        let userData: [String: Any] = [
-            "id": user.id,
-            "name": user.name,
-            "email": user.email
-        ]
-        
-        // Set the user's document data with merge option to update existing data
-        userRef.setData(userData, merge: true) { (error) in
-            if let error = error {
-                print("Error updating user data: \(error)")
-            } else {
-                print("User data updated successfully.")
-            }
-        }
     }
     
     
     // ---------------------------------------------------
     func readRecommendationData() {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
         // search "recommendationData" documents
@@ -102,7 +266,7 @@ class FirebaseManager {
     
     // ---------------------------------------------------
     func readFilterRecommendationData() {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
         // search "recommendationData" documents
@@ -163,7 +327,7 @@ class FirebaseManager {
     // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {
         // Get the user's document reference
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for likeData
         let likeCollection = userRef.collection("likeCollection")
         
@@ -187,27 +351,11 @@ class FirebaseManager {
                 print("LikeData added successfully.")
             }
         }
-        
-        // Update user document data with id, name, and email
-        let userData: [String: Any] = [
-            "id": user.id,
-            "name": user.name,
-            "email": user.email
-        ]
-        
-        // Set the user's document data with merge option to update existing data
-        userRef.setData(userData, merge: true) { (error) in
-            if let error = error {
-                print("Error updating user data: \(error)")
-            } else {
-                print("User data updated successfully.")
-            }
-        }
     }
     
     // ---------------------------------------------------
     func removeLikeData(likeData: LikeData) {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
         
         // Create a query to find documents matching likeCollection data
@@ -246,7 +394,7 @@ class FirebaseManager {
     }
     // ---------------------------------------------------
     func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
-        let userRef = db.collection("users").document(user.id)
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
         
         likeCollection.getDocuments { (querySnapshot, error) in
@@ -264,12 +412,12 @@ class FirebaseManager {
                     let likeData = LikeData(exhibitionUid: exhibitionUid, coffeeShopUid: coffeeShopUid, bookShopUid: bookShopUid)
                     userLikes.append(likeData)
                 }
-
-                 self.likeDelegate?.manager(self, didGet: userLikes)
+                
+                self.likeDelegate?.manager(self, didGet: userLikes)
                 completion(userLikes)
- 
+                
             }
         }
     }
-
+    
 }

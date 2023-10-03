@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import MapKit
 import CoreLocation
+import NVActivityIndicatorView
 
 class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -20,9 +21,12 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
     var longitude: Double?
     let mapView = MKMapView()
     
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setAnimation()
+        loading.startAnimating()
         bookShopManager.delegate = self
         bookShopManager.loadBookShops()
         
@@ -49,13 +53,13 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.delegate = self
         
-        // backBtn
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward.circle.fill"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR1
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
 
     @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +67,16 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         // Request user location permission
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
     }
  
 }
@@ -84,11 +98,14 @@ extension BookShopMapViewController: BookShopManagerDelegate {
                     self.mapView.addAnnotation(annotation)
                 }
             }
+            
+            self.loading.stopAnimating()
         }
     }
     
     func manager(_ manager: BookShopManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        // print(error.localizedDescription)
+        self.loading.stopAnimating()
     }
     
 }
@@ -103,7 +120,7 @@ extension BookShopMapViewController: BookShopManagerDelegate {
             if let selectedBookShop = bookShopCollection.first(where: { $0.name == annotation.title }) {
                 guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
                 bookShopViewController.bookShop = selectedBookShop
-                //navigationController?.pushViewController(bookShopViewController, animated: true)
+                // navigationController?.pushViewController(bookShopViewController, animated: true)
                 present(bookShopViewController, animated: true)                
             }
         }
