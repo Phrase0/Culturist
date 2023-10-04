@@ -89,6 +89,13 @@ class DetailViewController: UIViewController {
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+    }
 
 }
 
