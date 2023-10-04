@@ -88,7 +88,7 @@ class RecommendCollectionViewCell: GeminiCell {
         }
         
         productView.snp.makeConstraints { make in
-            make.leading.top.trailing.bottom.equalTo(productBackView).inset(5)
+            make.leading.top.trailing.bottom.equalTo(productBackView).inset(4)
             
         }
         
@@ -109,7 +109,7 @@ class RecommendCollectionViewCell: GeminiCell {
     }
     
     func setShadowColor() {
-       // productBackView.backgroundColor = .GR3
+        //productBackView.backgroundColor = .GR0
         productBackView.backgroundColor = UIColor(red: 237/255, green: 225/255, blue: 210/255, alpha: 0.8)
         productView.backgroundColor = .white
         productBackView.layer.shadowColor = UIColor.black.cgColor

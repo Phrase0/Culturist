@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
         homeTableView.dataSource = self
         setAnimation()
         loading.startAnimating()
-
+        
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
@@ -43,13 +43,25 @@ class HomeViewController: UIViewController {
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-//                concertDataManager.fetchConcertData()
-//                exhibitionDataManager.fetchExhibitionData()
-
+        //                concertDataManager.fetchConcertData()
+        //                exhibitionDataManager.fetchExhibitionData()
+        
+        // Create an empty UIBarButtonItem as the left item
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 44 // Adjust the width to add left space
+        // Add the left item to the navigation bar
+        navigationItem.leftBarButtonItems = [leftSpacer]
+        
+        // Create an image view as the title view
+        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green"))
+        imageView.contentMode = .scaleAspectFit
+        // Set the image view as the title view
+        navigationItem.titleView = imageView
+        
+        // Create the right-side search button
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
         searchButton.tintColor = .GR2
         navigationItem.rightBarButtonItem = searchButton
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +77,7 @@ class HomeViewController: UIViewController {
         }.autoChangeTransparency(true).link(to: self.homeTableView)
     }
     
-
+    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in
@@ -82,7 +94,7 @@ class HomeViewController: UIViewController {
         let allProducts = self.artProducts1 + self.artProducts6
         searchVC.allProducts = allProducts
         navigationController?.pushViewController(searchVC, animated: true)
-
+        
     }
     
 }
@@ -170,7 +182,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-
+    
     // MARK: - Button Action
     
     @objc func buttonTapped(_ sender: UIButton) {
@@ -183,7 +195,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             checkMoreVC.result = artProducts6
             checkMoreVC.navigationItemTitle = "展覽"
         }
-
+        
         navigationController?.pushViewController(checkMoreVC, animated: true)
     }
     
@@ -206,7 +218,7 @@ extension HomeViewController: ArtManagerDelegate {
                     }
                 }
             }
-
+            
         }
     }
     
@@ -232,7 +244,7 @@ extension HomeViewController: FirebaseConcertDelegate {
             self.loading.stopAnimating()
         }
     }
-
+    
 }
 
 extension HomeViewController: FirebaseExhibitionDelegate {

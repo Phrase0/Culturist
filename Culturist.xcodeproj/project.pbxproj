@@ -46,7 +46,6 @@
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
 		F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */; };
 		F883BEB82AC5757700437C1D /* FirebaseActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */; };
-		F889E90A2ACC0B6100EF40F2 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */; };
 		F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */; };
 		F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */; };
 		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
@@ -106,7 +105,6 @@
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseActivityManager.swift; sourceTree = "<group>"; };
-		F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
-				F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
 				F80D8D5A2ABFF304009195B2 /* SearchViewController */,
 				F80D8D612AC0281B009195B2 /* CheckMoreViewController */,
@@ -504,7 +501,6 @@
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,
 				F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */,
 				F883BEB82AC5757700437C1D /* FirebaseActivityManager.swift in Sources */,
-				F889E90A2ACC0B6100EF40F2 /* LaunchScreenViewController.swift in Sources */,
 				F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */,
 				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,

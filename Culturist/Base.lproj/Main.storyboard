@@ -706,21 +706,6 @@ Label</string>
             </objects>
             <point key="canvasLocation" x="1694" y="2053"/>
         </scene>
-        <!--Launch Screen View Controller-->
-        <scene sceneID="oHE-Cj-wPB">
-            <objects>
-                <viewController id="o4E-XR-Ho9" customClass="LaunchScreenViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rcd-yN-OVh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6R5-85-UD1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gDW-2j-tgU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2370" y="-35"/>
-        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="fFo-GH-bNC">
             <objects>
@@ -730,47 +715,38 @@ Label</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQ3-M4-lug">
-                                <rect key="frame" x="62.666666666666657" y="658" width="249.99999999999997" height="60"/>
-                                <color key="backgroundColor" name="B4"/>
+                                <rect key="frame" x="62.666666666666657" y="618" width="249.99999999999997" height="60"/>
+                                <color key="backgroundColor" name="GR0"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="2tg-UI-naC"/>
                                     <constraint firstAttribute="height" constant="60" id="LrL-O3-eo6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="19"/>
-                                <color key="tintColor" name="B1"/>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="19"/>
+                                <color key="tintColor" name="GR3"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="  Sign in with Apple">
-                                    <color key="titleColor" name="B1"/>
+                                    <color key="titleColor" name="GR3"/>
                                     <imageReference key="image" image="apple.logo" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
                                     <action selector="didTapSignIn:" destination="dM6-V9-3Od" eventType="touchUpInside" id="eG5-e0-jua"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSA-US-cpN">
-                                <rect key="frame" x="157.66666666666666" y="588" width="60" height="40"/>
-                                <color key="tintColor" name="B4"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="登入">
-                                    <fontDescription key="titleFontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
-                                </buttonConfiguration>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDr-ZM-uHO">
-                                <rect key="frame" x="30" y="200" width="163" height="48"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
-                                <color key="textColor" name="B4"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="culturist_logo_green" translatesAutoresizingMaskIntoConstraints="NO" id="RP7-gM-09p">
+                                <rect key="frame" x="20" y="200" width="180" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="IlM-Kl-MCh"/>
+                                    <constraint firstAttribute="width" constant="180" id="mm8-RA-Vwk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qTO-Pm-Pfn"/>
-                        <color key="backgroundColor" name="GR2"/>
+                        <color key="backgroundColor" name="GR3"/>
                         <constraints>
-                            <constraint firstItem="DSA-US-cpN" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="A4R-Rj-w0P"/>
-                            <constraint firstItem="qTO-Pm-Pfn" firstAttribute="bottom" secondItem="vQ3-M4-lug" secondAttribute="bottom" constant="60" id="Bwb-cx-LS9"/>
+                            <constraint firstItem="RP7-gM-09p" firstAttribute="top" secondItem="qTO-Pm-Pfn" secondAttribute="top" constant="150" id="Bpu-HS-7Wp"/>
+                            <constraint firstItem="qTO-Pm-Pfn" firstAttribute="bottom" secondItem="vQ3-M4-lug" secondAttribute="bottom" constant="100" id="Bwb-cx-LS9"/>
                             <constraint firstItem="vQ3-M4-lug" firstAttribute="centerX" secondItem="WvL-r4-A00" secondAttribute="centerX" id="EEJ-mf-Gmz"/>
-                            <constraint firstItem="vQ3-M4-lug" firstAttribute="top" secondItem="DSA-US-cpN" secondAttribute="bottom" constant="30" id="TC9-52-ZTZ"/>
-                            <constraint firstItem="TDr-ZM-uHO" firstAttribute="top" secondItem="qTO-Pm-Pfn" secondAttribute="top" constant="150" id="aMA-Mf-2r5"/>
-                            <constraint firstItem="TDr-ZM-uHO" firstAttribute="leading" secondItem="qTO-Pm-Pfn" secondAttribute="leading" constant="30" id="uZ3-eJ-6aD"/>
+                            <constraint firstItem="RP7-gM-09p" firstAttribute="leading" secondItem="qTO-Pm-Pfn" secondAttribute="leading" constant="20" id="efl-SV-6GI"/>
                         </constraints>
                     </view>
                     <connections>
@@ -779,7 +755,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IT-wY-KoM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1538" y="-35"/>
+            <point key="canvasLocation" x="-1538.4000000000001" y="-35.467980295566505"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="k9i-kN-nhw">
@@ -1502,6 +1478,13 @@ Label</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="phw-6d-KaS">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="0.0"/>
+                            <color key="textColor" name="GR0"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="0.0"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1588,6 +1571,7 @@ Label</string>
         <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="bookImage" width="5086" height="3389"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
+        <image name="culturist_logo_green" width="1513" height="450"/>
         <image name="greenBackground" width="4000" height="6000"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="B1">
@@ -1597,7 +1581,7 @@ Label</string>
             <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GR0">
-            <color red="0.26666666666666666" green="0.35294117647058826" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16078431372549021" green="0.2196078431372549" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GR1">
             <color red="0.36862745098039218" green="0.50588235294117645" blue="0.29019607843137257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

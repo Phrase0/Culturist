@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="culturist_logo_green" translatesAutoresizingMaskIntoConstraints="NO" id="ydf-po-bh8">
-                                <rect key="frame" x="121.66666666666669" y="688" width="150" height="50"/>
+                                <rect key="frame" x="118.66666666666669" y="688" width="150" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FcC-Qg-kmv"/>
                                     <constraint firstAttribute="width" constant="150" id="xDR-Vg-3Q0"/>
@@ -36,7 +36,7 @@
                         <color key="backgroundColor" name="GR3"/>
                         <constraints>
                             <constraint firstItem="HqJ-mO-Yoo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PHY-ig-gtB"/>
-                            <constraint firstItem="ydf-po-bh8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gMb-y3-eat"/>
+                            <constraint firstItem="ydf-po-bh8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-3" id="gMb-y3-eat"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ydf-po-bh8" secondAttribute="bottom" constant="80" id="rnA-Z6-1cq"/>
                             <constraint firstItem="HqJ-mO-Yoo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="w5m-cP-3IH"/>
                         </constraints>
