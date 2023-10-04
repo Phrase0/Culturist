@@ -8,7 +8,6 @@
 import UIKit
 import Gemini
 import NVActivityIndicatorView
-// import Hero
 
 class RecommendViewController: UIViewController {
     
@@ -101,11 +100,6 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
-        // ---------
-        //        self.navigationController?.hero.isEnabled = true
-        //        self.hero.modalAnimationType = .selectBy(presenting:.zoom, dismissing:.zoomOut)
-        // ---------
-        
         self.navigationController?.pushViewController(detailVC, animated: true)
         
     }

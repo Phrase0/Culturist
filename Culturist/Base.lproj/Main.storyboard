@@ -113,17 +113,17 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductTableViewCell" id="LRM-as-BeI" customClass="ProductTableViewCell" customModule="Culturist" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="277.33333206176758" width="375" height="288"/>
+                                        <rect key="frame" x="0.0" y="277.33333206176758" width="375" height="275"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LRM-as-BeI" id="dyF-W7-vru">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sLH-xT-4kl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="375:288" id="NZU-Ux-AAH"/>
+                                                        <constraint firstAttribute="width" secondItem="sLH-xT-4kl" secondAttribute="height" multiplier="375:275" id="NZU-Ux-AAH"/>
                                                     </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fp-tE-QTJ">
                                                         <size key="itemSize" width="147" height="250"/>
@@ -133,7 +133,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="9zf-rY-EIm" customClass="ProductCollectionViewCell" customModule="Culturist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="19" width="147" height="250"/>
+                                                            <rect key="frame" x="0.0" y="12.666666666666666" width="147" height="250"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SAw-Or-tIS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="147" height="250"/>

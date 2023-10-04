@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Hero
 import NVActivityIndicatorView
 
 class LikeViewController: UIViewController {

@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 import MapKit
 import EventKitUI
-import Hero
 
 class DetailViewController: UIViewController {
     
@@ -117,12 +116,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-            // ---------            
-//            cell.detailImageView.heroID = detailDesctription.imageURL
-//            self.view.heroID = detailDesctription.uid
-//            self.hero.isEnabled = true
-            // ---------
-            
             // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
@@ -137,8 +130,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     } else {
@@ -164,8 +156,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     }
@@ -187,8 +178,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     } else {
@@ -215,8 +205,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     }
