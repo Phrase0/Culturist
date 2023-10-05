@@ -23,7 +23,7 @@ class RecommendViewController: UIViewController {
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     // recommendProducts
     var recommendProducts: [ArtDatum] {

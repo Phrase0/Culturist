@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
         
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
-        navigationItem.rightBarButtonItem?.tintColor = .B1
+        navigationItem.rightBarButtonItem?.tintColor = .GR0
     }
     
     override func viewWillAppear(_ animated: Bool) {

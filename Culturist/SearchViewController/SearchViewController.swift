@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         settingSearchController()
         navigationItem.title = "搜尋"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR2
+        navigationItem.leftBarButtonItem?.tintColor = .GR0
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }

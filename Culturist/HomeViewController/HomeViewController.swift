@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class HomeViewController: UIViewController {
         
         // Create the right-side search button
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton.tintColor = .GR2
+        searchButton.tintColor = .GR0
         navigationItem.rightBarButtonItem = searchButton
     }
     
@@ -154,7 +154,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         // add button
         let button = UIButton()
-        button.setTitleColor(UIColor.GR1, for: .normal)
+        button.setTitleColor(UIColor.GR0, for: .normal)
         button.setTitle("查看更多 >", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.tag = buttonTag ?? 0

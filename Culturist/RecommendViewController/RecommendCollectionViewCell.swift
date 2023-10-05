@@ -109,8 +109,8 @@ class RecommendCollectionViewCell: GeminiCell {
     }
     
     func setShadowColor() {
-        // productBackView.backgroundColor = .GR0
-        productBackView.backgroundColor = UIColor(red: 237/255, green: 225/255, blue: 210/255, alpha: 0.8)
+         productBackView.backgroundColor = .GR1
+//        productBackView.backgroundColor = UIColor(red: 237/255, green: 225/255, blue: 210/255, alpha: 0.8)
         productView.backgroundColor = .white
         productBackView.layer.shadowColor = UIColor.black.cgColor
         productBackView.layer.shadowOpacity = 0.4
