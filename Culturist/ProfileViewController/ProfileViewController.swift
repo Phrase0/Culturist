@@ -7,6 +7,9 @@
 
 import UIKit
 import Kingfisher
+import FSCalendar_Persian
+import EventKit
+import EventKitUI
 
 class ProfileViewController: UIViewController {
     
@@ -14,24 +17,32 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backgroundWhiteView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var likeCollectionBtn: UIButton!
-    @IBOutlet weak var calendarBtn: UIButton!
+    //@IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var eventsTableView: UITableView!
+    var eventStore = EKEventStore()
+    var events: [EKEvent] = []
+    var selectedDate: Date?
     
     let firebaseManager = FirebaseManager()
     let userDefault = UserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firebaseManager.readUserData { fullName in
-            if let fullName = fullName {
-                self.userDefault.set(fullName, forKey: "fullName")
-                self.nameLabel.text = fullName
-            } else {
-                print("Full Name not found.")
-            }
-        }
+        calendar.dataSource = self
+        calendar.delegate = self
+        setCalendarAppearance()
+        eventsTableView.delegate = self
+        eventsTableView.dataSource = self
+//        firebaseManager.readUserData { fullName in
+//            if let fullName = fullName {
+//                self.userDefault.set(fullName, forKey: "fullName")
+//                self.nameLabel.text = fullName
+//            } else {
+//                print("Full Name not found.")
+//            }
+//        }
         
         firebaseManager.readImage { imageUrl in
             if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
@@ -51,9 +62,24 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nameLabel.text = userDefault.value(forKey: "fullName") as? String
+        requestAccess()
+        // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        requestAccess()
+    }
+    
+    @IBAction func todayBtn(_ sender: UIButton) {
+        // Get the current date
+        let today = Date()
+        // Use the `select` method of FSCalendar to select the current month
+        calendar.select(today)
+        // Scroll to the current month
+        calendar.setCurrentPage(today, animated: true)
+    }
+
     @IBAction func imageViewTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePickerController = UIImagePickerController()
@@ -73,39 +99,46 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
     
-    @IBAction func goToLikecollection(_ sender: UIButton) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
-        let navVC = UINavigationController(rootViewController: detailVC)
-        navVC.modalPresentationStyle = .fullScreen
-        navVC.modalTransitionStyle = .crossDissolve
-        self.present(navVC, animated: true)
-    }
-    
-    @IBAction func goToCalendarVC(_ sender: UIButton) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
-        let navVC = UINavigationController(rootViewController: detailVC)
-        navVC.modalPresentationStyle = .fullScreen
-        navVC.modalTransitionStyle = .crossDissolve
-        self.present(navVC, animated: true)
-    }
-    
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white
         backgroundWhiteView.layer.cornerRadius = 15
         backgroundWhiteView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         backgroundWhiteView.clipsToBounds = true
-        profileImageView.layer.cornerRadius = 65
+        profileImageView.layer.cornerRadius = 55
         profileImageView.layer.borderWidth = 4
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.backgroundColor = .white
         profileImageView.clipsToBounds = true
-        imageBtn.layer.cornerRadius = 65
+        imageBtn.layer.cornerRadius = 55
         imageBtn.clipsToBounds = true
-        likeCollectionBtn.layer.cornerRadius = 30
-        likeCollectionBtn.clipsToBounds = true
-        calendarBtn.layer.cornerRadius = 30
-        calendarBtn.clipsToBounds = true
     }
+    
+    // Calendar request
+    func requestAccess() {
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted {
+                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+                DispatchQueue.main.async {
+                    self.calendar.reloadData()
+                }
+            }
+        }
+    }
+    
+    func fetchEventsFromCalendar(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        for calendar in calendars {
+            if calendar.title == calendarName {
+                // set event start time
+                let startDate = Date()
+                // set event end time
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                events = eventStore.events(matching: predicate)
+            }
+        }
+    }
+
     
 }
 

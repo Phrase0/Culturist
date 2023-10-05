@@ -10,7 +10,6 @@ import UIKit
 class CheckMoreViewController: UIViewController {
 
     @IBOutlet weak var checkMoreCollectionView: UICollectionView!
-
     @IBOutlet weak var checkMoretitleLabel: UILabel!
     
     let firebaseManager = FirebaseManager()

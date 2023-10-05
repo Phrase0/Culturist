@@ -12,29 +12,23 @@ import EventKitUI
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var detailTableView: UITableView!
     // detailData from home page
     var detailDesctription: ArtDatum?
     
-    let firebaseManager = FirebaseManager()
+    // like data
     var isLiked: Bool?
     var likeData = [LikeData]()
     
     // appCalendar
     let eventStore = EKEventStore()
     var appCalendar: EKCalendar?
-    
-    @IBOutlet weak var detailTableView: UITableView!
-    
     // set Time
     let dateFormatter = DateFormatter()
     
-    func changeDateFormatter(dateString: String?) -> Date? {
-        guard let dateString = dateString else {
-            return nil
-        }
-        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        return dateFormatter.date(from: dateString)
-    }
+    // create DispatchGroup
+    let group = DispatchGroup()
+    let firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +36,11 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
-        
-        // create DispatchGroup
-        let group = DispatchGroup()
-        
+
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
              // leave DispatchGroup
-            group.leave()
+            self.group.leave()
         }
         
         // use DispatchGroup notify
@@ -84,16 +75,25 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // reset navigationBarAppearance
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+    }
     
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithTransparentBackground()
-        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+    func changeDateFormatter(dateString: String?) -> Date? {
+        guard let dateString = dateString else {
+            return nil
+        }
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return dateFormatter.date(from: dateString)
     }
 
 }
@@ -276,13 +276,11 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     // check if calendar is exist or not
     func findAppCalendar() -> EKCalendar? {
         let calendars = eventStore.calendars(for: .event)
-        
         for calendar in calendars {
             if calendar.title == "CulturistCalendar" {
                 return calendar
             }
         }
-        
         return nil
     }
     

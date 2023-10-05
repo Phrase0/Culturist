@@ -24,6 +24,8 @@ enum ImageAsset: String {
     case Icons_32px_Profile_Selected
     case Icons_32px_Recommendation_Normal
     case Icons_32px_Recommendation_Selected
+    case Icons_32px_BookMark_Normal
+    case Icons_32px_BookMark_Selected
     
     // page
     case Icons_24px_Heart_Selected

@@ -62,7 +62,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .GR3
+        view.backgroundColor = .B4
         setAnimation()
         loading.startAnimating()
         
@@ -70,12 +70,15 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
+        // concertDataManager.fetchConcertData()
+        // exhibitionDataManager.fetchExhibitionData()
         
         // use firebase to get recommend data
         recommendationManager.collectionDelegate = self
@@ -93,21 +96,20 @@ class RecommendViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(filterData)
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-
         recommendationManager.readFilterRecommendationData()
         
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
-                self.group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.group.enter()
-                self.artManager6.getArtProductList(number: "6")
+                //                self.group.enter()
+                //                self.artManager1.getArtProductList(number: "1")
+                //                self.group.enter()
+                //                self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                self.concertDataManager.fetchConcertData()
+                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
                 self.recommendationManager.readFilterRecommendationData()
                 self.recommendCollectionView.mj_trailer?.endRefreshing()
             }
@@ -117,7 +119,7 @@ class RecommendViewController: UIViewController {
         trailer.setTitle("側拉刷新中", for: .refreshing)
         // trailer.stateLabel?.isHidden = true
         trailer.autoChangeTransparency(true).link(to: self.recommendCollectionView)
-
+        
         group.notify(queue: .main) {
             DispatchQueue.main.async {
                 self.recommendCollectionView.reloadData()
