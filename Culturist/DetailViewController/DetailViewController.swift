@@ -315,6 +315,9 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         }
         eventVC.event = event
         
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        eventVC.navigationBar.standardAppearance = navigationBarAppearance
         present(eventVC, animated: true)
     }
     
@@ -335,6 +338,7 @@ extension DetailViewController: DetailTableViewCellDelegate {
                     // do stuff
                     DispatchQueue.main.async {
                         self.showEventViewController()
+                        
                     }
                 }
             }
