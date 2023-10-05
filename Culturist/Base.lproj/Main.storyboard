@@ -372,40 +372,6 @@ Label</string>
                                     <constraint firstAttribute="width" constant="130" id="s4D-KB-hax"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRl-u2-UEa">
-                                <rect key="frame" x="82.666666666666686" y="376" width="210" height="60"/>
-                                <color key="backgroundColor" name="B4"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="6yB-5g-QNa"/>
-                                    <constraint firstAttribute="width" constant="210" id="xbo-Gq-jSG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
-                                <color key="tintColor" name="B1"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  我的收藏" image="Icons_24px_BookMark_Normal">
-                                    <color key="titleColor" name="B1"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToLikecollection:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="ywv-Qc-Hia"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-mf-sBi">
-                                <rect key="frame" x="82.666666666666686" y="476" width="210" height="60"/>
-                                <color key="backgroundColor" name="B4"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="J44-e5-kaj"/>
-                                    <constraint firstAttribute="height" constant="60" id="T1J-ci-Gtr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
-                                <color key="tintColor" name="B1"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="   我的行事曆" image="calendar" catalog="system">
-                                    <color key="titleColor" name="B1"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToCalendarVC:" destination="zFx-gN-yGZ" eventType="touchUpInside" id="TIt-Yu-VgL"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrD-Rs-e7v">
                                 <rect key="frame" x="122.66666666666669" y="144" width="130" height="130"/>
                                 <state key="normal" title="Button"/>
@@ -425,34 +391,28 @@ Label</string>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="DMv-VX-NdV"/>
                             <constraint firstItem="LcT-qI-n2R" firstAttribute="top" secondItem="HuM-sN-Xgw" secondAttribute="bottom" constant="15" id="Fiy-f2-BmO"/>
                             <constraint firstItem="rrD-Rs-e7v" firstAttribute="centerY" secondItem="HuM-sN-Xgw" secondAttribute="centerY" id="Hzm-86-9ax"/>
-                            <constraint firstItem="mRl-u2-UEa" firstAttribute="top" secondItem="LcT-qI-n2R" secondAttribute="bottom" constant="45" id="P50-jx-IPq"/>
                             <constraint firstAttribute="trailing" secondItem="mYy-1W-7Gk" secondAttribute="trailing" id="SUh-sc-2bL"/>
                             <constraint firstItem="HuM-sN-Xgw" firstAttribute="top" secondItem="dzO-pN-0Fh" secondAttribute="top" constant="50" id="YYW-ru-2uX"/>
                             <constraint firstItem="BVj-Gc-lty" firstAttribute="leading" secondItem="dzO-pN-0Fh" secondAttribute="leading" id="ZVM-yS-UhK"/>
-                            <constraint firstItem="5ev-mf-sBi" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="dB6-QN-C73"/>
                             <constraint firstAttribute="bottom" secondItem="BVj-Gc-lty" secondAttribute="bottom" id="do6-FK-W31"/>
                             <constraint firstItem="BVj-Gc-lty" firstAttribute="top" secondItem="mYy-1W-7Gk" secondAttribute="bottom" constant="-15" id="ep2-mF-jh4"/>
-                            <constraint firstItem="5ev-mf-sBi" firstAttribute="top" secondItem="mRl-u2-UEa" secondAttribute="bottom" constant="40" id="frw-Um-zhy"/>
                             <constraint firstItem="mYy-1W-7Gk" firstAttribute="top" secondItem="WbB-Tf-pdW" secondAttribute="top" id="jdM-A1-fNc"/>
                             <constraint firstItem="rrD-Rs-e7v" firstAttribute="width" secondItem="HuM-sN-Xgw" secondAttribute="width" id="mRu-aX-z72"/>
                             <constraint firstItem="HuM-sN-Xgw" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="sCf-vr-Wtg"/>
-                            <constraint firstItem="mRl-u2-UEa" firstAttribute="centerX" secondItem="WbB-Tf-pdW" secondAttribute="centerX" id="seM-r6-6gu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ebu-Uy-Peh"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="mYy-1W-7Gk" id="YKT-IB-KcJ"/>
                         <outlet property="backgroundWhiteView" destination="BVj-Gc-lty" id="GP3-Sp-uZE"/>
-                        <outlet property="calendarBtn" destination="5ev-mf-sBi" id="L19-2U-bFJ"/>
                         <outlet property="imageBtn" destination="rrD-Rs-e7v" id="17r-gh-XEX"/>
-                        <outlet property="likeCollectionBtn" destination="mRl-u2-UEa" id="Xsd-0S-WhH"/>
                         <outlet property="nameLabel" destination="LcT-qI-n2R" id="GX7-md-ldX"/>
                         <outlet property="profileImageView" destination="HuM-sN-Xgw" id="FtT-KY-CHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOc-Cg-mCj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="935.20000000000005" y="1387.6847290640394"/>
+            <point key="canvasLocation" x="935" y="2093"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="SPU-ax-9Zj">
@@ -524,13 +484,13 @@ Label</string>
         <!--Like View Controller-->
         <scene sceneID="TzA-IQ-8P6">
             <objects>
-                <viewController storyboardIdentifier="LikeViewController" hidesBottomBarWhenPushed="YES" id="zKE-vo-gJM" customClass="LikeViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LikeViewController" id="zKE-vo-gJM" customClass="LikeViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TyY-KY-lIH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="52K-Os-cd3">
-                                <rect key="frame" x="0.0" y="134" width="375" height="678"/>
+                                <rect key="frame" x="0.0" y="178" width="375" height="634"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nyo-lR-e9N">
                                     <size key="itemSize" width="180" height="200"/>
@@ -550,7 +510,7 @@ Label</string>
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbT-DR-eco">
-                                <rect key="frame" x="25" y="80" width="96" height="34"/>
+                                <rect key="frame" x="25" y="124" width="96" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="24"/>
                                 <color key="textColor" name="GR0"/>
                                 <nil key="highlightedColor"/>
@@ -567,13 +527,14 @@ Label</string>
                             <constraint firstItem="wbT-DR-eco" firstAttribute="top" secondItem="58j-rJ-fMb" secondAttribute="top" constant="30" id="ncs-Qo-VYf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ccE-r0-9Ju"/>
                     <connections>
                         <outlet property="likeCollectionView" destination="52K-Os-cd3" id="ApC-vs-sNf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEv-xo-R60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1693.5999999999999" y="1387.6847290640394"/>
+            <point key="canvasLocation" x="934" y="1371"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="aww-N3-9lE">
@@ -952,7 +913,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kb-oh-hEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3749.5999999999999" y="1387.6847290640394"/>
+            <point key="canvasLocation" x="4692" y="1387.6847290640394"/>
         </scene>
         <!--Coffee Shop Map View Controller-->
         <scene sceneID="aY8-sH-Pro">
@@ -967,7 +928,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1P-ok-kcE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4559" y="1371"/>
+            <point key="canvasLocation" x="5500" y="1370.6896551724139"/>
         </scene>
         <!--Book Shop Map View Controller-->
         <scene sceneID="sAk-E7-bdo">
@@ -1429,7 +1390,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NrU-Ol-zDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5277.6000000000004" y="1370.6896551724139"/>
+            <point key="canvasLocation" x="6220" y="1370.6896551724139"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="IJh-cg-Ynw">
@@ -1467,7 +1428,7 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7a-sU-8Px" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6119" y="1371"/>
+            <point key="canvasLocation" x="7060" y="1370.6896551724139"/>
         </scene>
         <!--首頁-->
         <scene sceneID="ckV-0z-aXN">
@@ -1508,6 +1469,7 @@ Label</string>
                     <connections>
                         <segue destination="HOh-nm-YAL" kind="relationship" relationship="viewControllers" id="8uZ-DC-cmJ"/>
                         <segue destination="aQ5-jg-rEo" kind="relationship" relationship="viewControllers" id="QHQ-dd-XnA"/>
+                        <segue destination="MHu-8G-gsg" kind="relationship" relationship="viewControllers" id="FI3-bF-Bhe"/>
                         <segue destination="lVw-zd-xOr" kind="relationship" relationship="viewControllers" id="Uoq-I5-jxe"/>
                     </connections>
                 </tabBarController>
@@ -1552,7 +1514,26 @@ Label</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6y-dD-6qO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="178" y="1389"/>
+            <point key="canvasLocation" x="178" y="2076"/>
+        </scene>
+        <!--收藏-->
+        <scene sceneID="XOg-L4-Jfb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MHu-8G-gsg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="收藏" image="Icons_32px_BookMark_Normal" selectedImage="Icons_32px_BookMark_Selected" id="T48-js-v7F"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fcW-Zh-RKb">
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zKE-vo-gJM" kind="relationship" relationship="rootViewController" id="o8A-2A-vaY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JHn-Cf-BBr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="178" y="1371"/>
         </scene>
     </scenes>
     <resources>
@@ -1562,6 +1543,8 @@ Label</string>
         <image name="Icons_18px_Route" width="16" height="16"/>
         <image name="Icons_24px_BookMark_Normal" width="24" height="24"/>
         <image name="Icons_24px_Notification" width="24" height="24"/>
+        <image name="Icons_32px_BookMark_Normal" width="32" height="32"/>
+        <image name="Icons_32px_BookMark_Selected" width="32" height="32"/>
         <image name="Icons_32px_Home_Normal" width="32" height="32"/>
         <image name="Icons_32px_Home_Selected" width="32" height="32"/>
         <image name="Icons_32px_Profile_Normal" width="32" height="32"/>
@@ -1570,7 +1553,6 @@ Label</string>
         <image name="Icons_32px_Recommendation_Selected" width="32" height="32"/>
         <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="bookImage" width="5086" height="3389"/>
-        <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="culturist_logo_green" width="1513" height="450"/>
         <image name="greenBackground" width="4000" height="6000"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>

@@ -73,13 +73,7 @@ class HomeViewController: UIViewController {
         artManager1.getArtProductList(number: "1")
         group.enter()
         artManager6.getArtProductList(number: "6")
-        
-        group.notify(queue: .main) {
-            DispatchQueue.main.async {
-                self.homeTableView.reloadData()
-                self.loading.stopAnimating()
-            }
-        }
+
         // pullToRefresh Header
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
@@ -91,6 +85,13 @@ class HomeViewController: UIViewController {
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
     }
     
     func setAnimation() {

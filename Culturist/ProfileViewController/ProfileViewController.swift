@@ -15,8 +15,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var likeCollectionBtn: UIButton!
-    @IBOutlet weak var calendarBtn: UIButton!
     
     let firebaseManager = FirebaseManager()
     let userDefault = UserDefaults()
@@ -73,22 +71,6 @@ class ProfileViewController: UIViewController {
         self.present(navVC, animated: true)
     }
     
-    @IBAction func goToLikecollection(_ sender: UIButton) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "LikeViewController") as? LikeViewController  else { return }
-        let navVC = UINavigationController(rootViewController: detailVC)
-        navVC.modalPresentationStyle = .fullScreen
-        navVC.modalTransitionStyle = .crossDissolve
-        self.present(navVC, animated: true)
-    }
-    
-    @IBAction func goToCalendarVC(_ sender: UIButton) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
-        let navVC = UINavigationController(rootViewController: detailVC)
-        navVC.modalPresentationStyle = .fullScreen
-        navVC.modalTransitionStyle = .crossDissolve
-        self.present(navVC, animated: true)
-    }
-    
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white
         backgroundWhiteView.layer.cornerRadius = 15
@@ -101,10 +83,6 @@ class ProfileViewController: UIViewController {
         profileImageView.clipsToBounds = true
         imageBtn.layer.cornerRadius = 65
         imageBtn.clipsToBounds = true
-        likeCollectionBtn.layer.cornerRadius = 30
-        likeCollectionBtn.clipsToBounds = true
-        calendarBtn.layer.cornerRadius = 30
-        calendarBtn.clipsToBounds = true
     }
     
 }

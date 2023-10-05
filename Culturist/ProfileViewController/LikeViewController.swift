@@ -42,7 +42,7 @@ class LikeViewController: UIViewController {
     }
     
     @IBOutlet weak var likeCollectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setAnimation()
@@ -60,14 +60,8 @@ class LikeViewController: UIViewController {
         exhibitionDataManager.exhibitionDelegate = self
         // concertDataManager.fetchConcertData()
         // exhibitionDataManager.fetchExhibitionData()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .B2
     }
     
-    @objc private func backButtonTapped() {
-        self.dismiss(animated: true)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
