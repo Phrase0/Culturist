@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItems = [leftSpacer]
         
         // Create an image view as the title view
-        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green"))
+        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green_navTitle"))
         imageView.contentMode = .scaleAspectFit
         // Set the image view as the title view
         navigationItem.titleView = imageView

@@ -44,6 +44,7 @@
 		F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */; };
 		F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */; };
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
+		F85E30382ACE4A4200622014 /* culturist_lcon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = F85E30372ACE4A4100622014 /* culturist_lcon_small.png */; };
 		F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */; };
 		F883BEB82AC5757700437C1D /* FirebaseActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */; };
 		F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */; };
@@ -103,6 +104,7 @@
 		F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionViewCell.swift; sourceTree = "<group>"; };
 		F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		F85E30372ACE4A4100622014 /* culturist_lcon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = culturist_lcon_small.png; sourceTree = "<group>"; };
 		F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseActivityManager.swift; sourceTree = "<group>"; };
 		F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
+				F85E30372ACE4A4100622014 /* culturist_lcon_small.png */,
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
 				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
@@ -396,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */,
+				F85E30382ACE4A4200622014 /* culturist_lcon_small.png in Resources */,
 				F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */,
 				F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
