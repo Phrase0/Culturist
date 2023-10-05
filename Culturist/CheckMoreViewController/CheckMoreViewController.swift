@@ -25,13 +25,7 @@ class CheckMoreViewController: UIViewController {
         checkMoreCollectionView.dataSource = self
 
         checkMoretitleLabel.text = navigationItemTitle
-
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithTransparentBackground()
-        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-
-    
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .B2
         

@@ -751,7 +751,6 @@ PODS:
     - gRPC-Core/Interface (= 1.50.1)
   - gRPC-Core/Interface (1.50.1)
   - GTMSessionFetcher/Core (3.1.1)
-  - Hero (1.6.2)
   - Kingfisher (7.9.1)
   - leveldb-library (1.22.2)
   - MJRefresh (3.7.5)
@@ -776,7 +775,6 @@ DEPENDENCIES:
   - FirebaseStorage
   - "FSCalendar+Persian"
   - Gemini
-  - Hero
   - Kingfisher (~> 7.0)
   - MJRefresh
   - NVActivityIndicatorView
@@ -803,7 +801,6 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
-    - Hero
     - Kingfisher
     - leveldb-library
     - MJRefresh
@@ -833,7 +830,6 @@ SPEC CHECKSUMS:
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
   gRPC-Core: 17108291d84332196d3c8466b48f016fc17d816d
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
-  Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
@@ -844,6 +840,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: 1d06c8e61d321dbaae78a74d115a660d72804d5f
+PODFILE CHECKSUM: f47c7e891a8fdc6e4c24867c38c9b58abfb4f4e5
 
 COCOAPODS: 1.12.1

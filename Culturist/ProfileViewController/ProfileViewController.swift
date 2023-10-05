@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Hero
 import Kingfisher
 
 class ProfileViewController: UIViewController {
@@ -47,7 +46,7 @@ class ProfileViewController: UIViewController {
         
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
-        navigationItem.rightBarButtonItem?.tintColor = .B1
+        navigationItem.rightBarButtonItem?.tintColor = .GR0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,8 +69,7 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
-        navVC.hero.isEnabled = true
-        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+        navVC.modalTransitionStyle = .crossDissolve
         self.present(navVC, animated: true)
     }
     
@@ -87,8 +85,7 @@ class ProfileViewController: UIViewController {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController  else { return }
         let navVC = UINavigationController(rootViewController: detailVC)
         navVC.modalPresentationStyle = .fullScreen
-        navVC.hero.isEnabled = true
-        navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+        navVC.modalTransitionStyle = .crossDissolve
         self.present(navVC, animated: true)
     }
     

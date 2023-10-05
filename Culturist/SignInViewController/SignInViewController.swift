@@ -7,7 +7,6 @@
 
 import UIKit
 import AuthenticationServices
-import Hero
 
 class SignInViewController: UIViewController {
     

@@ -76,7 +76,7 @@ class AnimationTableViewCell: UITableViewCell {
     func setupPageControl() {
         pageControl.numberOfPages = 6
         pageControl.currentPage = imageIndex
-        pageControl.currentPageIndicatorTintColor = UIColor.GR2
+        pageControl.currentPageIndicatorTintColor = UIColor.GR0
         pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
         // pageControl.backgroundStyle = .minimal
         addSubview(pageControl)

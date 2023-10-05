@@ -187,6 +187,9 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
             eventEditViewController.event = event // when set to nil the controller would not display anything
         }
         eventEditViewController.editViewDelegate = self
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        eventEditViewController.navigationBar.standardAppearance = navigationBarAppearance
         present(eventEditViewController, animated: true, completion: nil)
     }
     
