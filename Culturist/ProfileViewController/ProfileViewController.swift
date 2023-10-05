@@ -20,11 +20,10 @@ class ProfileViewController: UIViewController {
     //@IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var eventsTableView: UITableView!
     var eventStore = EKEventStore()
     var events: [EKEvent] = []
     var selectedDate: Date?
-
-    @IBOutlet weak var eventsTableView: UITableView!
     
     let firebaseManager = FirebaseManager()
     let userDefault = UserDefaults()
@@ -64,7 +63,12 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
-        //nameLabel.text = userDefault.value(forKey: "fullName") as? String
+        // nameLabel.text = userDefault.value(forKey: "fullName") as? String
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        requestAccess()
     }
     
     @IBAction func todayBtn(_ sender: UIButton) {
@@ -74,30 +78,6 @@ class ProfileViewController: UIViewController {
         calendar.select(today)
         // Scroll to the current month
         calendar.setCurrentPage(today, animated: true)
-    }
-
-    func requestAccess() {
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            if granted {
-                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
-                DispatchQueue.main.async {
-                    self.calendar.reloadData()
-                }
-            }
-        }
-    }
-    func fetchEventsFromCalendar(calendarName: String) {
-        let calendars = eventStore.calendars(for: .event)
-        for calendar in calendars {
-            if calendar.title == calendarName {
-                // set event start time
-                let startDate = Date()
-                // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
-                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
-                events = eventStore.events(matching: predicate)
-            }
-        }
     }
 
     @IBAction func imageViewTapped(_ sender: UIButton) {
@@ -124,14 +104,41 @@ class ProfileViewController: UIViewController {
         backgroundWhiteView.layer.cornerRadius = 15
         backgroundWhiteView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         backgroundWhiteView.clipsToBounds = true
-        profileImageView.layer.cornerRadius = 65
+        profileImageView.layer.cornerRadius = 55
         profileImageView.layer.borderWidth = 4
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.backgroundColor = .white
         profileImageView.clipsToBounds = true
-        imageBtn.layer.cornerRadius = 65
+        imageBtn.layer.cornerRadius = 55
         imageBtn.clipsToBounds = true
     }
+    
+    // Calendar request
+    func requestAccess() {
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted {
+                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+                DispatchQueue.main.async {
+                    self.calendar.reloadData()
+                }
+            }
+        }
+    }
+    
+    func fetchEventsFromCalendar(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        for calendar in calendars {
+            if calendar.title == calendarName {
+                // set event start time
+                let startDate = Date()
+                // set event end time
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                events = eventStore.events(matching: predicate)
+            }
+        }
+    }
+
     
 }
 

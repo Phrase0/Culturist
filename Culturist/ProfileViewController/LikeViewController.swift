@@ -7,17 +7,18 @@
 
 import UIKit
 import NVActivityIndicatorView
+import MJRefresh
 
 class LikeViewController: UIViewController {
     
-    let firebaseManager = FirebaseManager()
-    var likeData = [LikeData]()
-    
+    @IBOutlet weak var likeCollectionView: UICollectionView!
+
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
     
+    let firebaseManager = FirebaseManager()
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
@@ -25,6 +26,7 @@ class LikeViewController: UIViewController {
     let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
+    var likeData = [LikeData]()
     // products in likeCollection
     var likeEXProducts: [ArtDatum] {
         let filteredProducts = self.artProducts1 + self.artProducts6
@@ -41,8 +43,6 @@ class LikeViewController: UIViewController {
         return filteredLikes
     }
     
-    @IBOutlet weak var likeCollectionView: UICollectionView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setAnimation()
@@ -55,16 +55,6 @@ class LikeViewController: UIViewController {
         artManager1.delegate = self
         artManager6.delegate = self
         
-        // use firebase to get data
-        concertDataManager.concertDelegate = self
-        exhibitionDataManager.exhibitionDelegate = self
-        // concertDataManager.fetchConcertData()
-        // exhibitionDataManager.fetchExhibitionData()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         group.enter()
         artManager1.getArtProductList(number: "1")
         group.enter()
@@ -76,6 +66,27 @@ class LikeViewController: UIViewController {
                 self.loading.stopAnimating()
             }
         }
+        
+        // MARK: - FireBaseData
+//        concertDataManager.concertDelegate = self
+//        exhibitionDataManager.exhibitionDelegate = self
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // pullToRefresh Header
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.group.enter()
+                self.artManager1.getArtProductList(number: "1")
+                self.group.enter()
+                self.artManager6.getArtProductList(number: "6")
+                self.likeCollectionView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.likeCollectionView)
         
         firebaseManager.fetchUserLikeData { _ in
             DispatchQueue.main.async {
