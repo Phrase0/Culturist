@@ -56,6 +56,7 @@ class RecommendViewController: UIViewController {
             let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
             // Get the first 15 items of data, or return an empty array if there is no data
             let result = Array(sortedProducts.prefix(6))
+            print("filterData have no data")
             return result
         }
     }
@@ -70,10 +71,7 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
+        
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
@@ -95,22 +93,26 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(filterData)
         recommendationManager.readFilterRecommendationData()
+        print(filterData)
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
         
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
-                //                self.group.enter()
-                //                self.artManager1.getArtProductList(number: "1")
-                //                self.group.enter()
-                //                self.artManager6.getArtProductList(number: "6")
-                // ---------------------------------------------------
-                self.concertDataManager.fetchConcertData()
-                self.exhibitionDataManager.fetchExhibitionData()
-                // ---------------------------------------------------
+                self.group.enter()
                 self.recommendationManager.readFilterRecommendationData()
+                self.artManager1.getArtProductList(number: "1")
+                self.group.enter()
+                self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                //                self.concertDataManager.fetchConcertData()
+                //                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
                 self.recommendCollectionView.mj_trailer?.endRefreshing()
             }
         }
@@ -126,6 +128,7 @@ class RecommendViewController: UIViewController {
                 self.loading.stopAnimating()
             }
         }
+  
     }
     
     func setAnimation() {
@@ -222,7 +225,6 @@ extension RecommendViewController: FirebaseCollectionDelegate {
 
 // MARK: - ArtManagerDelegate
 extension RecommendViewController: ArtManagerDelegate {
-    // Call the signal() method of the semaphore in manager(_:didGet:) to notify that the data loading is complete
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
         DispatchQueue.main.async {
             if artProductList.isEmpty {
@@ -233,13 +235,17 @@ extension RecommendViewController: ArtManagerDelegate {
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
-                self.group.leave()
             }
+            self.group.leave()
         }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+            // self.group.leave()
+        }
     }
     
 }

@@ -54,19 +54,7 @@ class LikeViewController: UIViewController {
         
         artManager1.delegate = self
         artManager6.delegate = self
-        
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-        
-        group.notify(queue: .main) {
-            DispatchQueue.main.async {
-                self.likeCollectionView.reloadData()
-                self.loading.stopAnimating()
-            }
-        }
-        
+
         // MARK: - FireBaseData
 //        concertDataManager.concertDelegate = self
 //        exhibitionDataManager.exhibitionDelegate = self
@@ -76,6 +64,10 @@ class LikeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
         // pullToRefresh Header
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
@@ -84,9 +76,20 @@ class LikeViewController: UIViewController {
                 self.artManager1.getArtProductList(number: "1")
                 self.group.enter()
                 self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                //                self.concertDataManager.fetchConcertData()
+                //                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
                 self.likeCollectionView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.likeCollectionView)
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.likeCollectionView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
         
         firebaseManager.fetchUserLikeData { _ in
             DispatchQueue.main.async {
@@ -181,10 +184,8 @@ extension LikeViewController: ArtManagerDelegate {
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
-                DispatchQueue.main.async {
-                    self.group.leave()
-                }
             }
+            self.group.leave()
         }
     }
     
@@ -192,7 +193,7 @@ extension LikeViewController: ArtManagerDelegate {
         print(error.localizedDescription)
         DispatchQueue.main.async {
             self.loading.stopAnimating()
-            self.group.leave()
+            // self.group.leave()
         }
     }
     

@@ -37,10 +37,7 @@ class HomeViewController: UIViewController {
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
+
         // MARK: - FireBaseData
         // use firebase to get data
 //        concertDataManager.concertDelegate = self
@@ -69,6 +66,11 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
         // pullToRefresh Header
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
@@ -77,6 +79,10 @@ class HomeViewController: UIViewController {
                 self.artManager1.getArtProductList(number: "1")
                 self.group.enter()
                 self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                //                self.concertDataManager.fetchConcertData()
+                //                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
@@ -225,9 +231,8 @@ extension HomeViewController: ArtManagerDelegate {
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
                 }
-                self.group.leave()
             }
-            
+            self.group.leave()
         }
     }
     
@@ -235,7 +240,7 @@ extension HomeViewController: ArtManagerDelegate {
         // print(error.localizedDescription)
         DispatchQueue.main.async {
             self.loading.stopAnimating()
-            self.group.leave()
+            // self.group.leave()
         }
     }
     

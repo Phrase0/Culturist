@@ -220,6 +220,7 @@
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F8447A232AB9CE0B00471552 /* NavigationViewController */,
+				F8A14E7A2ACF0C4D009A9291 /* LikeViewController */,
 				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
 				F81E8C772AC95F8D002AED22 /* SignInViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
@@ -314,13 +315,20 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		F8A14E7A2ACF0C4D009A9291 /* LikeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
+				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
+			);
+			path = LikeViewController;
+			sourceTree = "<group>";
+		};
 		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
 				F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */,
-				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
-				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
 				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
