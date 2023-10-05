@@ -72,6 +72,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = searchResult[indexPath.item]
+        firebaseManager.addRecommendData(exhibitionUid: searchResult[indexPath.item].uid, title: searchResult[indexPath.item].title, location: searchResult[indexPath.item].showInfo[0].location, locationName: searchResult[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

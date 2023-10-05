@@ -104,7 +104,6 @@ class FirebaseManager {
         }
     }
 
-    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -207,7 +206,6 @@ class FirebaseManager {
     }
 
 
-
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
         // Create a new RecommendationData
@@ -234,8 +232,7 @@ class FirebaseManager {
             }
         }
     }
-    
-    
+
     // ---------------------------------------------------
     func readRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
