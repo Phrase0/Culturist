@@ -8,6 +8,7 @@
 import UIKit
 import Gemini
 import NVActivityIndicatorView
+import MJRefresh
 
 class RecommendViewController: UIViewController {
     
@@ -20,20 +21,42 @@ class RecommendViewController: UIViewController {
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
     
+    let recommendationManager = FirebaseManager()
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
-    // recommendProducts
+    // MARK: - recommendProducts
+    var filterData = [RecommendationData]()
     var recommendProducts: [ArtDatum] {
         let filteredProducts = artProducts1 + artProducts6
-        // sort by hitRate
-        let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
-        // Get the first 15 items of data, or return an empty array if there is no data
-        let result = Array(sortedProducts.prefix(15))
-        return result
+        if let firstFilterData = self.filterData.first {
+            let searchTitleTerm = firstFilterData.title
+            let searchLocationTerm = firstFilterData.location.prefix(3)
+            let searchLocationNameTerm = firstFilterData.locationName
+            
+            // use `filter` to search data
+            let filteredData = filteredProducts.filter { data in
+                // Use the range(of:options:) to determine if it contains the specified substring
+                let titleContains = data.title.range(of: searchTitleTerm, options: .caseInsensitive) != nil
+                let locationContains = data.showInfo.first?.location.range(of: searchLocationTerm, options: .caseInsensitive) != nil
+                let locationNameContains = data.showInfo.first?.locationName.range(of: searchLocationNameTerm, options: .caseInsensitive) != nil
+                // return true if any of the properties contain similar text
+                return titleContains || locationContains || locationNameContains
+            }
+            let top15Results = Array(filteredData.prefix(2))
+            return top15Results
+        } else {
+            // if filterData have no data
+            // sort by hitRate
+            let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
+            // Get the first 15 items of data, or return an empty array if there is no data
+            let result = Array(sortedProducts.prefix(2))
+            return result
+        }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +70,9 @@ class RecommendViewController: UIViewController {
         artManager6.delegate = self
         artManager1.getArtProductList(number: "1")
         artManager6.getArtProductList(number: "6")
+        // use firebase to get recommend data
+        recommendationManager.collectionDelegate = self
+        recommendationManager.readFilterRecommendationData()
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
@@ -70,6 +96,28 @@ class RecommendViewController: UIViewController {
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(filterData)
+        
+        
+        // pullToRefresh Header
+        
+        let trailer = MJRefreshNormalTrailer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+                self.recommendCollectionView.mj_trailer?.endRefreshing()
+            }
+        }
+        trailer.setTitle("側拉", for: .idle)
+        trailer.setTitle("松開刷新", for: .pulling)
+        trailer.setTitle("側拉刷新中", for: .refreshing)
+        // trailer.stateLabel?.isHidden = true
+        trailer.autoChangeTransparency(true).link(to: self.recommendCollectionView)
     }
 }
 
@@ -136,10 +184,19 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumInteritemSpacing = interitemSpace
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 105/75)
-        
         // Set content insets
         recommendCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
+    }
+    
+}
+
+extension RecommendViewController: FirebaseCollectionDelegate {
+    func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
+        self.filterData = recommendationData
+        DispatchQueue.main.async {
+            self.recommendCollectionView.reloadData()
+        }
     }
     
 }
@@ -187,7 +244,6 @@ extension RecommendViewController: FirebaseConcertDelegate {
             self.loading.stopAnimating()
         }
     }
-    
 }
 
 extension RecommendViewController: FirebaseExhibitionDelegate {
