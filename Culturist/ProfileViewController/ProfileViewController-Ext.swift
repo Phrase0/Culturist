@@ -10,72 +10,8 @@ import FSCalendar_Persian
 import EventKit
 import EventKitUI
 
-class CalendarViewController: UIViewController {
-     
-    @IBOutlet weak var calendar: FSCalendar!
-    var eventStore = EKEventStore()
-    var events: [EKEvent] = []
-    var selectedDate: Date?
-    
-    @IBOutlet weak var eventsTableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        calendar.dataSource = self
-        calendar.delegate = self
-        setCalendarAppearance()
-        eventsTableView.delegate = self
-        eventsTableView.dataSource = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .B2
-    }
-        
-    @objc private func backButtonTapped() {
-        self.dismiss(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        requestAccess()
-    }
-    
-    @IBAction func todayBtn(_ sender: UIButton) {
-        // Get the current date
-        let today = Date()
-        // Use the `select` method of FSCalendar to select the current month
-        calendar.select(today)
-        // Scroll to the current month
-        calendar.setCurrentPage(today, animated: true)
-    }
-    
-    func requestAccess() {
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            if granted {
-                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
-                DispatchQueue.main.async {
-                    self.calendar.reloadData()
-                }
-            }
-        }
-    }
-    func fetchEventsFromCalendar(calendarName: String) {
-        let calendars = eventStore.calendars(for: .event)
-        for calendar in calendars {
-            if calendar.title == calendarName {
-                // set event start time
-                let startDate = Date()
-                // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
-                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
-                events = eventStore.events(matching: predicate)
-            }
-        }
-    }
-    
-}
-
 // MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
-extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
+extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: date) }
         return matchingEvents.count
@@ -105,7 +41,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let selectedDate = selectedDate {
             let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: selectedDate) }
@@ -197,7 +133,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 
 // MARK: EKEventEditViewDelegate
 
-extension CalendarViewController: EKEventEditViewDelegate {
+extension ProfileViewController: EKEventEditViewDelegate {
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)

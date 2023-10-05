@@ -7,6 +7,9 @@
 
 import UIKit
 import Kingfisher
+import FSCalendar_Persian
+import EventKit
+import EventKitUI
 
 class ProfileViewController: UIViewController {
     
@@ -14,22 +17,33 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backgroundWhiteView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
-    @IBOutlet weak var nameLabel: UILabel!
+    //@IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var calendar: FSCalendar!
+    var eventStore = EKEventStore()
+    var events: [EKEvent] = []
+    var selectedDate: Date?
+
+    @IBOutlet weak var eventsTableView: UITableView!
     
     let firebaseManager = FirebaseManager()
     let userDefault = UserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firebaseManager.readUserData { fullName in
-            if let fullName = fullName {
-                self.userDefault.set(fullName, forKey: "fullName")
-                self.nameLabel.text = fullName
-            } else {
-                print("Full Name not found.")
-            }
-        }
+        calendar.dataSource = self
+        calendar.delegate = self
+        setCalendarAppearance()
+        eventsTableView.delegate = self
+        eventsTableView.dataSource = self
+//        firebaseManager.readUserData { fullName in
+//            if let fullName = fullName {
+//                self.userDefault.set(fullName, forKey: "fullName")
+//                self.nameLabel.text = fullName
+//            } else {
+//                print("Full Name not found.")
+//            }
+//        }
         
         firebaseManager.readImage { imageUrl in
             if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
@@ -49,9 +63,43 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nameLabel.text = userDefault.value(forKey: "fullName") as? String
+        requestAccess()
+        //nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
     
+    @IBAction func todayBtn(_ sender: UIButton) {
+        // Get the current date
+        let today = Date()
+        // Use the `select` method of FSCalendar to select the current month
+        calendar.select(today)
+        // Scroll to the current month
+        calendar.setCurrentPage(today, animated: true)
+    }
+
+    func requestAccess() {
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted {
+                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+                DispatchQueue.main.async {
+                    self.calendar.reloadData()
+                }
+            }
+        }
+    }
+    func fetchEventsFromCalendar(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        for calendar in calendars {
+            if calendar.title == calendarName {
+                // set event start time
+                let startDate = Date()
+                // set event end time
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                events = eventStore.events(matching: predicate)
+            }
+        }
+    }
+
     @IBAction func imageViewTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePickerController = UIImagePickerController()
