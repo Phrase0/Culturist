@@ -21,6 +21,8 @@ class LikeViewController: UIViewController {
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
+    // create DispatchGroup
+    let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     // products in likeCollection
@@ -40,7 +42,7 @@ class LikeViewController: UIViewController {
     }
     
     @IBOutlet weak var likeCollectionView: UICollectionView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setAnimation()
@@ -49,11 +51,15 @@ class LikeViewController: UIViewController {
         firebaseManager.likeDelegate = self
         likeCollectionView.dataSource = self
         likeCollectionView.delegate = self
+        
         artManager1.delegate = self
         artManager6.delegate = self
+        
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
+        // concertDataManager.fetchConcertData()
+        // exhibitionDataManager.fetchExhibitionData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .B2
@@ -65,12 +71,22 @@ class LikeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        group.enter()
         artManager1.getArtProductList(number: "1")
+        group.enter()
         artManager6.getArtProductList(number: "6")
-        // use firebase to get data
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.likeCollectionView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
+        
         firebaseManager.fetchUserLikeData { _ in
+            DispatchQueue.main.async {
+                self.likeCollectionView.reloadData()
+            }
         }
         
     }
@@ -108,6 +124,7 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         if let selectedIndexPaths = self.likeCollectionView.indexPathsForSelectedItems,
            let selectedIndexPath = selectedIndexPaths.first {
             detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]
+            firebaseManager.addRecommendData(exhibitionUid: likeEXProducts[indexPath.item].uid, title: likeEXProducts[indexPath.item].title, location: likeEXProducts[indexPath.item].showInfo[0].location, locationName: likeEXProducts[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -144,9 +161,6 @@ extension LikeViewController: UICollectionViewDelegateFlowLayout {
 extension LikeViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
         self.likeData = likeData
-        DispatchQueue.main.async {
-            self.likeCollectionView.reloadData()
-        }
     }
 }
 
@@ -161,10 +175,9 @@ extension LikeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                    DispatchQueue.main.async {
-                        self.likeCollectionView.reloadData()
-                        self.loading.stopAnimating()
-                    }
+                }
+                DispatchQueue.main.async {
+                    self.group.leave()
                 }
             }
         }
@@ -174,6 +187,7 @@ extension LikeViewController: ArtManagerDelegate {
         print(error.localizedDescription)
         DispatchQueue.main.async {
             self.loading.stopAnimating()
+            self.group.leave()
         }
     }
     

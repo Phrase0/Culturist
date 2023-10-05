@@ -104,7 +104,6 @@ class FirebaseManager {
         }
     }
 
-    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")

@@ -9,7 +9,6 @@ import UIKit
 
 class CheckMoreCollectionViewCell: UICollectionViewCell {
     
-    
     lazy var productView: UIView = {
         let productView = UIView()
         return productView

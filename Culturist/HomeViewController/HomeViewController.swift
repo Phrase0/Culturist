@@ -25,6 +25,8 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
+    // create DispatchGroup
+    let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     override func viewDidLoad() {
@@ -37,15 +39,16 @@ class HomeViewController: UIViewController {
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
-        artManager1.getArtProductList(number: "1")
-        artManager6.getArtProductList(number: "6")
         
+        // MARK: - FireBase
         // use firebase to get data
-        concertDataManager.concertDelegate = self
-        exhibitionDataManager.exhibitionDelegate = self
-        //                concertDataManager.fetchConcertData()
-        //                exhibitionDataManager.fetchExhibitionData()
+//        concertDataManager.concertDelegate = self
+//        exhibitionDataManager.exhibitionDelegate = self
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
         
+        
+        // MARK: - navigationTitle
         // Create an empty UIBarButtonItem as the left item
         let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         leftSpacer.width = 44 // Adjust the width to add left space
@@ -66,17 +69,29 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
         // pullToRefresh Header
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
+                self.group.enter()
                 self.artManager1.getArtProductList(number: "1")
+                self.group.enter()
                 self.artManager6.getArtProductList(number: "6")
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
     }
-    
     
     func setAnimation() {
         view.addSubview(loading)
@@ -98,6 +113,7 @@ class HomeViewController: UIViewController {
     }
     
 }
+
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         3
@@ -212,11 +228,8 @@ extension HomeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                    DispatchQueue.main.async {
-                        self.homeTableView.reloadData()
-                        self.loading.stopAnimating()
-                    }
                 }
+                self.group.leave()
             }
             
         }
@@ -224,40 +237,41 @@ extension HomeViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         // print(error.localizedDescription)
-        self.loading.stopAnimating()
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+            self.group.leave()
+        }
     }
     
 }
 
 // MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
+    
+    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
+        self.artProducts1 = concertData
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+            self.homeTableView.reloadData()
+        }
+    }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
         DispatchQueue.main.async {
             self.loading.stopAnimating()
         }
     }
-    
-    func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
-        self.artProducts1 = concertData
-        DispatchQueue.main.async {
-            self.homeTableView.reloadData()
-            self.loading.stopAnimating()
-        }
-    }
-    
 }
 
 extension HomeViewController: FirebaseExhibitionDelegate {
-    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
-            self.loading.stopAnimating()
-        }
-    }
-    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async {
+            self.loading.stopAnimating()
             self.homeTableView.reloadData()
+        }
+    }
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async {
             self.loading.stopAnimating()
         }
     }
