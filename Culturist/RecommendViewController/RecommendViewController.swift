@@ -57,7 +57,7 @@ class RecommendViewController: UIViewController {
         }
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .B4
@@ -101,10 +101,8 @@ class RecommendViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(filterData)
-        
-        
-        // pullToRefresh Header
-        
+
+        // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
