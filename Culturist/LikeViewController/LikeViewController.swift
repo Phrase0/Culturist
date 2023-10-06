@@ -8,6 +8,7 @@
 import UIKit
 import NVActivityIndicatorView
 import MJRefresh
+import SnapKit
 
 class LikeViewController: UIViewController {
     
