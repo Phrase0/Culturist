@@ -24,7 +24,7 @@ class SearchViewController: UIViewController {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
         noDataNoteLabel.textColor = .B2
-        noDataNoteLabel.text = "請搜尋音樂會或展覽"
+        noDataNoteLabel.text = "找尋您感興趣的音樂會跟展覽"
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 18) {
             noDataNoteLabel.font = pingFangFont
         } else {
@@ -60,7 +60,6 @@ class SearchViewController: UIViewController {
         navigationItem.title = "搜尋"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .GR0
-        
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
@@ -175,7 +174,6 @@ extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
             filterContent(for: searchText)
-            print(searchResult)
             if searchResult.isEmpty && !searchText.isEmpty {
                 noResultNoteLabel.isHidden = false
             } else {
@@ -207,7 +205,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("Cancel button clicked")
         noDataNoteLabel.isHidden = false
         noDataNoteLabel.text = "請搜尋音樂會或展覽"
     }
