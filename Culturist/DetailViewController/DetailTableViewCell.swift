@@ -9,6 +9,7 @@ import UIKit
 
 protocol DetailTableViewCellDelegate: AnyObject {
     func notificationBtnTapped(sender: UIButton)
+    func webBtnTapped(sender: UIButton)
 }
 
 class DetailTableViewCell: UITableViewCell {
@@ -45,6 +46,11 @@ class DetailTableViewCell: UITableViewCell {
         searchBookButtonHandler?(sender)
     }
         
+    @IBAction func webBtutton(_ sender: UIButton) {
+        cellDelegate?.webBtnTapped(sender: sender)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()

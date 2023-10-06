@@ -232,7 +232,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
-            // MARK: - notificationBtnTapped
+            // MARK: - notificationBtn & webBtn Tapped
             cell.cellDelegate = self
             // ---------------------------------------------------
         }
@@ -329,6 +329,16 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
+    func webBtnTapped(sender: UIButton) {
+        guard let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController  else { return }
+        if let detailDesctription = detailDesctription {
+            webVC.urlString = detailDesctription.webSales
+            print(detailDesctription.webSales)
+            navigationController?.pushViewController(webVC, animated: true)
+        }
+        
+    }
+    
     func notificationBtnTapped(sender: UIButton) {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
