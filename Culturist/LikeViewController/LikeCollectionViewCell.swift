@@ -57,7 +57,6 @@ class LikeCollectionViewCell: UICollectionViewCell {
             make.leading.top.equalToSuperview()
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-10)
-            
         }
         
         productTitle.snp.makeConstraints { make in

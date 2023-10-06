@@ -12,7 +12,7 @@ import MJRefresh
 class LikeViewController: UIViewController {
     
     @IBOutlet weak var likeCollectionView: UICollectionView!
-
+    
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
@@ -43,9 +43,26 @@ class LikeViewController: UIViewController {
         return filteredLikes
     }
     
+    lazy var noDataNoteLabel: UILabel = {
+        let noDataNoteLabel = UILabel()
+        noDataNoteLabel.numberOfLines = 1
+        noDataNoteLabel.textColor = .B2
+        noDataNoteLabel.text = "開始添加展覽到您的收藏清單吧"
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 18) {
+            noDataNoteLabel.font = pingFangFont
+        } else {
+            noDataNoteLabel.font = UIFont.systemFont(ofSize: 18)
+            print("no font type")
+        }
+        return noDataNoteLabel
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(noDataNoteLabel)
+        
         setAnimation()
+        setupConstraints()
         loading.startAnimating()
         
         firebaseManager.likeDelegate = self
@@ -90,13 +107,17 @@ class LikeViewController: UIViewController {
                 self.loading.stopAnimating()
             }
         }
-        
+        noDataNoteLabel.isHidden = true
         firebaseManager.fetchUserLikeData { _ in
+            if self.likeData.isEmpty == true {
+                self.noDataNoteLabel.isHidden = false
+            } else {
+                self.noDataNoteLabel.isHidden = true
+            }
             DispatchQueue.main.async {
                 self.likeCollectionView.reloadData()
             }
         }
-        
     }
     
     func setAnimation() {
@@ -106,6 +127,13 @@ class LikeViewController: UIViewController {
             make.centerY.equalToSuperview()
             make.width.equalTo(40)
             make.height.equalTo(40)
+        }
+    }
+    
+    func setupConstraints() {
+        noDataNoteLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
     }
     
