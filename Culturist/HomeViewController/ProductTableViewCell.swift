@@ -79,10 +79,10 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
             
             if productIndexPath == 1 {
                 detailVC.detailDesctription = artProducts1[indexPath.item]
-                firebaseManager.addRecommendData(exhibitionUid: artProducts1[indexPath.item].uid, title: artProducts1[indexPath.item].title, location: artProducts1[indexPath.item].showInfo[0].location, locationName: artProducts1[indexPath.item].showInfo[0].locationName)
+                firebaseManager.addRecommendData(exhibitionUid: artProducts1[indexPath.item].uid, title: artProducts1[indexPath.item].title, category: artProducts1[indexPath.item].category, location: artProducts1[indexPath.item].showInfo[0].location, locationName: artProducts1[indexPath.item].showInfo[0].locationName)
             } else if productIndexPath == 2 {
                 detailVC.detailDesctription = artProducts6[indexPath.item]
-                firebaseManager.addRecommendData(exhibitionUid: artProducts6[indexPath.row].uid, title: artProducts6[indexPath.item].title, location: artProducts6[indexPath.item].showInfo[0].location, locationName: artProducts6[indexPath.item].showInfo[0].locationName)
+                firebaseManager.addRecommendData(exhibitionUid: artProducts6[indexPath.row].uid, title: artProducts6[indexPath.item].title, category: artProducts6[indexPath.row].category, location: artProducts6[indexPath.item].showInfo[0].location, locationName: artProducts6[indexPath.item].showInfo[0].locationName)
             }
             
             homeViewController.navigationController?.pushViewController(detailVC, animated: true)

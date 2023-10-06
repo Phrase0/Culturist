@@ -207,9 +207,9 @@ class FirebaseManager {
 
 
     // MARK: - Recommendation
-    func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
+    func addRecommendData(exhibitionUid: String, title: String, category: String, location: String, locationName: String) {
         // Create a new RecommendationData
-        let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+        let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
         // Get the user's document reference
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for recommendationData
@@ -219,6 +219,7 @@ class FirebaseManager {
         let recommendationData: [String: Any] = [
             "exhibitionUid": newRecommendationData.exhibitionUid,
             "title": newRecommendationData.title,
+            "category": newRecommendationData.category,
             "location": newRecommendationData.location,
             "locationName": newRecommendationData.locationName
         ]
@@ -249,10 +250,11 @@ class FirebaseManager {
                 let data = document.data()
                 if let exhibitionUid = data["exhibitionUid"] as? String,
                    let title = data["title"] as? String,
+                   let category = data["category"] as? String,
                    let location = data["location"] as? String,
                    let locationName = data["locationName"] as? String {
                     // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
                 }
             }
@@ -279,10 +281,11 @@ class FirebaseManager {
                 
                 if let exhibitionUid = data["exhibitionUid"] as? String,
                    let title = data["title"] as? String,
+                   let category = data["category"] as? String,
                    let location = data["location"] as? String,
                    let locationName = data["locationName"] as? String {
                     // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
                 }
             }

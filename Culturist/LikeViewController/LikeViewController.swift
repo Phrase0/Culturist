@@ -132,7 +132,7 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         if let selectedIndexPaths = self.likeCollectionView.indexPathsForSelectedItems,
            let selectedIndexPath = selectedIndexPaths.first {
             detailVC.detailDesctription = likeEXProducts[selectedIndexPath.row]
-            firebaseManager.addRecommendData(exhibitionUid: likeEXProducts[indexPath.item].uid, title: likeEXProducts[indexPath.item].title, location: likeEXProducts[indexPath.item].showInfo[0].location, locationName: likeEXProducts[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(exhibitionUid: likeEXProducts[indexPath.item].uid, title: likeEXProducts[indexPath.item].title, category: likeEXProducts[indexPath.item].category, location: likeEXProducts[indexPath.item].showInfo[0].location, locationName: likeEXProducts[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }

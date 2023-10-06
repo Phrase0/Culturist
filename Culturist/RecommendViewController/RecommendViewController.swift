@@ -32,31 +32,39 @@ class RecommendViewController: UIViewController {
     
     // MARK: - recommendProducts
     var filterData = [RecommendationData]()
+    
     var recommendProducts: [ArtDatum] {
         let filteredProducts = artProducts1 + artProducts6
         if let firstFilterData = self.filterData.first {
             let searchTitleTerm = firstFilterData.title
-            let searchLocationTerm = firstFilterData.location.prefix(3)
+            let searchLocationTerm = firstFilterData.location.prefix(6)
             let searchLocationNameTerm = firstFilterData.locationName
-            
-            // use `filter` to search data
-            let filteredData = filteredProducts.filter { data in
-                // Use the range(of:options:) to determine if it contains the specified substring
-                let titleContains = data.title.range(of: searchTitleTerm, options: .caseInsensitive) != nil
-                let locationContains = data.showInfo.first?.location.range(of: searchLocationTerm, options: .caseInsensitive) != nil
-                let locationNameContains = data.showInfo.first?.locationName.range(of: searchLocationNameTerm, options: .caseInsensitive) != nil
-                // return true if any of the properties contain similar text
-                return titleContains || locationContains || locationNameContains
+            // Use `filter` to search data
+            var filteredData = filteredProducts.filter { data in
+                let titleContains = data.title.contains(searchTitleTerm)
+                let locationContains = data.showInfo.first?.location.contains(searchLocationTerm)
+                let locationNameContains = data.showInfo.first?.locationName.contains(searchLocationNameTerm)
+                // Return true if any of the properties contain similar text
+                return titleContains || locationContains ?? false || locationNameContains ?? false
             }
-            let topResults = Array(filteredData.prefix(6))
+            
+            // Check the number of filtered data after filtering
+            let resultCount = filteredData.count
+            // If the result count is less than 10, recommend by hitRate to reach 10
+            if resultCount < 10 {
+                let remainingCount = 10 - resultCount
+                let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
+                let topProducts = Array(sortedProducts.prefix(remainingCount))
+                filteredData.append(contentsOf: topProducts)
+            }
+
+            let topResults = Array(filteredData.prefix(10))
             return topResults
         } else {
-            // if filterData have no data
-            // sort by hitRate
+            // if filterData have no data, sort by hitRate
             let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
-            // Get the first 15 items of data, or return an empty array if there is no data
-            let result = Array(sortedProducts.prefix(6))
-            print("filterData have no data")
+            let result = Array(sortedProducts.prefix(10))
+            print("results:\(result)")
             return result
         }
     }
@@ -105,7 +113,6 @@ class RecommendViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
                 self.group.enter()
-                self.recommendationManager.readFilterRecommendationData()
                 self.artManager1.getArtProductList(number: "1")
                 self.group.enter()
                 self.artManager6.getArtProductList(number: "6")
@@ -128,7 +135,7 @@ class RecommendViewController: UIViewController {
                 self.loading.stopAnimating()
             }
         }
-  
+        
     }
     
     func setAnimation() {
@@ -169,7 +176,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
-        firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
+        firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
         
     }
@@ -216,9 +223,9 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
         self.filterData = recommendationData
-        DispatchQueue.main.async {
-            self.recommendCollectionView.reloadData()
-        }
+        //        DispatchQueue.main.async {
+        //            self.recommendCollectionView.reloadData()
+        //        }
     }
     
 }
