@@ -220,6 +220,7 @@
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F8447A232AB9CE0B00471552 /* NavigationViewController */,
+				F8A14E7A2ACF0C4D009A9291 /* LikeViewController */,
 				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
 				F81E8C772AC95F8D002AED22 /* SignInViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
@@ -314,12 +315,19 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		F8A14E7A2ACF0C4D009A9291 /* LikeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
+				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
+			);
+			path = LikeViewController;
+			sourceTree = "<group>";
+		};
 		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
-				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
-				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 				F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
 				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
@@ -349,7 +357,8 @@
 				F82A34E72AB2AC4C004FF247 /* Frameworks */,
 				F82A34E82AB2AC4C004FF247 /* Resources */,
 				FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */,
-				F82A35112AB2DB77004FF247 /* ShellScript */,
+				F82A35112AB2DB77004FF247 /* Run Script SwiftLint */,
+				F8A14E792ACEEEE8009A9291 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -432,7 +441,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F82A35112AB2DB77004FF247 /* ShellScript */ = {
+		F82A35112AB2DB77004FF247 /* Run Script SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		F8A14E792ACEEEE8009A9291 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -447,7 +474,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 		FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -667,6 +694,7 @@
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
