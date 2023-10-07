@@ -59,9 +59,9 @@ class ConcertDataManager {
                            let location = showInfoData["location"] as? String,
                            let locationName = showInfoData["locationName"] as? String,
                            let price = showInfoData["price"] as? String,
-                           let endTime = showInfoData["endTime"] as? String,
-                            let latitude = showInfoData["latitude"] as? String,
-                           let longitude = showInfoData["longitude"] as? String {
+                           let endTime = showInfoData["endTime"] as? String {
+                            let latitude = showInfoData["latitude"] as? String
+                           let longitude = showInfoData["longitude"] as? String
                             
                             let singleShowInfo = ShowInfo(time: time, location: location, locationName: locationName, price: price, latitude: latitude, longitude: longitude, endTime: endTime)
                             showInfo.append(singleShowInfo)
