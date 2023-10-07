@@ -317,7 +317,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         let event = EKEvent(eventStore: eventVC.eventStore)
         event.calendar = appCalendar
         event.title = detailDesctription?.title
-        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.last?.endTime) {
+        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time) {
             // event.startDate = Date()
             event.startDate = startTime
             event.endDate = endTime
