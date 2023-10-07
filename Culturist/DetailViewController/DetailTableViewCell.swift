@@ -23,12 +23,14 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var webBtn: UIButton!
+    
+    
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
     weak var cellDelegate: DetailTableViewCellDelegate?
-    
-    @IBOutlet weak var likeBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
