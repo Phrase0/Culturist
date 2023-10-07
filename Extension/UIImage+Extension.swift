@@ -34,10 +34,11 @@ enum ImageAsset: String {
     case Icons_24px_BookMark_Normal
     case Icons_24px_BookMark_Selected
     case Icons_24px_BookMark_Selected_Color
+    case Icons_24px_Web
     
     case Icons_18px_Book
     case Icons_18px_Coffee
-    
+    case Icons_18px_Web
     // close and back
     case Icons_36px_Close
     case Icons_36px_Back

@@ -37,6 +37,10 @@ class HomeViewController: UIViewController {
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
 
         // MARK: - FireBaseData
         // use firebase to get data
@@ -66,11 +70,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
         // pullToRefresh Header
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in

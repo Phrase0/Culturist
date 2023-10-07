@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import MapKit
 import EventKitUI
+import SafariServices
 
 class DetailViewController: UIViewController {
     
@@ -232,8 +233,16 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
-            // MARK: - notificationBtnTapped
+            // MARK: - notificationBtn & webBtn Tapped
             cell.cellDelegate = self
+            let urlString = detailDesctription.sourceWebPromote
+            if let url = URL(string: urlString),
+               UIApplication.shared.canOpenURL(url) {
+                // url can use
+                cell.webBtn.isEnabled = true
+            } else {
+                cell.webBtn.isEnabled = false
+            }
             // ---------------------------------------------------
         }
         return cell
@@ -329,6 +338,12 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
+    func webBtnTapped(sender: UIButton) {
+        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL, entersReaderIfAvailable: true)
+        safariVC.delegate = self
+        self.present(safariVC, animated: true, completion: nil)
+    }
+    
     func notificationBtnTapped(sender: UIButton) {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
@@ -359,5 +374,12 @@ extension DetailViewController: DetailTableViewCellDelegate {
 extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+// MARK: - SFSafariViewControllerDelegate
+extension DetailViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

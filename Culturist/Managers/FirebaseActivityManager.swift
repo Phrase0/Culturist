@@ -46,6 +46,7 @@ class ConcertDataManager {
                    let descriptionFilterHTML = data["descriptionFilterHtml"] as? String,
                    let imageURL = data["imageUrl"] as? String,
                    let webSales = data["webSales"] as? String,
+                   let sourceWebPromote = data["sourceWebPromote"] as? String,
                    let startDate = data["startDate"] as? String,
                    let endDate = data["endDate"] as? String,
                    let hitRate = data["hitRate"] as? Int,
@@ -59,16 +60,15 @@ class ConcertDataManager {
                            let locationName = showInfoData["locationName"] as? String,
                            let price = showInfoData["price"] as? String,
                            let endTime = showInfoData["endTime"] as? String {
-                            
                             let latitude = showInfoData["latitude"] as? String
-                            let longitude = showInfoData["longitude"] as? String
+                           let longitude = showInfoData["longitude"] as? String
                             
                             let singleShowInfo = ShowInfo(time: time, location: location, locationName: locationName, price: price, latitude: latitude, longitude: longitude, endTime: endTime)
                             showInfo.append(singleShowInfo)
                         }
                     }
                     
-                    let concertData = ArtDatum(uid: uid, title: title, category: category, showInfo: showInfo, descriptionFilterHTML: descriptionFilterHTML, imageURL: imageURL, webSales: webSales, startDate: startDate, endDate: endDate, hitRate: hitRate)
+                    let concertData = ArtDatum(uid: uid, title: title, category: category, showInfo: showInfo, descriptionFilterHTML: descriptionFilterHTML, imageURL: imageURL, webSales: webSales, sourceWebPromote: sourceWebPromote, startDate: startDate, endDate: endDate, hitRate: hitRate)
                     artDataArray.append(concertData)
                 }
                 
@@ -104,6 +104,7 @@ class ExhibitionDataManager {
                    let descriptionFilterHTML = data["descriptionFilterHtml"] as? String,
                    let imageURL = data["imageUrl"] as? String,
                    let webSales = data["webSales"] as? String,
+                   let sourceWebPromote = data["sourceWebPromote"] as? String,
                    let startDate = data["startDate"] as? String,
                    let endDate = data["endDate"] as? String,
                    let hitRate = data["hitRate"] as? Int,
@@ -126,7 +127,7 @@ class ExhibitionDataManager {
                         }
                     }
                     
-                    let exhibitionData = ArtDatum(uid: uid, title: title, category: category, showInfo: showInfo, descriptionFilterHTML: descriptionFilterHTML, imageURL: imageURL, webSales: webSales, startDate: startDate, endDate: endDate, hitRate: hitRate)
+                    let exhibitionData = ArtDatum(uid: uid, title: title, category: category, showInfo: showInfo, descriptionFilterHTML: descriptionFilterHTML, imageURL: imageURL, webSales: webSales, sourceWebPromote: sourceWebPromote, startDate: startDate, endDate: endDate, hitRate: hitRate)
                     artDataArray.append(exhibitionData)
                 }
                 

@@ -79,6 +79,10 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
+        group.enter()
+        artManager1.getArtProductList(number: "1")
+        group.enter()
+        artManager6.getArtProductList(number: "6")
         
         // use firebase to get data
         concertDataManager.concertDelegate = self
@@ -103,11 +107,7 @@ class RecommendViewController: UIViewController {
         super.viewWillAppear(animated)
         recommendationManager.readFilterRecommendationData()
         print(filterData)
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-        
+
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in

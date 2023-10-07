@@ -9,6 +9,7 @@ import UIKit
 
 protocol DetailTableViewCellDelegate: AnyObject {
     func notificationBtnTapped(sender: UIButton)
+    func webBtnTapped(sender: UIButton)
 }
 
 class DetailTableViewCell: UITableViewCell {
@@ -22,12 +23,14 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBOutlet weak var webBtn: UIButton!
+    
+    
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
     weak var cellDelegate: DetailTableViewCellDelegate?
-    
-    @IBOutlet weak var likeBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,6 +48,11 @@ class DetailTableViewCell: UITableViewCell {
         searchBookButtonHandler?(sender)
     }
         
+    @IBAction func webBtutton(_ sender: UIButton) {
+        cellDelegate?.webBtnTapped(sender: sender)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
+    
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()

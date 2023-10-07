@@ -15,6 +15,7 @@ struct ArtDatum: Codable {
     let descriptionFilterHTML: String
     let imageURL: String
     let webSales: String
+    let sourceWebPromote: String
     let startDate, endDate: String
     let hitRate: Int
     
@@ -23,7 +24,7 @@ struct ArtDatum: Codable {
             case title, category, showInfo
             case descriptionFilterHTML = "descriptionFilterHtml"
             case imageURL = "imageUrl"
-            case webSales, startDate, endDate, hitRate
+            case webSales, sourceWebPromote, startDate, endDate, hitRate
         }
 }
 
