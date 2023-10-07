@@ -40,7 +40,7 @@ class NavigationViewController: UIViewController {
     // The initial value is respected
     let displayDebugging = false
     
-    let adjustNorthByTappingSidesOfScreen = false
+    let adjustNorthByTappingSidesOfScreen = true
     let addNodeByTappingScreen = true
     
     // activity indicator
@@ -76,7 +76,7 @@ class NavigationViewController: UIViewController {
         //        sceneLocationView.orientToTrueNorth = false
         //        sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
         
-        sceneLocationView.showAxesNode = true
+        sceneLocationView.showAxesNode = false
         sceneLocationView.showFeaturePoints = displayDebugging
         //        sceneLocationView.locationNodeTouchDelegate = self
         //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
@@ -229,28 +229,75 @@ extension NavigationViewController {
             return
         }
         
-        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
-        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
+//        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
+//        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
         
         // 2. If there is a route, show that
         if let routes = routes {
             sceneLocationView.addRoutes(routes: routes) { [self] distance -> SCNBox in
-                let box = SCNBox(width: 1.75, height: 0.5, length: distance, chamferRadius: 0.25)
-                
-                //                // Option 1: An absolutely terrible box material set (that demonstrates what you can do):
-                //                box.materials = ["box0", "box1", "box2", "box3", "box4", "box5"].map {
-                //                    let material = SCNMaterial()
-                //                    material.diffuse.contents = UIImage(named: $0)
-                //                    return material
-                //                }
-                
+                let box = SCNBox(width: 1, height: 1, length: distance, chamferRadius: 0.25)
+                box.firstMaterial?.diffuse.contents = UIColor.GR2!.withAlphaComponent(1)
+                // ---------------------------------------------------
+                // add arrow
+                let vertcount = 48;
+                        let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
+
+                        let facecount = 13;
+                        let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
+
+                        let vertsData  = NSData(
+                            bytes: verts,
+                            length: MemoryLayout<Float>.size * vertcount
+                        )
+
+                        let vertexSource = SCNGeometrySource(data: vertsData as Data,
+                                                             semantic: .vertex,
+                                                             vectorCount: vertcount,
+                                                             usesFloatComponents: true,
+                                                             componentsPerVector: 3,
+                                                             bytesPerComponent: MemoryLayout<Float>.size,
+                                                             dataOffset: 0,
+                                                             dataStride: MemoryLayout<Float>.size * 3)
+
+                        let polyIndexCount = 61;
+                        let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
+
+                        let element1 = SCNGeometryElement(data: indexPolyData as Data,
+                                                          primitiveType: .polygon,
+                                                          primitiveCount: facecount,
+                                                          bytesPerIndex: MemoryLayout<CInt>.size)
+
+                        let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
+
+                        let material1 = geometry1.firstMaterial!
+
+                        material1.diffuse.contents = UIColor.R1!
+                        material1.lightingModel = .lambert
+                        material1.transparency = 1.00
+                        material1.transparencyMode = .dualLayer
+                        material1.fresnelExponent = 1.00
+                        material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
+                        material1.specular.contents = UIColor(white:0.00, alpha:1.0)
+                        material1.shininess = 1.00
+
+                        // Assign the SCNGeometry to a SCNNode, for example:
+                        let aNode = SCNNode()
+                        aNode.geometry = geometry1
+                        aNode.scale = SCNVector3(0.006, 0.006, 0.006)
+                        sceneLocationView.scene.rootNode.addChildNode(aNode)
+
+                // ---------------------------------------------------
+                // Option 1: An absolutely terrible box material set (that demonstrates what you can do):
+//                                box.materials = ["box", "arrow"].map {
+//                                    let material = SCNMaterial()
+//                                    material.diffuse.contents = UIImage(named: $0)
+//                                    return material
+//                                }
                 // Option 2: Something more typical
-                box.firstMaterial?.diffuse.contents = UIColor.systemCyan.withAlphaComponent(0.8)
-                
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
                 }
-                print("routes:\(routes)")
+                // ---------------------------------------------------
                 return box
             }
         } else {
@@ -261,7 +308,6 @@ extension NavigationViewController {
                 sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
             }
         }
-        
         // There are many different ways to add lighting to a scene, but even this mechanism (the absolute simplest)
         // keeps 3D objects fron looking flat
         sceneLocationView.autoenablesDefaultLighting = true
@@ -277,8 +323,8 @@ extension NavigationViewController {
         var nodes: [LocationAnnotationNode] = []
         let distinationNeedle = buildNode(latitude: latitude!, longitude: longitude!, altitude: 225, imageName: "pin")
         nodes.append(distinationNeedle)
-        let schoolBuilding = buildNode(latitude: 25.038635384169808, longitude: 121.53242384738242, altitude: 225, imageName: "pin")
-        nodes.append(schoolBuilding)
+//        let schoolBuilding = buildNode(latitude: 25.038635384169808, longitude: 121.53242384738242, altitude: 225, imageName: "pin")
+//        nodes.append(schoolBuilding)
         return nodes
     }
     
