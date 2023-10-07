@@ -238,6 +238,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             let urlString = detailDesctription.sourceWebPromote
             if let url = URL(string: urlString),
                UIApplication.shared.canOpenURL(url) {
+                // url can use
                 cell.webBtn.isEnabled = true
             } else {
                 cell.webBtn.isEnabled = false
@@ -338,13 +339,6 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
     func webBtnTapped(sender: UIButton) {
-//        guard let webVC = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController  else { return }
-//        if let detailDesctription = detailDesctription {
-//            webVC.urlString = detailDesctription.sourceWebPromote
-//            print(detailDesctription.sourceWebPromote)
-//            navigationController?.pushViewController(webVC, animated: true)
-//        }
-        
         let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL, entersReaderIfAvailable: true)
         safariVC.delegate = self
         self.present(safariVC, animated: true, completion: nil)
@@ -383,6 +377,7 @@ extension DetailViewController: UIGestureRecognizerDelegate {
     }
 }
 
+// MARK: - SFSafariViewControllerDelegate
 extension DetailViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
