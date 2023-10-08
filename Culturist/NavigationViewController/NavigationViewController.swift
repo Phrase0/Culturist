@@ -236,7 +236,7 @@ extension NavigationViewController {
         if let routes = routes {
             sceneLocationView.addRoutes(routes: routes) { [self] distance -> SCNBox in
                 let box = SCNBox(width: 1, height: 1, length: distance, chamferRadius: 0.25)
-                box.firstMaterial?.diffuse.contents = UIColor.GR2!.withAlphaComponent(1)
+                box.firstMaterial?.diffuse.contents = UIColor.BL1!.withAlphaComponent(1)
                 // ---------------------------------------------------
                 // add arrow
                 let vertcount = 48;
