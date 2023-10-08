@@ -85,45 +85,71 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     
     // ---------------------------------------------------
     func getDirections(to mapLocation: MKMapItem) {
-        //refreshControl.startAnimating()
+        // Get the user's current location
+        guard let userLocation = locationManager.location else {
+            // If unable to retrieve the user's location, display an error message
+            showAlert(message: "無法找到您目前的位置")
+            return
+        }
         
-        let request = MKDirections.Request()
-        request.source = MKMapItem.forCurrentLocation()
-        request.destination = mapLocation
-        request.requestsAlternateRoutes = false
+        // Coordinates of the target location
+        let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop!.latitude)!, longitude: Double(coffeeShop!.longitude)!)
+        let targetLocation = CLLocation(latitude: targetCoordinate.latitude, longitude: targetCoordinate.longitude)
         
-        let directions = MKDirections(request: request)
+        // Calculate the distance between the current location and the target location
+        let distance = userLocation.distance(from: targetLocation)
         
-        directions.calculate(completionHandler: { response, error in
-            defer {
-                DispatchQueue.main.async { [weak self] in
-                    //self?.refreshControl.stopAnimating()
-                }
-            }
-            if let error = error {
-                return print("Error getting directions: \(error.localizedDescription)")
-            }
-            guard let response = response else {
-                return assertionFailure("No error, but no response, either.")
-            }
+        // Convert the distance to kilometers
+        let distanceInKilometers = distance / 1000.0
+        
+        // If the distance is greater than 5 kilometers, display a warning
+        if distanceInKilometers > 5.0 {
+            showAlert(message: "超出可導航範圍，請重新選取鄰近的咖啡館")
+        } else {
+            //refreshControl.startAnimating()
+            let request = MKDirections.Request()
+            request.source = MKMapItem.forCurrentLocation()
+            request.destination = mapLocation
+            request.requestsAlternateRoutes = false
             
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else {
-                    return
+            let directions = MKDirections(request: request)
+            
+            directions.calculate(completionHandler: { response, error in
+                defer {
+                    DispatchQueue.main.async { [weak self] in
+                        //self?.refreshControl.stopAnimating()
+                    }
                 }
-                guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController") as? NavigationViewController else { return }
-                detailVC.routes = response.routes
-                detailVC.name = coffeeShop?.name
-                detailVC.latitude = Double(coffeeShop!.latitude)
-                detailVC.longitude = Double(coffeeShop!.longitude)
-                let navVC = UINavigationController(rootViewController: detailVC)
-                navVC.modalPresentationStyle = .fullScreen
-                self.present(navVC, animated: true)
-            }
-        })
+                if let error = error {
+                    return print("Error getting directions: \(error.localizedDescription)")
+                }
+                guard let response = response else {
+                    return assertionFailure("No error, but no response, either.")
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController") as? NavigationViewController else { return }
+                    detailVC.routes = response.routes
+                    detailVC.name = coffeeShop?.name
+                    detailVC.latitude = Double(coffeeShop!.latitude)
+                    detailVC.longitude = Double(coffeeShop!.longitude)
+                    let navVC = UINavigationController(rootViewController: detailVC)
+                    navVC.modalPresentationStyle = .fullScreen
+                    self.present(navVC, animated: true)
+                }
+            })
+        }
     }
     
-    // ---------------------------------------------------
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "警告", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+
     
 }
 
