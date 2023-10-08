@@ -26,6 +26,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var webBtn: UIButton!
     
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
     var searchCoffeeButtonHandler: ((UIButton) -> Void)?
     var searchBookButtonHandler: ((UIButton) -> Void)?
@@ -50,17 +51,20 @@ class DetailTableViewCell: UITableViewCell {
         
     @IBAction func webBtutton(_ sender: UIButton) {
         cellDelegate?.webBtnTapped(sender: sender)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
 
     @IBAction func notificationBtnTapped(_ sender: UIButton) {
         cellDelegate?.notificationBtnTapped(sender: sender)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     func setCorner() {

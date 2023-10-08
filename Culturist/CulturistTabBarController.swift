@@ -16,11 +16,11 @@ class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate 
         self.tabBar.tintColor = UIColor.GR0
         self.tabBarItem.imageInsets = UIEdgeInsets(top: 2, left: 2, bottom: -2, right: -2)
         self.delegate = self
-        feedbackGenerator.prepare()
     }
     
     // touch feedback
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
     }
     
