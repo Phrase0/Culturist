@@ -214,7 +214,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 105/75)
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 40.0, bottom: 40.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     
