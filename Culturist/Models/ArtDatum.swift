@@ -1,4 +1,3 @@
-
 //
 //  ArtDatum.swift
 //  Culturist

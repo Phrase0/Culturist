@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backgroundWhiteView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
-    //@IBOutlet weak var nameLabel: UILabel!
+    // @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var eventsTableView: UITableView!
@@ -114,7 +114,7 @@ class ProfileViewController: UIViewController {
     
     // Calendar request
     func requestAccess() {
-        eventStore.requestAccess(to: .event) { (granted, error) in
+        eventStore.requestAccess(to: .event) { (granted, _) in
             if granted {
                 self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
                 DispatchQueue.main.async {
@@ -136,9 +136,7 @@ class ProfileViewController: UIViewController {
                 events = eventStore.events(matching: predicate)
             }
         }
-    }
-
-    
+    } 
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {

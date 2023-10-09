@@ -57,7 +57,7 @@ class RecommendViewController: UIViewController {
                 let topProducts = Array(sortedProducts.prefix(remainingCount))
                 filteredData.append(contentsOf: topProducts)
             }
-
+            
             let topResults = Array(filteredData.prefix(10))
             return topResults
         } else {
@@ -71,7 +71,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .B4
+        // view.backgroundColor = .B4
         backgroundImageView.isHidden = true
         setAnimation()
         loading.startAnimating()
@@ -177,7 +177,6 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         detailVC.detailDesctription = recommendProducts[indexPath.row]
         firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

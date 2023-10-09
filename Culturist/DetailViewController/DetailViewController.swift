@@ -342,7 +342,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
     func webBtnTapped(sender: UIButton) {
-        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL, entersReaderIfAvailable: true)
+        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL)
         safariVC.delegate = self
         self.present(safariVC, animated: true, completion: nil)
     }
@@ -351,7 +351,7 @@ extension DetailViewController: DetailTableViewCellDelegate {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             let eventStore = EKEventStore()
-            eventStore.requestAccess(to: .event) { (granted, error) in
+            eventStore.requestAccess(to: .event) { (granted, _) in
                 if granted {
                     // do stuff
                     DispatchQueue.main.async {

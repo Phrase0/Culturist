@@ -138,7 +138,7 @@ class FirebaseManager {
         }
     }
     
-    // MARK: -  storeProfileImage
+    // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
         storage.child("images/file.png").putData(imageData) { _, error in
             guard error == nil else {
@@ -204,7 +204,6 @@ class FirebaseManager {
             }
         }
     }
-
 
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, category: String, location: String, locationName: String) {

@@ -85,7 +85,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            cell.mapNavigationButtonHandler = { [weak self] sender in
+            cell.mapNavigationButtonHandler = { [weak self] _ in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(bookShop.latitude)!, longitude: Double(bookShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -115,7 +115,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
         let distanceInKilometers = distance / 1000.0
         
         // If the distance is greater than 5 kilometers, display a warning
-        if distanceInKilometers > 5.0 {
+        if distanceInKilometers > 3.0 {
             showAlert(message: "超出可導航範圍，請重新選取鄰近的書店")
         } else {
             // refreshControl.startAnimating()
@@ -127,11 +127,11 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             let directions = MKDirections(request: request)
             
             directions.calculate(completionHandler: { response, error in
-                defer {
-                    DispatchQueue.main.async { [weak self] in
-                        // self?.refreshControl.stopAnimating()
-                    }
-                }
+//                defer {
+//                    DispatchQueue.main.async { [weak self] in
+//                        self?.refreshControl.stopAnimating()
+//                    }
+//                }
                 if let error = error {
                     return print("Error getting directions: \(error.localizedDescription)")
                 }

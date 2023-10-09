@@ -91,4 +91,3 @@ class LikeCollectionViewCell: UICollectionViewCell {
         productImage.clipsToBounds = true
     }
 }
-
