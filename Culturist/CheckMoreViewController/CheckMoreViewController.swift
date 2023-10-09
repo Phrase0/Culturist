@@ -26,7 +26,7 @@ class CheckMoreViewController: UIViewController {
         checkMoretitleLabel.text = navigationItemTitle
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .B2
+        navigationItem.leftBarButtonItem?.tintColor = .GR0
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }

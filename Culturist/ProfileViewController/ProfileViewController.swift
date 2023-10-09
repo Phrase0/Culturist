@@ -63,14 +63,13 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
+        DispatchQueue.main.async {
+            self.calendar.reloadData()
+            self.eventsTableView.reloadData()
+        }
         // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        requestAccess()
-    }
-    
+
     @IBAction func todayBtn(_ sender: UIButton) {
         // Get the current date
         let today = Date()
