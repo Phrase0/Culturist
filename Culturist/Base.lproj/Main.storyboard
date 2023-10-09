@@ -348,7 +348,7 @@ Label</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenBackground" translatesAutoresizingMaskIntoConstraints="NO" id="mYy-1W-7Gk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenbackground" translatesAutoresizingMaskIntoConstraints="NO" id="mYy-1W-7Gk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVj-Gc-lty">
@@ -1556,7 +1556,7 @@ Label</string>
         <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="bookImage" width="5086" height="3389"/>
         <image name="culturist_logo_green" width="1513" height="450"/>
-        <image name="greenBackground" width="4000" height="6000"/>
+        <image name="greenbackground" width="1480" height="913"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="B1">
             <color red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -11,13 +11,6 @@ import UIKit
 enum ImageAsset: String {
 
     // Profile tab - Tab
-    case Icons_36px_Home_Normal
-    case Icons_36px_Home_Selected
-    case Icons_36px_Profile_Normal
-    case Icons_36px_Profile_Selected
-    case Icons_36px_Recommendation_Normal
-    case Icons_36px_Recommendation_Selected
-    
     case Icons_32px_Home_Normal
     case Icons_32px_Home_Selected
     case Icons_32px_Profile_Normal
@@ -28,20 +21,16 @@ enum ImageAsset: String {
     case Icons_32px_BookMark_Selected
     
     // page
-    case Icons_24px_Heart_Selected
-    case Icons_24px_Heart_Normal
     case Icons_24px_Notification
     case Icons_24px_BookMark_Normal
-    case Icons_24px_BookMark_Selected
     case Icons_24px_BookMark_Selected_Color
     case Icons_24px_Web
     
     case Icons_18px_Book
     case Icons_18px_Coffee
-    case Icons_18px_Web
     // close and back
-    case Icons_36px_Close
-    case Icons_36px_Back
+    case Icons_36px_Close_Black
+    case Icons_36px_Back_Black
 }
 
 extension UIImage {

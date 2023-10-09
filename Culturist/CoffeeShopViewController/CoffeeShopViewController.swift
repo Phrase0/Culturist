@@ -70,7 +70,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.socketLabel.text = "-"
             }
             
-            let random = Int.random(in: 1...27)
+            let random = Int.random(in: 1...15)
             cell.coffeeImageView.image = UIImage(named: "\(random)")
             cell.mapNavigationButtonHandler = { [weak self] sender in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)

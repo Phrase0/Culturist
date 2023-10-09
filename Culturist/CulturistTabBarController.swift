@@ -8,8 +8,6 @@
 import UIKit
 
 class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate {
-    
-    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +18,7 @@ class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate 
     
     // touch feedback
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
         feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
     }
