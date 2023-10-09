@@ -40,7 +40,6 @@ class LikeViewController: UIViewController {
             }
             return nil
         }
-        print(filteredLikes.count)
         return filteredLikes
     }
     

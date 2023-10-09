@@ -185,7 +185,6 @@
 			children = (
 				F85E30372ACE4A4100622014 /* culturist_lcon_small.png */,
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
-				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
 				9A1E41190C6E6F7290373612 /* Pods */,
@@ -209,6 +208,7 @@
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
+				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,

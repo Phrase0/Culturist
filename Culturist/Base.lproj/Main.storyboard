@@ -1435,7 +1435,7 @@ Label</string>
         <scene sceneID="ckV-0z-aXN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HOh-nm-YAL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首頁" image="Icons_32px_Home_Normal" selectedImage="Icons_32px_Home_Selected" id="0g2-yv-RLo"/>
+                    <tabBarItem key="tabBarItem" title="首頁" image="Icons_30px_Home_Normal" selectedImage="Icons_30px_Home_Selected" id="0g2-yv-RLo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="phw-6d-KaS">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
@@ -1482,7 +1482,7 @@ Label</string>
         <scene sceneID="0x1-1B-lCI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aQ5-jg-rEo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="推薦" image="Icons_32px_Recommendation_Normal" selectedImage="Icons_32px_Recommendation_Selected" id="oz3-Oj-t6x"/>
+                    <tabBarItem key="tabBarItem" title="推薦" image="Icons_30px_Recommendation_Normal" selectedImage="Icons_30px_Recommendation_Selected" id="oz3-Oj-t6x"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9Tu-Fm-dv1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IAd-QO-1kV">
@@ -1502,7 +1502,7 @@ Label</string>
         <scene sceneID="8da-c1-NVS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lVw-zd-xOr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="Icons_32px_Profile_Normal" selectedImage="Icons_32px_Profile_Selected" id="5hM-1E-Shh"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="Icons_30px_Profile_Normal" selectedImage="Icons_30px_Profile_Selected" id="5hM-1E-Shh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rh8-au-x9n">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
@@ -1521,7 +1521,7 @@ Label</string>
         <scene sceneID="XOg-L4-Jfb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MHu-8G-gsg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="收藏" image="Icons_32px_BookMark_Normal" selectedImage="Icons_32px_BookMark_Selected" id="T48-js-v7F"/>
+                    <tabBarItem key="tabBarItem" title="收藏" image="Icons_30px_BookMark_Normal" selectedImage="Icons_30px_BookMark_Selected" id="T48-js-v7F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fcW-Zh-RKb">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
@@ -1545,14 +1545,14 @@ Label</string>
         <image name="Icons_24px_BookMark_Normal" width="24" height="24"/>
         <image name="Icons_24px_Notification" width="24" height="24"/>
         <image name="Icons_24px_Web" width="24" height="24"/>
-        <image name="Icons_32px_BookMark_Normal" width="32" height="32"/>
-        <image name="Icons_32px_BookMark_Selected" width="32" height="32"/>
-        <image name="Icons_32px_Home_Normal" width="32" height="32"/>
-        <image name="Icons_32px_Home_Selected" width="32" height="32"/>
-        <image name="Icons_32px_Profile_Normal" width="32" height="32"/>
-        <image name="Icons_32px_Profile_Selected" width="32" height="32"/>
-        <image name="Icons_32px_Recommendation_Normal" width="32" height="32"/>
-        <image name="Icons_32px_Recommendation_Selected" width="32" height="32"/>
+        <image name="Icons_30px_BookMark_Normal" width="30" height="30"/>
+        <image name="Icons_30px_BookMark_Selected" width="30" height="30"/>
+        <image name="Icons_30px_Home_Normal" width="30" height="30"/>
+        <image name="Icons_30px_Home_Selected" width="30" height="30"/>
+        <image name="Icons_30px_Profile_Normal" width="30" height="30"/>
+        <image name="Icons_30px_Profile_Selected" width="30" height="30"/>
+        <image name="Icons_30px_Recommendation_Normal" width="30" height="30"/>
+        <image name="Icons_30px_Recommendation_Selected" width="30" height="30"/>
         <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="bookImage" width="5086" height="3389"/>
         <image name="culturist_logo_green" width="1513" height="450"/>
