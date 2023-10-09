@@ -30,9 +30,9 @@ extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCal
         calendar.appearance.weekdayTextColor = .GR2
         calendar.appearance.eventDefaultColor = .GR1
         calendar.appearance.eventSelectionColor = .R1
-        calendar.appearance.headerTitleFont = UIFont(name: "PingFangTC-Medium", size: 20)
-        calendar.appearance.weekdayFont = UIFont(name: "PingFangTC", size: 18)
-        calendar.appearance.titleFont = UIFont(name: "PingFangTC", size: 18)
+        calendar.appearance.headerTitleFont = UIFont.boldSystemFont(ofSize: 20)
+        calendar.appearance.weekdayFont = UIFont.boldSystemFont(ofSize: 17)
+        calendar.appearance.titleFont = UIFont.systemFont(ofSize: 17)
         // In month mode, only the current month is displayed
         calendar.placeholderType = .fillHeadTail
         calendar.appearance.borderRadius = 1
@@ -115,7 +115,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         
         present(ac, animated: true)
     }
-
+    
     func showEditViewController(for event: EKEvent?) {
         let eventEditViewController = EKEventEditViewController()
         eventEditViewController.eventStore = eventStore
@@ -139,13 +139,13 @@ extension ProfileViewController: EKEventEditViewDelegate {
         dismiss(animated: true, completion: nil)
         
         if action != .canceled {
-//            if let editedEvent = controller.event {
-//                // use Identifier to find
-//                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
-//                    // use editedEvent to replace the origin one
-//                    events[index] = editedEvent
-//                }
-//            }
+            //            if let editedEvent = controller.event {
+            //                // use Identifier to find
+            //                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
+            //                    // use editedEvent to replace the origin one
+            //                    events[index] = editedEvent
+            //                }
+            //            }
             self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
             DispatchQueue.main.async {
                 self.calendar.reloadData()
@@ -154,5 +154,5 @@ extension ProfileViewController: EKEventEditViewDelegate {
             
         }
     }
-
+    
 }

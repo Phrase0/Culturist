@@ -9,8 +9,7 @@ import UIKit
 import Gemini
 
 class RecommendCollectionViewCell: GeminiCell {
-
-
+    
     lazy var productBackView: UIView = {
         let productView = UIView()
         return productView
@@ -20,7 +19,7 @@ class RecommendCollectionViewCell: GeminiCell {
         let productView = UIView()
         return productView
     }()
- 
+    
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
         productTitle.numberOfLines = 1
@@ -46,7 +45,6 @@ class RecommendCollectionViewCell: GeminiCell {
         productTitle.textAlignment = .center
         return productTitle
     }()
-
     
     lazy var productImage: UIImageView = {
         let productImage = UIImageView()
@@ -67,8 +65,6 @@ class RecommendCollectionViewCell: GeminiCell {
         setupConstraints()
         setShadowColor()
     }
-    
-
     
     private func setupSubviews() {
         contentView.addSubview(productBackView)
@@ -101,7 +97,7 @@ class RecommendCollectionViewCell: GeminiCell {
             make.centerX.equalTo(productImage)
             make.top.equalTo(productTitle.snp.bottom).offset(4)
         }
-
+        
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView).inset(40)
             make.bottom.equalTo(productView).inset(70)
@@ -109,9 +105,9 @@ class RecommendCollectionViewCell: GeminiCell {
     }
     
     func setShadowColor() {
-         productBackView.backgroundColor = .GR1
-//        productBackView.backgroundColor = UIColor(red: 237/255, green: 225/255, blue: 210/255, alpha: 0.8)
-        productView.backgroundColor = .white
+        productBackView.backgroundColor = .GR0
+        // productBackView.backgroundColor = UIColor(red: 106/255, green: 111/255, blue: 76/255, alpha: 1)
+        productView.backgroundColor = .B4
         productBackView.layer.shadowColor = UIColor.black.cgColor
         productBackView.layer.shadowOpacity = 0.4
         productBackView.layer.shadowOffset = CGSize(width: 4, height: 4)

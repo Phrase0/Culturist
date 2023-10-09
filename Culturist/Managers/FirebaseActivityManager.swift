@@ -19,10 +19,8 @@ import Foundation
 import FirebaseCore
 import FirebaseFirestore
 
-// ---------------------------------------------------
-
+// MARK: - ConcertDataManager
 class ConcertDataManager {
-    
     var concertDelegate: FirebaseConcertDelegate?
     // get firebase data(local method)
     func fetchConcertData() {
@@ -77,9 +75,8 @@ class ConcertDataManager {
         }
     }
 }
-// ---------------------------------------------------
 
-
+// MARK: - ExhibitionDataManager
 class ExhibitionDataManager {
     var exhibitionDelegate: FirebaseExhibitionDelegate?
     

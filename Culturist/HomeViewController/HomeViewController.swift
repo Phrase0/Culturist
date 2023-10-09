@@ -165,7 +165,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // add title
         let label = UILabel()
         label.text = "\(title)"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        if let pingFangFont = UIFont(name: "PingFangTC-Medium", size: 20) {
+            label.font = pingFangFont
+        } else {
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+            print("no font type")
+        }
         label.textColor = UIColor.black
         headerView.addSubview(label)
         
@@ -173,7 +178,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let button = UIButton()
         button.setTitleColor(UIColor.GR0, for: .normal)
         button.setTitle("查看更多 >", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
+            button.titleLabel?.font = pingFangFont
+        } else {
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            print("no font type")
+        }
         button.tag = buttonTag ?? 0
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(button)

@@ -34,13 +34,13 @@ class RecommendViewController: UIViewController {
     var filterData = [RecommendationData]()
     
     var recommendProducts: [ArtDatum] {
-        let filteredProducts = artProducts1 + artProducts6
+        let allProducts = artProducts1 + artProducts6
         if let firstFilterData = self.filterData.first {
             let searchTitleTerm = firstFilterData.title
             let searchLocationTerm = firstFilterData.location.prefix(6)
             let searchLocationNameTerm = firstFilterData.locationName
             // Use `filter` to search data
-            var filteredData = filteredProducts.filter { data in
+            var filteredData = allProducts.filter { data in
                 let titleContains = data.title.contains(searchTitleTerm)
                 let locationContains = data.showInfo.first?.location.contains(searchLocationTerm)
                 let locationNameContains = data.showInfo.first?.locationName.contains(searchLocationNameTerm)
@@ -53,16 +53,16 @@ class RecommendViewController: UIViewController {
             // If the result count is less than 10, recommend by hitRate to reach 10
             if resultCount < 10 {
                 let remainingCount = 10 - resultCount
-                let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
+                let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
                 let topProducts = Array(sortedProducts.prefix(remainingCount))
                 filteredData.append(contentsOf: topProducts)
             }
-
+            
             let topResults = Array(filteredData.prefix(10))
             return topResults
         } else {
             // if filterData have no data, sort by hitRate
-            let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
+            let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
             let result = Array(sortedProducts.prefix(10))
             print("results:\(result)")
             return result
@@ -71,7 +71,8 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .B4
+        // view.backgroundColor = .B4
+        backgroundImageView.isHidden = true
         setAnimation()
         loading.startAnimating()
         
@@ -106,8 +107,6 @@ class RecommendViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recommendationManager.readFilterRecommendationData()
-        print(filterData)
-
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
@@ -178,7 +177,6 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         detailVC.detailDesctription = recommendProducts[indexPath.row]
         firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -214,7 +212,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 105/75)
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 40.0, bottom: 40.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     

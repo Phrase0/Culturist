@@ -70,9 +70,9 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.socketLabel.text = "-"
             }
             
-            let random = Int.random(in: 1...27)
+            let random = Int.random(in: 1...15)
             cell.coffeeImageView.image = UIImage(named: "\(random)")
-            cell.mapNavigationButtonHandler = { [weak self] sender in
+            cell.mapNavigationButtonHandler = { [weak self] _ in
                 let targetCoordinate = CLLocationCoordinate2D(latitude: Double(coffeeShop.latitude)!, longitude: Double(coffeeShop.longitude)!)
                 let destinationPlacemark = MKPlacemark(coordinate: targetCoordinate)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -103,10 +103,10 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         let distanceInKilometers = distance / 1000.0
         
         // If the distance is greater than 5 kilometers, display a warning
-        if distanceInKilometers > 5.0 {
+        if distanceInKilometers > 3.0 {
             showAlert(message: "超出可導航範圍，請重新選取鄰近的咖啡館")
         } else {
-            //refreshControl.startAnimating()
+            // refreshControl.startAnimating()
             let request = MKDirections.Request()
             request.source = MKMapItem.forCurrentLocation()
             request.destination = mapLocation
@@ -115,11 +115,11 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
             let directions = MKDirections(request: request)
             
             directions.calculate(completionHandler: { response, error in
-                defer {
-                    DispatchQueue.main.async { [weak self] in
-                        //self?.refreshControl.stopAnimating()
-                    }
-                }
+                //                defer {
+                //                    DispatchQueue.main.async { [weak self] in
+                //                        self?.refreshControl.stopAnimating()
+                //                    }
+                //                }
                 if let error = error {
                     return print("Error getting directions: \(error.localizedDescription)")
                 }
@@ -149,8 +149,6 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
-
-    
 }
 
 // MARK: - CLLocationManagerDelegate

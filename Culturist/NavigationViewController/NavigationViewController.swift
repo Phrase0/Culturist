@@ -82,15 +82,15 @@ class NavigationViewController: UIViewController {
         //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
         sceneLocationView.arViewDelegate = self
         // sceneLocationView.locationNodeTouchDelegate = self
-    
+        
         contentView.addSubview(sceneLocationView)
         sceneLocationView.frame = contentView.bounds
-
+        
         routes?.forEach { mapView.addOverlay($0.polyline) }
         
         // closeBtn
-        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
     
     @objc private func backButtonTapped() {
@@ -119,7 +119,7 @@ class NavigationViewController: UIViewController {
             self?.updateUserLocation()
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         print(#function)
         pauseAnimation()
@@ -229,8 +229,8 @@ extension NavigationViewController {
             return
         }
         
-//        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
-//        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
+        //        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
+        //        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
         
         // 2. If there is a route, show that
         if let routes = routes {
@@ -240,59 +240,59 @@ extension NavigationViewController {
                 // ---------------------------------------------------
                 // add arrow
                 let vertcount = 48;
-                        let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
-
-                        let facecount = 13;
-                        let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
-
-                        let vertsData  = NSData(
-                            bytes: verts,
-                            length: MemoryLayout<Float>.size * vertcount
-                        )
-
-                        let vertexSource = SCNGeometrySource(data: vertsData as Data,
-                                                             semantic: .vertex,
-                                                             vectorCount: vertcount,
-                                                             usesFloatComponents: true,
-                                                             componentsPerVector: 3,
-                                                             bytesPerComponent: MemoryLayout<Float>.size,
-                                                             dataOffset: 0,
-                                                             dataStride: MemoryLayout<Float>.size * 3)
-
-                        let polyIndexCount = 61;
-                        let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
-
-                        let element1 = SCNGeometryElement(data: indexPolyData as Data,
-                                                          primitiveType: .polygon,
-                                                          primitiveCount: facecount,
-                                                          bytesPerIndex: MemoryLayout<CInt>.size)
-
-                        let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
-
-                        let material1 = geometry1.firstMaterial!
-
-                        material1.diffuse.contents = UIColor.R1!
-                        material1.lightingModel = .lambert
-                        material1.transparency = 1.00
-                        material1.transparencyMode = .dualLayer
-                        material1.fresnelExponent = 1.00
-                        material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
-                        material1.specular.contents = UIColor(white:0.00, alpha:1.0)
-                        material1.shininess = 1.00
-
-                        // Assign the SCNGeometry to a SCNNode, for example:
-                        let aNode = SCNNode()
-                        aNode.geometry = geometry1
-                        aNode.scale = SCNVector3(0.006, 0.006, 0.006)
-                        sceneLocationView.scene.rootNode.addChildNode(aNode)
-
+                let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
+                
+                let facecount = 13;
+                let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
+                
+                let vertsData  = NSData(
+                    bytes: verts,
+                    length: MemoryLayout<Float>.size * vertcount
+                )
+                
+                let vertexSource = SCNGeometrySource(data: vertsData as Data,
+                                                     semantic: .vertex,
+                                                     vectorCount: vertcount,
+                                                     usesFloatComponents: true,
+                                                     componentsPerVector: 3,
+                                                     bytesPerComponent: MemoryLayout<Float>.size,
+                                                     dataOffset: 0,
+                                                     dataStride: MemoryLayout<Float>.size * 3)
+                
+                let polyIndexCount = 61;
+                let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
+                
+                let element1 = SCNGeometryElement(data: indexPolyData as Data,
+                                                  primitiveType: .polygon,
+                                                  primitiveCount: facecount,
+                                                  bytesPerIndex: MemoryLayout<CInt>.size)
+                
+                let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
+                
+                let material1 = geometry1.firstMaterial!
+                
+                material1.diffuse.contents = UIColor.R1!
+                material1.lightingModel = .lambert
+                material1.transparency = 1.00
+                material1.transparencyMode = .dualLayer
+                material1.fresnelExponent = 1.00
+                material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
+                material1.specular.contents = UIColor(white:0.00, alpha:1.0)
+                material1.shininess = 1.00
+                
+                // Assign the SCNGeometry to a SCNNode, for example:
+                let aNode = SCNNode()
+                aNode.geometry = geometry1
+                aNode.scale = SCNVector3(0.006, 0.006, 0.006)
+                sceneLocationView.scene.rootNode.addChildNode(aNode)
+                
                 // ---------------------------------------------------
                 // Option 1: An absolutely terrible box material set (that demonstrates what you can do):
-//                                box.materials = ["box", "arrow"].map {
-//                                    let material = SCNMaterial()
-//                                    material.diffuse.contents = UIImage(named: $0)
-//                                    return material
-//                                }
+                //                                box.materials = ["box", "arrow"].map {
+                //                                    let material = SCNMaterial()
+                //                                    material.diffuse.contents = UIImage(named: $0)
+                //                                    return material
+                //                                }
                 // Option 2: Something more typical
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
@@ -316,15 +316,15 @@ extension NavigationViewController {
         }
         
     }
-
+    
     // Builds the location annotations for a few random objects, scattered across the country
     // - Returns: an array of annotation nodes.
     func distinationData() -> [LocationAnnotationNode] {
         var nodes: [LocationAnnotationNode] = []
         let distinationNeedle = buildNode(latitude: latitude!, longitude: longitude!, altitude: 225, imageName: "pin")
         nodes.append(distinationNeedle)
-//        let schoolBuilding = buildNode(latitude: 25.038635384169808, longitude: 121.53242384738242, altitude: 225, imageName: "pin")
-//        nodes.append(schoolBuilding)
+        //        let schoolBuilding = buildNode(latitude: 25.038635384169808, longitude: 121.53242384738242, altitude: 225, imageName: "pin")
+        //        nodes.append(schoolBuilding)
         return nodes
     }
     
@@ -372,27 +372,20 @@ extension NavigationViewController {
         guard let currentLocation = sceneLocationView.sceneLocationManager.currentLocation else {
             return
         }
-        
         DispatchQueue.main.async { [weak self ] in
             guard let self = self else {
                 return
             }
-            
             if self.userAnnotation == nil {
                 self.userAnnotation = MKPointAnnotation()
                 self.mapView.addAnnotation(self.userAnnotation!)
                 
                 // add destinationAnnotation
-                // ---------------------------------------------------
                 let destinationLocation = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-                
                 let destinationAnnotation = MKPointAnnotation()
                 destinationAnnotation.coordinate = destinationLocation
                 destinationAnnotation.title = name!
                 mapView.addAnnotation(destinationAnnotation)
-                
-                // ---------------------------------------------------
-                
             }
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction, animations: {
@@ -406,9 +399,6 @@ extension NavigationViewController {
                                animations: {
                     self.mapView.setCenter(self.userAnnotation!.coordinate, animated: false)
                 }, completion: { _ in
-                    
-                    // ---------------------------------------------------
-                    // ---------------------------------------------------
                     self.mapView.region.span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
                 })
             }
@@ -428,30 +418,30 @@ extension NavigationViewController {
         }
     }
     
-//    @objc
-//    func updateInfoLabel() {
-//        if let position = sceneLocationView.currentScenePosition {
-//            infoLabel.text = " x: \(position.x.short), y: \(position.y.short), z: \(position.z.short)\n"
-//        }
-//
-//        if let eulerAngles = sceneLocationView.currentEulerAngles {
-//            infoLabel.text!.append(" Euler x: \(eulerAngles.x.short), y: \(eulerAngles.y.short), z: \(eulerAngles.z.short)\n")
-//        }
-//
-//        if let eulerAngles = sceneLocationView.currentEulerAngles,
-//           let heading = sceneLocationView.sceneLocationManager.locationManager.heading,
-//           let headingAccuracy = sceneLocationView.sceneLocationManager.locationManager.headingAccuracy {
-//            let yDegrees = (((0 - eulerAngles.y.radiansToDegrees) + 360).truncatingRemainder(dividingBy: 360) ).short
-//            infoLabel.text!.append(" Heading: \(yDegrees)° • \(Float(heading).short)° • \(headingAccuracy)°\n")
-//        }
-//
-//        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
-//        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-//            let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
-//            infoLabel.text!.append(" Time: \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3)" )
-//            // • \(nodeCount)")
-//        }
-//    }
+    //    @objc
+    //    func updateInfoLabel() {
+    //        if let position = sceneLocationView.currentScenePosition {
+    //            infoLabel.text = " x: \(position.x.short), y: \(position.y.short), z: \(position.z.short)\n"
+    //        }
+    //
+    //        if let eulerAngles = sceneLocationView.currentEulerAngles {
+    //            infoLabel.text!.append(" Euler x: \(eulerAngles.x.short), y: \(eulerAngles.y.short), z: \(eulerAngles.z.short)\n")
+    //        }
+    //
+    //        if let eulerAngles = sceneLocationView.currentEulerAngles,
+    //           let heading = sceneLocationView.sceneLocationManager.locationManager.heading,
+    //           let headingAccuracy = sceneLocationView.sceneLocationManager.locationManager.headingAccuracy {
+    //            let yDegrees = (((0 - eulerAngles.y.radiansToDegrees) + 360).truncatingRemainder(dividingBy: 360) ).short
+    //            infoLabel.text!.append(" Heading: \(yDegrees)° • \(Float(heading).short)° • \(headingAccuracy)°\n")
+    //        }
+    //
+    //        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
+    //        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
+    //            let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
+    //            infoLabel.text!.append(" Time: \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3)" )
+    //            // • \(nodeCount)")
+    //        }
+    //    }
     
     func buildNode(latitude: CLLocationDegrees, longitude: CLLocationDegrees,
                    altitude: CLLocationDistance, imageName: String) -> LocationAnnotationNode {
@@ -494,9 +484,7 @@ extension DispatchQueue {
 extension UIView {
     func recursiveSubviews() -> [UIView] {
         var recursiveSubviews = self.subviews
-        
         subviews.forEach { recursiveSubviews.append(contentsOf: $0.recursiveSubviews()) }
-        
         return recursiveSubviews
     }
 }

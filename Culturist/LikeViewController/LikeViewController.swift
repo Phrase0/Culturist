@@ -40,7 +40,6 @@ class LikeViewController: UIViewController {
             }
             return nil
         }
-        print(filteredLikes.count)
         return filteredLikes
     }
     
@@ -49,10 +48,10 @@ class LikeViewController: UIViewController {
         noDataNoteLabel.numberOfLines = 1
         noDataNoteLabel.textColor = .B2
         noDataNoteLabel.text = "開始添加展覽到您的收藏清單吧"
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 18) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noDataNoteLabel.font = pingFangFont
         } else {
-            noDataNoteLabel.font = UIFont.systemFont(ofSize: 18)
+            noDataNoteLabel.font = UIFont.systemFont(ofSize: 17)
             print("no font type")
         }
         return noDataNoteLabel

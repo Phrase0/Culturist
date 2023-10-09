@@ -65,7 +65,7 @@ class DetailViewController: UIViewController {
             appCalendar = createAppCalendar()
         }
         // ---------------------------------------------------        
-        let backImage = UIImage.asset(.Icons_36px_Back)?.withRenderingMode(.alwaysOriginal)
+        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
         // set tableView.contentInset fill the screen
@@ -73,7 +73,10 @@ class DetailViewController: UIViewController {
         
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
+        navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
+        navigationBarAppearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
@@ -339,7 +342,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
     func webBtnTapped(sender: UIButton) {
-        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL, entersReaderIfAvailable: true)
+        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL)
         safariVC.delegate = self
         self.present(safariVC, animated: true, completion: nil)
     }
@@ -348,7 +351,7 @@ extension DetailViewController: DetailTableViewCellDelegate {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             let eventStore = EKEventStore()
-            eventStore.requestAccess(to: .event) { (granted, error) in
+            eventStore.requestAccess(to: .event) { (granted, _) in
                 if granted {
                     // do stuff
                     DispatchQueue.main.async {

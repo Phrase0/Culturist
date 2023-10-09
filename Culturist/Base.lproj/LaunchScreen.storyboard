@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" constant="150" id="xDR-Vg-3Q0"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="culturist_lcon_small" translatesAutoresizingMaskIntoConstraints="NO" id="HqJ-mO-Yoo">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="culturist_lcon_small.png" translatesAutoresizingMaskIntoConstraints="NO" id="HqJ-mO-Yoo">
                                 <rect key="frame" x="91.666666666666686" y="233.33333333333334" width="210" height="305.33333333333326"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="jqp-iq-JId"/>
@@ -48,7 +48,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="culturist_lcon_small" width="200" height="289"/>
+        <image name="culturist_lcon_small.png" width="144" height="208.32000732421875"/>
         <image name="culturist_logo_green" width="1513" height="450"/>
         <namedColor name="GR3">
             <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

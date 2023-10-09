@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var backgroundWhiteView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var imageBtn: UIButton!
-    //@IBOutlet weak var nameLabel: UILabel!
+    // @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var eventsTableView: UITableView!
@@ -63,14 +63,13 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
+        DispatchQueue.main.async {
+            self.calendar.reloadData()
+            self.eventsTableView.reloadData()
+        }
         // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        requestAccess()
-    }
-    
+
     @IBAction func todayBtn(_ sender: UIButton) {
         // Get the current date
         let today = Date()
@@ -115,7 +114,7 @@ class ProfileViewController: UIViewController {
     
     // Calendar request
     func requestAccess() {
-        eventStore.requestAccess(to: .event) { (granted, error) in
+        eventStore.requestAccess(to: .event) { (granted, _) in
             if granted {
                 self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
                 DispatchQueue.main.async {
@@ -137,9 +136,7 @@ class ProfileViewController: UIViewController {
                 events = eventStore.events(matching: predicate)
             }
         }
-    }
-
-    
+    } 
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {

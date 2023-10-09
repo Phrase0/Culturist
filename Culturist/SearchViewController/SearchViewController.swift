@@ -25,10 +25,10 @@ class SearchViewController: UIViewController {
         noDataNoteLabel.numberOfLines = 1
         noDataNoteLabel.textColor = .B2
         noDataNoteLabel.text = "找尋您感興趣的音樂會跟展覽"
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 18) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noDataNoteLabel.font = pingFangFont
         } else {
-            noDataNoteLabel.font = UIFont.systemFont(ofSize: 18)
+            noDataNoteLabel.font = UIFont.systemFont(ofSize: 17)
             print("no font type")
         }
         return noDataNoteLabel
@@ -39,10 +39,10 @@ class SearchViewController: UIViewController {
         noResultNoteLabel.numberOfLines = 1
         noResultNoteLabel.textColor = .B2
         noResultNoteLabel.text = "抱歉，未找到符合條件的搜尋結果"
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 18) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noResultNoteLabel.font = pingFangFont
         } else {
-            noResultNoteLabel.font = UIFont.systemFont(ofSize: 18)
+            noResultNoteLabel.font = UIFont.systemFont(ofSize: 17)
             print("no font type")
         }
         return noResultNoteLabel
