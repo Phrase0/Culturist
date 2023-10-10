@@ -32,7 +32,9 @@ class RecommendViewController: UIViewController {
     
     // MARK: - recommendProducts
     var filterData = [RecommendationData]()
-    
+    // peek view indexpath
+    var indexPathItem: Int?
+
     var recommendProducts: [ArtDatum] {
         let allProducts = artProducts1 + artProducts6
         if let firstFilterData = self.filterData.first {
@@ -71,6 +73,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // view.backgroundColor = .B4
         backgroundImageView.isHidden = true
         setAnimation()
@@ -173,7 +176,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
         firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
@@ -190,6 +193,29 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
+    // MARK: - Peek the detail page
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController? in
+            // create detail page peek
+            let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            detailVC.detailDesctription = self.recommendProducts[indexPath.item]
+            let desiredHeight =  UIScreen.main.bounds.height * 0.8
+            let desiredWidth = UIScreen.main.bounds.width * 0.95
+            detailVC.preferredContentSize = CGSize(width: desiredWidth, height: desiredHeight)
+            
+            self.indexPathItem = indexPath.item
+            return detailVC
+        }, actionProvider: { _ -> UIMenu? in
+            return nil
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        detailVC.detailDesctription = self.recommendProducts[(self.indexPathItem!)]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
