@@ -6,8 +6,6 @@
 //
 
 import UIKit
-
-import UIKit
 import SnapKit
 
 class SearchCollectionViewCell: UICollectionViewCell {
@@ -20,10 +18,10 @@ class SearchCollectionViewCell: UICollectionViewCell {
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
         productTitle.numberOfLines = 2
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 16) {
             productTitle.font = pingFangFont
         } else {
-            productTitle.font = UIFont.systemFont(ofSize: 15)
+            productTitle.font = UIFont.systemFont(ofSize: 16)
             print("no font type")
         }
         return productTitle
@@ -69,7 +67,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(productImage.snp.bottom).offset(5)
             make.bottom.equalTo(productView).offset(-5)
         }
-        
         
         productImage.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(productView)

@@ -21,7 +21,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     var longitude: Double?
     let mapView = MKMapView()
     
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,8 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.delegate = self
         
         // closeBtn
-        let closeImage = UIImage.asset(.Icons_36px_Close)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
     }
     

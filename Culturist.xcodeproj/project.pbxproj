@@ -44,11 +44,11 @@
 		F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */; };
 		F851F75C2AB6BBC90029C78E /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */; };
 		F851F7662AB709250029C78E /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F851F7652AB709250029C78E /* FirebaseData.swift */; };
+		F85E30382ACE4A4200622014 /* culturist_lcon_small.png in Resources */ = {isa = PBXBuildFile; fileRef = F85E30372ACE4A4100622014 /* culturist_lcon_small.png */; };
 		F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */; };
 		F883BEB82AC5757700437C1D /* FirebaseActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */; };
-		F889E90A2ACC0B6100EF40F2 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */; };
 		F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */; };
-		F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */; };
+		F88EDD3E2ABB2A270061AA18 /* ProfileViewController-Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */; };
 		F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */; };
 		F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */; };
 		F8A532EA2ACAC9AA00250389 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A532E92ACAC9AA00250389 /* SettingViewController.swift */; };
@@ -104,11 +104,11 @@
 		F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionViewCell.swift; sourceTree = "<group>"; };
 		F851F75B2AB6BBC90029C78E /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		F851F7652AB709250029C78E /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		F85E30372ACE4A4100622014 /* culturist_lcon_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = culturist_lcon_small.png; sourceTree = "<group>"; };
 		F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F883BEB72AC5757700437C1D /* FirebaseActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseActivityManager.swift; sourceTree = "<group>"; };
-		F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController-Ext.swift"; sourceTree = "<group>"; };
 		F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventKit+Extension.swift"; sourceTree = "<group>"; };
 		F8A532E82ACAADC900250389 /* CulturistDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistDebug.entitlements; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		F82A34E12AB2AC4C004FF247 = {
 			isa = PBXGroup;
 			children = (
+				F85E30372ACE4A4100622014 /* culturist_lcon_small.png */,
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
-				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
 				9A1E41190C6E6F7290373612 /* Pods */,
@@ -208,10 +208,10 @@
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
+				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
-				F889E9092ACC0B6100EF40F2 /* LaunchScreenViewController.swift */,
 				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
 				F80D8D5A2ABFF304009195B2 /* SearchViewController */,
 				F80D8D612AC0281B009195B2 /* CheckMoreViewController */,
@@ -220,6 +220,7 @@
 				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
 				F851F7412AB35F5F0029C78E /* BookShopViewController */,
 				F8447A232AB9CE0B00471552 /* NavigationViewController */,
+				F8A14E7A2ACF0C4D009A9291 /* LikeViewController */,
 				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
 				F81E8C772AC95F8D002AED22 /* SignInViewController */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
@@ -314,13 +315,20 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		F8A14E7A2ACF0C4D009A9291 /* LikeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
+				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
+			);
+			path = LikeViewController;
+			sourceTree = "<group>";
+		};
 		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
-				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
-				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
-				F88EDD3D2ABB2A270061AA18 /* CalendarViewController.swift */,
+				F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
 				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
@@ -349,7 +357,7 @@
 				F82A34E72AB2AC4C004FF247 /* Frameworks */,
 				F82A34E82AB2AC4C004FF247 /* Resources */,
 				FEF45D8F4A7B5B31CA45A7DC /* [CP] Embed Pods Frameworks */,
-				F82A35112AB2DB77004FF247 /* ShellScript */,
+				F82A35112AB2DB77004FF247 /* Run Script SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -399,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */,
+				F85E30382ACE4A4200622014 /* culturist_lcon_small.png in Resources */,
 				F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */,
 				F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
@@ -431,7 +440,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F82A35112AB2DB77004FF247 /* ShellScript */ = {
+		F82A35112AB2DB77004FF247 /* Run Script SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,6 +449,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script SwiftLint";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -494,7 +504,7 @@
 				F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
-				F88EDD3E2ABB2A270061AA18 /* CalendarViewController.swift in Sources */,
+				F88EDD3E2ABB2A270061AA18 /* ProfileViewController-Ext.swift in Sources */,
 				F82A35062AB2B84C004FF247 /* ArtProductManager.swift in Sources */,
 				F80D8D632AC0283F009195B2 /* CheckMoreViewController.swift in Sources */,
 				F81E8C792AC95FAF002AED22 /* SignInViewController.swift in Sources */,
@@ -504,7 +514,6 @@
 				F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */,
 				F851F73C2AB32FA80029C78E /* CoffeeShopManager.swift in Sources */,
 				F883BEB82AC5757700437C1D /* FirebaseActivityManager.swift in Sources */,
-				F889E90A2ACC0B6100EF40F2 /* LaunchScreenViewController.swift in Sources */,
 				F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */,
 				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,
@@ -666,21 +675,23 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notificate exhibition";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality.";
-				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notificate exhibition";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notify you about upcoming exhibitions";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality in coffee shops and bookstores navigation";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notify you about upcoming exhibitions";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to add and change profile photos";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notify you about upcoming exhibitions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -709,22 +720,23 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notificate exhibition";
-				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality.";
-				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notificate exhibition";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This application will use location for Augmented Reality.";
-				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notificate exhibition";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notify you about upcoming exhibitions";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application will use the camera for Augmented Reality in coffee shops and bookstores navigation";
+				INFOPLIST_KEY_NSContactsUsageDescription = "Please allow access to notify you about upcoming exhibitions";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location for providing location-based services";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to add and change profile photos";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "Please allow access to notify you about upcoming exhibitions";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (

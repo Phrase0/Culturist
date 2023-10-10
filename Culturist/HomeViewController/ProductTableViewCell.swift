@@ -12,6 +12,7 @@ class ProductTableViewCell: UITableViewCell {
     
     @IBOutlet weak var productCollectionView: UICollectionView!
     var productIndexPath: Int?
+    let firebaseManager = FirebaseManager()
     
     var artProducts1: [ArtDatum] = [] {
         didSet {
@@ -61,7 +62,7 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         }
         return cell
     }
-
+    
     func parentViewController() -> HomeViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -75,19 +76,19 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let homeViewController = parentViewController() {
             guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-
+            
             if productIndexPath == 1 {
                 detailVC.detailDesctription = artProducts1[indexPath.item]
-                //                firebaseManager.addData(exhibitionUid: artProducts1[selectedIndexPath.row].uid, title: artProducts1[selectedIndexPath.row].title, location: artProducts1[selectedIndexPath.row].showInfo[0].location, locationName: artProducts1[selectedIndexPath.row].showInfo[0].locationName)
+                firebaseManager.addRecommendData(exhibitionUid: artProducts1[indexPath.item].uid, title: artProducts1[indexPath.item].title, category: artProducts1[indexPath.item].category, location: artProducts1[indexPath.item].showInfo[0].location, locationName: artProducts1[indexPath.item].showInfo[0].locationName)
             } else if productIndexPath == 2 {
                 detailVC.detailDesctription = artProducts6[indexPath.item]
-                //                firebaseManager.addData(exhibitionUid: artProducts6[selectedIndexPath.row].uid, title: artProducts6[selectedIndexPath.row].title, location: artProducts6[selectedIndexPath.row].showInfo[0].location, locationName: artProducts6[selectedIndexPath.row].showInfo[0].locationName)
+                firebaseManager.addRecommendData(exhibitionUid: artProducts6[indexPath.row].uid, title: artProducts6[indexPath.item].title, category: artProducts6[indexPath.row].category, location: artProducts6[indexPath.item].showInfo[0].location, locationName: artProducts6[indexPath.item].showInfo[0].locationName)
             }
-
+            
             homeViewController.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

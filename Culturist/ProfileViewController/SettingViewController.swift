@@ -19,7 +19,7 @@ class SettingViewController: UIViewController {
         setCorner()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .GR3
+        navigationItem.leftBarButtonItem?.tintColor = .GR0
     }
     
     @objc private func backButtonTapped() {

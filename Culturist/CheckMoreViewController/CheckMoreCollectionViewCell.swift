@@ -9,7 +9,6 @@ import UIKit
 
 class CheckMoreCollectionViewCell: UICollectionViewCell {
     
-    
     lazy var productView: UIView = {
         let productView = UIView()
         return productView
@@ -18,11 +17,11 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
         productTitle.numberOfLines = 2
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 16) {
             productTitle.font = pingFangFont
             productTitle.textColor = .black
         } else {
-            productTitle.font = UIFont.systemFont(ofSize: 15)
+            productTitle.font = UIFont.systemFont(ofSize: 16)
             productTitle.textColor = .black
             print("no font type")
         }

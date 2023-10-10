@@ -8,7 +8,7 @@
 import UIKit
 import Gemini
 import NVActivityIndicatorView
-// import Hero
+import MJRefresh
 
 class RecommendViewController: UIViewController {
     
@@ -20,25 +20,64 @@ class RecommendViewController: UIViewController {
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
-    
+    let recommendationManager = FirebaseManager()
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    // create DispatchGroup
+    let group = DispatchGroup()
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
-    // recommendProducts
+    let firebaseManager = FirebaseManager()
+    
+    // MARK: - recommendProducts
+    var filterData = [RecommendationData]()
+    // peek view indexpath
+    var indexPathItem: Int?
+    let desiredHeight =  UIScreen.main.bounds.height * 0.8
+    let desiredWidth = UIScreen.main.bounds.width * 0.95
+
     var recommendProducts: [ArtDatum] {
-        let filteredProducts = artProducts1 + artProducts6
-        // sort by hitRate
-        let sortedProducts = filteredProducts.sorted { $0.hitRate > $1.hitRate }
-        // Get the first 15 items of data, or return an empty array if there is no data
-        let result = Array(sortedProducts.prefix(15))
-        return result
+        let allProducts = artProducts1 + artProducts6
+        if let firstFilterData = self.filterData.first {
+            let searchTitleTerm = firstFilterData.title
+            let searchLocationTerm = firstFilterData.location.prefix(6)
+            let searchLocationNameTerm = firstFilterData.locationName
+            // Use `filter` to search data
+            var filteredData = allProducts.filter { data in
+                let titleContains = data.title.contains(searchTitleTerm)
+                let locationContains = data.showInfo.first?.location.contains(searchLocationTerm)
+                let locationNameContains = data.showInfo.first?.locationName.contains(searchLocationNameTerm)
+                // Return true if any of the properties contain similar text
+                return titleContains || locationContains ?? false || locationNameContains ?? false
+            }
+            
+            // Check the number of filtered data after filtering
+            let resultCount = filteredData.count
+            // If the result count is less than 10, recommend by hitRate to reach 10
+            if resultCount < 10 {
+                let remainingCount = 10 - resultCount
+                let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
+                let topProducts = Array(sortedProducts.prefix(remainingCount))
+                filteredData.append(contentsOf: topProducts)
+            }
+            
+            let topResults = Array(filteredData.prefix(10))
+            return topResults
+        } else {
+            // if filterData have no data, sort by hitRate
+            let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
+            let result = Array(sortedProducts.prefix(10))
+            print("results:\(result)")
+            return result
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .B4
+        
+        // view.backgroundColor = .B4
+        backgroundImageView.isHidden = true
         setAnimation()
         loading.startAnimating()
         
@@ -46,13 +85,20 @@ class RecommendViewController: UIViewController {
         recommendCollectionView.delegate = self
         artManager1.delegate = self
         artManager6.delegate = self
+        group.enter()
         artManager1.getArtProductList(number: "1")
+        group.enter()
         artManager6.getArtProductList(number: "6")
+        
         // use firebase to get data
         concertDataManager.concertDelegate = self
         exhibitionDataManager.exhibitionDelegate = self
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
+        // concertDataManager.fetchConcertData()
+        // exhibitionDataManager.fetchExhibitionData()
+        
+        // use firebase to get recommend data
+        recommendationManager.collectionDelegate = self
+        
         recommendCollectionView.gemini
             .scaleAnimation()
             .scale(0.7)
@@ -61,6 +107,39 @@ class RecommendViewController: UIViewController {
         //        backgroundImageView.image = UIImage(named: "background")
         //        backgroundImageView.contentMode = .scaleAspectFill
         //        backgroundImageView.layer.opacity = 0.6
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recommendationManager.readFilterRecommendationData()
+        // pullToRefresh trailer
+        let trailer = MJRefreshNormalTrailer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                self.group.enter()
+                self.artManager1.getArtProductList(number: "1")
+                self.group.enter()
+                self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                //                self.concertDataManager.fetchConcertData()
+                //                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
+                self.recommendCollectionView.mj_trailer?.endRefreshing()
+            }
+        }
+        trailer.setTitle("側拉", for: .idle)
+        trailer.setTitle("松開刷新", for: .pulling)
+        trailer.setTitle("側拉刷新中", for: .refreshing)
+        // trailer.stateLabel?.isHidden = true
+        trailer.autoChangeTransparency(true).link(to: self.recommendCollectionView)
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.recommendCollectionView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
+        
     }
     
     func setAnimation() {
@@ -99,15 +178,10 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
-        // ---------
-        //        self.navigationController?.hero.isEnabled = true
-        //        self.hero.modalAnimationType = .selectBy(presenting:.zoom, dismissing:.zoomOut)
-        // ---------
-        
+        firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         self.navigationController?.pushViewController(detailVC, animated: true)
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -121,6 +195,26 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
+    // MARK: - Peek the detail page
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController? in
+            // create detail page peek
+            let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+            detailVC.detailDesctription = self.recommendProducts[indexPath.item]
+            detailVC.preferredContentSize = CGSize(width: self.desiredWidth, height: self.desiredHeight)
+            self.indexPathItem = indexPath.item
+            return detailVC
+        }, actionProvider: { _ -> UIMenu? in
+            return nil
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        detailVC.detailDesctription = self.recommendProducts[(self.indexPathItem!)]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -142,19 +236,24 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumInteritemSpacing = interitemSpace
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 105/75)
-        
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 40.0, bottom: 40.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 40.0, bottom: 40.0, right: 40.0)
         return flowLayout.itemSize
     }
     
 }
 
+extension RecommendViewController: FirebaseCollectionDelegate {
+    func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
+        self.filterData = recommendationData
+    }
+}
+
 // MARK: - ArtManagerDelegate
 extension RecommendViewController: ArtManagerDelegate {
-    // Call the signal() method of the semaphore in manager(_:didGet:) to notify that the data loading is complete
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if artProductList.isEmpty {
                 print("no api data")
             } else {
@@ -162,51 +261,53 @@ extension RecommendViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                    DispatchQueue.main.async {
-                        self.recommendCollectionView.reloadData()
-                        self.loading.stopAnimating()
-                    }
                 }
-                
             }
+            self.group.leave()
         }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+            // self.group.leave()
+        }
     }
     
 }
 
 // MARK: - FirebaseDataDelegate
 extension RecommendViewController: FirebaseConcertDelegate {
-    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
-            self.loading.stopAnimating()
-        }
-    }
-    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
         }
     }
-    
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+        }
+    }
 }
 
 extension RecommendViewController: FirebaseExhibitionDelegate {
-    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
+        self.artProducts6 = exhibitionData
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
         }
     }
-    
-    func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
-        self.artProducts6 = exhibitionData
-        DispatchQueue.main.async {
-            self.recommendCollectionView.reloadData()
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }

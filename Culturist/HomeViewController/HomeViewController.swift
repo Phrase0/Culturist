@@ -14,18 +14,18 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
     var mySearchController = UISearchController(searchResultsController: nil)
-    
-    static let shared = HomeViewController()
+
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
     var artManager6 = ArtProductManager()
-    
     let concertDataManager = ConcertDataManager()
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR2, padding: 0)
+    // create DispatchGroup
+    let group = DispatchGroup()
+    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,23 +33,39 @@ class HomeViewController: UIViewController {
         homeTableView.dataSource = self
         setAnimation()
         loading.startAnimating()
-
+        
         // use api to get data
         artManager1.delegate = self
         artManager6.delegate = self
+        group.enter()
         artManager1.getArtProductList(number: "1")
+        group.enter()
         artManager6.getArtProductList(number: "6")
-        
+
+        // MARK: - FireBaseData
         // use firebase to get data
-        concertDataManager.concertDelegate = self
-        exhibitionDataManager.exhibitionDelegate = self
-//                concertDataManager.fetchConcertData()
-//                exhibitionDataManager.fetchExhibitionData()
-
+//        concertDataManager.concertDelegate = self
+//        exhibitionDataManager.exhibitionDelegate = self
+//        concertDataManager.fetchConcertData()
+//        exhibitionDataManager.fetchExhibitionData()
+        
+        // MARK: - navigationTitle
+        // Create an empty UIBarButtonItem as the left item
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 44 // Adjust the width to add left space
+        // Add the left item to the navigation bar
+        navigationItem.leftBarButtonItems = [leftSpacer]
+        
+        // Create an image view as the title view
+        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green_navTitle"))
+        imageView.contentMode = .scaleAspectFit
+        // Set the image view as the title view
+        navigationItem.titleView = imageView
+        
+        // Create the right-side search button
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton.tintColor = .GR2
+        searchButton.tintColor = .GR0
         navigationItem.rightBarButtonItem = searchButton
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,14 +74,26 @@ class HomeViewController: UIViewController {
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
+                self.group.enter()
                 self.artManager1.getArtProductList(number: "1")
+                self.group.enter()
                 self.artManager6.getArtProductList(number: "6")
+                // ---------------------------------------------------
+                //                self.concertDataManager.fetchConcertData()
+                //                self.exhibitionDataManager.fetchExhibitionData()
+                // ---------------------------------------------------
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
+        
+        group.notify(queue: .main) {
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
+                self.loading.stopAnimating()
+            }
+        }
     }
     
-
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in
@@ -82,10 +110,11 @@ class HomeViewController: UIViewController {
         let allProducts = self.artProducts1 + self.artProducts6
         searchVC.allProducts = allProducts
         navigationController?.pushViewController(searchVC, animated: true)
-
+        
     }
     
 }
+
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         3
@@ -136,15 +165,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // add title
         let label = UILabel()
         label.text = "\(title)"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        if let pingFangFont = UIFont(name: "PingFangTC-Medium", size: 20) {
+            label.font = pingFangFont
+        } else {
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+            print("no font type")
+        }
         label.textColor = UIColor.black
         headerView.addSubview(label)
         
         // add button
         let button = UIButton()
-        button.setTitleColor(UIColor.GR1, for: .normal)
+        button.setTitleColor(UIColor.GR0, for: .normal)
         button.setTitle("查看更多 >", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
+            button.titleLabel?.font = pingFangFont
+        } else {
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            print("no font type")
+        }
         button.tag = buttonTag ?? 0
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         headerView.addSubview(button)
@@ -170,7 +209,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-
+    
     // MARK: - Button Action
     
     @objc func buttonTapped(_ sender: UIButton) {
@@ -183,7 +222,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             checkMoreVC.result = artProducts6
             checkMoreVC.navigationItemTitle = "展覽"
         }
-
+        
         navigationController?.pushViewController(checkMoreVC, animated: true)
     }
     
@@ -192,7 +231,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if artProductList.isEmpty {
                 print("no api data")
             } else {
@@ -200,52 +240,54 @@ extension HomeViewController: ArtManagerDelegate {
                     self.artProducts1 = artProductList
                 } else if manager === self.artManager6 {
                     self.artProducts6 = artProductList
-                    DispatchQueue.main.async {
-                        self.homeTableView.reloadData()
-                        self.loading.stopAnimating()
-                    }
                 }
             }
-
+            self.group.leave()
         }
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         // print(error.localizedDescription)
-        self.loading.stopAnimating()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+            // self.group.leave()
+        }
     }
     
 }
 
 // MARK: - FirebaseDataDelegate
 extension HomeViewController: FirebaseConcertDelegate {
-    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
-            self.loading.stopAnimating()
-        }
-    }
     
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
             self.homeTableView.reloadData()
+        }
+    }
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
-
 }
 
 extension HomeViewController: FirebaseExhibitionDelegate {
-    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
-            self.loading.stopAnimating()
-        }
-    }
-    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
             self.homeTableView.reloadData()
+        }
+    }
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }

@@ -104,7 +104,6 @@ class FirebaseManager {
         }
     }
 
-    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -139,19 +138,18 @@ class FirebaseManager {
         }
     }
     
-    // MARK: -  storeProfileImage
+    // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
-        storage.child("images/file.png").putData(imageData) { _, error in
+        storage.child("images/\(KeychainItem.currentUserIdentifier).png").putData(imageData) { _, error in
             guard error == nil else {
                 print("Failed to upload")
                 return
             }
-            self.storage.child("images/file.png").downloadURL { url, error in
+            self.storage.child("images/\(KeychainItem.currentUserIdentifier).png").downloadURL { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
                 let urlString = url.absoluteString
-                print("Download URL: \(urlString)")
                 UserDefaults.standard.set(urlString, forKey: "url")
                 self.addImage(imageUrl: urlString)
             }
@@ -206,12 +204,10 @@ class FirebaseManager {
         }
     }
 
-
-
     // MARK: - Recommendation
-    func addRecommendData(exhibitionUid: String, title: String, location: String, locationName: String) {
+    func addRecommendData(exhibitionUid: String, title: String, category: String, location: String, locationName: String) {
         // Create a new RecommendationData
-        let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+        let newRecommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
         // Get the user's document reference
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         // Create a new collection reference for recommendationData
@@ -221,6 +217,7 @@ class FirebaseManager {
         let recommendationData: [String: Any] = [
             "exhibitionUid": newRecommendationData.exhibitionUid,
             "title": newRecommendationData.title,
+            "category": newRecommendationData.category,
             "location": newRecommendationData.location,
             "locationName": newRecommendationData.locationName
         ]
@@ -234,8 +231,7 @@ class FirebaseManager {
             }
         }
     }
-    
-    
+
     // ---------------------------------------------------
     func readRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
@@ -252,10 +248,11 @@ class FirebaseManager {
                 let data = document.data()
                 if let exhibitionUid = data["exhibitionUid"] as? String,
                    let title = data["title"] as? String,
+                   let category = data["category"] as? String,
                    let location = data["location"] as? String,
                    let locationName = data["locationName"] as? String {
                     // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
                 }
             }
@@ -282,10 +279,11 @@ class FirebaseManager {
                 
                 if let exhibitionUid = data["exhibitionUid"] as? String,
                    let title = data["title"] as? String,
+                   let category = data["category"] as? String,
                    let location = data["location"] as? String,
                    let locationName = data["locationName"] as? String {
                     // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, location: location, locationName: locationName)
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
                 }
             }

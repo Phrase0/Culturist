@@ -18,7 +18,6 @@ target 'Culturist' do
   pod 'FSCalendar+Persian'
   pod 'SnapKit'
   pod 'Gemini'
-  pod 'Hero'
   pod 'NVActivityIndicatorView'
 
 

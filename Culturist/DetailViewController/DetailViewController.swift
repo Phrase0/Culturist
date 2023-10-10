@@ -9,33 +9,27 @@ import UIKit
 import Kingfisher
 import MapKit
 import EventKitUI
-import Hero
+import SafariServices
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var detailTableView: UITableView!
     // detailData from home page
     var detailDesctription: ArtDatum?
     
-    let firebaseManager = FirebaseManager()
+    // like data
     var isLiked: Bool?
     var likeData = [LikeData]()
     
     // appCalendar
     let eventStore = EKEventStore()
     var appCalendar: EKCalendar?
-    
-    @IBOutlet weak var detailTableView: UITableView!
-    
     // set Time
     let dateFormatter = DateFormatter()
     
-    func changeDateFormatter(dateString: String?) -> Date? {
-        guard let dateString = dateString else {
-            return nil
-        }
-        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        return dateFormatter.date(from: dateString)
-    }
+    // create DispatchGroup
+    let group = DispatchGroup()
+    let firebaseManager = FirebaseManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +37,11 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
-        
-        // create DispatchGroup
-        let group = DispatchGroup()
-        
+
         group.enter()
         firebaseManager.fetchUserLikeData { _ in
              // leave DispatchGroup
-            group.leave()
+            self.group.leave()
         }
         
         // use DispatchGroup notify
@@ -74,20 +65,40 @@ class DetailViewController: UIViewController {
             appCalendar = createAppCalendar()
         }
         // ---------------------------------------------------        
-        let backImage = UIImage.asset(.Icons_36px_Back)?.withRenderingMode(.alwaysOriginal)
+        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
+        navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
+        navigationBarAppearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // reset navigationBarAppearance
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithTransparentBackground()
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
     }
     
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func changeDateFormatter(dateString: String?) -> Date? {
+        guard let dateString = dateString else {
+            return nil
+        }
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return dateFormatter.date(from: dateString)
     }
 
 }
@@ -99,23 +110,23 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else { return UITableViewCell() }
         if let detailDesctription = detailDesctription {
             let url = URL(string: detailDesctription.imageURL)
             cell.detailImageView.kf.setImage(with: url)
             cell.titleLabel.text = detailDesctription.title
             cell.locationLabel.text = detailDesctription.showInfo[0].locationName
             cell.priceLabel.text = detailDesctription.showInfo[0].price
+            if !detailDesctription.showInfo[0].price.isEmpty {
+                cell.priceLabel.text = ("$:\(detailDesctription.showInfo[0].price)")
+            } else {
+                cell.priceLabel.text = ""
+            }
+            
             cell.addressLabel.text = detailDesctription.showInfo[0].location
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-            // ---------            
-//            cell.detailImageView.heroID = detailDesctription.imageURL
-//            self.view.heroID = detailDesctription.uid
-//            self.hero.isEnabled = true
-            // ---------
-            
             // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
                 guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
@@ -130,8 +141,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     } else {
@@ -157,8 +167,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     }
@@ -180,8 +189,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     } else {
@@ -208,8 +216,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
-                            navVC.hero.isEnabled = true
-                            navVC.hero.modalAnimationType = .selectBy(presenting:.fade, dismissing:.fade)
+                            navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
                     }
@@ -236,8 +243,16 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             // ---------------------------------------------------
-            // MARK: - notificationBtnTapped
+            // MARK: - notificationBtn & webBtn Tapped
             cell.cellDelegate = self
+            let urlString = detailDesctription.sourceWebPromote
+            if let url = URL(string: urlString),
+               UIApplication.shared.canOpenURL(url) {
+                // url can use
+                cell.webBtn.isEnabled = true
+            } else {
+                cell.webBtn.isEnabled = false
+            }
             // ---------------------------------------------------
         }
         return cell
@@ -276,17 +291,14 @@ extension DetailViewController: FirebaseLikeDelegate {
 
 // MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
 extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
-    
     // check if calendar is exist or not
     func findAppCalendar() -> EKCalendar? {
         let calendars = eventStore.calendars(for: .event)
-        
         for calendar in calendars {
             if calendar.title == "CulturistCalendar" {
                 return calendar
             }
         }
-        
         return nil
     }
     
@@ -314,13 +326,15 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         let event = EKEvent(eventStore: eventVC.eventStore)
         event.calendar = appCalendar
         event.title = detailDesctription?.title
-        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.last?.endTime) {
+        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time) {
             // event.startDate = Date()
             event.startDate = startTime
             event.endDate = endTime
         }
         eventVC.event = event
-        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        eventVC.navigationBar.standardAppearance = navigationBarAppearance
         present(eventVC, animated: true)
     }
     
@@ -332,15 +346,22 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
 
 // MARK: - DetailTableViewCellDelegate
 extension DetailViewController: DetailTableViewCellDelegate {
+    func webBtnTapped(sender: UIButton) {
+        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL)
+        safariVC.delegate = self
+        self.present(safariVC, animated: true, completion: nil)
+    }
+    
     func notificationBtnTapped(sender: UIButton) {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             let eventStore = EKEventStore()
-            eventStore.requestAccess(to: .event) { (granted, error) in
+            eventStore.requestAccess(to: .event) { (granted, _) in
                 if granted {
                     // do stuff
                     DispatchQueue.main.async {
                         self.showEventViewController()
+                        
                     }
                 }
             }
@@ -361,5 +382,12 @@ extension DetailViewController: DetailTableViewCellDelegate {
 extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+// MARK: - SFSafariViewControllerDelegate
+extension DetailViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
