@@ -231,7 +231,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - ProductManagerDelegate
 extension HomeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if artProductList.isEmpty {
                 print("no api data")
             } else {
@@ -247,7 +248,8 @@ extension HomeViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         // print(error.localizedDescription)
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
             // self.group.leave()
         }
@@ -260,13 +262,15 @@ extension HomeViewController: FirebaseConcertDelegate {
     
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
             self.homeTableView.reloadData()
         }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
@@ -275,13 +279,15 @@ extension HomeViewController: FirebaseConcertDelegate {
 extension HomeViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
             self.homeTableView.reloadData()
         }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }

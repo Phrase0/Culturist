@@ -140,17 +140,16 @@ class FirebaseManager {
     
     // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
-        storage.child("images/file.png").putData(imageData) { _, error in
+        storage.child("images/\(KeychainItem.currentUserIdentifier).png").putData(imageData) { _, error in
             guard error == nil else {
                 print("Failed to upload")
                 return
             }
-            self.storage.child("images/file.png").downloadURL { url, error in
+            self.storage.child("images/\(KeychainItem.currentUserIdentifier).png").downloadURL { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
                 let urlString = url.absoluteString
-                print("Download URL: \(urlString)")
                 UserDefaults.standard.set(urlString, forKey: "url")
                 self.addImage(imageUrl: urlString)
             }
