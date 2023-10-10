@@ -202,7 +202,6 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
             let desiredHeight =  UIScreen.main.bounds.height * 0.8
             let desiredWidth = UIScreen.main.bounds.width * 0.95
             detailVC.preferredContentSize = CGSize(width: desiredWidth, height: desiredHeight)
-            
             self.indexPathItem = indexPath.item
             return detailVC
         }, actionProvider: { _ -> UIMenu? in
@@ -247,11 +246,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
         self.filterData = recommendationData
-        //        DispatchQueue.main.async {
-        //            self.recommendCollectionView.reloadData()
-        //        }
     }
-    
 }
 
 // MARK: - ArtManagerDelegate
