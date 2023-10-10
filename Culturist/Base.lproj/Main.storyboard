@@ -756,7 +756,7 @@ Label</string>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qTO-Pm-Pfn"/>
-                        <color key="backgroundColor" name="GR3"/>
+                        <color key="backgroundColor" name="GR4"/>
                         <constraints>
                             <constraint firstItem="RP7-gM-09p" firstAttribute="top" secondItem="qTO-Pm-Pfn" secondAttribute="top" constant="150" id="Bpu-HS-7Wp"/>
                             <constraint firstItem="qTO-Pm-Pfn" firstAttribute="bottom" secondItem="vQ3-M4-lug" secondAttribute="bottom" constant="100" id="Bwb-cx-LS9"/>
@@ -1535,7 +1535,6 @@ Label</string>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Csv-iY-oI9">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="HOh-nm-YAL" kind="relationship" relationship="viewControllers" id="8uZ-DC-cmJ"/>
