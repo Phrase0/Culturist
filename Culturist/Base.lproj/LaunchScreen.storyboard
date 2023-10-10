@@ -33,7 +33,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="GR3"/>
+                        <color key="backgroundColor" name="GR4"/>
                         <constraints>
                             <constraint firstItem="HqJ-mO-Yoo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="1dh-cq-1p6"/>
                             <constraint firstItem="ydf-po-bh8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-3" id="gMb-y3-eat"/>
@@ -50,8 +50,8 @@
     <resources>
         <image name="culturist_lcon_small.png" width="144" height="208.32000732421875"/>
         <image name="culturist_logo_green" width="1513" height="450"/>
-        <namedColor name="GR3">
-            <color red="0.90980392156862744" green="0.90980392156862744" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="GR4">
+            <color red="0.9100000262260437" green="0.9100000262260437" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
