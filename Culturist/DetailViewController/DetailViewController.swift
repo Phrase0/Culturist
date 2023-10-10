@@ -110,13 +110,19 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else { return UITableViewCell() }
         if let detailDesctription = detailDesctription {
             let url = URL(string: detailDesctription.imageURL)
             cell.detailImageView.kf.setImage(with: url)
             cell.titleLabel.text = detailDesctription.title
             cell.locationLabel.text = detailDesctription.showInfo[0].locationName
             cell.priceLabel.text = detailDesctription.showInfo[0].price
+            if !detailDesctription.showInfo[0].price.isEmpty {
+                cell.priceLabel.text = ("$:\(detailDesctription.showInfo[0].price)")
+            } else {
+                cell.priceLabel.text = ""
+            }
+            
             cell.addressLabel.text = detailDesctription.showInfo[0].location
             cell.startTimeLabel.text = detailDesctription.showInfo[0].time
             cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
@@ -285,7 +291,6 @@ extension DetailViewController: FirebaseLikeDelegate {
 
 // MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
 extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
-    
     // check if calendar is exist or not
     func findAppCalendar() -> EKCalendar? {
         let calendars = eventStore.calendars(for: .event)

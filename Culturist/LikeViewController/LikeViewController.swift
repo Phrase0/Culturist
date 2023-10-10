@@ -102,7 +102,8 @@ class LikeViewController: UIViewController {
         }.autoChangeTransparency(true).link(to: self.likeCollectionView)
         
         group.notify(queue: .main) {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.likeCollectionView.reloadData()
                 self.loading.stopAnimating()
             }
@@ -114,7 +115,8 @@ class LikeViewController: UIViewController {
             } else {
                 self.noDataNoteLabel.isHidden = true
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.likeCollectionView.reloadData()
             }
         }
@@ -203,7 +205,8 @@ extension LikeViewController: FirebaseLikeDelegate {
 // MARK: - ArtManagerDelegate
 extension LikeViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if artProductList.isEmpty {
                 print("no api data")
             } else {
@@ -219,7 +222,8 @@ extension LikeViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
             // self.group.leave()
         }
@@ -230,14 +234,16 @@ extension LikeViewController: ArtManagerDelegate {
 // MARK: - FirebaseDataDelegate
 extension LikeViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
     
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.likeCollectionView.reloadData()
             self.loading.stopAnimating()
         }
@@ -247,14 +253,16 @@ extension LikeViewController: FirebaseConcertDelegate {
 
 extension LikeViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
     
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.likeCollectionView.reloadData()
             self.loading.stopAnimating()
         }

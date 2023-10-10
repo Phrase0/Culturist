@@ -34,6 +34,8 @@ class RecommendViewController: UIViewController {
     var filterData = [RecommendationData]()
     // peek view indexpath
     var indexPathItem: Int?
+    let desiredHeight =  UIScreen.main.bounds.height * 0.8
+    let desiredWidth = UIScreen.main.bounds.width * 0.95
 
     var recommendProducts: [ArtDatum] {
         let allProducts = artProducts1 + artProducts6
@@ -199,9 +201,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
             // create detail page peek
             let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
             detailVC.detailDesctription = self.recommendProducts[indexPath.item]
-            let desiredHeight =  UIScreen.main.bounds.height * 0.8
-            let desiredWidth = UIScreen.main.bounds.width * 0.95
-            detailVC.preferredContentSize = CGSize(width: desiredWidth, height: desiredHeight)
+            detailVC.preferredContentSize = CGSize(width: self.desiredWidth, height: self.desiredHeight)
             self.indexPathItem = indexPath.item
             return detailVC
         }, actionProvider: { _ -> UIMenu? in
@@ -252,7 +252,8 @@ extension RecommendViewController: FirebaseCollectionDelegate {
 // MARK: - ArtManagerDelegate
 extension RecommendViewController: ArtManagerDelegate {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if artProductList.isEmpty {
                 print("no api data")
             } else {
@@ -268,7 +269,8 @@ extension RecommendViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
             // self.group.leave()
         }
@@ -280,13 +282,15 @@ extension RecommendViewController: ArtManagerDelegate {
 extension RecommendViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
         }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
@@ -295,13 +299,15 @@ extension RecommendViewController: FirebaseConcertDelegate {
 extension RecommendViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
         }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.loading.stopAnimating()
         }
     }
