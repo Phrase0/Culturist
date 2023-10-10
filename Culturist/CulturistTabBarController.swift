@@ -12,7 +12,6 @@ class CulturistTabBarController: UITabBarController, UITabBarControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = UIColor.GR0
-        self.tabBarItem.imageInsets = UIEdgeInsets(top: 2, left: 2, bottom: -2, right: -2)
         self.delegate = self
     }
     
