@@ -51,7 +51,7 @@ class ProfileViewController: UIViewController {
                 }
             } else {
                 self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
-                self.profileImageView.tintColor = .GR3
+                self.profileImageView.tintColor = .GR4
             }
         }
         

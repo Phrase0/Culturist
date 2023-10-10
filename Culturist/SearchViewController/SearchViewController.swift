@@ -13,6 +13,11 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchCollectionView: UICollectionView!
     
+    @IBOutlet weak var taipeiBtn: UIButton!
+    @IBOutlet weak var taichungBtn: UIButton!
+    @IBOutlet weak var musicBtn: UIButton!
+    @IBOutlet weak var paintBtn: UIButton!
+    
     let firebaseManager = FirebaseManager()
     
     var allProducts: [ArtDatum] = []
@@ -54,6 +59,7 @@ class SearchViewController: UIViewController {
         view.addSubview(noResultNoteLabel)
         noResultNoteLabel.isHidden = true
         setupConstraints()
+        setUpBtn()
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         settingSearchController()
@@ -62,9 +68,66 @@ class SearchViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .GR0
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-    
+
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - search tag btn
+    @IBAction func taipeiBtnTapped(_ sender: UIButton) {
+        settingBtnTapped(text: "臺北", sender: sender)
+    }
+    
+    @IBAction func taichungBtnTapped(_ sender: UIButton) {
+        settingBtnTapped(text: "臺中", sender: sender)
+    }
+    
+    @IBAction func musicBtnTapped(_ sender: UIButton) {
+        settingBtnTapped(text: "音樂", sender: sender)
+    }
+    
+    @IBAction func paintBtnTapped(_ sender: UIButton) {
+        settingBtnTapped(text: "畫展", sender: sender)
+    }
+
+    func settingBtnTapped(text: String, sender: UIButton) {
+        setUpBtn()
+        // open keyboard
+        mySearchController.searchBar.becomeFirstResponder()
+        mySearchController.searchBar.resignFirstResponder()
+        mySearchController.searchBar.text = text
+        if let searchText =  mySearchController.searchBar.text {
+            searchBar(mySearchController.searchBar, textDidChange: searchText)
+        }
+        sender.backgroundColor = .GR3
+        sender.tintColor = .GR1
+        sender.layer.borderColor = UIColor.GR1!.cgColor
+    }
+    
+    func setUpBtn() {
+        taipeiBtn.backgroundColor = .white
+        taipeiBtn.tintColor = .B1
+        taipeiBtn.layer.cornerRadius = 18
+        taipeiBtn.layer.borderColor = UIColor.B1!.cgColor
+        taipeiBtn.layer.borderWidth = 0.5
+        
+        taichungBtn.backgroundColor = .white
+        taichungBtn.tintColor = .B1
+        taichungBtn.layer.cornerRadius = 18
+        taichungBtn.layer.borderColor = UIColor.B1!.cgColor
+        taichungBtn.layer.borderWidth = 0.5
+        
+        musicBtn.backgroundColor = .white
+        musicBtn.tintColor = .B1
+        musicBtn.layer.cornerRadius = 18
+        musicBtn.layer.borderColor = UIColor.B1!.cgColor
+        musicBtn.layer.borderWidth = 0.5
+        
+        paintBtn.backgroundColor = .white
+        paintBtn.tintColor = .B1
+        paintBtn.layer.cornerRadius = 18
+        paintBtn.layer.borderColor = UIColor.B1!.cgColor
+        paintBtn.layer.borderWidth = 0.5
     }
     
     func setupConstraints() {
@@ -140,7 +203,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        searchCollectionView.contentInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 12.0)
+        searchCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 12.0)
         return flowLayout.itemSize
     }
     
@@ -149,7 +212,6 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func settingSearchController() {
-        mySearchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = mySearchController
         mySearchController.hidesNavigationBarDuringPresentation = false
         mySearchController.searchResultsUpdater = self
@@ -183,6 +245,19 @@ extension SearchViewController: UISearchResultsUpdating {
         }
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContent(for: searchText)
+        if searchResult.isEmpty && !searchText.isEmpty {
+            noResultNoteLabel.isHidden = false
+        } else {
+            noResultNoteLabel.isHidden = true
+        }
+        searchCollectionView.reloadData()
+        if searchText == "" {
+            setUpBtn()
+        }
+    }
+
     func filterContent(for searchText: String) {
         // copy allProducts to searchResult
         searchResult = allProducts
@@ -203,10 +278,11 @@ extension SearchViewController: UISearchBarDelegate {
         noDataNoteLabel.isHidden = true
         return true
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         noDataNoteLabel.isHidden = false
         noDataNoteLabel.text = "請搜尋音樂會或展覽"
+        setUpBtn()
     }
 }
 

@@ -20,6 +20,7 @@ private enum STColor: String {
     case GR1
     case GR2
     case GR3
+    case GR4
     case R1
     case R2
     case R3
@@ -38,6 +39,7 @@ extension UIColor {
     static let GR1 = STColor(.GR1)
     static let GR2 = STColor(.GR2)
     static let GR3 = STColor(.GR3)
+    static let GR4 = STColor(.GR4)
     static let R1 = STColor(.R1)
     static let R2 = STColor(.R2)
     static let R3 = STColor(.R3)
