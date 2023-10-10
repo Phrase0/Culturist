@@ -70,13 +70,14 @@ class DetailViewController: UIViewController {
 
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
         navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
         navigationBarAppearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
@@ -326,7 +327,6 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
             event.endDate = endTime
         }
         eventVC.event = event
-        
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithDefaultBackground()
         eventVC.navigationBar.standardAppearance = navigationBarAppearance
