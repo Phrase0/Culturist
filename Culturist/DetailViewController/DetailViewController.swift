@@ -343,7 +343,18 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
+        if action == .saved {
+            // Event is saved, show a success message
+            let alert = UIAlertController(title: "儲存成功", message: "已加入行事曆", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                // Handle the OK button press if needed
+            })
+            alert.addAction(okAction)
+            print("save")
+            present(alert, animated: true, completion: nil)
+        }
     }
+
     
 }
 
@@ -364,7 +375,6 @@ extension DetailViewController: DetailTableViewCellDelegate {
                     // do stuff
                     DispatchQueue.main.async {
                         self.showEventViewController()
-                        
                     }
                 }
             }
