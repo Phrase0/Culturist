@@ -10,17 +10,48 @@ import FSCalendar_Persian
 import EventKit
 import EventKitUI
 
-// MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
-extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: date) }
-        return matchingEvents.count
+extension ProfileViewController {
+    func requestAccess() {
+        // Forcefully clear EventKit cache
+        eventStore.reset()
+        eventStore.requestAccess(to: .event) { [weak self] (granted, _) in
+            if granted {
+                self?.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            } else {
+                // Handling when access is denied or the calendar is not found
+                // Clean event data
+                self?.events.removeAll()
+                // Clear table view data
+                self?.eventsTableView.reloadData()
+            }
+            DispatchQueue.main.async {
+                self?.calendar.reloadData()
+                self?.eventsTableView.reloadData()
+            }
+        }
     }
     
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDate = date
-        eventsTableView.reloadData()
+    func fetchEventsFromCalendar(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        var calendarFound = false
+        for calendar in calendars {
+            if calendar.title == calendarName {
+                calendarFound = true
+                // set event start time
+                let startDate = Date()
+                // set event end time
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                events = eventStore.events(matching: predicate)
+            }
+        }
+        if !calendarFound {
+            // Handling when the specified calendar is not found
+            events.removeAll()
+        }
     }
+
+    
     
     func setCalendarAppearance() {
         calendar.today = Date()
@@ -37,6 +68,21 @@ extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCal
         calendar.placeholderType = .fillHeadTail
         calendar.appearance.borderRadius = 1
         
+    }
+}
+
+
+
+// MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
+extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: date) }
+        return matchingEvents.count
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        selectedDate = date
+        eventsTableView.reloadData()
     }
 }
 
@@ -86,9 +132,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let matchingEvents = events.filter({ Calendar.current.isDate($0.startDate, inSameDayAs: selectedDate) })
         
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
             let event = matchingEvents[indexPath.row]
-            self.deleteEventWithConfirmation(event: event, at: indexPath)
+            self?.deleteEventWithConfirmation(event: event, at: indexPath)
             completionHandler(true)
         }
         
@@ -106,7 +152,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 self.events.remove(at: indexPath.row)
                 self.eventsTableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendar.reloadData()
-                
             } catch {
                 print(error)
             }

@@ -55,16 +55,6 @@ class DetailViewController: UIViewController {
                 self.detailTableView.reloadData()
             }
         }
-        
-        // ---------------------------------------------------
-        // check if calendar is exist or not
-        if let calendar = findAppCalendar() {
-            appCalendar = calendar
-        } else {
-            // if check if calendar isn't exist, create one
-            appCalendar = createAppCalendar()
-        }
-        // ---------------------------------------------------        
         let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -323,6 +313,15 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     }
     
     func showEventViewController() {
+        // ---------------------------------------------------
+        // check if calendar is exist or not
+        if let calendar = findAppCalendar() {
+            self.appCalendar = calendar
+        } else {
+            // if check if calendar isn't exist, create one
+            self.appCalendar = createAppCalendar()
+        }
+        // ---------------------------------------------------
         let eventVC = EKEventEditViewController()
         eventVC.editViewDelegate = self // don't forget the delegate
         eventVC.eventStore = EKEventStore()
