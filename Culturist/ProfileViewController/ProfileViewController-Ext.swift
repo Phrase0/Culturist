@@ -152,6 +152,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 self.events.remove(at: indexPath.row)
                 self.eventsTableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendar.reloadData()
+                //self.eventsTableView.reloadData()
             } catch {
                 print(error)
             }
@@ -183,7 +184,7 @@ extension ProfileViewController: EKEventEditViewDelegate {
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
         if action != .canceled {
-            //self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
             if let editedEvent = controller.event {
                 // use Identifier to find
                 if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {

@@ -354,8 +354,6 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
             present(alert, animated: true, completion: nil)
         }
     }
-
-    
 }
 
 // MARK: - DetailTableViewCellDelegate
