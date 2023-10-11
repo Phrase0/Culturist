@@ -718,11 +718,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = VLTRC7L6R5;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Please allow access to notify you about upcoming exhibitions";
@@ -747,7 +745,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = peiyun.Culturist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Culturist;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
