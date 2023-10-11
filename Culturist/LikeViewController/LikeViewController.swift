@@ -85,22 +85,6 @@ class LikeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // pullToRefresh Header
-        MJRefreshNormalHeader {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-                guard let self = self else { return }
-                self.group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.group.enter()
-                self.artManager6.getArtProductList(number: "6")
-                // ---------------------------------------------------
-                //                self.concertDataManager.fetchConcertData()
-                //                self.exhibitionDataManager.fetchExhibitionData()
-                // ---------------------------------------------------
-                self.likeCollectionView.mj_header?.endRefreshing()
-            }
-        }.autoChangeTransparency(true).link(to: self.likeCollectionView)
-        
         group.notify(queue: .main) {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
