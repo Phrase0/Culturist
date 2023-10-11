@@ -13,6 +13,7 @@ target 'Culturist' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseStorage'
+  pod 'Firebase/Crashlytics'
   pod 'SwiftLint'
   pod 'ARCL'
   pod 'FSCalendar+Persian'
