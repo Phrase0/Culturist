@@ -1,0 +1,6 @@
+framework module Layout {
+  umbrella header "swift-layout-umbrella.h"
+
+  export *
+  module * { export * }
+}

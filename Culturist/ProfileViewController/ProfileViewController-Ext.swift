@@ -50,7 +50,7 @@ extension ProfileViewController {
             events.removeAll()
         }
     }
-
+    
     
     
     func setCalendarAppearance() {
@@ -182,16 +182,15 @@ extension ProfileViewController: EKEventEditViewDelegate {
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
-        
         if action != .canceled {
-            //            if let editedEvent = controller.event {
-            //                // use Identifier to find
-            //                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
-            //                    // use editedEvent to replace the origin one
-            //                    events[index] = editedEvent
-            //                }
-            //            }
-            self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            //self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            if let editedEvent = controller.event {
+                // use Identifier to find
+                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
+                    // use editedEvent to replace the origin one
+                    events[index] = editedEvent
+                }
+            }
             DispatchQueue.main.async {
                 self.calendar.reloadData()
                 self.eventsTableView.reloadData()

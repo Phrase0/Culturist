@@ -20,6 +20,7 @@ target 'Culturist' do
   pod 'SnapKit'
   pod 'Gemini'
   pod 'NVActivityIndicatorView'
+  pod 'CMHUD'
 
 
   source 'https://github.com/CocoaPods/Specs.git'
