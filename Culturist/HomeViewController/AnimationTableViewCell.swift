@@ -74,6 +74,7 @@ class AnimationTableViewCell: UITableViewCell {
     
     // MARK: - PageControl
     func setupPageControl() {
+        pageControl.isUserInteractionEnabled = false
         pageControl.numberOfPages = 6
         pageControl.currentPage = imageIndex
         pageControl.currentPageIndicatorTintColor = UIColor.GR0
@@ -83,20 +84,6 @@ class AnimationTableViewCell: UITableViewCell {
         pageControl.snp.makeConstraints { make in
             make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
             make.trailing.equalTo(animationCollectionView.snp.trailing)
-        }
-    }
-}
-extension AnimationTableViewCell: UIScrollViewDelegate {
-    // MARK: - UIScrollViewDelegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == animationCollectionView {
-            // currentpage index
-            let xOffset = scrollView.contentOffset.x
-            let pageWidth = scrollView.frame.width
-            let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
-            // update pageControl
-            pageControl.currentPage = currentPage
-            imageIndex = currentPage
         }
     }
 }
@@ -130,6 +117,19 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
             guard let detailVC = homeViewController.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
             detailVC.detailDesctription = randomSixItems[indexPath.item]
             homeViewController.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == animationCollectionView {
+            // currentpage index
+            let xOffset = scrollView.contentOffset.x
+            let pageWidth = scrollView.frame.width
+            let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
+            // update pageControl
+            pageControl.currentPage = currentPage
+            imageIndex = currentPage
         }
     }
     
