@@ -68,7 +68,6 @@ class RecommendViewController: UIViewController {
             // if filterData have no data, sort by hitRate
             let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
             let result = Array(sortedProducts.prefix(10))
-            print("results:\(result)")
             return result
         }
     }
@@ -95,7 +94,7 @@ class RecommendViewController: UIViewController {
         exhibitionDataManager.exhibitionDelegate = self
         // concertDataManager.fetchConcertData()
         // exhibitionDataManager.fetchExhibitionData()
-        
+
         // use firebase to get recommend data
         recommendationManager.collectionDelegate = self
         
@@ -111,12 +110,12 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if !KeychainItem.currentUserIdentifier.isEmpty {
             recommendationManager.readFilterRecommendationData()
         } else {
             self.filterData.removeAll()
         }
-        
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in

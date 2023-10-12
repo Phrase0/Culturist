@@ -36,7 +36,8 @@ class DetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
-         
+        isLiked = false
+        
         if !KeychainItem.currentUserIdentifier.isEmpty {
             group.enter()
             firebaseManager.fetchUserLikeData { _ in
@@ -56,7 +57,6 @@ class DetailViewController: UIViewController {
                 }
             }
         } else {
-            self.isLiked = false
             self.likeData.removeAll()
         }
         
