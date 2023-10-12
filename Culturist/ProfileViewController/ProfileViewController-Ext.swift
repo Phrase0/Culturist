@@ -10,18 +10,48 @@ import FSCalendar_Persian
 import EventKit
 import EventKitUI
 
-// MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
-extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: date) }
-        return matchingEvents.count
+extension ProfileViewController {
+    func requestAccess() {
+        // Forcefully clear EventKit cache
+        eventStore.reset()
+        eventStore.requestAccess(to: .event) { [weak self] (granted, _) in
+            if granted {
+                self?.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            } else {
+                // Handling when access is denied or the calendar is not found
+                // Clean event data
+                self?.events.removeAll()
+            }
+            DispatchQueue.main.async {
+                self?.calendar.reloadData()
+                self?.eventsTableView.reloadData()
+            }
+        }
     }
     
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDate = date
-        eventsTableView.reloadData()
+    func fetchEventsFromCalendar(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        var calendarFound = false
+        for calendar in calendars {
+            if calendar.title == calendarName {
+                calendarFound = true
+                // set event start time
+                let startDate = Date()
+                // set event end time
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+                events = eventStore.events(matching: predicate)
+                // Sort events by startDate
+                events.sort { $0.startDate < $1.startDate }
+
+            }
+        }
+        if !calendarFound {
+            // Handling when the specified calendar is not found
+            events.removeAll()
+        }
     }
-    
+
     func setCalendarAppearance() {
         calendar.today = Date()
         calendar.appearance.headerTitleColor = .GR1
@@ -37,6 +67,21 @@ extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCal
         calendar.placeholderType = .fillHeadTail
         calendar.appearance.borderRadius = 1
         
+    }
+}
+
+
+
+// MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
+extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let matchingEvents = events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: date) }
+        return matchingEvents.count
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        selectedDate = date
+        eventsTableView.reloadData()
     }
 }
 
@@ -86,9 +131,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let matchingEvents = events.filter({ Calendar.current.isDate($0.startDate, inSameDayAs: selectedDate) })
         
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
             let event = matchingEvents[indexPath.row]
-            self.deleteEventWithConfirmation(event: event, at: indexPath)
+            self?.deleteEventWithConfirmation(event: event, at: indexPath)
             completionHandler(true)
         }
         
@@ -106,13 +151,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 self.events.remove(at: indexPath.row)
                 self.eventsTableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendar.reloadData()
-                
+                // self.eventsTableView.reloadData()
             } catch {
                 print(error)
             }
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         present(ac, animated: true)
     }
     
@@ -134,18 +178,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: EKEventEditViewDelegate
 
 extension ProfileViewController: EKEventEditViewDelegate {
-    
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
-        
         if action != .canceled {
-            //            if let editedEvent = controller.event {
-            //                // use Identifier to find
-            //                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
-            //                    // use editedEvent to replace the origin one
-            //                    events[index] = editedEvent
-            //                }
-            //            }
+            if let editedEvent = controller.event {
+                // use Identifier to find
+                if let index = events.firstIndex(where: { $0.eventIdentifier == editedEvent.eventIdentifier }) {
+                    // use editedEvent to replace the origin one
+                    events[index] = editedEvent
+                }
+            }
             self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
             DispatchQueue.main.async {
                 self.calendar.reloadData()

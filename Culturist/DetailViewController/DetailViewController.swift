@@ -55,16 +55,6 @@ class DetailViewController: UIViewController {
                 self.detailTableView.reloadData()
             }
         }
-        
-        // ---------------------------------------------------
-        // check if calendar is exist or not
-        if let calendar = findAppCalendar() {
-            appCalendar = calendar
-        } else {
-            // if check if calendar isn't exist, create one
-            appCalendar = createAppCalendar()
-        }
-        // ---------------------------------------------------        
         let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -323,6 +313,15 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     }
     
     func showEventViewController() {
+        // ---------------------------------------------------
+        // check if calendar is exist or not
+        if let calendar = findAppCalendar() {
+            self.appCalendar = calendar
+        } else {
+            // if check if calendar isn't exist, create one
+            self.appCalendar = createAppCalendar()
+        }
+        // ---------------------------------------------------
         let eventVC = EKEventEditViewController()
         eventVC.editViewDelegate = self // don't forget the delegate
         eventVC.eventStore = EKEventStore()
@@ -344,8 +343,17 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
+        if action == .saved {
+            // Event is saved, show a success message
+            let alert = UIAlertController(title: "儲存成功", message: "已加入行事曆", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                // Handle the OK button press if needed
+            })
+            alert.addAction(okAction)
+            print("save")
+            present(alert, animated: true, completion: nil)
+        }
     }
-    
 }
 
 // MARK: - DetailTableViewCellDelegate
@@ -365,7 +373,6 @@ extension DetailViewController: DetailTableViewCellDelegate {
                     // do stuff
                     DispatchQueue.main.async {
                         self.showEventViewController()
-                        
                     }
                 }
             }

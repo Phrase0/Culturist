@@ -63,10 +63,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
-        DispatchQueue.main.async {
-            self.calendar.reloadData()
-            self.eventsTableView.reloadData()
-        }
         // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
 
@@ -111,32 +107,6 @@ class ProfileViewController: UIViewController {
         imageBtn.layer.cornerRadius = 55
         imageBtn.clipsToBounds = true
     }
-    
-    // Calendar request
-    func requestAccess() {
-        eventStore.requestAccess(to: .event) { (granted, _) in
-            if granted {
-                self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
-                DispatchQueue.main.async {
-                    self.calendar.reloadData()
-                }
-            }
-        }
-    }
-    
-    func fetchEventsFromCalendar(calendarName: String) {
-        let calendars = eventStore.calendars(for: .event)
-        for calendar in calendars {
-            if calendar.title == calendarName {
-                // set event start time
-                let startDate = Date()
-                // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
-                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
-                events = eventStore.events(matching: predicate)
-            }
-        }
-    } 
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
