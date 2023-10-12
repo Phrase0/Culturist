@@ -263,12 +263,6 @@ class FirebaseManager {
     
     // ---------------------------------------------------
     func readFilterRecommendationData() {
-        guard !KeychainItem.currentUserIdentifier.isEmpty else {
-                // Handle the case when userIdentifier is empty (e.g., show an error message or take appropriate action)
-                print("User is not logged in")
-                return
-            }
-
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
@@ -398,11 +392,6 @@ class FirebaseManager {
     }
     // ---------------------------------------------------
     func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
-        guard !KeychainItem.currentUserIdentifier.isEmpty else {
-                // Handle the case when userIdentifier is empty (e.g., show an error message or take appropriate action)
-                print("User is not logged in")
-                return
-            }
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
         

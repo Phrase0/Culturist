@@ -60,7 +60,6 @@ class DetailViewController: UIViewController {
             self.likeData.removeAll()
         }
         
-        
         let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -129,18 +128,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                    // if data has latitude and longitude
-//                    if detailDesctription.showInfo[0].latitude != nil && detailDesctription.showInfo[0].longitude != nil {
-//                        detailVC.latitude = Double(detailDesctription.showInfo[0].latitude!)
-//                        detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
-//                        // No need to wait, proceed to navigation directly
-//                        DispatchQueue.main.async {
-//                            let navVC = UINavigationController(rootViewController: detailVC)
-//                            navVC.modalPresentationStyle = .fullScreen
-//                            navVC.modalTransitionStyle = .crossDissolve
-//                            self?.present(navVC, animated: true)
-//                        }
-//                    } else {
                         let geoCoder = CLGeocoder()
                         geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
                             if let error = error {
@@ -159,14 +146,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         }
                         // Wait for the semaphore to ensure geocoding is completed before navigation
                         semaphore.wait()
-                        
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
                             navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
-//                    }
 
                 }
             }
@@ -177,22 +162,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                    // if data has latitude and longitude
-//                    if detailDesctription.showInfo[0].latitude != nil && detailDesctription.showInfo[0].longitude != nil {
-//                        detailVC.latitude = Double(detailDesctription.showInfo[0].latitude!)
-//                        detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
-//                        print(detailVC.latitude)
-//                        print(detailVC.longitude)
-//                        semaphore.signal()
-//                        semaphore.wait()
-//                        // No need to wait, proceed to navigation directly
-//                        DispatchQueue.main.async {
-//                            let navVC = UINavigationController(rootViewController: detailVC)
-//                            navVC.modalPresentationStyle = .fullScreen
-//                            navVC.modalTransitionStyle = .crossDissolve
-//                            self?.present(navVC, animated: true)
-//                        }
-//                    } else {
                         let geoCoder = CLGeocoder()
                         geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
                             if let error = error {
@@ -212,14 +181,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         // Wait for the semaphore to ensure geocoding is completed before navigation
                         semaphore.wait()
-                        
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
                             navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
-//                   }
                 }
             }
             

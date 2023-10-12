@@ -37,7 +37,7 @@ class SettingViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
- 
+    
     @IBAction func deleteAccountTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "刪除帳號",
                                                 message: "您確定要刪除帳號嗎？",
@@ -50,40 +50,11 @@ class SettingViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
     func goBackToRootVC() {
         // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
-        print("KeychainItem:\(KeychainItem.currentUserIdentifier)")
-        // checkout to SignInViewController
-        
-//        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
-        // Create an instance of the tab bar controller
-//        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
-//
-//        // set the selected index of the tab bar to determine the initial tab
-//        tabBarController.selectedIndex = 3 // 0 is the index of the first tab
-//
-//        // Switch to the main interface using the tab bar controller
-//        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-//            let window = UIWindow(windowScene: windowScene)
-//            window.rootViewController = tabBarController
-//            window.makeKeyAndVisible()
-//            sceneDelegate.window = window
-//        }
-        
-            self.dismiss(animated: true)
-        
-//        if let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") {
-//            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//               let sceneDelegate = windowScene.delegate as? SceneDelegate {
-//                let window = UIWindow(windowScene: windowScene)
-//                window.rootViewController = signInViewController
-//                window.makeKeyAndVisible()
-//                sceneDelegate.window = window
-//            }
-//        }
+        self.dismiss(animated: true)
     }
     
     func setCorner() {

@@ -111,7 +111,11 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recommendationManager.readFilterRecommendationData()
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            recommendationManager.readFilterRecommendationData()
+        } else {
+            self.filterData.removeAll()
+        }
         
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
@@ -248,11 +252,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
-        if KeychainItem.currentUserIdentifier.isEmpty {
-            self.filterData = []
-        } else {
             self.filterData = recommendationData
-        }
     }
 }
 

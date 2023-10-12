@@ -176,6 +176,7 @@
 			children = (
 				F81E8C782AC95FAF002AED22 /* SignInViewController.swift */,
 				F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */,
+				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
 			path = SignInViewController;
 			sourceTree = "<group>";
@@ -330,7 +331,6 @@
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
 				F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
-				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
 			path = ProfileViewController;
 			sourceTree = "<group>";
