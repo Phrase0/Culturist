@@ -43,6 +43,15 @@ class ProfileViewController: UIViewController {
 //                print("Full Name not found.")
 //            }
 //        }
+
+        setCorner()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
+        navigationItem.rightBarButtonItem?.tintColor = .GR0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        requestAccess()
         if KeychainItem.currentUserIdentifier.isEmpty {
             // If there is no user identifier in Keychain, navigate to SignInViewController
             self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
@@ -59,14 +68,6 @@ class ProfileViewController: UIViewController {
                 }
             }
         }
-        setCorner()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
-        navigationItem.rightBarButtonItem?.tintColor = .GR0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        requestAccess()
         // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
 

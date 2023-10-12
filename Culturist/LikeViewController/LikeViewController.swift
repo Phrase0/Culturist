@@ -77,10 +77,10 @@ class LikeViewController: UIViewController {
         artManager6.getArtProductList(number: "6")
         
         // MARK: - FireBaseData
-//        concertDataManager.concertDelegate = self
-//        exhibitionDataManager.exhibitionDelegate = self
-//        concertDataManager.fetchConcertData()
-//        exhibitionDataManager.fetchExhibitionData()
+        //        concertDataManager.concertDelegate = self
+        //        exhibitionDataManager.exhibitionDelegate = self
+        //        concertDataManager.fetchConcertData()
+        //        exhibitionDataManager.fetchExhibitionData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,17 +93,26 @@ class LikeViewController: UIViewController {
             }
         }
         noDataNoteLabel.isHidden = true
-        firebaseManager.fetchUserLikeData { _ in
-            if self.likeData.isEmpty == true {
-                self.noDataNoteLabel.isHidden = false
-            } else {
-                self.noDataNoteLabel.isHidden = true
+        
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            firebaseManager.fetchUserLikeData { _ in
+                if self.likeData.isEmpty == true {
+                    self.noDataNoteLabel.isHidden = false
+                } else {
+                    self.noDataNoteLabel.isHidden = true
+                }
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.likeCollectionView.reloadData()
+                }
             }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.likeCollectionView.reloadData()
-            }
+        } else {
+            self.noDataNoteLabel.isHidden = false
+            self.likeData.removeAll()
         }
+        
+        
+        
     }
     
     func setAnimation() {
@@ -180,7 +189,7 @@ extension LikeViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - FirebaseLikeDelegate
 extension LikeViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-        self.likeData = likeData
+            self.likeData = likeData
     }
 }
 

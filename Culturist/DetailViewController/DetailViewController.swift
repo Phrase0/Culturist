@@ -36,25 +36,31 @@ class DetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
-        isLiked = false
-
-        group.enter()
-        firebaseManager.fetchUserLikeData { _ in
-             // leave DispatchGroup
-            self.group.leave()
-        }
-        
-        // use DispatchGroup notify
-        group.notify(queue: .main) {
-            let isLiked = self.likeData.contains { like in
-                return like.exhibitionUid == self.detailDesctription?.uid
+         
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            group.enter()
+            firebaseManager.fetchUserLikeData { _ in
+                // leave DispatchGroup
+                self.group.leave()
             }
             
-            DispatchQueue.main.async {
-                self.isLiked = isLiked
-                self.detailTableView.reloadData()
+            // use DispatchGroup notify
+            group.notify(queue: .main) {
+                let isLiked = self.likeData.contains { like in
+                    return like.exhibitionUid == self.detailDesctription?.uid
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLiked = isLiked
+                    self.detailTableView.reloadData()
+                }
             }
+        } else {
+            self.isLiked = false
+            self.likeData.removeAll()
         }
+        
+        
         let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -288,11 +294,7 @@ extension DetailViewController {
 // MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-        if KeychainItem.currentUserIdentifier.isEmpty {
-            self.likeData = []
-        } else {
             self.likeData = likeData
-        }
     }
 }
 
