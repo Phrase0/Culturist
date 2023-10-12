@@ -1,0 +1,6 @@
+framework module CMHUD {
+  umbrella header "CMHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}

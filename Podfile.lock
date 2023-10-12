@@ -636,6 +636,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
+  - CMHUD (0.3.1):
+    - swift-layout
+    - swifty-toast
   - Firebase/CoreOnly (10.14.0):
     - FirebaseCore (= 10.14.0)
   - Firebase/Crashlytics (10.14.0):
@@ -799,11 +802,14 @@ PODS:
     - PromisesObjC (= 2.3.1)
   - RecaptchaInterop (100.0.0)
   - SnapKit (5.6.0)
+  - swift-layout (0.0.2)
   - SwiftLint (0.52.4)
+  - swifty-toast (0.0.6)
 
 DEPENDENCIES:
   - Alamofire
   - ARCL
+  - CMHUD
   - Firebase/Crashlytics
   - FirebaseAuth
   - FirebaseFirestore
@@ -822,6 +828,7 @@ SPEC REPOS:
     - Alamofire
     - ARCL
     - BoringSSL-GRPC
+    - CMHUD
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -850,13 +857,16 @@ SPEC REPOS:
     - PromisesSwift
     - RecaptchaInterop
     - SnapKit
+    - swift-layout
     - SwiftLint
+    - swifty-toast
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
   ARCL: db48b6927d6f3f49f29568295ed91c94ab8d4aab
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
+  CMHUD: 8881a345dc809509ad876b2327dafe0a8f0e1207
   Firebase: 6c1bf3f534bc422d52af2e41fe0d50bf08b6b773
   FirebaseAppCheckInterop: c87f1d5421c852413dd936b2b2340b21e62501a0
   FirebaseAuth: bd1ae3d28beb83bfe9247e50eb82688b683dd770
@@ -885,8 +895,10 @@ SPEC CHECKSUMS:
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  swift-layout: fbba262013629381d4b6363b92639b651a9d3a75
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
+  swifty-toast: d20703cc2576976d121280da78fffe78de2e50f3
 
-PODFILE CHECKSUM: 08153c9e404578e3ab59bda545efdbf07dc7e069
+PODFILE CHECKSUM: 4d12539559432f2f5d3e299f5ece79b0423e87b4
 
 COCOAPODS: 1.12.1

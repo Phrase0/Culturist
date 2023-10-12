@@ -18,6 +18,11 @@ extension EKEvent {
     }
     
     var color: UIColor {
-        return UIColor(cgColor: calendar.cgColor)
+        if let calendarColor = calendar?.cgColor {
+            return UIColor(cgColor: calendarColor)
+        } else {
+            return UIColor.GR2!
+        }
     }
+
 }

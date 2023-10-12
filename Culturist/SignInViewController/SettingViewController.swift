@@ -37,7 +37,7 @@ class SettingViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
- 
+    
     @IBAction func deleteAccountTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "刪除帳號",
                                                 message: "您確定要刪除帳號嗎？",
@@ -50,21 +50,11 @@ class SettingViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
     func goBackToRootVC() {
         // clean user data
         KeychainItem.deleteUserIdentifierFromKeychain()
-        print("KeychainItem:\(KeychainItem.currentUserIdentifier)")
-        // checkout to SignInViewController
-        if let signInViewController = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                let window = UIWindow(windowScene: windowScene)
-                window.rootViewController = signInViewController
-                window.makeKeyAndVisible()
-                sceneDelegate.window = window
-            }
-        }
+        self.dismiss(animated: true)
     }
     
     func setCorner() {

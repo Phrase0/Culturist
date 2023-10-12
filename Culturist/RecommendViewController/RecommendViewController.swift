@@ -36,7 +36,7 @@ class RecommendViewController: UIViewController {
     var indexPathItem: Int?
     let desiredHeight =  UIScreen.main.bounds.height * 0.8
     let desiredWidth = UIScreen.main.bounds.width * 0.95
-
+    
     var recommendProducts: [ArtDatum] {
         let allProducts = artProducts1 + artProducts6
         if let firstFilterData = self.filterData.first {
@@ -68,7 +68,6 @@ class RecommendViewController: UIViewController {
             // if filterData have no data, sort by hitRate
             let sortedProducts = allProducts.sorted { $0.hitRate > $1.hitRate }
             let result = Array(sortedProducts.prefix(10))
-            print("results:\(result)")
             return result
         }
     }
@@ -95,7 +94,7 @@ class RecommendViewController: UIViewController {
         exhibitionDataManager.exhibitionDelegate = self
         // concertDataManager.fetchConcertData()
         // exhibitionDataManager.fetchExhibitionData()
-        
+
         // use firebase to get recommend data
         recommendationManager.collectionDelegate = self
         
@@ -111,7 +110,12 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recommendationManager.readFilterRecommendationData()
+        
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            recommendationManager.readFilterRecommendationData()
+        } else {
+            self.filterData.removeAll()
+        }
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
@@ -180,7 +184,9 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
-        firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
+        }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -214,7 +220,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         detailVC.detailDesctription = self.recommendProducts[(self.indexPathItem!)]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
-
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -245,7 +251,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
-        self.filterData = recommendationData
+            self.filterData = recommendationData
     }
 }
 
