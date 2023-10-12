@@ -345,13 +345,12 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         dismiss(animated: true, completion: nil)
         if action == .saved {
             // Event is saved, show a success message
-            let alert = UIAlertController(title: "儲存成功", message: "已加入行事曆", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                // Handle the OK button press if needed
-            })
-            alert.addAction(okAction)
-            print("save")
+            let alert = UIAlertController(title: nil, message: "儲存成功，已加入行事曆", preferredStyle: .alert)
             present(alert, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+
         }
     }
 }
