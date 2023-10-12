@@ -43,18 +43,7 @@ class ProfileViewController: UIViewController {
 //                print("Full Name not found.")
 //            }
 //        }
-        
-        firebaseManager.readImage { imageUrl in
-            if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
-                DispatchQueue.main.async {
-                    self.profileImageView.kf.setImage(with: url)
-                }
-            } else {
-                self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
-                self.profileImageView.tintColor = .GR4
-            }
-        }
-        
+
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .GR0
@@ -63,6 +52,22 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
+        if KeychainItem.currentUserIdentifier.isEmpty {
+            // If there is no user identifier in Keychain, navigate to SignInViewController
+            self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+            self.profileImageView.tintColor = .GR4
+        } else {
+            firebaseManager.readImage { imageUrl in
+                if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                    DispatchQueue.main.async {
+                        self.profileImageView.kf.setImage(with: url)
+                    }
+                } else {
+                    self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+                    self.profileImageView.tintColor = .GR4
+                }
+            }
+        }
         // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
 
@@ -76,22 +81,42 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func imageViewTapped(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePickerController = UIImagePickerController()
-            // check image resource
-            imagePickerController.sourceType = .photoLibrary
-            imagePickerController.delegate = self
-            imagePickerController.allowsEditing = true
-            present(imagePickerController, animated: true, completion: nil)
+        if KeychainItem.currentUserIdentifier.isEmpty {
+                    // If there is no user identifier in Keychain, navigate to SignInViewController
+                    guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
+                    let navVC = UINavigationController(rootViewController: detailVC)
+                    navVC.modalPresentationStyle = .fullScreen
+                    navVC.modalTransitionStyle = .crossDissolve
+                    self.present(navVC, animated: true)
+        } else {
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let imagePickerController = UIImagePickerController()
+                // check image resource
+                imagePickerController.sourceType = .photoLibrary
+                imagePickerController.delegate = self
+                imagePickerController.allowsEditing = true
+                present(imagePickerController, animated: true, completion: nil)
+            }
         }
     }
     
     @objc private func goToSetting() {
-        guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
-        let navVC = UINavigationController(rootViewController: detailVC)
-        navVC.modalPresentationStyle = .fullScreen
-        navVC.modalTransitionStyle = .crossDissolve
-        self.present(navVC, animated: true)
+        // Check if the current user identifier exists in Keychain
+        if KeychainItem.currentUserIdentifier.isEmpty {
+            // If there is no user identifier in Keychain, navigate to SignInViewController
+            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
+            let navVC = UINavigationController(rootViewController: detailVC)
+            navVC.modalPresentationStyle = .fullScreen
+            navVC.modalTransitionStyle = .crossDissolve
+            self.present(navVC, animated: true)
+        } else {
+            // If there is a user identifier in Keychain, navigate to TabBarController
+            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController  else { return }
+            let navVC = UINavigationController(rootViewController: detailVC)
+            navVC.modalPresentationStyle = .fullScreen
+            navVC.modalTransitionStyle = .crossDissolve
+            self.present(navVC, animated: true)
+        }
     }
     
     func setCorner() {

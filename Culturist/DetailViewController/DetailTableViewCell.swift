@@ -59,6 +59,7 @@ class DetailTableViewCell: UITableViewCell {
         likeButtonHandler?(sender)
         feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
+        
     }
 
     @IBAction func notificationBtnTapped(_ sender: UIButton) {

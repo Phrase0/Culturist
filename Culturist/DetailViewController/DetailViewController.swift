@@ -37,24 +37,29 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
-
-        group.enter()
-        firebaseManager.fetchUserLikeData { _ in
-             // leave DispatchGroup
-            self.group.leave()
-        }
         
-        // use DispatchGroup notify
-        group.notify(queue: .main) {
-            let isLiked = self.likeData.contains { like in
-                return like.exhibitionUid == self.detailDesctription?.uid
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            group.enter()
+            firebaseManager.fetchUserLikeData { _ in
+                // leave DispatchGroup
+                self.group.leave()
             }
             
-            DispatchQueue.main.async {
-                self.isLiked = isLiked
-                self.detailTableView.reloadData()
+            // use DispatchGroup notify
+            group.notify(queue: .main) {
+                let isLiked = self.likeData.contains { like in
+                    return like.exhibitionUid == self.detailDesctription?.uid
+                }
+                
+                DispatchQueue.main.async {
+                    self.isLiked = isLiked
+                    self.detailTableView.reloadData()
+                }
             }
+        } else {
+            self.likeData.removeAll()
         }
+        
         let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
 
@@ -123,18 +128,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                    // if data has latitude and longitude
-//                    if detailDesctription.showInfo[0].latitude != nil && detailDesctription.showInfo[0].longitude != nil {
-//                        detailVC.latitude = Double(detailDesctription.showInfo[0].latitude!)
-//                        detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
-//                        // No need to wait, proceed to navigation directly
-//                        DispatchQueue.main.async {
-//                            let navVC = UINavigationController(rootViewController: detailVC)
-//                            navVC.modalPresentationStyle = .fullScreen
-//                            navVC.modalTransitionStyle = .crossDissolve
-//                            self?.present(navVC, animated: true)
-//                        }
-//                    } else {
                         let geoCoder = CLGeocoder()
                         geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
                             if let error = error {
@@ -153,14 +146,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         }
                         // Wait for the semaphore to ensure geocoding is completed before navigation
                         semaphore.wait()
-                        
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
                             navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
-//                    }
 
                 }
             }
@@ -171,22 +162,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                    // if data has latitude and longitude
-//                    if detailDesctription.showInfo[0].latitude != nil && detailDesctription.showInfo[0].longitude != nil {
-//                        detailVC.latitude = Double(detailDesctription.showInfo[0].latitude!)
-//                        detailVC.longitude = Double(detailDesctription.showInfo[0].longitude!)
-//                        print(detailVC.latitude)
-//                        print(detailVC.longitude)
-//                        semaphore.signal()
-//                        semaphore.wait()
-//                        // No need to wait, proceed to navigation directly
-//                        DispatchQueue.main.async {
-//                            let navVC = UINavigationController(rootViewController: detailVC)
-//                            navVC.modalPresentationStyle = .fullScreen
-//                            navVC.modalTransitionStyle = .crossDissolve
-//                            self?.present(navVC, animated: true)
-//                        }
-//                    } else {
                         let geoCoder = CLGeocoder()
                         geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
                             if let error = error {
@@ -206,14 +181,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         // Wait for the semaphore to ensure geocoding is completed before navigation
                         semaphore.wait()
-                        
                         DispatchQueue.main.async {
                             let navVC = UINavigationController(rootViewController: detailVC)
                             navVC.modalPresentationStyle = .fullScreen
                             navVC.modalTransitionStyle = .crossDissolve
                             self?.present(navVC, animated: true)
                         }
-//                   }
                 }
             }
             
@@ -225,15 +198,24 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.likeButtonHandler = { [weak self] _ in
-                if self?.isLiked == true {
-                    // if isLiked, removeFavorite
-                    self?.removeFavorite()
-                    cell.likeBtn.isSelected = false
+                
+                if KeychainItem.currentUserIdentifier.isEmpty {
+                            // If there is no user identifier in Keychain, navigate to SignInViewController
+                    guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.modalTransitionStyle = .crossDissolve
+                            self?.present(navVC, animated: true)
                 } else {
-                    self?.addFavorite()
-                    cell.likeBtn.isSelected = true
+                    if self?.isLiked == true {
+                        // if isLiked, removeFavorite
+                        self?.removeFavorite()
+                        cell.likeBtn.isSelected = false
+                    } else {
+                        self?.addFavorite()
+                        cell.likeBtn.isSelected = true
+                    }
                 }
-              
             }
             
             // ---------------------------------------------------
@@ -279,7 +261,7 @@ extension DetailViewController {
 // MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-        self.likeData = likeData
+            self.likeData = likeData
     }
 }
 
@@ -345,13 +327,12 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         dismiss(animated: true, completion: nil)
         if action == .saved {
             // Event is saved, show a success message
-            let alert = UIAlertController(title: "儲存成功", message: "已加入行事曆", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                // Handle the OK button press if needed
-            })
-            alert.addAction(okAction)
-            print("save")
+            let alert = UIAlertController(title: nil, message: "儲存成功，已加入行事曆", preferredStyle: .alert)
             present(alert, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                alert.dismiss(animated: true, completion: nil)
+            }
+
         }
     }
 }
