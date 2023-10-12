@@ -225,15 +225,24 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell.likeButtonHandler = { [weak self] _ in
-                if self?.isLiked == true {
-                    // if isLiked, removeFavorite
-                    self?.removeFavorite()
-                    cell.likeBtn.isSelected = false
+                
+                if KeychainItem.currentUserIdentifier.isEmpty {
+                            // If there is no user identifier in Keychain, navigate to SignInViewController
+                    guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
+                            let navVC = UINavigationController(rootViewController: detailVC)
+                            navVC.modalPresentationStyle = .fullScreen
+                            navVC.modalTransitionStyle = .crossDissolve
+                            self?.present(navVC, animated: true)
                 } else {
-                    self?.addFavorite()
-                    cell.likeBtn.isSelected = true
+                    if self?.isLiked == true {
+                        // if isLiked, removeFavorite
+                        self?.removeFavorite()
+                        cell.likeBtn.isSelected = false
+                    } else {
+                        self?.addFavorite()
+                        cell.likeBtn.isSelected = true
+                    }
                 }
-              
             }
             
             // ---------------------------------------------------
@@ -279,7 +288,11 @@ extension DetailViewController {
 // MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-        self.likeData = likeData
+        if KeychainItem.currentUserIdentifier.isEmpty {
+            self.likeData = []
+        } else {
+            self.likeData = likeData
+        }
     }
 }
 

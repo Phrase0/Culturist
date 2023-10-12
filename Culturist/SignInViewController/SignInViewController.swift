@@ -18,6 +18,13 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         setCorner()
         performExistingAccountSetupFlows()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .GR0
+    }
+    
+    @objc private func backButtonTapped() {
+        
     }
     
     @IBAction func didTapSignIn(_ sender: Any) {
@@ -28,6 +35,7 @@ class SignInViewController: UIViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
+        
     }
     
     // - Tag: perform_appleid_password_request
@@ -63,22 +71,24 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             firebaseManager.addUserData(id: userIdentifier, fullName: fullName, email: email)
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
             self.saveUserIdentifierInKeychain(userIdentifier)
-
+            if !KeychainItem.currentUserIdentifier.isEmpty {
             // Create an instance of the tab bar controller
-            let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
-
-            // set the selected index of the tab bar to determine the initial tab
-            tabBarController.selectedIndex = 0 // 0 is the index of the first tab
-
-            // Switch to the main interface using the tab bar controller            
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = windowScene.delegate as? SceneDelegate {
-                let window = UIWindow(windowScene: windowScene)
-                window.rootViewController = tabBarController
-                window.makeKeyAndVisible()
-                sceneDelegate.window = window
+//            let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CulturistTabBarController") as! UITabBarController
+//
+//            // set the selected index of the tab bar to determine the initial tab
+//            tabBarController.selectedIndex = 3 // 0 is the index of the first tab
+//
+//            // Switch to the main interface using the tab bar controller
+//            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+//                let window = UIWindow(windowScene: windowScene)
+//                window.rootViewController = tabBarController
+//                window.makeKeyAndVisible()
+//                sceneDelegate.window = window
+//            }
+            
+                self.dismiss(animated: true)
             }
-
         case let passwordCredential as ASPasswordCredential:
             
             // Sign in using an existing iCloud Keychain credential.

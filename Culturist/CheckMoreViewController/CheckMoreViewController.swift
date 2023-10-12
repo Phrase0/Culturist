@@ -60,7 +60,9 @@ extension CheckMoreViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = result[indexPath.item]
-        firebaseManager.addRecommendData(exhibitionUid: result[indexPath.item].uid, title: result[indexPath.item].title, category: result[indexPath.item].category, location: result[indexPath.item].showInfo[0].location, locationName: result[indexPath.item].showInfo[0].locationName)
+        if !KeychainItem.currentUserIdentifier.isEmpty {
+            firebaseManager.addRecommendData(exhibitionUid: result[indexPath.item].uid, title: result[indexPath.item].title, category: result[indexPath.item].category, location: result[indexPath.item].showInfo[0].location, locationName: result[indexPath.item].showInfo[0].locationName)
+        }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

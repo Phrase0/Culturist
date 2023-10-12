@@ -140,6 +140,7 @@ class FirebaseManager {
     
     // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
+        
         storage.child("images/\(KeychainItem.currentUserIdentifier).png").putData(imageData) { _, error in
             guard error == nil else {
                 print("Failed to upload")
