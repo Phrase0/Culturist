@@ -24,7 +24,7 @@ class SignInViewController: UIViewController {
     }
     
     @objc private func backButtonTapped() {
-        
+        self.dismiss(animated: true)
     }
     
     @IBAction func didTapSignIn(_ sender: Any) {
