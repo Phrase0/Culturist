@@ -43,7 +43,7 @@ extension ProfileViewController {
                 events = eventStore.events(matching: predicate)
                 // Sort events by startDate
                 events.sort { $0.startDate < $1.startDate }
-
+                
             }
         }
         if !calendarFound {
@@ -51,7 +51,7 @@ extension ProfileViewController {
             events.removeAll()
         }
     }
-
+    
     func setCalendarAppearance() {
         calendar.today = Date()
         calendar.appearance.headerTitleColor = .GR1
@@ -111,13 +111,29 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    //        if let selectedDate = selectedDate {
+    //            defer {
+    //                tableView.deselectRow(at: indexPath, animated: true)
+    //            }
+    //
+    //            let event = events[indexPath.row]
+    //            print(event)
+    //            showEditViewController(for: event)
+    //        }
+    //    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer {
-            tableView.deselectRow(at: indexPath, animated: true)
+        guard let selectedDate = selectedDate else {
+            preconditionFailure("A date should be selected to display events")
         }
-        
-        let event = events[indexPath.row]
-        print(event)
+        let matchingEvents = events.filter({ Calendar.current.isDate($0.startDate, inSameDayAs: selectedDate) })
+        // Ensure the index is valid
+        guard indexPath.row < matchingEvents.count else {
+            return
+        }
+        let event = matchingEvents[indexPath.row]
         showEditViewController(for: event)
     }
     
@@ -135,6 +151,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
             let event = matchingEvents[indexPath.row]
             self?.deleteEventWithConfirmation(event: event, at: indexPath)
+            print("indexPath.row:\(indexPath.row)")
+            print("indexPath:\(indexPath)")
             completionHandler(true)
         }
         
@@ -149,7 +167,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
             do {
                 try self.eventStore.remove(event, span: .thisEvent)
-                self.events.remove(at: indexPath.row)
+                // Update the data source, removing the event from the events array
+                if let index = self.events.firstIndex(where: { $0.eventIdentifier == event.eventIdentifier }) {
+                    self.events.remove(at: index)
+                }
                 self.eventsTableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendar.reloadData()
                 // self.eventsTableView.reloadData()
