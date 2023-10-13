@@ -36,9 +36,10 @@ extension ProfileViewController {
             if calendar.title == calendarName {
                 calendarFound = true
                 // set event start time
-                let startDate = Date()
+                let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
                 // set event end time
                 let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                
                 let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                 events = eventStore.events(matching: predicate)
                 // Sort events by startDate
@@ -110,19 +111,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: event)
         return cell
     }
-    
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //
-    //        if let selectedDate = selectedDate {
-    //            defer {
-    //                tableView.deselectRow(at: indexPath, animated: true)
-    //            }
-    //
-    //            let event = events[indexPath.row]
-    //            print(event)
-    //            showEditViewController(for: event)
-    //        }
-    //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedDate = selectedDate else {
