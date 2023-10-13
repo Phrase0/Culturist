@@ -95,6 +95,17 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
+        
+        // ---------------------------------------------------
+        cell.animationImage.contentMode = .scaleToFill
+        cell.animationImage.snp.remakeConstraints { make in
+            make.centerY.equalToSuperview()  // 垂直居中
+            make.trailing.equalTo(cell.animationView).offset(-30)  // 距离 animationView.trailing 30
+            make.top.equalTo(cell.animationView).offset(40)  // 距离 animationView.top 30
+            make.bottom.equalTo(cell.animationView).offset(-40)  // 距离 animationView.bottom 30
+            make.width.equalTo(cell.animationImage.snp.height)  // 1:1 宽高比
+        }
+        // ---------------------------------------------------
         let itemData = randomSixItems[indexPath.item]
         let url = URL(string: itemData.imageURL)
         cell.animationImage.kf.setImage(with: url)

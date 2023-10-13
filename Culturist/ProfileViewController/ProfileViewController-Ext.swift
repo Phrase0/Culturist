@@ -117,6 +117,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let event = events[indexPath.row]
+        print(event)
         showEditViewController(for: event)
     }
     
@@ -180,6 +181,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 extension ProfileViewController: EKEventEditViewDelegate {
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
+        self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
         if action != .canceled {
             if let editedEvent = controller.event {
                 // use Identifier to find
@@ -188,7 +190,7 @@ extension ProfileViewController: EKEventEditViewDelegate {
                     events[index] = editedEvent
                 }
             }
-            self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            
             DispatchQueue.main.async {
                 self.calendar.reloadData()
                 self.eventsTableView.reloadData()
