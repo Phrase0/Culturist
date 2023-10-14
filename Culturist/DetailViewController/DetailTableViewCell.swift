@@ -32,7 +32,7 @@ class DetailTableViewCell: UITableViewCell {
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
     weak var cellDelegate: DetailTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -69,6 +69,9 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     func setCorner() {
+        detailImageView.translatesAutoresizingMaskIntoConstraints = false
+        detailImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.6).isActive = true
+        detailImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
         detailImageView.layer.cornerRadius = 100
         detailImageView.clipsToBounds = true
         detailImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
