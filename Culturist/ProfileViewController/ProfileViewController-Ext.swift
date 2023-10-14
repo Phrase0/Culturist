@@ -71,8 +71,6 @@ extension ProfileViewController {
     }
 }
 
-
-
 // MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
 extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {

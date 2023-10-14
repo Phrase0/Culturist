@@ -31,7 +31,8 @@ class AnimationTableViewCell: UITableViewCell {
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
-        setupPageControl()
+        
+         setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
 
@@ -95,21 +96,10 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
-        
-        // ---------------------------------------------------
-        cell.animationImage.contentMode = .scaleToFill
-        cell.animationImage.snp.remakeConstraints { make in
-            make.centerY.equalToSuperview()  // 垂直居中
-            make.trailing.equalTo(cell.animationView).offset(-30)  // 距离 animationView.trailing 30
-            make.top.equalTo(cell.animationView).offset(40)  // 距离 animationView.top 30
-            make.bottom.equalTo(cell.animationView).offset(-40)  // 距离 animationView.bottom 30
-            make.width.equalTo(cell.animationImage.snp.height)  // 1:1 宽高比
-        }
-        // ---------------------------------------------------
         let itemData = randomSixItems[indexPath.item]
         let url = URL(string: itemData.imageURL)
         cell.animationImage.kf.setImage(with: url)
-        
+        cell.productTitle.text = randomSixItems[indexPath.item].title
         return cell
     }
     
@@ -148,24 +138,24 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension AnimationTableViewCell: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Set item size to match the collection view's bounds
         return collectionView.bounds.size
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.zero
     }
