@@ -7,8 +7,9 @@
 
 import UIKit
 import SnapKit
+import Gemini
 
-class AnimationCollectionViewCell: UICollectionViewCell {
+class AnimationCollectionViewCell: GeminiCell {
 
     lazy var animationView: UIView = {
         let animationView = UIView()
