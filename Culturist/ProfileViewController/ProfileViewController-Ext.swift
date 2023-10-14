@@ -38,7 +38,7 @@ extension ProfileViewController {
                 // set event start time
                 let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
                 // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date()-1)!
                 
                 let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                 events = eventStore.events(matching: predicate)
