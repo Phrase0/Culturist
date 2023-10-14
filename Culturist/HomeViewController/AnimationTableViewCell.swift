@@ -12,7 +12,7 @@ class AnimationTableViewCell: UITableViewCell {
     @IBOutlet weak var animationCollectionView: UICollectionView!
     
     var timer: Timer?
-    private let pageControl = UIPageControl()
+    //private let pageControl = UIPageControl()
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
     
@@ -32,7 +32,7 @@ class AnimationTableViewCell: UITableViewCell {
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
         
-         setupPageControl()
+         //setupPageControl()
         // Auto scroll animation, set to switch every 2 seconds
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
 
@@ -70,23 +70,23 @@ class AnimationTableViewCell: UITableViewCell {
             // Actions to perform when adding auto-scroll animation
             animationCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
         }
-        pageControl.currentPage = imageIndex
+        //pageControl.currentPage = imageIndex
     }
     
     // MARK: - PageControl
-    func setupPageControl() {
-        pageControl.isUserInteractionEnabled = false
-        pageControl.numberOfPages = 6
-        pageControl.currentPage = imageIndex
-        pageControl.currentPageIndicatorTintColor = UIColor.GR0
-        pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
-        // pageControl.backgroundStyle = .minimal
-        addSubview(pageControl)
-        pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
-            make.trailing.equalTo(animationCollectionView.snp.trailing)
-        }
-    }
+//    func setupPageControl() {
+//        pageControl.isUserInteractionEnabled = false
+//        pageControl.numberOfPages = 6
+//        pageControl.currentPage = imageIndex
+//        pageControl.currentPageIndicatorTintColor = UIColor.GR0
+//        pageControl.pageIndicatorTintColor = UIColor.GR3!.withAlphaComponent(0.8)
+//        // pageControl.backgroundStyle = .minimal
+//        addSubview(pageControl)
+//        pageControl.snp.makeConstraints { make in
+//            make.bottom.equalTo(animationCollectionView.snp.bottom).offset(-10)
+//            make.trailing.equalTo(animationCollectionView.snp.trailing)
+//        }
+//    }
 }
 
 extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -96,10 +96,12 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = animationCollectionView.dequeueReusableCell(withReuseIdentifier: "AnimationCollectionViewCell", for: indexPath) as? AnimationCollectionViewCell else { return UICollectionViewCell() }
+        let viewArray = [UIColor.Color1, UIColor.Color2, UIColor.Color3, UIColor.Color4, UIColor.Color5, UIColor.Color6]
         let itemData = randomSixItems[indexPath.item]
+        cell.animationView.backgroundColor = viewArray[indexPath.item]
         let url = URL(string: itemData.imageURL)
         cell.animationImage.kf.setImage(with: url)
-        cell.productTitle.text = randomSixItems[indexPath.item].title
+        cell.productTitle.text = itemData.title
         return cell
     }
     
@@ -122,17 +124,17 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     }
     
     // MARK: - UIScrollViewDelegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == animationCollectionView {
-            // currentpage index
-            let xOffset = scrollView.contentOffset.x
-            let pageWidth = scrollView.frame.width
-            let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
-            // update pageControl
-            pageControl.currentPage = currentPage
-            imageIndex = currentPage
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView == animationCollectionView {
+//            // currentpage index
+//            let xOffset = scrollView.contentOffset.x
+//            let pageWidth = scrollView.frame.width
+//            let currentPage = Int((xOffset + pageWidth / 2) / pageWidth)
+//            // update pageControl
+//            pageControl.currentPage = currentPage
+//            imageIndex = currentPage
+//        }
+//    }
     
 }
 

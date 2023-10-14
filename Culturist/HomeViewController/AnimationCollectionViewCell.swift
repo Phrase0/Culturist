@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class AnimationCollectionViewCell: UICollectionViewCell {
-    
-    // let width = UIScreen.main.bounds.width
-    
+
     lazy var animationView: UIView = {
         let animationView = UIView()
         return animationView
@@ -55,7 +53,6 @@ class AnimationCollectionViewCell: UICollectionViewCell {
     }
     
     func setupConstraints() {
-        animationView.backgroundColor = UIColor.Color1
         animationView.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalTo(contentView).inset(16)
             make.top.equalTo(contentView)
