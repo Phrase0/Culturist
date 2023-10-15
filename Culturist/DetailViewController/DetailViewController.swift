@@ -37,6 +37,16 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
+
+        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
+
+        // set tableView.contentInset fill the screen
+        detailTableView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         if !KeychainItem.currentUserIdentifier.isEmpty {
             group.enter()
@@ -59,23 +69,8 @@ class DetailViewController: UIViewController {
         } else {
             self.likeData.removeAll()
         }
-        
-        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
-
-        // set tableView.contentInset fill the screen
-        detailTableView.contentInsetAdjustmentBehavior = .never
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithDefaultBackground()
-        navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
-        navigationBarAppearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // reset navigationBarAppearance
@@ -234,6 +229,27 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        
+        // cauculate 1/2 creen height
+        let oneTwiceScreenHeight = view.frame.height / 2
+        if contentOffsetY >= oneTwiceScreenHeight {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithDefaultBackground()
+            navigationBarAppearance.backgroundColor = UIColor(white: 0, alpha: 0.1)
+            navigationBarAppearance.shadowColor = .clear
+            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+
+        } else {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            navigationBarAppearance.shadowColor = .clear
+            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        }
+    }
+
 }
 
 // MARK: - likeCollection function

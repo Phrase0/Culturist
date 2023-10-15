@@ -36,14 +36,15 @@ extension ProfileViewController {
             if calendar.title == calendarName {
                 calendarFound = true
                 // set event start time
-                let startDate = Date()
+                let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
                 // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: startDate)!
+                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date()-1)!
+                
                 let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
                 events = eventStore.events(matching: predicate)
                 // Sort events by startDate
                 events.sort { $0.startDate < $1.startDate }
-
+                
             }
         }
         if !calendarFound {
@@ -51,7 +52,7 @@ extension ProfileViewController {
             events.removeAll()
         }
     }
-
+    
     func setCalendarAppearance() {
         calendar.today = Date()
         calendar.appearance.headerTitleColor = .GR1
@@ -69,8 +70,6 @@ extension ProfileViewController {
         
     }
 }
-
-
 
 // MARK: - FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance
 extension ProfileViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
@@ -112,11 +111,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer {
-            tableView.deselectRow(at: indexPath, animated: true)
+        guard let selectedDate = selectedDate else {
+            preconditionFailure("A date should be selected to display events")
         }
-        
-        let event = events[indexPath.row]
+        let matchingEvents = events.filter({ Calendar.current.isDate($0.startDate, inSameDayAs: selectedDate) })
+        // Ensure the index is valid
+        guard indexPath.row < matchingEvents.count else {
+            return
+        }
+        let event = matchingEvents[indexPath.row]
         showEditViewController(for: event)
     }
     
@@ -134,6 +137,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
             let event = matchingEvents[indexPath.row]
             self?.deleteEventWithConfirmation(event: event, at: indexPath)
+            print("indexPath.row:\(indexPath.row)")
+            print("indexPath:\(indexPath)")
             completionHandler(true)
         }
         
@@ -148,7 +153,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
             do {
                 try self.eventStore.remove(event, span: .thisEvent)
-                self.events.remove(at: indexPath.row)
+                // Update the data source, removing the event from the events array
+                if let index = self.events.firstIndex(where: { $0.eventIdentifier == event.eventIdentifier }) {
+                    self.events.remove(at: index)
+                }
                 self.eventsTableView.deleteRows(at: [indexPath], with: .fade)
                 self.calendar.reloadData()
                 // self.eventsTableView.reloadData()
@@ -180,6 +188,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 extension ProfileViewController: EKEventEditViewDelegate {
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
+        self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
         if action != .canceled {
             if let editedEvent = controller.event {
                 // use Identifier to find
@@ -188,7 +197,7 @@ extension ProfileViewController: EKEventEditViewDelegate {
                     events[index] = editedEvent
                 }
             }
-            self.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            
             DispatchQueue.main.async {
                 self.calendar.reloadData()
                 self.eventsTableView.reloadData()
