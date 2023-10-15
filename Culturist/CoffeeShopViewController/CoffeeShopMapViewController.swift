@@ -17,6 +17,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
     var coffeeShopManager = CoffeeShopManager()
     let locationManager = CLLocationManager()
     
+    var exhibitionLocation: String?
     var latitude: Double?
     var longitude: Double?
     let mapView = MKMapView()
@@ -44,6 +45,12 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         ])
         
         let initialLocation = CLLocation(latitude: latitude ?? 25.039, longitude: longitude ?? 121.532)
+        if let latitude = latitude, let longitude = longitude {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let customAnnotation = CustomAnnotation(coordinate: coordinate, title: exhibitionLocation, pinColor: .GR1!)
+            self.mapView.addAnnotation(customAnnotation)
+        }
+        
         let regionRadius: CLLocationDistance = 500
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate,
@@ -57,7 +64,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
         // closeBtn
         let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +83,7 @@ class CoffeeShopMapViewController: UIViewController, CLLocationManagerDelegate {
             make.height.equalTo(40)
         }
     }
-
+    
     @objc private func backButtonTapped() {
         self.dismiss(animated: true)
     }
@@ -97,7 +104,6 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = coordinate
                     annotation.title = coffeeShop.name
-                    annotation.subtitle = coffeeShop.address
                     self.mapView.addAnnotation(annotation)
                 }
             }
@@ -113,6 +119,20 @@ extension CoffeeShopMapViewController: CoffeeShopManagerDelegate {
 
 // MARK: - MKMapViewDelegate
 extension CoffeeShopMapViewController: MKMapViewDelegate {
+    // set exhibitionLocation pincolor
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            // Do not change the style of user location annotation
+            return nil
+        }
+        if let customAnnotation = annotation as? CustomAnnotation {
+            let annotationView = MKPinAnnotationView(annotation: customAnnotation, reuseIdentifier: "customAnnotation")
+            annotationView.pinTintColor = customAnnotation.pinColor
+            annotationView.canShowCallout = true
+            return annotationView
+        }
+        return nil
+    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         // get user tap mark
@@ -123,8 +143,6 @@ extension CoffeeShopMapViewController: MKMapViewDelegate {
             coffeeShopViewController.coffeeShop = selectedCoffeeShop
             // navigationController?.pushViewController(coffeeShopViewController, animated: true)
             present(coffeeShopViewController, animated: true)
-            
         }
     }
-    
 }

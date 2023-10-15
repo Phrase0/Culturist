@@ -132,6 +132,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                                 return
                             }
                             if let placemarks = placemarks, let placemark = placemarks.first {
+                                detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
                                 detailVC.latitude = placemark.location?.coordinate.latitude
                                 detailVC.longitude = placemark.location?.coordinate.longitude
                                 print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
@@ -166,6 +167,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                                 return
                             }
                             if let placemarks = placemarks, let placemark = placemarks.first {
+                                detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
                                 detailVC.latitude = placemark.location?.coordinate.latitude
                                 detailVC.longitude = placemark.location?.coordinate.longitude
                                 print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
