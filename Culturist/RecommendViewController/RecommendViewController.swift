@@ -274,7 +274,7 @@ extension RecommendViewController: ArtManagerDelegate {
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        print(error.localizedDescription)
+        print("can't not get api data")
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.loading.stopAnimating()

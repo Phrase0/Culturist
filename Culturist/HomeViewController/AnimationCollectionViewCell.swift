@@ -25,10 +25,10 @@ class AnimationCollectionViewCell: GeminiCell {
         let productTitle = UILabel()
         productTitle.numberOfLines = 0
         productTitle.textColor = .white
-        if let pingFangFont = UIFont(name: "PingFangTC-Medium", size: 18) {
+        if let pingFangFont = UIFont(name: "PingFangTC-Medium", size: 20) {
             productTitle.font = pingFangFont
         } else {
-            productTitle.font = UIFont.systemFont(ofSize: 18)
+            productTitle.font = UIFont.systemFont(ofSize: 20)
             print("no font type")
         }
         return productTitle
@@ -55,16 +55,17 @@ class AnimationCollectionViewCell: GeminiCell {
     
     func setupConstraints() {
         animationView.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalTo(contentView).inset(16)
-            make.top.equalTo(contentView)
+            make.leading.trailing.equalTo(contentView).inset(10)
+            make.top.equalTo(contentView).inset(5)
+            make.bottom.equalTo(contentView).inset(10)
         }
         animationView.layer.cornerRadius = 8
         animationView.clipsToBounds = true
         
         animationImage.snp.makeConstraints { make in
             make.trailing.equalTo(animationView).offset(-30)
-            make.top.equalTo(animationView).offset(40)
-            make.bottom.equalTo(animationView).offset(-40)
+            make.top.equalTo(animationView).offset(30)
+            make.bottom.equalTo(animationView).offset(-30)
             make.width.equalTo(animationImage.snp.height)
         }
         animationImage.contentMode = .scaleAspectFill

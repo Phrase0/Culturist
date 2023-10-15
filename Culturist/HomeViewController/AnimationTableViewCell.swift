@@ -27,7 +27,6 @@ class AnimationTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         animationCollectionView.dataSource = self
         animationCollectionView.delegate = self
         animationCollectionView.isPagingEnabled = true
@@ -50,11 +49,11 @@ class AnimationTableViewCell: UITableViewCell {
             .scaleAnimation()
             .scale(0.8)
             .scaleEffect(.scaleUp)
-            .ease(.linear)
+            .ease(.easeOutCirc)
     }
-    
+
     func getRandomSixItems() -> [ArtDatum] {
-        var shuffledData = self.allData.shuffled()
+        let shuffledData = self.allData.shuffled()
         if shuffledData.isEmpty {
             return []
         }
@@ -128,6 +127,7 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // MARK: - UIScrollViewDelegate
         animationCollectionView.animateVisibleCells()
+        // hand gesture
         if scrollView == animationCollectionView {
             // currentpage index
             let xOffset = scrollView.contentOffset.x
@@ -161,11 +161,6 @@ extension AnimationTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 0
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.zero
-    }
-    
 }
