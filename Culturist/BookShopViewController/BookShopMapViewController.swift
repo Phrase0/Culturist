@@ -12,11 +12,12 @@ import CoreLocation
 import NVActivityIndicatorView
 
 class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
-
+    
     var bookShopCollection = [BookShop]()
     var bookShopManager = BookShopManager()
     let locationManager = CLLocationManager()
     
+    var exhibitionLocation: String?
     var latitude: Double?
     var longitude: Double?
     let mapView = MKMapView()
@@ -43,6 +44,12 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         ])
         
         let initialLocation = CLLocation(latitude: latitude ?? 25.039, longitude: longitude ?? 121.532)
+        if let latitude = latitude, let longitude = longitude {
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let customAnnotation = CustomAnnotation(coordinate: coordinate, title: exhibitionLocation, pinColor: .GR1!)
+            self.mapView.addAnnotation(customAnnotation)
+        }
+        
         let regionRadius: CLLocationDistance = 1000
         let coordinateRegion = MKCoordinateRegion(
             center: initialLocation.coordinate,
@@ -57,7 +64,7 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
         let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
-
+    
     @objc private func backButtonTapped() {
         self.dismiss(animated: true)
     }
@@ -78,7 +85,7 @@ class BookShopMapViewController: UIViewController, CLLocationManagerDelegate {
             make.height.equalTo(40)
         }
     }
- 
+    
 }
 
 // MARK: - BookShopManagerDelegate
@@ -94,7 +101,6 @@ extension BookShopMapViewController: BookShopManagerDelegate {
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = coordinate
                     annotation.title = bookShop.name
-                    annotation.subtitle = bookShop.address
                     self.mapView.addAnnotation(annotation)
                 }
             }
@@ -109,20 +115,33 @@ extension BookShopMapViewController: BookShopManagerDelegate {
     }
     
 }
-    
-    // MARK: - MKMapViewDelegate
-    extension BookShopMapViewController: MKMapViewDelegate {
-        
-        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            // get user tap mark
-            guard let annotation = view.annotation as? MKPointAnnotation else { return }
-            //  find the same name in bookShopCollection
-            if let selectedBookShop = bookShopCollection.first(where: { $0.name == annotation.title }) {
-                guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
-                bookShopViewController.bookShop = selectedBookShop
-                // navigationController?.pushViewController(bookShopViewController, animated: true)
-                present(bookShopViewController, animated: true)                
-            }
+
+// MARK: - MKMapViewDelegate
+extension BookShopMapViewController: MKMapViewDelegate {
+    // set exhibitionLocation pincolor
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            // Do not change the style of user location annotation
+            return nil
         }
-        
+        if let customAnnotation = annotation as? CustomAnnotation {
+            let annotationView = MKPinAnnotationView(annotation: customAnnotation, reuseIdentifier: "customAnnotation")
+            annotationView.pinTintColor = customAnnotation.pinColor
+            annotationView.canShowCallout = true
+            return annotationView
+        }
+        return nil
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // get user tap mark
+        guard let annotation = view.annotation as? MKPointAnnotation else { return }
+        //  find the same name in bookShopCollection
+        if let selectedBookShop = bookShopCollection.first(where: { $0.name == annotation.title }) {
+            guard let bookShopViewController = self.storyboard?.instantiateViewController(withIdentifier: "BookShopViewController") as? BookShopViewController else { return }
+            bookShopViewController.bookShop = selectedBookShop
+            // navigationController?.pushViewController(bookShopViewController, animated: true)
+            present(bookShopViewController, animated: true)
+        }
+    }
+}
