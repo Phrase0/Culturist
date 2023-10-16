@@ -88,10 +88,10 @@ class RecommendViewController: UIViewController {
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
-            concertDataManager.concertDelegate = self
-            exhibitionDataManager.exhibitionDelegate = self
-            concertDataManager.fetchConcertData()
-            exhibitionDataManager.fetchExhibitionData()
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
             print("loadAPIFromFirebase")
         }
         // use firebase to get recommend data
@@ -122,8 +122,8 @@ class RecommendViewController: UIViewController {
                     self.artManager6.getArtProductList(number: "6")
                     print("loadAPIFromWeb")
                 } else {
-                    self.concertDataManager.fetchConcertData()
-                    self.exhibitionDataManager.fetchExhibitionData()
+//                    self.concertDataManager.fetchConcertData()
+//                    self.exhibitionDataManager.fetchExhibitionData()
                     print("loadAPIFromFirebase")
                 }
                 self.recommendCollectionView.mj_trailer?.endRefreshing()

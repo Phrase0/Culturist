@@ -79,10 +79,10 @@ class LikeViewController: UIViewController {
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
-            concertDataManager.concertDelegate = self
-            exhibitionDataManager.exhibitionDelegate = self
-            concertDataManager.fetchConcertData()
-            exhibitionDataManager.fetchExhibitionData()
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
             print("loadAPIFromFirebase")
         }
     }
@@ -114,9 +114,6 @@ class LikeViewController: UIViewController {
             self.noDataNoteLabel.isHidden = false
             self.likeData.removeAll()
         }
-        
-        
-        
     }
     
     func setAnimation() {
