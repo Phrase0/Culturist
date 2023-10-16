@@ -13,7 +13,6 @@ import MJRefresh
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
-    var mySearchController = UISearchController(searchResultsController: nil)
 
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
@@ -23,6 +22,9 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
+    // control buttonEnable
+    var isButtonEnabled = false
+    var searchButton: UIBarButtonItem?
     // create DispatchGroup
     let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
@@ -62,9 +64,9 @@ class HomeViewController: UIViewController {
         // Set the image view as the title view
         navigationItem.titleView = imageView
         
-        // Create the right-side search button
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton.tintColor = .GR0
+        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton?.tintColor = .GR0
+        searchButton?.isEnabled = false
         navigationItem.rightBarButtonItem = searchButton
     }
     
@@ -90,6 +92,8 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
                 self.loading.stopAnimating()
+                self.isButtonEnabled = true
+                self.searchButton?.isEnabled = true
             }
         }
     }
@@ -175,18 +179,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.addSubview(label)
         
         // add button
-        let button = UIButton()
-        button.setTitleColor(UIColor.GR0, for: .normal)
-        button.setTitle("查看更多 >", for: .normal)
+        let headButton = UIButton()
+        headButton.setTitleColor(UIColor.GR0, for: .normal)
+        headButton.setTitle("查看更多 >", for: .normal)
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
-            button.titleLabel?.font = pingFangFont
+            headButton.titleLabel?.font = pingFangFont
         } else {
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            headButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             print("no font type")
         }
-        button.tag = buttonTag ?? 0
-        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        headerView.addSubview(button)
+        headButton.tag = buttonTag ?? 0
+        headButton.isEnabled = isButtonEnabled
+        headButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        headerView.addSubview(headButton)
         
         // Apply Auto Layout constraints using SnapKit
         label.snp.makeConstraints { make in
@@ -194,7 +199,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             make.leading.equalToSuperview().offset(16)
         }
         
-        button.snp.makeConstraints { make in
+        headButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-6)
             make.trailing.equalToSuperview().offset(-20)
         }
