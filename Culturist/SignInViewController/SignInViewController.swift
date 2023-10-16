@@ -17,10 +17,13 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCorner()
-        performExistingAccountSetupFlows()
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .GR0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //performExistingAccountSetupFlows()
     }
     
     @objc private func backButtonTapped() {
@@ -35,9 +38,8 @@ class SignInViewController: UIViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
-        
-    }
-    
+       }
+
     // - Tag: perform_appleid_password_request
     // Prompts the user if an existing iCloud Keychain credential or Apple ID credential is found.
     func performExistingAccountSetupFlows() {

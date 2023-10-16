@@ -11,9 +11,8 @@ import NVActivityIndicatorView
 import MJRefresh
 
 class RecommendViewController: UIViewController {
-
+    
     @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
-    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // total products
     var artProducts1 = [ArtDatum]()
@@ -73,36 +72,35 @@ class RecommendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backgroundImageView.isHidden = true
         setAnimation()
         loading.startAnimating()
         
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
-        artManager1.delegate = self
-        artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
         
-        // use firebase to get data
-        concertDataManager.concertDelegate = self
-        exhibitionDataManager.exhibitionDelegate = self
-        // concertDataManager.fetchConcertData()
-        // exhibitionDataManager.fetchExhibitionData()
-
+        if HomeViewController.loadAPIFromWeb == true {
+            artManager1.delegate = self
+            artManager6.delegate = self
+            group.enter()
+            artManager1.getArtProductList(number: "1")
+            group.enter()
+            artManager6.getArtProductList(number: "6")
+            print("loadAPIFromWeb")
+        } else {
+            // use firebase to get data
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
+            print("loadAPIFromFirebase")
+        }
         // use firebase to get recommend data
         recommendationManager.collectionDelegate = self
         
         recommendCollectionView.gemini
             .scaleAnimation()
             .scale(0.7)
-            .scaleEffect(.scaleUp) // or .scaleDown
-        
-        //        backgroundImageView.image = UIImage(named: "background")
-        //        backgroundImageView.contentMode = .scaleAspectFill
-        //        backgroundImageView.layer.opacity = 0.6
+            .scaleEffect(.scaleUp)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,14 +115,17 @@ class RecommendViewController: UIViewController {
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
-                self.group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.group.enter()
-                self.artManager6.getArtProductList(number: "6")
-                // ---------------------------------------------------
-                //                self.concertDataManager.fetchConcertData()
-                //                self.exhibitionDataManager.fetchExhibitionData()
-                // ---------------------------------------------------
+                if HomeViewController.loadAPIFromWeb == true {
+                    self.group.enter()
+                    self.artManager1.getArtProductList(number: "1")
+                    self.group.enter()
+                    self.artManager6.getArtProductList(number: "6")
+                    print("loadAPIFromWeb")
+                } else {
+//                    self.concertDataManager.fetchConcertData()
+//                    self.exhibitionDataManager.fetchExhibitionData()
+                    print("loadAPIFromFirebase")
+                }
                 self.recommendCollectionView.mj_trailer?.endRefreshing()
             }
         }
@@ -214,7 +215,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         })
         
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = self.recommendProducts[(self.indexPathItem!)]
@@ -251,7 +252,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
-            self.filterData = recommendationData
+        self.filterData = recommendationData
     }
 }
 

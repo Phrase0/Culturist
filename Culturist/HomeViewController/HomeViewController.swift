@@ -12,8 +12,10 @@ import MJRefresh
 
 class HomeViewController: UIViewController {
     
+    static var loadAPIFromWeb = true
+    
     @IBOutlet weak var homeTableView: UITableView!
-
+    
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
@@ -36,20 +38,24 @@ class HomeViewController: UIViewController {
         setAnimation()
         loading.startAnimating()
         
-        // use api to get data
-        artManager1.delegate = self
-        artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-
-        // MARK: - FireBaseData
-        // use firebase to get data
-//        concertDataManager.concertDelegate = self
-//        exhibitionDataManager.exhibitionDelegate = self
-//        concertDataManager.fetchConcertData()
-//        exhibitionDataManager.fetchExhibitionData()
+        if HomeViewController.loadAPIFromWeb == true {
+            // use api to get data
+            artManager1.delegate = self
+            artManager6.delegate = self
+            group.enter()
+            artManager1.getArtProductList(number: "1")
+            group.enter()
+            artManager6.getArtProductList(number: "6")
+            print("loadAPIFromWeb")
+        } else {
+            // MARK: - FireBaseData
+            // use firebase to get data
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
+            print("loadAPIFromFirebase")
+        }
         
         // MARK: - navigationTitle
         // Create an empty UIBarButtonItem as the left item
@@ -76,14 +82,17 @@ class HomeViewController: UIViewController {
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
-                self.group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.group.enter()
-                self.artManager6.getArtProductList(number: "6")
-                // ---------------------------------------------------
-                //                self.concertDataManager.fetchConcertData()
-                //                self.exhibitionDataManager.fetchExhibitionData()
-                // ---------------------------------------------------
+                if HomeViewController.loadAPIFromWeb == true {
+                    self.group.enter()
+                    self.artManager1.getArtProductList(number: "1")
+                    self.group.enter()
+                    self.artManager6.getArtProductList(number: "6")
+                    print("loadAPIFromWeb")
+                } else {
+//                    self.concertDataManager.fetchConcertData()
+//                    self.exhibitionDataManager.fetchExhibitionData()
+                    print("loadAPIFromFirebase")
+                }
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
