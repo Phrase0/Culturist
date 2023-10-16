@@ -354,9 +354,6 @@ Label</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-wv-GD4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5oF-bs-e3W" customClass="GeminiCollectionView" customModule="Gemini">
                                 <rect key="frame" x="0.0" y="163.33333333333331" width="375" height="565.66666666666674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -391,19 +388,14 @@ Label</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5oF-bs-e3W" secondAttribute="trailing" id="48d-vN-NKx"/>
                             <constraint firstItem="5oF-bs-e3W" firstAttribute="top" secondItem="vPM-SI-CNq" secondAttribute="bottom" id="5i7-AA-huC"/>
-                            <constraint firstItem="Cmh-wv-GD4" firstAttribute="leading" secondItem="FTL-Xe-7cj" secondAttribute="leading" id="E4K-e1-AFe"/>
-                            <constraint firstAttribute="bottom" secondItem="Cmh-wv-GD4" secondAttribute="bottom" id="Pnn-uX-3kN"/>
                             <constraint firstItem="vPM-SI-CNq" firstAttribute="leading" secondItem="Zyn-1H-WP3" secondAttribute="leading" constant="25" id="Ujg-e1-rHV"/>
-                            <constraint firstItem="Cmh-wv-GD4" firstAttribute="top" secondItem="FTL-Xe-7cj" secondAttribute="top" id="bs4-SJ-6UP"/>
                             <constraint firstItem="5oF-bs-e3W" firstAttribute="leading" secondItem="FTL-Xe-7cj" secondAttribute="leading" id="nTK-hK-m6L"/>
                             <constraint firstItem="vPM-SI-CNq" firstAttribute="top" secondItem="Zyn-1H-WP3" secondAttribute="top" constant="30" id="sno-x9-sIx"/>
                             <constraint firstItem="Zyn-1H-WP3" firstAttribute="bottom" secondItem="5oF-bs-e3W" secondAttribute="bottom" id="tqg-c6-fh1"/>
-                            <constraint firstAttribute="trailing" secondItem="Cmh-wv-GD4" secondAttribute="trailing" id="xxH-88-QNQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QZb-we-2nf"/>
                     <connections>
-                        <outlet property="backgroundImageView" destination="Cmh-wv-GD4" id="b5A-e5-cEe"/>
                         <outlet property="recommendCollectionView" destination="5oF-bs-e3W" id="Be9-eF-8Gx"/>
                     </connections>
                 </viewController>
