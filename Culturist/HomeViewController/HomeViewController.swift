@@ -13,7 +13,6 @@ import MJRefresh
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var homeTableView: UITableView!
-    var mySearchController = UISearchController(searchResultsController: nil)
 
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
@@ -23,6 +22,8 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
+    // Create the right-side search button
+    var searchButton: UIBarButtonItem?
     // create DispatchGroup
     let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
@@ -62,9 +63,9 @@ class HomeViewController: UIViewController {
         // Set the image view as the title view
         navigationItem.titleView = imageView
         
-        // Create the right-side search button
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton.tintColor = .GR0
+        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton?.tintColor = .GR0
+        searchButton?.isEnabled = false
         navigationItem.rightBarButtonItem = searchButton
     }
     
@@ -90,6 +91,7 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
                 self.loading.stopAnimating()
+                self.searchButton?.isEnabled = true
             }
         }
     }
