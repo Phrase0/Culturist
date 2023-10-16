@@ -33,6 +33,12 @@ class DetailTableViewCell: UITableViewCell {
     var likeButtonHandler: ((UIButton) -> Void)?
     weak var cellDelegate: DetailTableViewCellDelegate?
 
+    
+    // ---------------------------------------------------
+    func setPreviewImageSize(width: CGFloat, height: CGFloat) {
+           detailImageView.frame.size = CGSize(width: width, height: height)
+       }
+    // ---------------------------------------------------
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -75,6 +81,8 @@ class DetailTableViewCell: UITableViewCell {
         detailImageView.layer.cornerRadius = 100
         detailImageView.clipsToBounds = true
         detailImageView.layer.maskedCorners = [.layerMinXMaxYCorner]
-        
+
     }
+
+
 }

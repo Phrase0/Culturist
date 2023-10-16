@@ -11,7 +11,7 @@ import NVActivityIndicatorView
 import MJRefresh
 
 class RecommendViewController: UIViewController {
-    
+
     @IBOutlet weak var recommendCollectionView: GeminiCollectionView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
@@ -34,8 +34,6 @@ class RecommendViewController: UIViewController {
     var filterData = [RecommendationData]()
     // peek view indexpath
     var indexPathItem: Int?
-    let desiredHeight =  UIScreen.main.bounds.height * 0.8
-    let desiredWidth = UIScreen.main.bounds.width * 0.95
     
     var recommendProducts: [ArtDatum] {
         let allProducts = artProducts1 + artProducts6
@@ -75,7 +73,6 @@ class RecommendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // view.backgroundColor = .B4
         backgroundImageView.isHidden = true
         setAnimation()
         loading.startAnimating()
@@ -204,17 +201,20 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
     // MARK: - Peek the detail page
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: { () -> UIViewController? in
+            
             // create detail page peek
             let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
             detailVC.detailDesctription = self.recommendProducts[indexPath.item]
-            detailVC.preferredContentSize = CGSize(width: self.desiredWidth, height: self.desiredHeight)
+            // set peek preview position, let information more clear
+            detailVC.isPreviewing = true
             self.indexPathItem = indexPath.item
             return detailVC
         }, actionProvider: { _ -> UIMenu? in
             return nil
         })
+        
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = self.recommendProducts[(self.indexPathItem!)]

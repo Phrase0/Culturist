@@ -34,9 +34,7 @@ class AnimationTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             self.setupGeminiAnimation()
         }
-        // Auto scroll animation, set to switch every 2 seconds
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
-        
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
     }
     
     deinit {
@@ -67,23 +65,28 @@ class AnimationTableViewCell: UITableViewCell {
     // Banner auto-scroll animation
     @objc func changeBanner() {
         guard !randomSixItems.isEmpty else {
-            // if randomSixItems isEmpty，don't animate
+            // If randomSixItems is empty, do not perform the animation
             return
         }
+        
         var indexPath: IndexPath
         imageIndex += 1
         if imageIndex < randomSixItems.count {
-            // If the displayed cell is less than the total count, display the next one
+            // If the displayed image index is less than the total count, show the next one
             indexPath = IndexPath(item: imageIndex, section: 0)
-            // Actions to perform when adding auto-scroll animation
+            // Add automatic scrolling animation
             animationCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         } else {
-            // If the displayed cell is equal to the total count and there is no next image, select the first one
+            // If the current image index is equal to the total count and there is no next image, select the first one
             imageIndex = 0
             indexPath = IndexPath(item: 0, section: 0)
-            // Actions to perform when adding auto-scroll animation
             animationCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
         }
+        
+        // Set the next call's time interval based on the current image index
+        let timeInterval: TimeInterval = (imageIndex == randomSixItems.count - 1) ? 1.0 : 5.0
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(changeBanner), userInfo: nil, repeats: true)
     }
 }
 
