@@ -160,7 +160,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                         navVC.modalTransitionStyle = .crossDissolve
                         self?.present(navVC, animated: true)
                     }
-                    
                 }
             }
             
@@ -187,7 +186,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                             semaphore.signal()
                         }
                     }
-                    
                     // Wait for the semaphore to ensure geocoding is completed before navigation
                     semaphore.wait()
                     DispatchQueue.main.async {
