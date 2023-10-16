@@ -69,18 +69,22 @@ class LikeViewController: UIViewController {
         likeCollectionView.dataSource = self
         likeCollectionView.delegate = self
         
-        artManager1.delegate = self
-        artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-        
-        // MARK: - FireBaseData
-        //        concertDataManager.concertDelegate = self
-        //        exhibitionDataManager.exhibitionDelegate = self
-        //        concertDataManager.fetchConcertData()
-        //        exhibitionDataManager.fetchExhibitionData()
+        if HomeViewController.loadAPIFromWeb == true {
+            artManager1.delegate = self
+            artManager6.delegate = self
+            group.enter()
+            artManager1.getArtProductList(number: "1")
+            group.enter()
+            artManager6.getArtProductList(number: "6")
+            print("loadAPIFromWeb")
+        } else {
+            // use firebase to get data
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
+            print("loadAPIFromFirebase")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,9 +114,6 @@ class LikeViewController: UIViewController {
             self.noDataNoteLabel.isHidden = false
             self.likeData.removeAll()
         }
-        
-        
-        
     }
     
     func setAnimation() {

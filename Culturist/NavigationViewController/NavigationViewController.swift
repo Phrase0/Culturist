@@ -46,8 +46,13 @@ class NavigationViewController: UIViewController {
     // activity indicator
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
+    // when arNavigation error, call this
+    var arSession: ARSession?
     override func viewDidLoad() {
         super.viewDidLoad()
+        arSession = ARSession()
+        arSession?.delegate = self
+        
         setAnimation()
         loading.startAnimating()
         
@@ -121,9 +126,8 @@ class NavigationViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print(#function)
-        pauseAnimation()
         super.viewWillDisappear(animated)
+        pauseAnimation()
     }
     
     func pauseAnimation() {
@@ -285,7 +289,6 @@ extension NavigationViewController {
                 aNode.geometry = geometry1
                 aNode.scale = SCNVector3(0.006, 0.006, 0.006)
                 sceneLocationView.scene.rootNode.addChildNode(aNode)
-                
                 // ---------------------------------------------------
                 // Option 1: An absolutely terrible box material set (that demonstrates what you can do):
                 //                                box.materials = ["box", "arrow"].map {
@@ -486,5 +489,16 @@ extension UIView {
         var recursiveSubviews = self.subviews
         subviews.forEach { recursiveSubviews.append(contentsOf: $0.recursiveSubviews()) }
         return recursiveSubviews
+    }
+}
+
+@available(iOS 11.0, *)
+extension NavigationViewController: ARSessionDelegate {
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        let alertController = UIAlertController(title: "警告", message: "內存空間不足，請關閉AR導航，重新啟動", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+            self.dismiss(animated: true)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
 }

@@ -30,6 +30,8 @@ class DetailViewController: UIViewController {
     // create DispatchGroup
     let group = DispatchGroup()
     let firebaseManager = FirebaseManager()
+    // set peek preview position
+    var isPreviewing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,26 @@ class DetailViewController: UIViewController {
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
         isLiked = false
+        
+        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        
+        // set tableView.contentInset fill the screen
+        detailTableView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // set peek preview position
+        if isPreviewing {
+            let screenHeight = UIScreen.main.bounds.height
+            let yOffset = screenHeight / 4
+            let desiredContentOffset = CGPoint(x: 0, y: yOffset)
+            detailTableView.setContentOffset(desiredContentOffset, animated: false)
+            isPreviewing = false
+        }
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         if !KeychainItem.currentUserIdentifier.isEmpty {
             group.enter()
@@ -59,23 +81,8 @@ class DetailViewController: UIViewController {
         } else {
             self.likeData.removeAll()
         }
-        
-        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
-
-        // set tableView.contentInset fill the screen
-        detailTableView.contentInsetAdjustmentBehavior = .never
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithDefaultBackground()
-        navigationBarAppearance.backgroundEffect = UIBlurEffect(style: .regular)
-        navigationBarAppearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // reset navigationBarAppearance
@@ -95,7 +102,7 @@ class DetailViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         return dateFormatter.date(from: dateString)
     }
-
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -128,31 +135,31 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                        let geoCoder = CLGeocoder()
-                        geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                            if let error = error {
-                                print("Geocoding error: \(error.localizedDescription)")
-                                // Signal the semaphore to continue execution in case of an error
-                                semaphore.signal()
-                                return
-                            }
-                            if let placemarks = placemarks, let placemark = placemarks.first {
-                                detailVC.latitude = placemark.location?.coordinate.latitude
-                                detailVC.longitude = placemark.location?.coordinate.longitude
-                                print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
-                                // Signal the semaphore to notify completion of geocoding
-                                semaphore.signal()
-                            }
+                    let geoCoder = CLGeocoder()
+                    geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
+                        if let error = error {
+                            print("Geocoding error: \(error.localizedDescription)")
+                            // Signal the semaphore to continue execution in case of an error
+                            semaphore.signal()
+                            return
                         }
-                        // Wait for the semaphore to ensure geocoding is completed before navigation
-                        semaphore.wait()
-                        DispatchQueue.main.async {
-                            let navVC = UINavigationController(rootViewController: detailVC)
-                            navVC.modalPresentationStyle = .fullScreen
-                            navVC.modalTransitionStyle = .crossDissolve
-                            self?.present(navVC, animated: true)
+                        if let placemarks = placemarks, let placemark = placemarks.first {
+                            detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
+                            detailVC.latitude = placemark.location?.coordinate.latitude
+                            detailVC.longitude = placemark.location?.coordinate.longitude
+                            print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
+                            // Signal the semaphore to notify completion of geocoding
+                            semaphore.signal()
                         }
-
+                    }
+                    // Wait for the semaphore to ensure geocoding is completed before navigation
+                    semaphore.wait()
+                    DispatchQueue.main.async {
+                        let navVC = UINavigationController(rootViewController: detailVC)
+                        navVC.modalPresentationStyle = .fullScreen
+                        navVC.modalTransitionStyle = .crossDissolve
+                        self?.present(navVC, animated: true)
+                    }
                 }
             }
             
@@ -162,31 +169,31 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 // Default semaphore value is 0 (initial value is 0)
                 let semaphore = DispatchSemaphore(value: 0)
                 DispatchQueue.global().async {
-                        let geoCoder = CLGeocoder()
-                        geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                            if let error = error {
-                                print("Geocoding error: \(error.localizedDescription)")
-                                // Signal the semaphore to continue execution in case of an error
-                                semaphore.signal()
-                                return
-                            }
-                            if let placemarks = placemarks, let placemark = placemarks.first {
-                                detailVC.latitude = placemark.location?.coordinate.latitude
-                                detailVC.longitude = placemark.location?.coordinate.longitude
-                                print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
-                                // Signal the semaphore to notify completion of geocoding
-                                semaphore.signal()
-                            }
+                    let geoCoder = CLGeocoder()
+                    geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
+                        if let error = error {
+                            print("Geocoding error: \(error.localizedDescription)")
+                            // Signal the semaphore to continue execution in case of an error
+                            semaphore.signal()
+                            return
                         }
-                        
-                        // Wait for the semaphore to ensure geocoding is completed before navigation
-                        semaphore.wait()
-                        DispatchQueue.main.async {
-                            let navVC = UINavigationController(rootViewController: detailVC)
-                            navVC.modalPresentationStyle = .fullScreen
-                            navVC.modalTransitionStyle = .crossDissolve
-                            self?.present(navVC, animated: true)
+                        if let placemarks = placemarks, let placemark = placemarks.first {
+                            detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
+                            detailVC.latitude = placemark.location?.coordinate.latitude
+                            detailVC.longitude = placemark.location?.coordinate.longitude
+                            print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
+                            // Signal the semaphore to notify completion of geocoding
+                            semaphore.signal()
                         }
+                    }
+                    // Wait for the semaphore to ensure geocoding is completed before navigation
+                    semaphore.wait()
+                    DispatchQueue.main.async {
+                        let navVC = UINavigationController(rootViewController: detailVC)
+                        navVC.modalPresentationStyle = .fullScreen
+                        navVC.modalTransitionStyle = .crossDissolve
+                        self?.present(navVC, animated: true)
+                    }
                 }
             }
             
@@ -200,12 +207,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.likeButtonHandler = { [weak self] _ in
                 
                 if KeychainItem.currentUserIdentifier.isEmpty {
-                            // If there is no user identifier in Keychain, navigate to SignInViewController
+                    // If there is no user identifier in Keychain, navigate to SignInViewController
                     guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
-                            let navVC = UINavigationController(rootViewController: detailVC)
-                            navVC.modalPresentationStyle = .fullScreen
-                            navVC.modalTransitionStyle = .crossDissolve
-                            self?.present(navVC, animated: true)
+                    let navVC = UINavigationController(rootViewController: detailVC)
+                    navVC.modalPresentationStyle = .fullScreen
+                    navVC.modalTransitionStyle = .crossDissolve
+                    self?.present(navVC, animated: true)
                 } else {
                     if self?.isLiked == true {
                         // if isLiked, removeFavorite
@@ -232,6 +239,27 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             // ---------------------------------------------------
         }
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        
+        // cauculate 1/2 creen height
+        let oneTwiceScreenHeight = view.frame.height / 2
+        if contentOffsetY >= oneTwiceScreenHeight {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithDefaultBackground()
+            navigationBarAppearance.backgroundColor = UIColor(white: 0, alpha: 0.1)
+            navigationBarAppearance.shadowColor = .clear
+            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+            
+        } else {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            navigationBarAppearance.shadowColor = .clear
+            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        }
     }
     
 }
@@ -261,7 +289,7 @@ extension DetailViewController {
 // MARK: - FirebaseLikeDelegate
 extension DetailViewController: FirebaseLikeDelegate {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-            self.likeData = likeData
+        self.likeData = likeData
     }
 }
 
@@ -332,7 +360,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 alert.dismiss(animated: true, completion: nil)
             }
-
+            
         }
     }
 }

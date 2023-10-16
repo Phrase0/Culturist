@@ -12,9 +12,10 @@ import MJRefresh
 
 class HomeViewController: UIViewController {
     
+    static var loadAPIFromWeb = true
+    
     @IBOutlet weak var homeTableView: UITableView!
-    var mySearchController = UISearchController(searchResultsController: nil)
-
+    
     var artProducts1 = [ArtDatum]()
     var artProducts6 = [ArtDatum]()
     var artManager1 = ArtProductManager()
@@ -23,6 +24,9 @@ class HomeViewController: UIViewController {
     let exhibitionDataManager = ExhibitionDataManager()
     
     var buttonTag: Int?
+    // control buttonEnable
+    var isButtonEnabled = false
+    var searchButton: UIBarButtonItem?
     // create DispatchGroup
     let group = DispatchGroup()
     let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
@@ -34,20 +38,24 @@ class HomeViewController: UIViewController {
         setAnimation()
         loading.startAnimating()
         
-        // use api to get data
-        artManager1.delegate = self
-        artManager6.delegate = self
-        group.enter()
-        artManager1.getArtProductList(number: "1")
-        group.enter()
-        artManager6.getArtProductList(number: "6")
-
-        // MARK: - FireBaseData
-        // use firebase to get data
-//        concertDataManager.concertDelegate = self
-//        exhibitionDataManager.exhibitionDelegate = self
-//        concertDataManager.fetchConcertData()
-//        exhibitionDataManager.fetchExhibitionData()
+        if HomeViewController.loadAPIFromWeb == true {
+            // use api to get data
+            artManager1.delegate = self
+            artManager6.delegate = self
+            group.enter()
+            artManager1.getArtProductList(number: "1")
+            group.enter()
+            artManager6.getArtProductList(number: "6")
+            print("loadAPIFromWeb")
+        } else {
+            // MARK: - FireBaseData
+            // use firebase to get data
+//            concertDataManager.concertDelegate = self
+//            exhibitionDataManager.exhibitionDelegate = self
+//            concertDataManager.fetchConcertData()
+//            exhibitionDataManager.fetchExhibitionData()
+            print("loadAPIFromFirebase")
+        }
         
         // MARK: - navigationTitle
         // Create an empty UIBarButtonItem as the left item
@@ -62,9 +70,9 @@ class HomeViewController: UIViewController {
         // Set the image view as the title view
         navigationItem.titleView = imageView
         
-        // Create the right-side search button
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton.tintColor = .GR0
+        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton?.tintColor = .GR0
+        searchButton?.isEnabled = false
         navigationItem.rightBarButtonItem = searchButton
     }
     
@@ -74,14 +82,17 @@ class HomeViewController: UIViewController {
         MJRefreshNormalHeader {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
-                self.group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.group.enter()
-                self.artManager6.getArtProductList(number: "6")
-                // ---------------------------------------------------
-                //                self.concertDataManager.fetchConcertData()
-                //                self.exhibitionDataManager.fetchExhibitionData()
-                // ---------------------------------------------------
+                if HomeViewController.loadAPIFromWeb == true {
+                    self.group.enter()
+                    self.artManager1.getArtProductList(number: "1")
+                    self.group.enter()
+                    self.artManager6.getArtProductList(number: "6")
+                    print("loadAPIFromWeb")
+                } else {
+//                    self.concertDataManager.fetchConcertData()
+//                    self.exhibitionDataManager.fetchExhibitionData()
+                    print("loadAPIFromFirebase")
+                }
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
@@ -90,6 +101,8 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
                 self.loading.stopAnimating()
+                self.isButtonEnabled = true
+                self.searchButton?.isEnabled = true
             }
         }
     }
@@ -175,18 +188,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         headerView.addSubview(label)
         
         // add button
-        let button = UIButton()
-        button.setTitleColor(UIColor.GR0, for: .normal)
-        button.setTitle("查看更多 >", for: .normal)
+        let headButton = UIButton()
+        headButton.setTitleColor(UIColor.GR0, for: .normal)
+        headButton.setTitle("查看更多 >", for: .normal)
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
-            button.titleLabel?.font = pingFangFont
+            headButton.titleLabel?.font = pingFangFont
         } else {
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            headButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             print("no font type")
         }
-        button.tag = buttonTag ?? 0
-        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        headerView.addSubview(button)
+        headButton.tag = buttonTag ?? 0
+        headButton.isEnabled = isButtonEnabled
+        headButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        headerView.addSubview(headButton)
         
         // Apply Auto Layout constraints using SnapKit
         label.snp.makeConstraints { make in
@@ -194,7 +208,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             make.leading.equalToSuperview().offset(16)
         }
         
-        button.snp.makeConstraints { make in
+        headButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-6)
             make.trailing.equalToSuperview().offset(-20)
         }
