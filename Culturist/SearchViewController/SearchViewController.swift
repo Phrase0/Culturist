@@ -99,8 +99,8 @@ class SearchViewController: UIViewController {
         if let searchText =  mySearchController.searchBar.text {
             searchBar(mySearchController.searchBar, textDidChange: searchText)
         }
-        sender.backgroundColor = .GR3
-        sender.tintColor = .GR1
+        sender.backgroundColor = .GR2
+        sender.tintColor = .white
         sender.layer.borderColor = UIColor.GR1!.cgColor
     }
     
