@@ -12,7 +12,7 @@ import MJRefresh
 
 class HomeViewController: UIViewController {
     
-    static var loadAPIFromWeb = false
+    static var loadAPIFromWeb = true
     
     @IBOutlet weak var homeTableView: UITableView!
     
