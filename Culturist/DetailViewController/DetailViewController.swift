@@ -137,7 +137,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.global().async {
                     let geoCoder = CLGeocoder()
                     geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                        if let error = error {
+                        if let error {
                             print("Geocoding error: \(error.localizedDescription)")
                             // Signal the semaphore to continue execution in case of an error
                             semaphore.signal()
@@ -171,7 +171,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.global().async {
                     let geoCoder = CLGeocoder()
                     geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                        if let error = error {
+                        if let error {
                             print("Geocoding error: \(error.localizedDescription)")
                             // Signal the semaphore to continue execution in case of an error
                             semaphore.signal()

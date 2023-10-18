@@ -33,7 +33,7 @@ class FirebaseManager {
         let document = db.collection("users").document(id)
         // Use the getDocument method to check if the document already exists
         document.getDocument { (snapshot, error) in
-            if let error = error {
+            if let error {
                 print("Failed to retrieve the document: \(error.localizedDescription)")
                 return
             }
@@ -56,7 +56,7 @@ class FirebaseManager {
                 updatedData["createdTime"] = FieldValue.serverTimestamp()
                 
                 document.updateData(updatedData) { error in
-                    if let error = error {
+                    if let error {
                         print("Failed to update data: \(error.localizedDescription)")
                     } else {
                         print("Data updated successfully")
@@ -75,7 +75,7 @@ class FirebaseManager {
                 ]
                 
                 document.setData(data) { error in
-                    if let error = error {
+                    if let error {
                         print("Failed to add data: \(error.localizedDescription)")
                     } else {
                         print("Data added successfully")
@@ -90,7 +90,7 @@ class FirebaseManager {
 //        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
 //        // Get the single document from the subcollection
 //        userRef.getDocument { (snapshot, error) in
-//            if let error = error {
+//            if let error {
 //                print("Error getting document: \(error.localizedDescription)")
 //                completion(nil)
 //            } else {
@@ -108,7 +108,7 @@ class FirebaseManager {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
@@ -118,7 +118,7 @@ class FirebaseManager {
         }
         let likeCollection = userRef.collection("likeCollection")
         likeCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
@@ -128,7 +128,7 @@ class FirebaseManager {
         }
         let imageData = userRef.collection("imageData")
         imageData.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
@@ -170,7 +170,7 @@ class FirebaseManager {
         
         // Set the data with merge option to update or create
         imageDocRef.setData(imageData, merge: true) { error in
-            if let error = error {
+            if let error {
                 print("Failed to add data: \(error.localizedDescription)")
             } else {
                 print("Data added successfully")
@@ -187,7 +187,7 @@ class FirebaseManager {
         
         // Get the single document from the subcollection
         imageDataCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error getting documents: \(error.localizedDescription)")
                 completion(nil)
             } else {
@@ -224,7 +224,7 @@ class FirebaseManager {
         
         // Add RecommendationData to the recommendationData collection
         recommendationDataCollection.addDocument(data: recommendationData) { (error) in
-            if let error = error {
+            if let error {
                 print("Error adding RecommendationData: \(error)")
             } else {
                 print("RecommendationData added successfully.")
@@ -239,7 +239,7 @@ class FirebaseManager {
         
         // search "recommendationData" documents
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error fetching recommendationData: \(error)")
                 return
             }
@@ -268,7 +268,7 @@ class FirebaseManager {
         
         // search "recommendationData" documents
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error fetching recommendationData: \(error)")
                 return
             }
@@ -343,7 +343,7 @@ class FirebaseManager {
         
         // Add LikeData to the likeCollection
         likeCollection.addDocument(data: likeDataDict) { (error) in
-            if let error = error {
+            if let error {
                 print("Error adding LikeData: \(error)")
             } else {
                 print("LikeData added successfully.")
@@ -373,13 +373,13 @@ class FirebaseManager {
         
         // Execute a query, get matching documents and delete them
         query.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error removing LikeData: \(error)")
             } else {
                 for document in querySnapshot!.documents {
                     let documentID = document.documentID
                     likeCollection.document(documentID).delete { (error) in
-                        if let error = error {
+                        if let error {
                             print("Error removing LikeData document: \(error)")
                         } else {
                             print("LikeData removed successfully.")
@@ -396,7 +396,7 @@ class FirebaseManager {
         let likeCollection = userRef.collection("likeCollection")
         
         likeCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error fetching LikeData: \(error)")
             } else {
                 var userLikes: [LikeData] = []

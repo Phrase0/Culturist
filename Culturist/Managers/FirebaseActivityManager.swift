@@ -28,7 +28,7 @@ class ConcertDataManager {
         let artDataCollection = db.collection("concert")
         
         artDataCollection.whereField("imageUrl", isNotEqualTo: "").getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error fetching ConcertData: \(error)")
                 self.concertDelegate?.manager(self, didFailWith: error)
                 return
@@ -85,7 +85,7 @@ class ExhibitionDataManager {
         let artDataCollection = db.collection("exhibition")
         
         artDataCollection.whereField("imageUrl", isNotEqualTo: "").getDocuments { (querySnapshot, error) in
-            if let error = error {
+            if let error {
                 print("Error fetching ConcertData: \(error)")
                 self.exhibitionDelegate?.manager(self, didFailWith: error)
                 return

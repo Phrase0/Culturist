@@ -26,7 +26,7 @@ extension Installations: InstallationsProtocol {
     installationID { (installationID: String?, error: Error?) in
       if let installationID = installationID {
         completion(.success(installationID))
-      } else if let error = error {
+      } else if let error {
         completion(.failure(error))
       }
     }

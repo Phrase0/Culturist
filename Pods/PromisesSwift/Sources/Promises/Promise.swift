@@ -130,7 +130,7 @@ extension Promise: CustomStringConvertible {
       return "Fulfilled: \(description)"
     }
     if isRejected {
-      if let error = error { description = String(describing: error) }
+      if let error { description = String(describing: error) }
       return "Rejected: \(description)"
     }
     return "Pending: \(Value.self)"

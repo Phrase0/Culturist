@@ -132,7 +132,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
 //                        self?.refreshControl.stopAnimating()
 //                    }
 //                }
-                if let error = error {
+                if let error {
                     return print("Error getting directions: \(error.localizedDescription)")
                 }
                 guard let response = response else {
