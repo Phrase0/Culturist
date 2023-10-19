@@ -32,8 +32,7 @@ class DetailTableViewCell: UITableViewCell {
     var searchBookButtonHandler: ((UIButton) -> Void)?
     var likeButtonHandler: ((UIButton) -> Void)?
     weak var cellDelegate: DetailTableViewCellDelegate?
-
-    
+ 
     // ---------------------------------------------------
     func setPreviewImageSize(width: CGFloat, height: CGFloat) {
            detailImageView.frame.size = CGSize(width: width, height: height)
@@ -57,27 +56,24 @@ class DetailTableViewCell: UITableViewCell {
         
     @IBAction func webBtutton(_ sender: UIButton) {
         cellDelegate?.webBtnTapped(sender: sender)
-        feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
     }
     
     @IBAction func likeButton(_ sender: UIButton) {
         likeButtonHandler?(sender)
-        feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
         
     }
 
     @IBAction func notificationBtnTapped(_ sender: UIButton) {
         cellDelegate?.notificationBtnTapped(sender: sender)
-        feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
     }
     
     func setCorner() {
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
         detailImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.6).isActive = true
-        detailImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+        detailImageView.widthAnchor.constraint(equalToConstant: UIScreen.width).isActive = true
         detailImageView.layer.cornerRadius = 100
         detailImageView.clipsToBounds = true
         detailImageView.layer.maskedCorners = [.layerMinXMaxYCorner]

@@ -59,6 +59,7 @@
 		F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
+		F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */; };
 		F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +122,7 @@
 		F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistRelease.entitlements; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
+		F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonNameEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,32 +155,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F80D8D5A2ABFF304009195B2 /* SearchViewController */ = {
+		F80D8D5A2ABFF304009195B2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				F80D8D5B2ABFF32A009195B2 /* SearchViewController.swift */,
 				F80D8D5D2ABFF600009195B2 /* SearchCollectionViewCell.swift */,
 			);
-			path = SearchViewController;
+			path = Search;
 			sourceTree = "<group>";
 		};
-		F80D8D612AC0281B009195B2 /* CheckMoreViewController */ = {
+		F80D8D612AC0281B009195B2 /* CheckMore */ = {
 			isa = PBXGroup;
 			children = (
 				F80D8D622AC0283F009195B2 /* CheckMoreViewController.swift */,
 				F80D8D642AC02850009195B2 /* CheckMoreCollectionViewCell.swift */,
 			);
-			path = CheckMoreViewController;
+			path = CheckMore;
 			sourceTree = "<group>";
 		};
-		F81E8C772AC95F8D002AED22 /* SignInViewController */ = {
+		F81E8C772AC95F8D002AED22 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
 				F81E8C782AC95FAF002AED22 /* SignInViewController.swift */,
 				F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */,
-				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
 			);
-			path = SignInViewController;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		F82A34E12AB2AC4C004FF247 = {
@@ -210,20 +211,9 @@
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
 				F88EDD412ABC1DA20061AA18 /* Extension */,
-				F851F7512AB6136B0029C78E /* Managers */,
 				F82A35092AB2B8BF004FF247 /* Models */,
-				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
-				F82A350E2AB2D2DD004FF247 /* HomeViewController */,
-				F80D8D5A2ABFF304009195B2 /* SearchViewController */,
-				F80D8D612AC0281B009195B2 /* CheckMoreViewController */,
-				F851F7542AB6B4680029C78E /* RecommendViewController */,
-				F851F7482AB41F460029C78E /* DetailViewController */,
-				F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */,
-				F851F7412AB35F5F0029C78E /* BookShopViewController */,
-				F8447A232AB9CE0B00471552 /* NavigationViewController */,
-				F8A14E7A2ACF0C4D009A9291 /* LikeViewController */,
-				F8B816B22AB83B7D0016F4BB /* ProfileViewController */,
-				F81E8C772AC95F8D002AED22 /* SignInViewController */,
+				F851F7512AB6136B0029C78E /* Managers */,
+				F8FAA6002AE12DFA001A5329 /* Views */,
 				F82A34F62AB2AC4D004FF247 /* Assets.xcassets */,
 				F82A34F82AB2AC4D004FF247 /* LaunchScreen.storyboard */,
 				F883BEB52AC552CB00437C1D /* GoogleService-Info.plist */,
@@ -243,7 +233,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F82A350E2AB2D2DD004FF247 /* HomeViewController */ = {
+		F82A350E2AB2D2DD004FF247 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				F83E4C242ABEC4E4000E2DAC /* HomeViewController.swift */,
@@ -252,35 +242,35 @@
 				F83E4C282ABEC66A000E2DAC /* ProductTableViewCell.swift */,
 				F82A350F2AB2D34B004FF247 /* ProductCollectionViewCell.swift */,
 			);
-			path = HomeViewController;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		F8447A232AB9CE0B00471552 /* NavigationViewController */ = {
+		F8447A232AB9CE0B00471552 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */,
 				F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */,
 			);
-			path = NavigationViewController;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
-		F851F7412AB35F5F0029C78E /* BookShopViewController */ = {
+		F851F7412AB35F5F0029C78E /* BookShop */ = {
 			isa = PBXGroup;
 			children = (
 				F851F73F2AB35F5A0029C78E /* BookShopMapViewController.swift */,
 				F851F7442AB361C50029C78E /* BookShopViewController.swift */,
 				F851F7462AB361DC0029C78E /* BookShopTableViewCell.swift */,
 			);
-			path = BookShopViewController;
+			path = BookShop;
 			sourceTree = "<group>";
 		};
-		F851F7482AB41F460029C78E /* DetailViewController */ = {
+		F851F7482AB41F460029C78E /* Detail */ = {
 			isa = PBXGroup;
 			children = (
 				F851F7492AB41F690029C78E /* DetailViewController.swift */,
 				F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */,
 			);
-			path = DetailViewController;
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		F851F7512AB6136B0029C78E /* Managers */ = {
@@ -295,19 +285,20 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		F851F7542AB6B4680029C78E /* RecommendViewController */ = {
+		F851F7542AB6B4680029C78E /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
 				F851F7572AB6B4C70029C78E /* RecommendViewController.swift */,
 				F851F7592AB6B6650029C78E /* RecommendCollectionViewCell.swift */,
 			);
-			path = RecommendViewController;
+			path = Recommend;
 			sourceTree = "<group>";
 		};
 		F88EDD412ABC1DA20061AA18 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */,
+				F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */,
 				F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */,
 				F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */,
 				F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */,
@@ -315,26 +306,26 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		F8A14E7A2ACF0C4D009A9291 /* LikeViewController */ = {
+		F8A14E7A2ACF0C4D009A9291 /* Like */ = {
 			isa = PBXGroup;
 			children = (
 				F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */,
 				F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */,
 			);
-			path = LikeViewController;
+			path = Like;
 			sourceTree = "<group>";
 		};
-		F8B816B22AB83B7D0016F4BB /* ProfileViewController */ = {
+		F8B816B22AB83B7D0016F4BB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */,
 				F88EDD3D2ABB2A270061AA18 /* ProfileViewController-Ext.swift */,
 				F88EDD3F2ABC1C360061AA18 /* EventsTableViewCell.swift */,
 			);
-			path = ProfileViewController;
+			path = Profile;
 			sourceTree = "<group>";
 		};
-		F8D2460C2AB328EA00521C5E /* CoffeeShopViewController */ = {
+		F8D2460C2AB328EA00521C5E /* CoffeeShop */ = {
 			isa = PBXGroup;
 			children = (
 				F8AAC8902ADB9979007C4F20 /* CustomAnnotation.swift */,
@@ -342,7 +333,35 @@
 				F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */,
 				F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */,
 			);
-			path = CoffeeShopViewController;
+			path = CoffeeShop;
+			sourceTree = "<group>";
+		};
+		F8FAA6002AE12DFA001A5329 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */,
+				F82A350E2AB2D2DD004FF247 /* Home */,
+				F80D8D5A2ABFF304009195B2 /* Search */,
+				F80D8D612AC0281B009195B2 /* CheckMore */,
+				F851F7542AB6B4680029C78E /* Recommend */,
+				F851F7482AB41F460029C78E /* Detail */,
+				F8D2460C2AB328EA00521C5E /* CoffeeShop */,
+				F851F7412AB35F5F0029C78E /* BookShop */,
+				F8447A232AB9CE0B00471552 /* Navigation */,
+				F8A14E7A2ACF0C4D009A9291 /* Like */,
+				F8B816B22AB83B7D0016F4BB /* Profile */,
+				F81E8C772AC95F8D002AED22 /* SignIn */,
+				F8FAA6012AE12ED7001A5329 /* Setting */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8FAA6012AE12ED7001A5329 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				F8A532E92ACAC9AA00250389 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */,
 				F851F74C2AB41F860029C78E /* DetailTableViewCell.swift in Sources */,
 				F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */,
 				F851F74A2AB41F690029C78E /* DetailViewController.swift in Sources */,

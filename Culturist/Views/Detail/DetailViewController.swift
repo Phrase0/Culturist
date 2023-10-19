@@ -18,18 +18,18 @@ class DetailViewController: UIViewController {
     var detailDesctription: ArtDatum?
     
     // like data
-    var isLiked: Bool?
-    var likeData = [LikeData]()
+    private var isLiked: Bool?
+    private var likeData = [LikeData]()
     
     // appCalendar
-    let eventStore = EKEventStore()
-    var appCalendar: EKCalendar?
+    private let eventStore = EKEventStore()
+    private var appCalendar: EKCalendar?
     // set Time
-    let dateFormatter = DateFormatter()
+    private let dateFormatter = DateFormatter()
     
     // create DispatchGroup
-    let group = DispatchGroup()
-    let firebaseManager = FirebaseManager()
+    private let group = DispatchGroup()
+    private let firebaseManager = FirebaseManager()
     // set peek preview position
     var isPreviewing = false
     
@@ -48,7 +48,6 @@ class DetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         // set peek preview position
         if isPreviewing {
             let screenHeight = UIScreen.main.bounds.height
@@ -90,17 +89,18 @@ class DetailViewController: UIViewController {
         navigationBarAppearance.configureWithTransparentBackground()
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
     }
-    
-    @objc private func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+
+    // MARK: - functions
     func changeDateFormatter(dateString: String?) -> Date? {
         guard let dateString = dateString else {
             return nil
         }
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         return dateFormatter.date(from: dateString)
+    }
+    
+    @objc private func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -138,7 +138,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.locationLabel.text = detailDesctription.showInfo[0].locationName
             cell.addressLabel.text = detailDesctription.showInfo[0].location
-            cell.priceLabel.text = detailDesctription.showInfo[0].price
+            
             if !detailDesctription.showInfo[0].price.isEmpty {
                 cell.priceLabel.text = ("$:\(detailDesctription.showInfo[0].price)")
             } else {
@@ -241,7 +241,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            // ---------------------------------------------------
             // MARK: - notificationBtn & webBtn Tapped
             cell.cellDelegate = self
             let urlString = detailDesctription.sourceWebPromote
@@ -252,7 +251,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.webBtn.isEnabled = false
             }
-            // ---------------------------------------------------
         }
         return cell
     }
@@ -395,14 +393,12 @@ extension DetailViewController: DetailTableViewCellDelegate {
             let eventStore = EKEventStore()
             eventStore.requestAccess(to: .event) { (granted, _) in
                 if granted {
-                    // do stuff
                     DispatchQueue.main.async {
                         self.showEventViewController()
                     }
                 }
             }
         case .authorized:
-            // do stuff
             DispatchQueue.main.async {
                 self.showEventViewController()
             }

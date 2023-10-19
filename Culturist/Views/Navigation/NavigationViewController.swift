@@ -26,7 +26,6 @@ class NavigationViewController: UIViewController {
     var locationEstimateAnnotation: MKPointAnnotation?
     
     var updateUserLocationTimer: Timer?
-    var updateInfoLabelTimer: Timer?
     
     var centerMapOnUserLocation: Bool = true
     var routes: [MKRoute]?
@@ -71,22 +70,10 @@ class NavigationViewController: UIViewController {
                                                queue: nil) { [weak self] _ in
             self?.restartAnimation()
         }
-        
-        updateInfoLabelTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            // self?.updateInfoLabel()
-        }
-        
-        // Set to true to display an arrow which points north.
-        // Checkout the comments in the property description and on the readme on this.
-        //        sceneLocationView.orientToTrueNorth = false
-        //        sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
-        
+      
         sceneLocationView.showAxesNode = false
         sceneLocationView.showFeaturePoints = displayDebugging
-        //        sceneLocationView.locationNodeTouchDelegate = self
-        //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
         sceneLocationView.arViewDelegate = self
-        // sceneLocationView.locationNodeTouchDelegate = self
         
         contentView.addSubview(sceneLocationView)
         sceneLocationView.frame = contentView.bounds
@@ -163,17 +150,6 @@ class NavigationViewController: UIViewController {
                 print("right side of the screen")
                 sceneLocationView.moveSceneHeadingClockwise()
             }
-            //            else if addNodeByTappingScreen {
-            //                let image = UIImage(named: "pin")!
-            //                let annotationNode = LocationAnnotationNode(location: nil, image: image)
-            //                annotationNode.scaleRelativeToDistance = false
-            //                annotationNode.scalingScheme = .normal
-            //                DispatchQueue.main.async {
-            //                    // If we're using the touch delegate, adding a new node in the touch handler sometimes causes a freeze.
-            //                    // So defer to next pass.
-            //                    self.sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-            //                }
-            //            }
         }
     }
 }
@@ -221,9 +197,9 @@ extension NavigationViewController: MKMapViewDelegate {
 @available(iOS 11.0, *)
 extension NavigationViewController {
     
-    /// Adds the appropriate ARKit models to the scene.  Note: that this won't
-    /// do anything until the scene has a `currentLocation`.  It "polls" on that
-    /// and when a location is finally discovered, the models are added.
+    // Adds the appropriate ARKit models to the scene.  Note: that this won't
+    // do anything until the scene has a `currentLocation`.  It "polls" on that
+    // and when a location is finally discovered, the models are added.
     func addSceneModels() {
         // 1. Don't try to add the models to the scene until we have a current location
         guard sceneLocationView.sceneLocationManager.currentLocation != nil else {
@@ -232,7 +208,6 @@ extension NavigationViewController {
             }
             return
         }
-        
         //        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
         //        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
         
@@ -356,10 +331,7 @@ extension NavigationViewController {
         pikesPeakLayer.alignmentMode = .center
         pikesPeakLayer.foregroundColor = UIColor.black.cgColor
         pikesPeakLayer.backgroundColor = UIColor.white.cgColor
-        
-        // This demo uses a simple periodic timer to showcase dynamic text in a node.  In your implementation,
-        // the view's content will probably be changed as the result of a network fetch or some other asynchronous event.
-        
+
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             pikesPeakLayer.string = "Pike's Peak\n" + Date().description
         }
@@ -420,32 +392,7 @@ extension NavigationViewController {
             }
         }
     }
-    
-    //    @objc
-    //    func updateInfoLabel() {
-    //        if let position = sceneLocationView.currentScenePosition {
-    //            infoLabel.text = " x: \(position.x.short), y: \(position.y.short), z: \(position.z.short)\n"
-    //        }
-    //
-    //        if let eulerAngles = sceneLocationView.currentEulerAngles {
-    //            infoLabel.text!.append(" Euler x: \(eulerAngles.x.short), y: \(eulerAngles.y.short), z: \(eulerAngles.z.short)\n")
-    //        }
-    //
-    //        if let eulerAngles = sceneLocationView.currentEulerAngles,
-    //           let heading = sceneLocationView.sceneLocationManager.locationManager.heading,
-    //           let headingAccuracy = sceneLocationView.sceneLocationManager.locationManager.headingAccuracy {
-    //            let yDegrees = (((0 - eulerAngles.y.radiansToDegrees) + 360).truncatingRemainder(dividingBy: 360) ).short
-    //            infoLabel.text!.append(" Heading: \(yDegrees)° • \(Float(heading).short)° • \(headingAccuracy)°\n")
-    //        }
-    //
-    //        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
-    //        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-    //            let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
-    //            infoLabel.text!.append(" Time: \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3)" )
-    //            // • \(nodeCount)")
-    //        }
-    //    }
-    
+
     func buildNode(latitude: CLLocationDegrees, longitude: CLLocationDegrees,
                    altitude: CLLocationDistance, imageName: String) -> LocationAnnotationNode {
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -475,7 +422,6 @@ extension NavigationViewController {
 }
 
 // MARK: - Helpers
-
 extension DispatchQueue {
     func asyncAfter(timeInterval: TimeInterval, execute: @escaping () -> Void) {
         self.asyncAfter(
