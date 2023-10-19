@@ -117,17 +117,33 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             let url = URL(string: detailDesctription.imageURL)
             cell.detailImageView.kf.setImage(with: url)
             cell.titleLabel.text = detailDesctription.title
+            // set time
+            let timeString = detailDesctription.showInfo[0].time
+            let components = timeString.split(separator: ":")
+            if components.count >= 2 {
+                let hourMinuteString = "\(components[0]):\(components[1])"
+                cell.startTimeLabel.text = hourMinuteString
+            } else {
+                cell.startTimeLabel.text = detailDesctription.showInfo[0].time
+            }
+            
+            if let endTimeString = detailDesctription.showInfo.last?.endTime {
+                let endTimecomponents = endTimeString.split(separator: ":")
+                if endTimecomponents.count >= 2 {
+                    let hourMinuteString = "\(endTimecomponents[0]):\(endTimecomponents[1])"
+                    cell.endTimeLabel.text = hourMinuteString
+                } else {
+                    cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
+                }
+            }
             cell.locationLabel.text = detailDesctription.showInfo[0].locationName
+            cell.addressLabel.text = detailDesctription.showInfo[0].location
             cell.priceLabel.text = detailDesctription.showInfo[0].price
             if !detailDesctription.showInfo[0].price.isEmpty {
                 cell.priceLabel.text = ("$:\(detailDesctription.showInfo[0].price)")
             } else {
                 cell.priceLabel.text = ""
             }
-            
-            cell.addressLabel.text = detailDesctription.showInfo[0].location
-            cell.startTimeLabel.text = detailDesctription.showInfo[0].time
-            cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
             cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
             // MARK: - coffeeBtnTapped
             cell.searchCoffeeButtonHandler = { [weak self] _ in
