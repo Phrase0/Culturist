@@ -6,10 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
-import MapKit
 import EventKitUI
-import SafariServices
 
 class DetailViewController: UIViewController {
     
@@ -18,18 +15,18 @@ class DetailViewController: UIViewController {
     var detailDesctription: ArtDatum?
     
     // like data
-    private var isLiked: Bool?
-    private var likeData = [LikeData]()
+    var isLiked = false
+    var likeData = [LikeData]()
     
     // appCalendar
-    private let eventStore = EKEventStore()
-    private var appCalendar: EKCalendar?
+    let eventStore = EKEventStore()
+    var appCalendar: EKCalendar?
     // set Time
-    private let dateFormatter = DateFormatter()
+    let dateFormatter = DateFormatter()
     
     // create DispatchGroup
     private let group = DispatchGroup()
-    private let firebaseManager = FirebaseManager()
+    let firebaseManager = FirebaseManager()
     // set peek preview position
     var isPreviewing = false
     
@@ -38,11 +35,7 @@ class DetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.delegate = self
         firebaseManager.likeDelegate = self
-        isLiked = false
-        
-        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        
+        setBackButton()
         // set tableView.contentInset fill the screen
         detailTableView.contentInsetAdjustmentBehavior = .never
     }
@@ -50,13 +43,13 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // set peek preview position
         if isPreviewing {
-            let screenHeight = UIScreen.main.bounds.height
+            let screenHeight = UIScreen.height
             let yOffset = screenHeight / 4
             let desiredContentOffset = CGPoint(x: 0, y: yOffset)
             detailTableView.setContentOffset(desiredContentOffset, animated: false)
             isPreviewing = false
         }
-        
+        // set scroll back
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         if !KeychainItem.currentUserIdentifier.isEmpty {
@@ -65,13 +58,11 @@ class DetailViewController: UIViewController {
                 // leave DispatchGroup
                 self.group.leave()
             }
-            
             // use DispatchGroup notify
             group.notify(queue: .main) {
                 let isLiked = self.likeData.contains { like in
                     return like.exhibitionUid == self.detailDesctription?.uid
                 }
-                
                 DispatchQueue.main.async {
                     self.isLiked = isLiked
                     self.detailTableView.reloadData()
@@ -91,321 +82,13 @@ class DetailViewController: UIViewController {
     }
 
     // MARK: - functions
-    func changeDateFormatter(dateString: String?) -> Date? {
-        guard let dateString = dateString else {
-            return nil
-        }
-        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        return dateFormatter.date(from: dateString)
+    func setBackButton() {
+        let backImage = UIImage.asset(.Icons_36px_Back_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
     }
-    
+
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-}
-
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else { return UITableViewCell() }
-        if let detailDesctription = detailDesctription {
-            let url = URL(string: detailDesctription.imageURL)
-            cell.detailImageView.kf.setImage(with: url)
-            cell.titleLabel.text = detailDesctription.title
-            // set time
-            let timeString = detailDesctription.showInfo[0].time
-            let components = timeString.split(separator: ":")
-            if components.count >= 2 {
-                let hourMinuteString = "\(components[0]):\(components[1])"
-                cell.startTimeLabel.text = hourMinuteString
-            } else {
-                cell.startTimeLabel.text = detailDesctription.showInfo[0].time
-            }
-            
-            if let endTimeString = detailDesctription.showInfo.last?.endTime {
-                let endTimecomponents = endTimeString.split(separator: ":")
-                if endTimecomponents.count >= 2 {
-                    let hourMinuteString = "\(endTimecomponents[0]):\(endTimecomponents[1])"
-                    cell.endTimeLabel.text = hourMinuteString
-                } else {
-                    cell.endTimeLabel.text = detailDesctription.showInfo.last?.endTime
-                }
-            }
-            cell.locationLabel.text = detailDesctription.showInfo[0].locationName
-            cell.addressLabel.text = detailDesctription.showInfo[0].location
-            
-            if !detailDesctription.showInfo[0].price.isEmpty {
-                cell.priceLabel.text = ("$:\(detailDesctription.showInfo[0].price)")
-            } else {
-                cell.priceLabel.text = ""
-            }
-            cell.descriptionLabel.text = detailDesctription.descriptionFilterHTML
-            // MARK: - coffeeBtnTapped
-            cell.searchCoffeeButtonHandler = { [weak self] _ in
-                guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "CoffeeShopMapViewController") as? CoffeeShopMapViewController  else { return }
-                // Default semaphore value is 0 (initial value is 0)
-                let semaphore = DispatchSemaphore(value: 0)
-                DispatchQueue.global().async {
-                    let geoCoder = CLGeocoder()
-                    geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                        if let error {
-                            print("Geocoding error: \(error.localizedDescription)")
-                            // Signal the semaphore to continue execution in case of an error
-                            semaphore.signal()
-                            return
-                        }
-                        if let placemarks = placemarks, let placemark = placemarks.first {
-                            detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
-                            detailVC.latitude = placemark.location?.coordinate.latitude
-                            detailVC.longitude = placemark.location?.coordinate.longitude
-                            print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
-                            // Signal the semaphore to notify completion of geocoding
-                            semaphore.signal()
-                        }
-                    }
-                    // Wait for the semaphore to ensure geocoding is completed before navigation
-                    semaphore.wait()
-                    DispatchQueue.main.async {
-                        let navVC = UINavigationController(rootViewController: detailVC)
-                        navVC.modalPresentationStyle = .fullScreen
-                        navVC.modalTransitionStyle = .crossDissolve
-                        self?.present(navVC, animated: true)
-                    }
-                }
-            }
-            
-            // MARK: - BookButtonTapped
-            cell.searchBookButtonHandler = { [weak self] _ in
-                guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "BookShopMapViewController") as? BookShopMapViewController  else { return }
-                // Default semaphore value is 0 (initial value is 0)
-                let semaphore = DispatchSemaphore(value: 0)
-                DispatchQueue.global().async {
-                    let geoCoder = CLGeocoder()
-                    geoCoder.geocodeAddressString("\(detailDesctription.showInfo[0].location)") { (placemarks, error) in
-                        if let error {
-                            print("Geocoding error: \(error.localizedDescription)")
-                            // Signal the semaphore to continue execution in case of an error
-                            semaphore.signal()
-                            return
-                        }
-                        if let placemarks = placemarks, let placemark = placemarks.first {
-                            detailVC.exhibitionLocation = detailDesctription.showInfo[0].locationName
-                            detailVC.latitude = placemark.location?.coordinate.latitude
-                            detailVC.longitude = placemark.location?.coordinate.longitude
-                            print("Geocoding successful: Latitude \(placemark.location?.coordinate.latitude ?? 0.0), Longitude \(placemark.location?.coordinate.longitude ?? 0.0)")
-                            // Signal the semaphore to notify completion of geocoding
-                            semaphore.signal()
-                        }
-                    }
-                    // Wait for the semaphore to ensure geocoding is completed before navigation
-                    semaphore.wait()
-                    DispatchQueue.main.async {
-                        let navVC = UINavigationController(rootViewController: detailVC)
-                        navVC.modalPresentationStyle = .fullScreen
-                        navVC.modalTransitionStyle = .crossDissolve
-                        self?.present(navVC, animated: true)
-                    }
-                }
-            }
-            
-            // MARK: - likeBtnTapped
-            if isLiked == false {
-                cell.likeBtn.isSelected = false
-            } else {
-                cell.likeBtn.isSelected = true
-            }
-            
-            cell.likeButtonHandler = { [weak self] _ in
-                
-                if KeychainItem.currentUserIdentifier.isEmpty {
-                    // If there is no user identifier in Keychain, navigate to SignInViewController
-                    guard let detailVC = self?.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
-                    let navVC = UINavigationController(rootViewController: detailVC)
-                    navVC.modalPresentationStyle = .fullScreen
-                    navVC.modalTransitionStyle = .crossDissolve
-                    self?.present(navVC, animated: true)
-                } else {
-                    if self?.isLiked == true {
-                        // if isLiked, removeFavorite
-                        self?.removeFavorite()
-                        cell.likeBtn.isSelected = false
-                    } else {
-                        self?.addFavorite()
-                        cell.likeBtn.isSelected = true
-                    }
-                }
-            }
-            
-            // MARK: - notificationBtn & webBtn Tapped
-            cell.cellDelegate = self
-            let urlString = detailDesctription.sourceWebPromote
-            if let url = URL(string: urlString),
-               UIApplication.shared.canOpenURL(url) {
-                // url can use
-                cell.webBtn.isEnabled = true
-            } else {
-                cell.webBtn.isEnabled = false
-            }
-        }
-        return cell
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffsetY = scrollView.contentOffset.y
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
-        
-        // cauculate 1/2 creen height
-        let oneTwiceScreenHeight = view.frame.height / 2
-        if contentOffsetY >= oneTwiceScreenHeight {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithDefaultBackground()
-            navigationBarAppearance.backgroundColor = UIColor(white: 0, alpha: 0.1)
-            navigationBarAppearance.shadowColor = .clear
-            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-            
-        } else {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithTransparentBackground()
-            navigationBarAppearance.shadowColor = .clear
-            self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        }
-    }
-    
-}
-
-// MARK: - likeCollection function
-extension DetailViewController {
-    func addFavorite() {
-        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
-        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
-        // Call the function to add liked data
-        firebaseManager.addLikeData(likeData: likeData)
-        // Update the flag to indicate that the user has liked the item
-        isLiked = true
-    }
-    
-    // Remove favorite action
-    func removeFavorite() {
-        // Create a LikeData object and set the corresponding exhibitionUid, coffeeShopUid, or bookShopUid
-        let likeData = LikeData(exhibitionUid: detailDesctription?.uid, coffeeShopUid: nil, bookShopUid: nil)
-        // Call the function to remove liked data
-        firebaseManager.removeLikeData(likeData: likeData)
-        // Update the flag to indicate that the user has unliked the item
-        isLiked = false
-    }
-}
-
-// MARK: - FirebaseLikeDelegate
-extension DetailViewController: FirebaseLikeDelegate {
-    func manager(_ manager: FirebaseManager, didGet likeData: [LikeData]) {
-        self.likeData = likeData
-    }
-}
-
-// MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
-extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerDelegate {
-    // check if calendar is exist or not
-    func findAppCalendar() -> EKCalendar? {
-        let calendars = eventStore.calendars(for: .event)
-        for calendar in calendars {
-            if calendar.title == "CulturistCalendar" {
-                return calendar
-            }
-        }
-        return nil
-    }
-    
-    // create a new calendar
-    func createAppCalendar() -> EKCalendar? {
-        let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
-        newCalendar.title = "CulturistCalendar"
-        newCalendar.source = eventStore.defaultCalendarForNewEvents?.source
-        newCalendar.cgColor = UIColor.GR2?.cgColor
-        
-        do {
-            try eventStore.saveCalendar(newCalendar, commit: true)
-            return newCalendar
-        } catch {
-            print("無法創建日曆：\(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    func showEventViewController() {
-        // ---------------------------------------------------
-        // check if calendar is exist or not
-        if let calendar = findAppCalendar() {
-            self.appCalendar = calendar
-        } else {
-            // if check if calendar isn't exist, create one
-            self.appCalendar = createAppCalendar()
-        }
-        // ---------------------------------------------------
-        let eventVC = EKEventEditViewController()
-        eventVC.editViewDelegate = self // don't forget the delegate
-        eventVC.eventStore = EKEventStore()
-        
-        let event = EKEvent(eventStore: eventVC.eventStore)
-        event.calendar = appCalendar
-        event.title = detailDesctription?.title
-        if let startTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time), let endTime = changeDateFormatter(dateString: detailDesctription?.showInfo.first?.time) {
-            // event.startDate = Date()
-            event.startDate = startTime
-            event.endDate = endTime
-        }
-        eventVC.event = event
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithDefaultBackground()
-        eventVC.navigationBar.standardAppearance = navigationBarAppearance
-        present(eventVC, animated: true)
-    }
-    
-    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        dismiss(animated: true, completion: nil)
-        if action == .saved {
-            // Event is saved, show a success message
-            let alert = UIAlertController(title: nil, message: "儲存成功，已加入行事曆", preferredStyle: .alert)
-            present(alert, animated: true, completion: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                alert.dismiss(animated: true, completion: nil)
-            }
-            
-        }
-    }
-}
-
-// MARK: - DetailTableViewCellDelegate
-extension DetailViewController: DetailTableViewCellDelegate {
-    func webBtnTapped(sender: UIButton) {
-        let safariVC = SFSafariViewController(url: NSURL(string: detailDesctription!.sourceWebPromote)! as URL)
-        safariVC.delegate = self
-        self.present(safariVC, animated: true, completion: nil)
-    }
-    
-    func notificationBtnTapped(sender: UIButton) {
-        switch EKEventStore.authorizationStatus(for: .event) {
-        case .notDetermined:
-            let eventStore = EKEventStore()
-            eventStore.requestAccess(to: .event) { (granted, _) in
-                if granted {
-                    DispatchQueue.main.async {
-                        self.showEventViewController()
-                    }
-                }
-            }
-        case .authorized:
-            DispatchQueue.main.async {
-                self.showEventViewController()
-            }
-        default:
-            break
-        }
-        
     }
     
 }
@@ -414,12 +97,5 @@ extension DetailViewController: DetailTableViewCellDelegate {
 extension DetailViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
-    }
-}
-
-// MARK: - SFSafariViewControllerDelegate
-extension DetailViewController: SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
     }
 }

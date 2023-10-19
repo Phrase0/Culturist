@@ -60,6 +60,8 @@
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 		F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */; };
+		F8FAA6052AE15D02001A5329 /* DetailViewController+TableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6042AE15D02001A5329 /* DetailViewController+TableView+Ext.swift */; };
+		F8FAA6072AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */; };
 		F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,8 @@
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 		F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		F8FAA6042AE15D02001A5329 /* DetailViewController+TableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TableView+Ext.swift"; sourceTree = "<group>"; };
+		F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+FirebaseLikeDelegate+Ext.swift"; sourceTree = "<group>"; };
 		F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonNameEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				F851F7492AB41F690029C78E /* DetailViewController.swift */,
+				F8FAA6042AE15D02001A5329 /* DetailViewController+TableView+Ext.swift */,
+				F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */,
 				F851F74B2AB41F860029C78E /* DetailTableViewCell.swift */,
 			);
 			path = Detail;
@@ -541,6 +547,7 @@
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
 				F81E8CE72ACA6E76002AED22 /* KeychainItem.swift in Sources */,
 				F83E4C2B2ABECB82000E2DAC /* AnimationCollectionViewCell.swift in Sources */,
+				F8FAA6072AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift in Sources */,
 				F88EDD432ABC1DBA0061AA18 /* EventKit+Extension.swift in Sources */,
 				F851F7432AB35F9A0029C78E /* BookShopManager.swift in Sources */,
 				F88EDD3A2ABACDCE0061AA18 /* NavigationViewController.swift in Sources */,
@@ -556,6 +563,7 @@
 				F88EDD402ABC1C360061AA18 /* EventsTableViewCell.swift in Sources */,
 				F851F7402AB35F5A0029C78E /* BookShopMapViewController.swift in Sources */,
 				F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */,
+				F8FAA6052AE15D02001A5329 /* DetailViewController+TableView+Ext.swift in Sources */,
 				F82A350D2AB2B916004FF247 /* CoffeeShop.swift in Sources */,
 				F82A35082AB2B8B4004FF247 /* ArtDatum.swift in Sources */,
 				F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */,
