@@ -11,13 +11,11 @@ import Gemini
 class RecommendCollectionViewCell: GeminiCell {
     
     lazy var productBackView: UIView = {
-        let productView = UIView()
-        return productView
+        return UIView()
     }()
     
     lazy var productView: UIView = {
-        let productView = UIView()
-        return productView
+        return UIView()
     }()
     
     lazy var productTitle: UILabel = {

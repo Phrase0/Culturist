@@ -8,10 +8,9 @@
 import UIKit
 
 class LikeCollectionViewCell: UICollectionViewCell {
-    
+
     lazy var productView: UIView = {
-        let productView = UIView()
-        return productView
+        return UIView()
     }()
     
     lazy var productTitle: UILabel = {

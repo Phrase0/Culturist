@@ -11,8 +11,7 @@ import SnapKit
 class SearchCollectionViewCell: UICollectionViewCell {
     
     lazy var productView: UIView = {
-        let productView = UIView()
-        return productView
+        return UIView()
     }()
     
     lazy var productTitle: UILabel = {
