@@ -129,7 +129,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
+
     func configureCell(_ cell: DetailTableViewCell, with detailDescription: ArtDatum) {
         let url = URL(string: detailDescription.imageURL)
         cell.detailImageView.kf.setImage(with: url)

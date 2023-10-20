@@ -56,7 +56,7 @@
 		F8B816B42AB83BA40016F4BB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */; };
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
-		F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */; };
+		F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 		F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */; };
@@ -120,7 +120,7 @@
 		F8B816B32AB83BA40016F4BB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
-		F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationViewControllerViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
+		F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationViewControllerViewController+Delegate+Helpler.swift"; sourceTree = "<group>"; };
 		F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistRelease.entitlements; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				F88EDD392ABACDCE0061AA18 /* NavigationViewController.swift */,
-				F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift */,
+				F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -569,7 +569,7 @@
 				F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */,
 				F8AAC8912ADB9979007C4F20 /* CustomAnnotation.swift in Sources */,
 				F83E4C292ABEC66A000E2DAC /* ProductTableViewCell.swift in Sources */,
-				F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+ARSCNViewDelegate.swift in Sources */,
+				F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift in Sources */,
 				F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */,
 				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F80D8D5E2ABFF600009195B2 /* SearchCollectionViewCell.swift in Sources */,
