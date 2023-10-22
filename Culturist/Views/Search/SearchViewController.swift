@@ -64,9 +64,10 @@ class SearchViewController: UIViewController {
         searchCollectionView.dataSource = self
         settingSearchController()
         navigationItem.title = "搜尋"
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .GR0
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
     }
 
     @objc private func backButtonTapped() {

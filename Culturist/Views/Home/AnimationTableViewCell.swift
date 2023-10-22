@@ -49,7 +49,7 @@ class AnimationTableViewCell: UITableViewCell {
             .scaleEffect(.scaleUp)
             .ease(.easeOutCirc)
     }
-
+    
     func getRandomSixItems() -> [ArtDatum] {
         let shuffledData = self.allData.shuffled()
         if shuffledData.isEmpty {
@@ -127,8 +127,8 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
+    // MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // MARK: - UIScrollViewDelegate
         animationCollectionView.animateVisibleCells()
         // hand gesture
         if scrollView == animationCollectionView {

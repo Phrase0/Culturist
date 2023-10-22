@@ -17,17 +17,11 @@ import NVActivityIndicatorView
 class NavigationViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
-    
     @IBOutlet var contentView: UIView!
-    
     let sceneLocationView = SceneLocationView()
-    
     var userAnnotation: MKPointAnnotation?
     var locationEstimateAnnotation: MKPointAnnotation?
-    
     var updateUserLocationTimer: Timer?
-    var updateInfoLabelTimer: Timer?
-    
     var centerMapOnUserLocation: Bool = true
     var routes: [MKRoute]?
     
@@ -38,78 +32,31 @@ class NavigationViewController: UIViewController {
     // Whether to display some debugging data
     // This currently displays the coordinate of the best location estimate
     // The initial value is respected
-    let displayDebugging = false
+    private let displayDebugging = false
     
     let adjustNorthByTappingSidesOfScreen = true
-    let addNodeByTappingScreen = true
+    // let addNodeByTappingScreen = true
     
     // activity indicator
-    let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
+    private let loading = NVActivityIndicatorView(frame: .zero, type: .ballGridPulse, color: .GR0, padding: 0)
     
     // when arNavigation error, call this
-    var arSession: ARSession?
+    private var arSession: ARSession?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         arSession = ARSession()
         arSession?.delegate = self
-        
-        setAnimation()
+        mapView.delegate = self
         loading.startAnimating()
         
-        mapView.delegate = self
+        setCloseButton()
+        setAnimation()
         setCorner()
-        
-        // swiftlint:disable:next discarded_notification_center_observer
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification,
-                                               object: nil,
-                                               queue: nil) { [weak self] _ in
-            self?.pauseAnimation()
-        }
-        // swiftlint:disable:next discarded_notification_center_observer
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
-                                               object: nil,
-                                               queue: nil) { [weak self] _ in
-            self?.restartAnimation()
-        }
-        
-        updateInfoLabelTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            // self?.updateInfoLabel()
-        }
-        
-        // Set to true to display an arrow which points north.
-        // Checkout the comments in the property description and on the readme on this.
-        //        sceneLocationView.orientToTrueNorth = false
-        //        sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
-        
-        sceneLocationView.showAxesNode = false
-        sceneLocationView.showFeaturePoints = displayDebugging
-        //        sceneLocationView.locationNodeTouchDelegate = self
-        //        sceneLocationView.delegate = self // Causes an assertionFailure - use the `arViewDelegate` instead:
-        sceneLocationView.arViewDelegate = self
-        // sceneLocationView.locationNodeTouchDelegate = self
-        
-        contentView.addSubview(sceneLocationView)
-        sceneLocationView.frame = contentView.bounds
+        setNotificaiton()
+        setSceneLocationView()
         
         routes?.forEach { mapView.addOverlay($0.polyline) }
-        
-        // closeBtn
-        let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
-    }
-    
-    @objc private func backButtonTapped() {
-        self.dismiss(animated: true)
-    }
-    
-    func setAnimation() {
-        view.addSubview(loading)
-        loading.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.width.equalTo(40)
-            make.height.equalTo(40)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,6 +77,61 @@ class NavigationViewController: UIViewController {
         pauseAnimation()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sceneLocationView.frame = contentView.bounds
+    }
+    
+    // MARK: - functions
+    func setCloseButton() {
+        // closeBtn
+        let closeImage = UIImage.asset(.Icons_36px_Close_Black)?.withRenderingMode(.alwaysOriginal)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(backButtonTapped))
+    }
+    
+    @objc private func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
+    func setAnimation() {
+        view.addSubview(loading)
+        loading.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(40)
+        }
+    }
+    
+    func setNotificaiton() {
+        // swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.pauseAnimation()
+        }
+        // swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.restartAnimation()
+        }
+    }
+    
+    func setCorner() {
+        mapView.layer.cornerRadius = 20
+        mapView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        mapView.clipsToBounds = true
+    }
+    
+    func setSceneLocationView() {
+        sceneLocationView.showAxesNode = false
+        sceneLocationView.showFeaturePoints = displayDebugging
+        sceneLocationView.arViewDelegate = self
+        contentView.addSubview(sceneLocationView)
+        sceneLocationView.frame = contentView.bounds
+    }
+    
     func pauseAnimation() {
         print("pause")
         sceneLocationView.pause()
@@ -139,91 +141,16 @@ class NavigationViewController: UIViewController {
         print("run")
         sceneLocationView.run()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        sceneLocationView.frame = contentView.bounds
-    }
-    
-    // let map can scale
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let touch = touches.first,
-              let view = touch.view else { return }
-        
-        if mapView == view || mapView.recursiveSubviews().contains(view) {
-            centerMapOnUserLocation = false
-        } else {
-            let location = touch.location(in: self.view)
-            
-            if location.x <= 40 && adjustNorthByTappingSidesOfScreen {
-                print("left side of the screen")
-                sceneLocationView.moveSceneHeadingAntiClockwise()
-            } else if location.x >= view.frame.size.width - 40 && adjustNorthByTappingSidesOfScreen {
-                print("right side of the screen")
-                sceneLocationView.moveSceneHeadingClockwise()
-            }
-            //            else if addNodeByTappingScreen {
-            //                let image = UIImage(named: "pin")!
-            //                let annotationNode = LocationAnnotationNode(location: nil, image: image)
-            //                annotationNode.scaleRelativeToDistance = false
-            //                annotationNode.scalingScheme = .normal
-            //                DispatchQueue.main.async {
-            //                    // If we're using the touch delegate, adding a new node in the touch handler sometimes causes a freeze.
-            //                    // So defer to next pass.
-            //                    self.sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-            //                }
-            //            }
-        }
-    }
 }
 
-// MARK: - MKMapViewDelegate
 
-@available(iOS 11.0, *)
-extension NavigationViewController: MKMapViewDelegate {
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.lineWidth = 3
-        renderer.strokeColor = UIColor.systemCyan.withAlphaComponent(0.5)
-        
-        return renderer
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !(annotation is MKUserLocation),
-              let pointAnnotation = annotation as? MKPointAnnotation else { return nil }
-        
-        let marker = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: nil)
-        
-        if pointAnnotation == self.userAnnotation {
-            marker.displayPriority = .required
-            marker.glyphImage = UIImage(named: "user")
-        } else {
-            marker.displayPriority = .required
-            marker.markerTintColor = UIColor(hue: 0.267, saturation: 0.67, brightness: 0.77, alpha: 1.0)
-            marker.glyphImage = UIImage(named: "compass")
-        }
-        
-        return marker
-    }
-    
-    func setCorner() {
-        mapView.layer.cornerRadius = 20
-        mapView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        mapView.clipsToBounds = true
-    }
-}
 
 // MARK: - Implementation
-
 @available(iOS 11.0, *)
 extension NavigationViewController {
-    
-    /// Adds the appropriate ARKit models to the scene.  Note: that this won't
-    /// do anything until the scene has a `currentLocation`.  It "polls" on that
-    /// and when a location is finally discovered, the models are added.
+    // Adds the appropriate ARKit models to the scene.  Note: that this won't
+    // do anything until the scene has a `currentLocation`.  It "polls" on that
+    // and when a location is finally discovered, the models are added.
     func addSceneModels() {
         // 1. Don't try to add the models to the scene until we have a current location
         guard sceneLocationView.sceneLocationManager.currentLocation != nil else {
@@ -232,10 +159,8 @@ extension NavigationViewController {
             }
             return
         }
-        
         //        let box = SCNBox(width: 1, height: 0.2, length: 5, chamferRadius: 0.25)
         //        box.firstMaterial?.diffuse.contents = UIColor.gray.withAlphaComponent(0.5)
-        
         // 2. If there is a route, show that
         if let routes = routes {
             sceneLocationView.addRoutes(routes: routes) { [self] distance -> SCNBox in
@@ -300,7 +225,6 @@ extension NavigationViewController {
                 distinationData().forEach {
                     sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: $0)
                 }
-                // ---------------------------------------------------
                 return box
             }
         } else {
@@ -356,9 +280,6 @@ extension NavigationViewController {
         pikesPeakLayer.alignmentMode = .center
         pikesPeakLayer.foregroundColor = UIColor.black.cgColor
         pikesPeakLayer.backgroundColor = UIColor.white.cgColor
-        
-        // This demo uses a simple periodic timer to showcase dynamic text in a node.  In your implementation,
-        // the view's content will probably be changed as the result of a network fetch or some other asynchronous event.
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             pikesPeakLayer.string = "Pike's Peak\n" + Date().description
@@ -421,31 +342,6 @@ extension NavigationViewController {
         }
     }
     
-    //    @objc
-    //    func updateInfoLabel() {
-    //        if let position = sceneLocationView.currentScenePosition {
-    //            infoLabel.text = " x: \(position.x.short), y: \(position.y.short), z: \(position.z.short)\n"
-    //        }
-    //
-    //        if let eulerAngles = sceneLocationView.currentEulerAngles {
-    //            infoLabel.text!.append(" Euler x: \(eulerAngles.x.short), y: \(eulerAngles.y.short), z: \(eulerAngles.z.short)\n")
-    //        }
-    //
-    //        if let eulerAngles = sceneLocationView.currentEulerAngles,
-    //           let heading = sceneLocationView.sceneLocationManager.locationManager.heading,
-    //           let headingAccuracy = sceneLocationView.sceneLocationManager.locationManager.headingAccuracy {
-    //            let yDegrees = (((0 - eulerAngles.y.radiansToDegrees) + 360).truncatingRemainder(dividingBy: 360) ).short
-    //            infoLabel.text!.append(" Heading: \(yDegrees)° • \(Float(heading).short)° • \(headingAccuracy)°\n")
-    //        }
-    //
-    //        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: Date())
-    //        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-    //            let nodeCount = "\(sceneLocationView.sceneNode?.childNodes.count.description ?? "n/a") ARKit Nodes"
-    //            infoLabel.text!.append(" Time: \(hour.short):\(minute.short):\(second.short):\(nanosecond.short3)" )
-    //            // • \(nodeCount)")
-    //        }
-    //    }
-    
     func buildNode(latitude: CLLocationDegrees, longitude: CLLocationDegrees,
                    altitude: CLLocationDistance, imageName: String) -> LocationAnnotationNode {
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -472,33 +368,4 @@ extension NavigationViewController {
         return LocationAnnotationNode(location: location, layer: layer)
     }
     
-}
-
-// MARK: - Helpers
-
-extension DispatchQueue {
-    func asyncAfter(timeInterval: TimeInterval, execute: @escaping () -> Void) {
-        self.asyncAfter(
-            deadline: DispatchTime.now() + Double(Int64(timeInterval * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
-            execute: execute)
-    }
-}
-
-extension UIView {
-    func recursiveSubviews() -> [UIView] {
-        var recursiveSubviews = self.subviews
-        subviews.forEach { recursiveSubviews.append(contentsOf: $0.recursiveSubviews()) }
-        return recursiveSubviews
-    }
-}
-
-@available(iOS 11.0, *)
-extension NavigationViewController: ARSessionDelegate {
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        let alertController = UIAlertController(title: "警告", message: "內存空間不足，請關閉AR導航，重新啟動", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
-            self.dismiss(animated: true)
-        }))
-        present(alertController, animated: true, completion: nil)
-    }
 }
