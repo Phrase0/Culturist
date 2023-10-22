@@ -62,8 +62,52 @@
 		F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */; };
 		F8FAA6052AE15D02001A5329 /* DetailViewController+TableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6042AE15D02001A5329 /* DetailViewController+TableView+Ext.swift */; };
 		F8FAA6072AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */; };
+		F8FAA6202AE5036A001A5329 /* CulturistSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA61F2AE5036A001A5329 /* CulturistSlowTests.swift */; };
+		F8FAA6272AE5063A001A5329 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */; };
+		F8FAA62A2AE50681001A5329 /* URLSessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6292AE50681001A5329 /* URLSessionStub.swift */; };
+		F8FAA6322AE50B06001A5329 /* CulturistTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6312AE50B06001A5329 /* CulturistTimeTests.swift */; };
+		F8FAA64C2AE5119B001A5329 /* CulturistDateFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA64B2AE5119B001A5329 /* CulturistDateFormatTests.swift */; };
+		F8FAA6662AE52839001A5329 /* CulturistRecommendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6652AE52839001A5329 /* CulturistRecommendTests.swift */; };
 		F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F8FAA6212AE5036A001A5329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F82A34E22AB2AC4C004FF247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F82A34E92AB2AC4C004FF247;
+			remoteInfo = Culturist;
+		};
+		F8FAA6332AE50B06001A5329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F82A34E22AB2AC4C004FF247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F82A34E92AB2AC4C004FF247;
+			remoteInfo = Culturist;
+		};
+		F8FAA64D2AE5119B001A5329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F82A34E22AB2AC4C004FF247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F82A34E92AB2AC4C004FF247;
+			remoteInfo = Culturist;
+		};
+		F8FAA65A2AE52245001A5329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F82A34E22AB2AC4C004FF247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F82A34E92AB2AC4C004FF247;
+			remoteInfo = Culturist;
+		};
+		F8FAA6672AE52839001A5329 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F82A34E22AB2AC4C004FF247 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F82A34E92AB2AC4C004FF247;
+			remoteInfo = Culturist;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		02FE216777EF229DA999A7FE /* Pods-Culturist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Culturist.debug.xcconfig"; path = "Target Support Files/Pods-Culturist/Pods-Culturist.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +171,17 @@
 		F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		F8FAA6042AE15D02001A5329 /* DetailViewController+TableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TableView+Ext.swift"; sourceTree = "<group>"; };
 		F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+FirebaseLikeDelegate+Ext.swift"; sourceTree = "<group>"; };
+		F8FAA61D2AE5036A001A5329 /* CulturistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FAA61F2AE5036A001A5329 /* CulturistSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistSlowTests.swift; sourceTree = "<group>"; };
+		F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		F8FAA6292AE50681001A5329 /* URLSessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionStub.swift; sourceTree = "<group>"; };
+		F8FAA62F2AE50B06001A5329 /* CulturistTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FAA6312AE50B06001A5329 /* CulturistTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTimeTests.swift; sourceTree = "<group>"; };
+		F8FAA6492AE5119A001A5329 /* CulturistAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FAA64B2AE5119B001A5329 /* CulturistDateFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistDateFormatTests.swift; sourceTree = "<group>"; };
+		F8FAA6562AE52245001A5329 /* CulturistArtProductManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistArtProductManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FAA6632AE52839001A5329 /* CulturistRecommendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistRecommendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FAA6652AE52839001A5329 /* CulturistRecommendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistRecommendTests.swift; sourceTree = "<group>"; };
 		F8FED9B92AC47D8B00273B23 /* JsonNameEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonNameEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +191,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F386B239B8E910EA7212345 /* Pods_Culturist.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA61A2AE5036A001A5329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA62C2AE50B06001A5329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6462AE5119A001A5329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6532AE52245001A5329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6602AE52839001A5329 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +282,11 @@
 				F85E30372ACE4A4100622014 /* culturist_lcon_small.png */,
 				F82A35122AB2DDC5004FF247 /* .swiftlint.yml */,
 				F82A34EC2AB2AC4C004FF247 /* Culturist */,
+				F8FAA6282AE5064F001A5329 /* Supporting Files */,
+				F8FAA61E2AE5036A001A5329 /* CulturistSlowTests */,
+				F8FAA6302AE50B06001A5329 /* CulturistTimeTests */,
+				F8FAA64A2AE5119B001A5329 /* CulturistDateFormatTests */,
+				F8FAA6642AE52839001A5329 /* CulturistRecommendTests */,
 				F82A34EB2AB2AC4C004FF247 /* Products */,
 				9A1E41190C6E6F7290373612 /* Pods */,
 				B75ED660726A6ABC1A2A37FC /* Frameworks */,
@@ -202,6 +297,11 @@
 			isa = PBXGroup;
 			children = (
 				F82A34EA2AB2AC4C004FF247 /* Culturist.app */,
+				F8FAA61D2AE5036A001A5329 /* CulturistTests.xctest */,
+				F8FAA62F2AE50B06001A5329 /* CulturistTimeTests.xctest */,
+				F8FAA6492AE5119A001A5329 /* CulturistAPITests.xctest */,
+				F8FAA6562AE52245001A5329 /* CulturistArtProductManagerTests.xctest */,
+				F8FAA6632AE52839001A5329 /* CulturistRecommendTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -370,6 +470,47 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		F8FAA61E2AE5036A001A5329 /* CulturistSlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAA61F2AE5036A001A5329 /* CulturistSlowTests.swift */,
+			);
+			path = CulturistSlowTests;
+			sourceTree = "<group>";
+		};
+		F8FAA6282AE5064F001A5329 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */,
+				F8FAA6292AE50681001A5329 /* URLSessionStub.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F8FAA6302AE50B06001A5329 /* CulturistTimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAA6312AE50B06001A5329 /* CulturistTimeTests.swift */,
+			);
+			path = CulturistTimeTests;
+			sourceTree = "<group>";
+		};
+		F8FAA64A2AE5119B001A5329 /* CulturistDateFormatTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAA64B2AE5119B001A5329 /* CulturistDateFormatTests.swift */,
+			);
+			path = CulturistDateFormatTests;
+			sourceTree = "<group>";
+		};
+		F8FAA6642AE52839001A5329 /* CulturistRecommendTests */ = {
+			isa = PBXGroup;
+			children = (
+				F8FAA6652AE52839001A5329 /* CulturistRecommendTests.swift */,
+			);
+			path = CulturistRecommendTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +535,96 @@
 			productReference = F82A34EA2AB2AC4C004FF247 /* Culturist.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F8FAA61C2AE5036A001A5329 /* CulturistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8FAA6252AE5036A001A5329 /* Build configuration list for PBXNativeTarget "CulturistTests" */;
+			buildPhases = (
+				F8FAA6192AE5036A001A5329 /* Sources */,
+				F8FAA61A2AE5036A001A5329 /* Frameworks */,
+				F8FAA61B2AE5036A001A5329 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8FAA6222AE5036A001A5329 /* PBXTargetDependency */,
+			);
+			name = CulturistTests;
+			productName = CulturistTests;
+			productReference = F8FAA61D2AE5036A001A5329 /* CulturistTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F8FAA62E2AE50B06001A5329 /* CulturistTimeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8FAA6352AE50B07001A5329 /* Build configuration list for PBXNativeTarget "CulturistTimeTests" */;
+			buildPhases = (
+				F8FAA62B2AE50B06001A5329 /* Sources */,
+				F8FAA62C2AE50B06001A5329 /* Frameworks */,
+				F8FAA62D2AE50B06001A5329 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8FAA6342AE50B06001A5329 /* PBXTargetDependency */,
+			);
+			name = CulturistTimeTests;
+			productName = CulturistTimeTests;
+			productReference = F8FAA62F2AE50B06001A5329 /* CulturistTimeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F8FAA6482AE5119A001A5329 /* CulturistAPITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8FAA64F2AE5119B001A5329 /* Build configuration list for PBXNativeTarget "CulturistAPITests" */;
+			buildPhases = (
+				F8FAA6452AE5119A001A5329 /* Sources */,
+				F8FAA6462AE5119A001A5329 /* Frameworks */,
+				F8FAA6472AE5119A001A5329 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8FAA64E2AE5119B001A5329 /* PBXTargetDependency */,
+			);
+			name = CulturistAPITests;
+			productName = CulturistAPITests;
+			productReference = F8FAA6492AE5119A001A5329 /* CulturistAPITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F8FAA6552AE52245001A5329 /* CulturistArtProductManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8FAA65C2AE52245001A5329 /* Build configuration list for PBXNativeTarget "CulturistArtProductManagerTests" */;
+			buildPhases = (
+				F8FAA6522AE52245001A5329 /* Sources */,
+				F8FAA6532AE52245001A5329 /* Frameworks */,
+				F8FAA6542AE52245001A5329 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8FAA65B2AE52245001A5329 /* PBXTargetDependency */,
+			);
+			name = CulturistArtProductManagerTests;
+			productName = CulturistArtProductManagerTests;
+			productReference = F8FAA6562AE52245001A5329 /* CulturistArtProductManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F8FAA6622AE52839001A5329 /* CulturistRecommendTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8FAA66B2AE52839001A5329 /* Build configuration list for PBXNativeTarget "CulturistRecommendTests" */;
+			buildPhases = (
+				F8FAA65F2AE52839001A5329 /* Sources */,
+				F8FAA6602AE52839001A5329 /* Frameworks */,
+				F8FAA6612AE52839001A5329 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F8FAA6682AE52839001A5329 /* PBXTargetDependency */,
+			);
+			name = CulturistRecommendTests;
+			productName = CulturistRecommendTests;
+			productReference = F8FAA6632AE52839001A5329 /* CulturistRecommendTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -406,6 +637,26 @@
 				TargetAttributes = {
 					F82A34E92AB2AC4C004FF247 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					F8FAA61C2AE5036A001A5329 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = F82A34E92AB2AC4C004FF247;
+					};
+					F8FAA62E2AE50B06001A5329 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = F82A34E92AB2AC4C004FF247;
+					};
+					F8FAA6482AE5119A001A5329 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = F82A34E92AB2AC4C004FF247;
+					};
+					F8FAA6552AE52245001A5329 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = F82A34E92AB2AC4C004FF247;
+					};
+					F8FAA6622AE52839001A5329 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = F82A34E92AB2AC4C004FF247;
 					};
 				};
 			};
@@ -423,6 +674,11 @@
 			projectRoot = "";
 			targets = (
 				F82A34E92AB2AC4C004FF247 /* Culturist */,
+				F8FAA61C2AE5036A001A5329 /* CulturistTests */,
+				F8FAA62E2AE50B06001A5329 /* CulturistTimeTests */,
+				F8FAA6482AE5119A001A5329 /* CulturistAPITests */,
+				F8FAA6552AE52245001A5329 /* CulturistArtProductManagerTests */,
+				F8FAA6622AE52839001A5329 /* CulturistRecommendTests */,
 			);
 		};
 /* End PBXProject section */
@@ -438,6 +694,41 @@
 				F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
 				F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA61B2AE5036A001A5329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA62D2AE50B06001A5329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6472AE5119A001A5329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6542AE52245001A5329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6612AE52839001A5329 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +870,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F8FAA6192AE5036A001A5329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8FAA6202AE5036A001A5329 /* CulturistSlowTests.swift in Sources */,
+				F8FAA6272AE5063A001A5329 /* NetworkMonitor.swift in Sources */,
+				F8FAA62A2AE50681001A5329 /* URLSessionStub.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA62B2AE50B06001A5329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8FAA6322AE50B06001A5329 /* CulturistTimeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6452AE5119A001A5329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8FAA64C2AE5119B001A5329 /* CulturistDateFormatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA6522AE52245001A5329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8FAA65F2AE52839001A5329 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8FAA6662AE52839001A5329 /* CulturistRecommendTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F8FAA6222AE5036A001A5329 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F82A34E92AB2AC4C004FF247 /* Culturist */;
+			targetProxy = F8FAA6212AE5036A001A5329 /* PBXContainerItemProxy */;
+		};
+		F8FAA6342AE50B06001A5329 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F82A34E92AB2AC4C004FF247 /* Culturist */;
+			targetProxy = F8FAA6332AE50B06001A5329 /* PBXContainerItemProxy */;
+		};
+		F8FAA64E2AE5119B001A5329 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F82A34E92AB2AC4C004FF247 /* Culturist */;
+			targetProxy = F8FAA64D2AE5119B001A5329 /* PBXContainerItemProxy */;
+		};
+		F8FAA65B2AE52245001A5329 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F82A34E92AB2AC4C004FF247 /* Culturist */;
+			targetProxy = F8FAA65A2AE52245001A5329 /* PBXContainerItemProxy */;
+		};
+		F8FAA6682AE52839001A5329 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F82A34E92AB2AC4C004FF247 /* Culturist */;
+			targetProxy = F8FAA6672AE52839001A5329 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F82A34F32AB2AC4C004FF247 /* Main.storyboard */ = {
@@ -802,6 +1162,226 @@
 			};
 			name = Release;
 		};
+		F8FAA6232AE5036A001A5329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Debug;
+		};
+		F8FAA6242AE5036A001A5329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Release;
+		};
+		F8FAA6362AE50B07001A5329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistTimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Debug;
+		};
+		F8FAA6372AE50B07001A5329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistTimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Release;
+		};
+		F8FAA6502AE5119B001A5329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistAPITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Debug;
+		};
+		F8FAA6512AE5119B001A5329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistAPITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Release;
+		};
+		F8FAA65D2AE52245001A5329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistArtProductManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Debug;
+		};
+		F8FAA65E2AE52245001A5329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistArtProductManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Release;
+		};
+		F8FAA6692AE52839001A5329 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistRecommendTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Debug;
+		};
+		F8FAA66A2AE52839001A5329 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VLTRC7L6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = peiyun.CulturistRecommendTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culturist.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Culturist";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -819,6 +1399,51 @@
 			buildConfigurations = (
 				F82A34FF2AB2AC4D004FF247 /* Debug */,
 				F82A35002AB2AC4D004FF247 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8FAA6252AE5036A001A5329 /* Build configuration list for PBXNativeTarget "CulturistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8FAA6232AE5036A001A5329 /* Debug */,
+				F8FAA6242AE5036A001A5329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8FAA6352AE50B07001A5329 /* Build configuration list for PBXNativeTarget "CulturistTimeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8FAA6362AE50B07001A5329 /* Debug */,
+				F8FAA6372AE50B07001A5329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8FAA64F2AE5119B001A5329 /* Build configuration list for PBXNativeTarget "CulturistAPITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8FAA6502AE5119B001A5329 /* Debug */,
+				F8FAA6512AE5119B001A5329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8FAA65C2AE52245001A5329 /* Build configuration list for PBXNativeTarget "CulturistArtProductManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8FAA65D2AE52245001A5329 /* Debug */,
+				F8FAA65E2AE52245001A5329 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8FAA66B2AE52839001A5329 /* Build configuration list for PBXNativeTarget "CulturistRecommendTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8FAA6692AE52839001A5329 /* Debug */,
+				F8FAA66A2AE52839001A5329 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

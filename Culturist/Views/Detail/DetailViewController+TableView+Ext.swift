@@ -228,6 +228,8 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         for calendar in calendars {
             if calendar.title == "CulturistCalendar" {
                 return calendar
+            } else {
+                return nil
             }
         }
         return nil
@@ -278,7 +280,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         eventVC.navigationBar.standardAppearance = navigationBarAppearance
         present(eventVC, animated: true)
     }
-    
+
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         dismiss(animated: true, completion: nil)
         if action == .saved {
