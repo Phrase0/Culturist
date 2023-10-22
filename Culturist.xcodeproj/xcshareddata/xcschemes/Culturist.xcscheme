@@ -84,6 +84,17 @@
                ReferencedContainer = "container:Culturist.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8A36D272AE5492500DEDAA6"
+               BuildableName = "CulturistSearchTests.xctest"
+               BlueprintName = "CulturistSearchTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

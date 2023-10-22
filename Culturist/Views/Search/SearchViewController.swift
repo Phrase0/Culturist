@@ -271,7 +271,6 @@ extension SearchViewController: UISearchResultsUpdating {
             
             return title.contains(searchText.lowercased()) || locationName.contains(searchText.lowercased()) || location.contains(searchText.lowercased())
         }
-        
     }
     
 }
