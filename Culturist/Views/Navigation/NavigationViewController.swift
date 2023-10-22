@@ -53,8 +53,20 @@ class NavigationViewController: UIViewController {
         setCloseButton()
         setAnimation()
         setCorner()
-        setNotificaiton()
         setSceneLocationView()
+        
+        // swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.pauseAnimation()
+        }
+        // swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.restartAnimation()
+        }
         
         routes?.forEach { mapView.addOverlay($0.polyline) }
     }
@@ -102,22 +114,7 @@ class NavigationViewController: UIViewController {
             make.height.equalTo(40)
         }
     }
-    
-    func setNotificaiton() {
-        // swiftlint:disable:next discarded_notification_center_observer
-        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification,
-                                               object: nil,
-                                               queue: nil) { [weak self] _ in
-            self?.pauseAnimation()
-        }
-        // swiftlint:disable:next discarded_notification_center_observer
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
-                                               object: nil,
-                                               queue: nil) { [weak self] _ in
-            self?.restartAnimation()
-        }
-    }
-    
+
     func setCorner() {
         mapView.layer.cornerRadius = 20
         mapView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -142,8 +139,6 @@ class NavigationViewController: UIViewController {
         sceneLocationView.run()
     }
 }
-
-
 
 // MARK: - Implementation
 @available(iOS 11.0, *)
