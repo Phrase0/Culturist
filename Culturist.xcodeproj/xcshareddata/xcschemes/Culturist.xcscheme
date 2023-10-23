@@ -35,8 +35,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F8FAA61C2AE5036A001A5329"
-               BuildableName = "CulturistTests.xctest"
-               BlueprintName = "CulturistTests"
+               BuildableName = "CulturistSlowTests.xctest"
+               BlueprintName = "CulturistSlowTests"
                ReferencedContainer = "container:Culturist.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -57,8 +57,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F8FAA6482AE5119A001A5329"
-               BuildableName = "CulturistAPITests.xctest"
-               BlueprintName = "CulturistAPITests"
+               BuildableName = "CulturistDateFormatTests.xctest"
+               BlueprintName = "CulturistDateFormatTests"
                ReferencedContainer = "container:Culturist.xcodeproj">
             </BuildableReference>
          </TestableReference>
