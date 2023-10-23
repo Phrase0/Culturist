@@ -15,7 +15,7 @@ class AnimationTableViewCell: UITableViewCell {
     var timer: Timer?
     // Used to keep track of the currently displayed banner
     var imageIndex = 0
-    
+    var randomSixItems: [ArtDatum] = []
     var allData: [ArtDatum] = [] {
         didSet {
             randomSixItems = getRandomSixItems()
@@ -23,7 +23,7 @@ class AnimationTableViewCell: UITableViewCell {
         }
     }
     
-    var randomSixItems: [ArtDatum] = []
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

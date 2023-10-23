@@ -410,7 +410,6 @@ class FirebaseManager {
                     let likeData = LikeData(exhibitionUid: exhibitionUid, coffeeShopUid: coffeeShopUid, bookShopUid: bookShopUid)
                     userLikes.append(likeData)
                 }
-                
                 self.likeDelegate?.manager(self, didGet: userLikes)
                 completion(userLikes)
                 

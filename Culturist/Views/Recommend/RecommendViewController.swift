@@ -68,7 +68,7 @@ class RecommendViewController: UIViewController {
             return result
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,10 +88,10 @@ class RecommendViewController: UIViewController {
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
-//            concertDataManager.concertDelegate = self
-//            exhibitionDataManager.exhibitionDelegate = self
-//            concertDataManager.fetchConcertData()
-//            exhibitionDataManager.fetchExhibitionData()
+            concertDataManager.concertDelegate = self
+            exhibitionDataManager.exhibitionDelegate = self
+            concertDataManager.fetchConcertData()
+            exhibitionDataManager.fetchExhibitionData()
             print("loadAPIFromFirebase")
         }
         // use firebase to get recommend data

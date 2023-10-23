@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        setNavigationTitle()
         setAnimation()
         loading.startAnimating()
         
@@ -50,30 +51,12 @@ class HomeViewController: UIViewController {
         } else {
             // MARK: - FireBaseData
             // use firebase to get data
-//            concertDataManager.concertDelegate = self
-//            exhibitionDataManager.exhibitionDelegate = self
-//            concertDataManager.fetchConcertData()
-//            exhibitionDataManager.fetchExhibitionData()
+            concertDataManager.concertDelegate = self
+            exhibitionDataManager.exhibitionDelegate = self
+            concertDataManager.fetchConcertData()
+            exhibitionDataManager.fetchExhibitionData()
             print("loadAPIFromFirebase")
         }
-        
-        // MARK: - navigationTitle
-        // Create an empty UIBarButtonItem as the left item
-        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        leftSpacer.width = 44 // Adjust the width to add left space
-        // Add the left item to the navigation bar
-        navigationItem.leftBarButtonItems = [leftSpacer]
-        
-        // Create an image view as the title view
-        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green_navTitle"))
-        imageView.contentMode = .scaleAspectFit
-        // Set the image view as the title view
-        navigationItem.titleView = imageView
-        
-        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton?.tintColor = .GR0
-        searchButton?.isEnabled = false
-        navigationItem.rightBarButtonItem = searchButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +98,26 @@ class HomeViewController: UIViewController {
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
+    }
+
+    func setNavigationTitle() {
+        // MARK: - navigationTitle
+        // Create an empty UIBarButtonItem as the left item
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 44 // Adjust the width to add left space
+        // Add the left item to the navigation bar
+        navigationItem.leftBarButtonItems = [leftSpacer]
+        
+        // Create an image view as the title view
+        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green_navTitle"))
+        imageView.contentMode = .scaleAspectFit
+        // Set the image view as the title view
+        navigationItem.titleView = imageView
+        
+        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton?.tintColor = .GR0
+        searchButton?.isEnabled = false
+        navigationItem.rightBarButtonItem = searchButton
     }
     
     @objc func searchButtonTapped() {
@@ -261,7 +264,7 @@ extension HomeViewController: ArtManagerDelegate {
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        // print(error.localizedDescription)
+         print(error.localizedDescription)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.loading.stopAnimating()
