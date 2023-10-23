@@ -90,10 +90,10 @@ class LikeViewController: UIViewController {
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
-            print("loadAPIFromFirebase")
             self.group.notify(queue: .main) {
                 self.dataLoaded()
             }
+            print("loadAPIFromFirebase")
         }
     }
     
@@ -120,7 +120,7 @@ class LikeViewController: UIViewController {
         }
     }
 
-    // MARK: - Function    
+    // MARK: - Function
     // load api data
     func dataLoaded() {
         DispatchQueue.main.async { [weak self] in
