@@ -40,21 +40,29 @@ class HomeViewController: UIViewController {
         loading.startAnimating()
         
         if HomeViewController.loadAPIFromWeb == true {
-            // use api to get data
             artManager1.delegate = self
             artManager6.delegate = self
             group.enter()
-            artManager1.getArtProductList(number: "1")
             group.enter()
-            artManager6.getArtProductList(number: "6")
+            // Load data asynchronously
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                self?.artManager1.getArtProductList(number: "1")
+                self?.artManager6.getArtProductList(number: "6")
+                // Notify on the main queue when both calls are complete
+                self?.group.notify(queue: .main) {
+                    self?.dataLoaded()
+                }
+            }
             print("loadAPIFromWeb")
         } else {
-            // MARK: - FireBaseData
             // use firebase to get data
             concertDataManager.concertDelegate = self
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
+            self.group.notify(queue: .main) { [weak self] in
+                self?.dataLoaded()
+            }
             print("loadAPIFromFirebase")
         }
     }
@@ -66,27 +74,41 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
                 if HomeViewController.loadAPIFromWeb == true {
-                    self.group.enter()
-                    self.artManager1.getArtProductList(number: "1")
-                    self.group.enter()
-                    self.artManager6.getArtProductList(number: "6")
+                    group.enter()
+                    group.enter()
+                    // Load data asynchronously
+                    DispatchQueue.global(qos: .background).async { [weak self] in
+                        self?.artManager1.getArtProductList(number: "1")
+                        self?.artManager6.getArtProductList(number: "6")
+                        // Notify on the main queue when both calls are complete
+                        self?.group.notify(queue: .main) {
+                            self?.dataLoaded()
+                        }
+                    }
                     print("loadAPIFromWeb")
                 } else {
-//                    self.concertDataManager.fetchConcertData()
-//                    self.exhibitionDataManager.fetchExhibitionData()
+                    // use firebase to get data
+                    concertDataManager.fetchConcertData()
+                    exhibitionDataManager.fetchExhibitionData()
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.dataLoaded()
+                    }
                     print("loadAPIFromFirebase")
                 }
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
-        
-        group.notify(queue: .main) {
-            DispatchQueue.main.async {
-                self.homeTableView.reloadData()
-                self.loading.stopAnimating()
-                self.isButtonEnabled = true
-                self.searchButton?.isEnabled = true
-            }
+    }
+    
+    // MARK: - Function
+    // load api data
+    func dataLoaded() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+            self.homeTableView.reloadData()
+            self.isButtonEnabled = true
+            self.searchButton?.isEnabled = true
         }
     }
     

@@ -99,8 +99,8 @@ class RecommendViewController: UIViewController {
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
-            self.group.notify(queue: .main) {
-                self.dataLoaded()
+            self.group.notify(queue: .main) { [weak self] in
+                self?.dataLoaded()
             }
             print("loadAPIFromFirebase")
         }
@@ -144,8 +144,8 @@ class RecommendViewController: UIViewController {
                     // use firebase to get data
                     concertDataManager.fetchConcertData()
                     exhibitionDataManager.fetchExhibitionData()
-                    self.group.notify(queue: .main) {
-                        self.dataLoaded()
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.dataLoaded()
                     }
                     print("loadAPIFromFirebase")
                 }
