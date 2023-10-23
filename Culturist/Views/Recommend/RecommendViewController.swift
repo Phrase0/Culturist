@@ -208,7 +208,12 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
         if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(
+                exhibitionUid: recommendProducts[indexPath.item].uid,
+                title: recommendProducts[indexPath.item].title,
+                category: recommendProducts[indexPath.item].category,
+                location: recommendProducts[indexPath.item].showInfo[0].location,
+                locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }

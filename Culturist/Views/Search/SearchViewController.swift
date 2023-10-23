@@ -69,7 +69,7 @@ class SearchViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .GR0
         
     }
-
+    
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -90,7 +90,7 @@ class SearchViewController: UIViewController {
     @IBAction func paintBtnTapped(_ sender: UIButton) {
         settingBtnTapped(text: "畫展", sender: sender)
     }
-
+    
     func settingBtnTapped(text: String, sender: UIButton) {
         setUpBtn()
         // open keyboard
@@ -179,7 +179,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = searchResult[indexPath.item]
         if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.addRecommendData(exhibitionUid: searchResult[indexPath.item].uid, title: searchResult[indexPath.item].title, category: searchResult[indexPath.item].category, location: searchResult[indexPath.item].showInfo[0].location, locationName: searchResult[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(
+                exhibitionUid: searchResult[indexPath.item].uid,
+                title: searchResult[indexPath.item].title,
+                category: searchResult[indexPath.item].category,
+                location: searchResult[indexPath.item].showInfo[0].location,
+                locationName: searchResult[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -260,7 +265,7 @@ extension SearchViewController: UISearchResultsUpdating {
             setUpBtn()
         }
     }
-
+    
     func filterContent(for searchText: String) {
         // copy allProducts to searchResult
         searchResult = allProducts
@@ -280,7 +285,7 @@ extension SearchViewController: UISearchBarDelegate {
         noDataNoteLabel.isHidden = true
         return true
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         noDataNoteLabel.isHidden = false
         noDataNoteLabel.text = "請搜尋音樂會或展覽"

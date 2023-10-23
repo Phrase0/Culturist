@@ -61,7 +61,12 @@ extension CheckMoreViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = result[indexPath.item]
         if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.addRecommendData(exhibitionUid: result[indexPath.item].uid, title: result[indexPath.item].title, category: result[indexPath.item].category, location: result[indexPath.item].showInfo[0].location, locationName: result[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(
+                exhibitionUid: result[indexPath.item].uid,
+                title: result[indexPath.item].title,
+                category: result[indexPath.item].category,
+                location: result[indexPath.item].showInfo[0].location,
+                locationName: result[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }

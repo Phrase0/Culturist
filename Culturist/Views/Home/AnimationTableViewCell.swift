@@ -22,9 +22,7 @@ class AnimationTableViewCell: UITableViewCell {
             animationCollectionView.reloadData()
         }
     }
-    
-    
-    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         animationCollectionView.dataSource = self

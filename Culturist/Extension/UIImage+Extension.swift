@@ -31,6 +31,8 @@ enum ImageAsset: String {
     // close and back
     case Icons_36px_Close_Black
     case Icons_36px_Back_Black
+    
+    case culturist_logo_green_navTitle
 }
 
 extension UIImage {

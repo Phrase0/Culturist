@@ -168,7 +168,12 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController  else { return }
         detailVC.detailDesctription = likeEXProducts[indexPath.row]
         if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.addRecommendData(exhibitionUid: likeEXProducts[indexPath.item].uid, title: likeEXProducts[indexPath.item].title, category: likeEXProducts[indexPath.item].category, location: likeEXProducts[indexPath.item].showInfo[0].location, locationName: likeEXProducts[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(
+                exhibitionUid: likeEXProducts[indexPath.item].uid,
+                title: likeEXProducts[indexPath.item].title,
+                category: likeEXProducts[indexPath.item].category,
+                location: likeEXProducts[indexPath.item].showInfo[0].location,
+                locationName: likeEXProducts[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }

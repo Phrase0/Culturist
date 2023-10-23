@@ -65,7 +65,6 @@
 		F8FAA6072AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6062AE18BAE001A5329 /* DetailViewController+FirebaseLikeDelegate+Ext.swift */; };
 		F8FAA6202AE5036A001A5329 /* CulturistSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA61F2AE5036A001A5329 /* CulturistSlowTests.swift */; };
 		F8FAA6272AE5063A001A5329 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */; };
-		F8FAA62A2AE50681001A5329 /* URLSessionStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6292AE50681001A5329 /* URLSessionStub.swift */; };
 		F8FAA6322AE50B06001A5329 /* CulturistTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6312AE50B06001A5329 /* CulturistTimeTests.swift */; };
 		F8FAA64C2AE5119B001A5329 /* CulturistDateFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA64B2AE5119B001A5329 /* CulturistDateFormatTests.swift */; };
 		F8FAA6662AE52839001A5329 /* CulturistRecommendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6652AE52839001A5329 /* CulturistRecommendTests.swift */; };
@@ -177,7 +176,6 @@
 		F8FAA61D2AE5036A001A5329 /* CulturistSlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistSlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAA61F2AE5036A001A5329 /* CulturistSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistSlowTests.swift; sourceTree = "<group>"; };
 		F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
-		F8FAA6292AE50681001A5329 /* URLSessionStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionStub.swift; sourceTree = "<group>"; };
 		F8FAA62F2AE50B06001A5329 /* CulturistTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8FAA6312AE50B06001A5329 /* CulturistTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTimeTests.swift; sourceTree = "<group>"; };
 		F8FAA6492AE5119A001A5329 /* CulturistDateFormatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulturistDateFormatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -493,7 +491,6 @@
 			isa = PBXGroup;
 			children = (
 				F8FAA6262AE5063A001A5329 /* NetworkMonitor.swift */,
-				F8FAA6292AE50681001A5329 /* URLSessionStub.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -895,7 +892,6 @@
 			files = (
 				F8FAA6202AE5036A001A5329 /* CulturistSlowTests.swift in Sources */,
 				F8FAA6272AE5063A001A5329 /* NetworkMonitor.swift in Sources */,
-				F8FAA62A2AE50681001A5329 /* URLSessionStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
