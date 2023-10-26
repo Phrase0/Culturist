@@ -35,45 +35,36 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        setNavigationTitle()
         setAnimation()
         loading.startAnimating()
         
         if HomeViewController.loadAPIFromWeb == true {
-            // use api to get data
             artManager1.delegate = self
             artManager6.delegate = self
             group.enter()
-            artManager1.getArtProductList(number: "1")
             group.enter()
-            artManager6.getArtProductList(number: "6")
+            // Load data asynchronously
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                self?.artManager1.getArtProductList(number: "1")
+                self?.artManager6.getArtProductList(number: "6")
+                // Notify on the main queue when both calls are complete
+                self?.group.notify(queue: .main) {
+                    self?.dataLoaded()
+                }
+            }
             print("loadAPIFromWeb")
         } else {
-            // MARK: - FireBaseData
             // use firebase to get data
-//            concertDataManager.concertDelegate = self
-//            exhibitionDataManager.exhibitionDelegate = self
-//            concertDataManager.fetchConcertData()
-//            exhibitionDataManager.fetchExhibitionData()
+            concertDataManager.concertDelegate = self
+            exhibitionDataManager.exhibitionDelegate = self
+            concertDataManager.fetchConcertData()
+            exhibitionDataManager.fetchExhibitionData()
+            self.group.notify(queue: .main) { [weak self] in
+                self?.dataLoaded()
+            }
             print("loadAPIFromFirebase")
         }
-        
-        // MARK: - navigationTitle
-        // Create an empty UIBarButtonItem as the left item
-        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        leftSpacer.width = 44 // Adjust the width to add left space
-        // Add the left item to the navigation bar
-        navigationItem.leftBarButtonItems = [leftSpacer]
-        
-        // Create an image view as the title view
-        let imageView = UIImageView(image: UIImage(named: "culturist_logo_green_navTitle"))
-        imageView.contentMode = .scaleAspectFit
-        // Set the image view as the title view
-        navigationItem.titleView = imageView
-        
-        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
-        searchButton?.tintColor = .GR0
-        searchButton?.isEnabled = false
-        navigationItem.rightBarButtonItem = searchButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,27 +74,41 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
                 if HomeViewController.loadAPIFromWeb == true {
-                    self.group.enter()
-                    self.artManager1.getArtProductList(number: "1")
-                    self.group.enter()
-                    self.artManager6.getArtProductList(number: "6")
+                    group.enter()
+                    group.enter()
+                    // Load data asynchronously
+                    DispatchQueue.global(qos: .background).async { [weak self] in
+                        self?.artManager1.getArtProductList(number: "1")
+                        self?.artManager6.getArtProductList(number: "6")
+                        // Notify on the main queue when both calls are complete
+                        self?.group.notify(queue: .main) {
+                            self?.dataLoaded()
+                        }
+                    }
                     print("loadAPIFromWeb")
                 } else {
-//                    self.concertDataManager.fetchConcertData()
-//                    self.exhibitionDataManager.fetchExhibitionData()
+                    // use firebase to get data
+                    concertDataManager.fetchConcertData()
+                    exhibitionDataManager.fetchExhibitionData()
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.dataLoaded()
+                    }
                     print("loadAPIFromFirebase")
                 }
                 self.homeTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.homeTableView)
-        
-        group.notify(queue: .main) {
-            DispatchQueue.main.async {
-                self.homeTableView.reloadData()
-                self.loading.stopAnimating()
-                self.isButtonEnabled = true
-                self.searchButton?.isEnabled = true
-            }
+    }
+    
+    // MARK: - Function
+    // load api data
+    func dataLoaded() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+            self.homeTableView.reloadData()
+            self.isButtonEnabled = true
+            self.searchButton?.isEnabled = true
         }
     }
     
@@ -115,6 +120,26 @@ class HomeViewController: UIViewController {
             make.width.equalTo(40)
             make.height.equalTo(40)
         }
+    }
+
+    func setNavigationTitle() {
+        // MARK: - navigationTitle
+        // Create an empty UIBarButtonItem as the left item
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 44 // Adjust the width to add left space
+        // Add the left item to the navigation bar
+        navigationItem.leftBarButtonItems = [leftSpacer]
+        
+        // Create an image view as the title view
+        let imageView = UIImageView(image: UIImage.asset(.culturist_logo_green_navTitle))
+        imageView.contentMode = .scaleAspectFit
+        // Set the image view as the title view
+        navigationItem.titleView = imageView
+        
+        searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton?.tintColor = .GR0
+        searchButton?.isEnabled = false
+        navigationItem.rightBarButtonItem = searchButton
     }
     
     @objc func searchButtonTapped() {
@@ -261,7 +286,7 @@ extension HomeViewController: ArtManagerDelegate {
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-        // print(error.localizedDescription)
+         print(error.localizedDescription)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.loading.stopAnimating()

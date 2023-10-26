@@ -82,18 +82,29 @@ class RecommendViewController: UIViewController {
             artManager1.delegate = self
             artManager6.delegate = self
             group.enter()
-            artManager1.getArtProductList(number: "1")
             group.enter()
-            artManager6.getArtProductList(number: "6")
+            // Load data asynchronously
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                self?.artManager1.getArtProductList(number: "1")
+                self?.artManager6.getArtProductList(number: "6")
+                // Notify on the main queue when both calls are complete
+                self?.group.notify(queue: .main) {
+                    self?.dataLoaded()
+                }
+            }
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
-//            concertDataManager.concertDelegate = self
-//            exhibitionDataManager.exhibitionDelegate = self
-//            concertDataManager.fetchConcertData()
-//            exhibitionDataManager.fetchExhibitionData()
+            concertDataManager.concertDelegate = self
+            exhibitionDataManager.exhibitionDelegate = self
+            concertDataManager.fetchConcertData()
+            exhibitionDataManager.fetchExhibitionData()
+            self.group.notify(queue: .main) { [weak self] in
+                self?.dataLoaded()
+            }
             print("loadAPIFromFirebase")
         }
+        
         // use firebase to get recommend data
         recommendationManager.collectionDelegate = self
         
@@ -110,20 +121,32 @@ class RecommendViewController: UIViewController {
             recommendationManager.readFilterRecommendationData()
         } else {
             self.filterData.removeAll()
+            self.recommendCollectionView.reloadData()
         }
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 guard let self = self else { return }
                 if HomeViewController.loadAPIFromWeb == true {
-                    self.group.enter()
-                    self.artManager1.getArtProductList(number: "1")
-                    self.group.enter()
-                    self.artManager6.getArtProductList(number: "6")
+                    group.enter()
+                    group.enter()
+                    // Load data asynchronously
+                    DispatchQueue.global(qos: .background).async { [weak self] in
+                        self?.artManager1.getArtProductList(number: "1")
+                        self?.artManager6.getArtProductList(number: "6")
+                        // Notify on the main queue when both calls are complete
+                        self?.group.notify(queue: .main) {
+                            self?.dataLoaded()
+                        }
+                    }
                     print("loadAPIFromWeb")
                 } else {
-//                    self.concertDataManager.fetchConcertData()
-//                    self.exhibitionDataManager.fetchExhibitionData()
+                    // use firebase to get data
+                    concertDataManager.fetchConcertData()
+                    exhibitionDataManager.fetchExhibitionData()
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.dataLoaded()
+                    }
                     print("loadAPIFromFirebase")
                 }
                 self.recommendCollectionView.mj_trailer?.endRefreshing()
@@ -134,14 +157,16 @@ class RecommendViewController: UIViewController {
         trailer.setTitle("側拉刷新中", for: .refreshing)
         // trailer.stateLabel?.isHidden = true
         trailer.autoChangeTransparency(true).link(to: self.recommendCollectionView)
-        
-        group.notify(queue: .main) {
-            DispatchQueue.main.async {
-                self.recommendCollectionView.reloadData()
-                self.loading.stopAnimating()
-            }
+    }
+    
+    // MARK: - Function
+    // load api data
+    func dataLoaded() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loading.stopAnimating()
+            self.recommendCollectionView.reloadData()
         }
-        
     }
     
     func setAnimation() {
@@ -183,7 +208,12 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.detailDesctription = recommendProducts[indexPath.row]
         if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.addRecommendData(exhibitionUid: recommendProducts[indexPath.item].uid, title: recommendProducts[indexPath.item].title, category: recommendProducts[indexPath.item].category, location: recommendProducts[indexPath.item].showInfo[0].location, locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
+            firebaseManager.addRecommendData(
+                exhibitionUid: recommendProducts[indexPath.item].uid,
+                title: recommendProducts[indexPath.item].title,
+                category: recommendProducts[indexPath.item].category,
+                location: recommendProducts[indexPath.item].showInfo[0].location,
+                locationName: recommendProducts[indexPath.item].showInfo[0].locationName)
         }
         self.navigationController?.pushViewController(detailVC, animated: true)
     }

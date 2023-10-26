@@ -20,28 +20,14 @@ class RecommendCollectionViewCell: GeminiCell {
     
     lazy var productTitle: UILabel = {
         let productTitle = UILabel()
-        productTitle.numberOfLines = 1
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 5) {
-            productTitle.font = pingFangFont
-        } else {
-            productTitle.font = UIFont.systemFont(ofSize: 5)
-            print("no font type")
-        }
-        productTitle.textAlignment = .center
+        setFont(productName: productTitle, size: 5)
         return productTitle
     }()
     
     lazy var productTime: UILabel = {
-        let productTitle = UILabel()
-        productTitle.numberOfLines = 1
-        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 5) {
-            productTitle.font = pingFangFont
-        } else {
-            productTitle.font = UIFont.systemFont(ofSize: 5)
-            print("no font type")
-        }
-        productTitle.textAlignment = .center
-        return productTitle
+        let productTime = UILabel()
+        setFont(productName: productTime, size: 5)
+        return productTime
     }()
     
     lazy var productImage: UIImageView = {
@@ -62,6 +48,17 @@ class RecommendCollectionViewCell: GeminiCell {
         setupSubviews()
         setupConstraints()
         setShadowColor()
+    }
+    
+    func setFont(productName:UILabel, size: CGFloat) {
+        productName.numberOfLines = 1
+        if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: size) {
+            productName.font = pingFangFont
+        } else {
+            productName.font = UIFont.systemFont(ofSize: size)
+            print("no font type")
+        }
+        productName.textAlignment = .center
     }
     
     private func setupSubviews() {
