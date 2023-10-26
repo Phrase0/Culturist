@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     var detailDesctription: ArtDatum?
     
     // like data
-    var isLiked = false
+    var isLiked: Bool?
     var likeData = [LikeData]()
     
     // appCalendar
@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         detailTableView.dataSource = self
         detailTableView.delegate = self
+        isLiked = false
         firebaseManager.likeDelegate = self
         setBackButton()
         // set tableView.contentInset fill the screen

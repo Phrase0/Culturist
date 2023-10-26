@@ -68,7 +68,6 @@ class LikeViewController: UIViewController {
         firebaseManager.likeDelegate = self
         likeCollectionView.dataSource = self
         likeCollectionView.delegate = self
-        
         if HomeViewController.loadAPIFromWeb == true {
             artManager1.delegate = self
             artManager6.delegate = self
@@ -103,7 +102,7 @@ class LikeViewController: UIViewController {
         
         if !KeychainItem.currentUserIdentifier.isEmpty {
             firebaseManager.fetchUserLikeData { _ in
-                if self.likeData.isEmpty == true {
+                if self.likeEXProducts.isEmpty == true {
                     self.noDataNoteLabel.isHidden = false
                 } else {
                     self.noDataNoteLabel.isHidden = true
