@@ -64,7 +64,7 @@ class SettingsDownloader: SettingsDownloadClient {
                 .JSONParseError("Failed to parse JSON to dictionary")
               ))
             }
-          } else if let error = error {
+          } else if let error {
             completion(.failure(.URLSessionError(error.localizedDescription)))
           }
         }

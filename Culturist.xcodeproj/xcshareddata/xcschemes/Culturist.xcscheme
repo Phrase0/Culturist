@@ -26,8 +26,81 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:../Culturist.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8FAA61C2AE5036A001A5329"
+               BuildableName = "CulturistSlowTests.xctest"
+               BlueprintName = "CulturistSlowTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8FAA62E2AE50B06001A5329"
+               BuildableName = "CulturistTimeTests.xctest"
+               BlueprintName = "CulturistTimeTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8FAA6482AE5119A001A5329"
+               BuildableName = "CulturistDateFormatTests.xctest"
+               BlueprintName = "CulturistDateFormatTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8FAA6552AE52245001A5329"
+               BuildableName = "CulturistArtProductManagerTests.xctest"
+               BlueprintName = "CulturistArtProductManagerTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8FAA6622AE52839001A5329"
+               BuildableName = "CulturistRecommendTests.xctest"
+               BlueprintName = "CulturistRecommendTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F8A36D272AE5492500DEDAA6"
+               BuildableName = "CulturistSearchTests.xctest"
+               BlueprintName = "CulturistSearchTests"
+               ReferencedContainer = "container:Culturist.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

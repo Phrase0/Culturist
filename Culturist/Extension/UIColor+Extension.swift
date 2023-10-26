@@ -35,7 +35,6 @@ private enum STColor: String {
 }
 
 extension UIColor {
-
     // swiftlint:disable identifier_name
     static let B1 = STColor(.B1)
     static let B2 = STColor(.B2)
