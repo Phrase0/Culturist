@@ -59,24 +59,31 @@ class LikeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(noDataNoteLabel)
         
+        // Add the noDataNoteLabel to the view
+        view.addSubview(noDataNoteLabel)
+        noDataNoteLabel.isHidden = true
+        // Set up animations and constraints
         setAnimation()
         setupConstraints()
         loading.startAnimating()
         
+        // Set delegate for like data and collectionView
         firebaseManager.likeDelegate = self
         likeCollectionView.dataSource = self
         likeCollectionView.delegate = self
-        if HomeViewController.loadAPIFromWeb == true {
+        
+        if HomeViewController.loadAPIFromWeb {
             artManager1.delegate = self
             artManager6.delegate = self
             group.enter()
             group.enter()
+            
             // Load data asynchronously
             DispatchQueue.global(qos: .background).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
+                
                 // Notify on the main queue when both calls are complete
                 self?.group.notify(queue: .main) {
                     self?.dataLoaded()
@@ -84,43 +91,46 @@ class LikeViewController: UIViewController {
             }
             print("loadAPIFromWeb")
         } else {
-            // use firebase to get data
+            // Use Firebase to get data
             concertDataManager.concertDelegate = self
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
+            
             self.group.notify(queue: .main) { [weak self] in
                 self?.dataLoaded()
             }
             print("loadAPIFromFirebase")
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        noDataNoteLabel.isHidden = true
         
-        if !KeychainItem.currentUserIdentifier.isEmpty {
-            firebaseManager.fetchUserLikeData { _ in
-                if self.likeEXProducts.isEmpty == true {
-                    self.noDataNoteLabel.isHidden = false
-                } else {
-                    self.noDataNoteLabel.isHidden = true
+        self.group.notify(queue: .main) { [weak self] in
+            guard let self = self else { return }
+            
+            if !KeychainItem.currentUserIdentifier.isEmpty {
+                self.firebaseManager.fetchUserLikeData { _ in
+                    if self.likeEXProducts.isEmpty {
+                        self.noDataNoteLabel.isHidden = false
+                    } else {
+                        self.noDataNoteLabel.isHidden = true
+                    }
+                    DispatchQueue.main.async {
+                        self.likeCollectionView.reloadData()
+                    }
                 }
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.likeCollectionView.reloadData()
-                }
+            } else {
+                self.noDataNoteLabel.isHidden = false
+                self.likeData.removeAll()
+                self.likeCollectionView.reloadData()
             }
-        } else {
-            self.noDataNoteLabel.isHidden = false
-            self.likeData.removeAll()
-            self.likeCollectionView.reloadData()
         }
     }
 
     // MARK: - Function
-    // load api data
+    // Load API data
     func dataLoaded() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

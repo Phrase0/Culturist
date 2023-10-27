@@ -121,7 +121,9 @@ class RecommendViewController: UIViewController {
             recommendationManager.readFilterRecommendationData()
         } else {
             self.filterData.removeAll()
-            self.recommendCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.recommendCollectionView.reloadData()
+            }
         }
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
@@ -283,6 +285,10 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
         self.filterData = recommendationData
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.recommendCollectionView.reloadData()
+        }
     }
 }
 
