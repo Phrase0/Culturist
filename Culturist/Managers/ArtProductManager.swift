@@ -75,18 +75,13 @@ class ArtProductManager {
                     } else {
                         self.getArtProductListFromAsset(filename: JsonName.exhibition.rawValue)
                     }
-                    print("Using cached artProduct local data")
+                    print("Using local artProduct local data")
                 }
             }, receiveValue: { artProductList in
                 let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
                 self.delegate?.manager(self, didGet: filteredData)
             })
             .store(in: &cancellables)
-    }
-
-    // Helper function to clear the cache
-    func clearCache() {
-        URLCache.shared.removeAllCachedResponses()
     }
     
     // if api fetch failure

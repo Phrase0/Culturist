@@ -155,7 +155,7 @@ class FirebaseManager {
             }
         }
     }
-    
+
     // MARK: - addProfileImage
     func addImage(imageUrl: String) {
         // Get the user's document reference
