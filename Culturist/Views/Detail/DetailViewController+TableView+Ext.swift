@@ -228,13 +228,11 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         for calendar in calendars {
             if calendar.title == "CulturistCalendar" {
                 return calendar
-            } else {
-                return nil
             }
         }
         return nil
     }
-    
+
     // create a new calendar
     func createAppCalendar() -> EKCalendar? {
         let newCalendar = EKCalendar(for: .event, eventStore: eventStore)

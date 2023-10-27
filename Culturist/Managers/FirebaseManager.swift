@@ -252,8 +252,7 @@ class FirebaseManager {
                    let category = data["category"] as? String,
                    let location = data["location"] as? String,
                    let locationName = data["locationName"] as? String,
-                   let timestamp = data["timestamp"] as? TimeInterval
-                {
+                   let timestamp = data["timestamp"] as? TimeInterval {
                     // add RecommendationData to list
                     let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
