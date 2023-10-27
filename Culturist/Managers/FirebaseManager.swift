@@ -219,7 +219,8 @@ class FirebaseManager {
             "title": newRecommendationData.title,
             "category": newRecommendationData.category,
             "location": newRecommendationData.location,
-            "locationName": newRecommendationData.locationName
+            "locationName": newRecommendationData.locationName,
+            "timestamp": Date().timeIntervalSince1970
         ]
         
         // Add RecommendationData to the recommendationData collection
@@ -250,7 +251,9 @@ class FirebaseManager {
                    let title = data["title"] as? String,
                    let category = data["category"] as? String,
                    let location = data["location"] as? String,
-                   let locationName = data["locationName"] as? String {
+                   let locationName = data["locationName"] as? String,
+                   let timestamp = data["timestamp"] as? TimeInterval
+                {
                     // add RecommendationData to list
                     let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
@@ -262,76 +265,106 @@ class FirebaseManager {
     }
     
     // ---------------------------------------------------
-    var cachedRecommendationData: [RecommendationData]?
     func readFilterRecommendationData() {
-        // Check if the RecommendationData is cached
-        if let cachedData = cachedRecommendationData {
-            // If cached, return the cached data immediately
-            self.collectionDelegate?.manager(self, didGet: cachedData)
-        } else {
-            let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-            let recommendationDataCollection = userRef.collection("recommendationData")
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        let recommendationDataCollection = userRef.collection("recommendationData")
+        
+        // search "recommendationData" documents
+        recommendationDataCollection.getDocuments { (querySnapshot, error) in
+            if let error {
+                print("Error fetching recommendationData: \(error)")
+                return
+            }
+            var recommendationDataList = [RecommendationData]()
             
-            // search "recommendationData" documents
-            recommendationDataCollection.getDocuments { (querySnapshot, error) in
-                if let error {
-                    print("Error fetching recommendationData: \(error)")
-                    return
-                }
-                var recommendationDataList = [RecommendationData]()
+            for document in querySnapshot!.documents {
+                let data = document.data()
                 
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    
-                    if let exhibitionUid = data["exhibitionUid"] as? String,
-                       let title = data["title"] as? String,
-                       let category = data["category"] as? String,
-                       let location = data["location"] as? String,
-                       let locationName = data["locationName"] as? String {
-                        // add RecommendationData to list
-                        let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
-                        recommendationDataList.append(recommendationData)
-                    }
+                if let exhibitionUid = data["exhibitionUid"] as? String,
+                   let title = data["title"] as? String,
+                   let category = data["category"] as? String,
+                   let location = data["location"] as? String,
+                   let locationName = data["locationName"] as? String {
+                    // add RecommendationData to list
+                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
+                    recommendationDataList.append(recommendationData)
+                }
+            }
+            
+            if !recommendationDataList.isEmpty {
+                // calculate every RecommendationData amount
+                var counts = [RecommendationData: Int]()
+                
+                for recommendationData in recommendationDataList {
+                    counts[recommendationData, default: 0] += 1
                 }
                 
-                if !recommendationDataList.isEmpty {
-                    // calculate every RecommendationData amount
-                    var counts = [RecommendationData: Int]()
-                    
-                    for recommendationData in recommendationDataList {
-                        counts[recommendationData, default: 0] += 1
+                // find  mostRepeatedData
+                var mostRepeatedData = recommendationDataList[0]
+                var maxCount = counts[mostRepeatedData] ?? 0
+                
+                for (recommendationData, count) in counts {
+                    if count > maxCount {
+                        mostRepeatedData = recommendationData
+                        maxCount = count
                     }
-                    
-                    // find mostRepeatedData
-                    var mostRepeatedData = recommendationDataList[0]
-                    var maxCount = counts[mostRepeatedData] ?? 0
-                    
-                    for (recommendationData, count) in counts {
-                        if count > maxCount {
-                            mostRepeatedData = recommendationData
-                            maxCount = count
-                        }
-                    }
-                    
-                    // Cache the fetched RecommendationData
-                    self.cachedRecommendationData = [mostRepeatedData]
-                    
-                    // recommend mostRepeatedData
-                    self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
+                }
+                //delete too much data
+                self.deleteRecommendDataIfNeeded()
+                // recommend mostRepeatedData
+                self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
+            } else {
+                // if no RecommendationData(two data have same count)，recommend for random
+                if let randomData = recommendationDataList.randomElement() {
+                    self.collectionDelegate?.manager(self, didGet: [randomData])
                 } else {
-                    // if no RecommendationData，recommend for random
-                    if let randomData = recommendationDataList.randomElement() {
-                        // Cache the fetched RecommendationData
-                        self.cachedRecommendationData = [randomData]
-                        self.collectionDelegate?.manager(self, didGet: [randomData])
-                    } else {
-                        // no data could choose
-                        self.collectionDelegate?.manager(self, didGet: [])
+                    // no data could choose
+                    self.collectionDelegate?.manager(self, didGet: [])
+                }
+            }
+        }
+    }
+
+    // ---------------------------------------------------
+    func deleteRecommendDataIfNeeded() {
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        let recommendationDataCollection = userRef.collection("recommendationData")
+        
+        // Fetch all recommendation data documents
+        recommendationDataCollection.getDocuments { (querySnapshot, error) in
+            if let error {
+                print("Error fetching recommendationData: \(error)")
+                return
+            }
+            
+            // If the recommendation data count exceeds 20, we need to delete the earliest data
+            if querySnapshot!.documents.count > 20 {
+                // Sort documents in ascending order based on timestamp
+                let sortedDocuments = querySnapshot!.documents.sorted(by: { (doc1, doc2) -> Bool in
+                    if let timestamp1 = doc1["timestamp"] as? Timestamp, let timestamp2 = doc2["timestamp"] as? Timestamp {
+                        return timestamp1.seconds < timestamp2.seconds
+                    }
+                    return false
+                })
+                
+                // Calculate the number of documents to delete
+                let deleteCount = querySnapshot!.documents.count - 20
+                
+                // Delete the earliest documents
+                for i in 0..<deleteCount {
+                    let document = sortedDocuments[i]
+                    recommendationDataCollection.document(document.documentID).delete { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        }
                     }
                 }
             }
         }
     }
+
+
+    
     
     // ---------------------------------------------------
     // MARK: - LikeCollection

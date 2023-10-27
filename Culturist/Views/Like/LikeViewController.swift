@@ -78,16 +78,10 @@ class LikeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            
             // Load data asynchronously
             DispatchQueue.global(qos: .background).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
-                
-                // Notify on the main queue when both calls are complete
-                self?.group.notify(queue: .main) {
-                    self?.dataLoaded()
-                }
             }
             print("loadAPIFromWeb")
         } else {
@@ -96,10 +90,6 @@ class LikeViewController: UIViewController {
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
-            
-            self.group.notify(queue: .main) { [weak self] in
-                self?.dataLoaded()
-            }
             print("loadAPIFromFirebase")
         }
     }
@@ -109,7 +99,6 @@ class LikeViewController: UIViewController {
         
         self.group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
-            
             if !KeychainItem.currentUserIdentifier.isEmpty {
                 self.firebaseManager.fetchUserLikeData { _ in
                     if self.likeEXProducts.isEmpty {
@@ -118,27 +107,22 @@ class LikeViewController: UIViewController {
                         self.noDataNoteLabel.isHidden = true
                     }
                     DispatchQueue.main.async {
+                        self.loading.stopAnimating()
                         self.likeCollectionView.reloadData()
                     }
                 }
             } else {
                 self.noDataNoteLabel.isHidden = false
                 self.likeData.removeAll()
-                self.likeCollectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.loading.stopAnimating()
+                    self.likeCollectionView.reloadData()
+                }
             }
         }
     }
 
     // MARK: - Function
-    // Load API data
-    func dataLoaded() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            self.likeCollectionView.reloadData()
-        }
-    }
-    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in

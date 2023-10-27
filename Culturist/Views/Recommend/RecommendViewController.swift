@@ -87,10 +87,6 @@ class RecommendViewController: UIViewController {
             DispatchQueue.global(qos: .background).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
-                // Notify on the main queue when both calls are complete
-                self?.group.notify(queue: .main) {
-                    self?.dataLoaded()
-                }
             }
             print("loadAPIFromWeb")
         } else {
@@ -99,9 +95,6 @@ class RecommendViewController: UIViewController {
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
-            self.group.notify(queue: .main) { [weak self] in
-                self?.dataLoaded()
-            }
             print("loadAPIFromFirebase")
         }
         
@@ -116,13 +109,17 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if !KeychainItem.currentUserIdentifier.isEmpty {
-            recommendationManager.readFilterRecommendationData()
-        } else {
-            self.filterData.removeAll()
-            DispatchQueue.main.async {
-                self.recommendCollectionView.reloadData()
+        self.group.notify(queue: .main) {[weak self] in
+            guard let self = self else { return }
+            if !KeychainItem.currentUserIdentifier.isEmpty {
+                self.loading.stopAnimating()
+                self.recommendationManager.readFilterRecommendationData()
+            } else {
+                self.filterData.removeAll()
+                DispatchQueue.main.async {
+                    self.loading.stopAnimating()
+                    self.recommendCollectionView.reloadData()
+                }
             }
         }
         // pullToRefresh trailer
@@ -138,7 +135,10 @@ class RecommendViewController: UIViewController {
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
                         self?.group.notify(queue: .main) {
-                            self?.dataLoaded()
+                            DispatchQueue.main.async {
+                                self?.loading.stopAnimating()
+                                self?.recommendCollectionView.reloadData()
+                            }
                         }
                     }
                     print("loadAPIFromWeb")
@@ -147,7 +147,10 @@ class RecommendViewController: UIViewController {
                     concertDataManager.fetchConcertData()
                     exhibitionDataManager.fetchExhibitionData()
                     self.group.notify(queue: .main) { [weak self] in
-                        self?.dataLoaded()
+                        DispatchQueue.main.async {
+                            self?.loading.stopAnimating()
+                            self?.recommendCollectionView.reloadData()
+                        }
                     }
                     print("loadAPIFromFirebase")
                 }
@@ -162,14 +165,6 @@ class RecommendViewController: UIViewController {
     }
     
     // MARK: - Function
-    // load api data
-    func dataLoaded() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            self.recommendCollectionView.reloadData()
-        }
-    }
     
     func setAnimation() {
         view.addSubview(loading)

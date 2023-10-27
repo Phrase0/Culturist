@@ -109,8 +109,26 @@ class HomeViewController: UIViewController {
             self.homeTableView.reloadData()
             self.isButtonEnabled = true
             self.searchButton?.isEnabled = true
+            // Store the API data in cache
+            self.storeAPIDataInCache()
         }
     }
+    
+    // ---------------------------------------------------
+    func storeAPIDataInCache() {
+        if let artData1 = try? JSONEncoder().encode(artProducts1),
+           let artData6 = try? JSONEncoder().encode(artProducts6) {
+            let response1 = HTTPURLResponse(url: URL(string: "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=1")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            let response6 = HTTPURLResponse(url: URL(string: "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=6")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            
+            let cachedData1 = CachedURLResponse(response: response1, data: artData1)
+            let cachedData6 = CachedURLResponse(response: response6, data: artData6)
+            
+            URLCache.shared.storeCachedResponse(cachedData1, for: URLRequest(url: URL(string: "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=1")!))
+            URLCache.shared.storeCachedResponse(cachedData6, for: URLRequest(url: URL(string: "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=6")!))
+        }
+    }
+    // ---------------------------------------------------
     
     func setAnimation() {
         view.addSubview(loading)
