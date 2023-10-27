@@ -327,8 +327,8 @@ extension RecommendViewController: FirebaseConcertDelegate {
         self.artProducts1 = concertData
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
+            self.recommendCollectionView.reloadData()
         }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
@@ -344,8 +344,8 @@ extension RecommendViewController: FirebaseExhibitionDelegate {
         self.artProducts6 = exhibitionData
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.recommendCollectionView.reloadData()
             self.loading.stopAnimating()
+            self.recommendCollectionView.reloadData()
         }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {

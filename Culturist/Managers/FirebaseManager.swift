@@ -63,7 +63,7 @@ class FirebaseManager {
                     }
                 }
             }
-        
+            
             // ---------------------------------------------------
             // If the document doesn't exist, add new data
             if snapshot?.exists == false {
@@ -85,25 +85,25 @@ class FirebaseManager {
         }
     }
     
-//    func readUserData(completion: @escaping (String?) -> Void) {
-//        // Get the user's document reference
-//        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-//        // Get the single document from the subcollection
-//        userRef.getDocument { (snapshot, error) in
-//            if let error {
-//                print("Error getting document: \(error.localizedDescription)")
-//                completion(nil)
-//            } else {
-//                // Check if the document exists and contains a fullName field
-//                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
-//                    completion(fullName)
-//                } else {
-//                    completion(nil)
-//                }
-//            }
-//        }
-//    }
-
+    //    func readUserData(completion: @escaping (String?) -> Void) {
+    //        // Get the user's document reference
+    //        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+    //        // Get the single document from the subcollection
+    //        userRef.getDocument { (snapshot, error) in
+    //            if let error {
+    //                print("Error getting document: \(error.localizedDescription)")
+    //                completion(nil)
+    //            } else {
+    //                // Check if the document exists and contains a fullName field
+    //                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
+    //                    completion(fullName)
+    //                } else {
+    //                    completion(nil)
+    //                }
+    //            }
+    //        }
+    //    }
+    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -155,7 +155,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // MARK: - addProfileImage
     func addImage(imageUrl: String) {
         // Get the user's document reference
@@ -203,7 +203,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, category: String, location: String, locationName: String) {
         // Create a new RecommendationData
@@ -231,7 +231,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // ---------------------------------------------------
     func readRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
@@ -262,60 +262,72 @@ class FirebaseManager {
     }
     
     // ---------------------------------------------------
+    var cachedRecommendationData: [RecommendationData]?
     func readFilterRecommendationData() {
-        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-        let recommendationDataCollection = userRef.collection("recommendationData")
-        
-        // search "recommendationData" documents
-        recommendationDataCollection.getDocuments { (querySnapshot, error) in
-            if let error {
-                print("Error fetching recommendationData: \(error)")
-                return
-            }
-            var recommendationDataList = [RecommendationData]()
+        // Check if the RecommendationData is cached
+        if let cachedData = cachedRecommendationData {
+            // If cached, return the cached data immediately
+            self.collectionDelegate?.manager(self, didGet: cachedData)
+        } else {
+            let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+            let recommendationDataCollection = userRef.collection("recommendationData")
             
-            for document in querySnapshot!.documents {
-                let data = document.data()
-                
-                if let exhibitionUid = data["exhibitionUid"] as? String,
-                   let title = data["title"] as? String,
-                   let category = data["category"] as? String,
-                   let location = data["location"] as? String,
-                   let locationName = data["locationName"] as? String {
-                    // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
-                    recommendationDataList.append(recommendationData)
+            // search "recommendationData" documents
+            recommendationDataCollection.getDocuments { (querySnapshot, error) in
+                if let error {
+                    print("Error fetching recommendationData: \(error)")
+                    return
                 }
-            }
-            
-            if !recommendationDataList.isEmpty {
-                // calculate every RecommendationData amount
-                var counts = [RecommendationData: Int]()
+                var recommendationDataList = [RecommendationData]()
                 
-                for recommendationData in recommendationDataList {
-                    counts[recommendationData, default: 0] += 1
-                }
-                
-                // find  mostRepeatedData
-                var mostRepeatedData = recommendationDataList[0]
-                var maxCount = counts[mostRepeatedData] ?? 0
-                
-                for (recommendationData, count) in counts {
-                    if count > maxCount {
-                        mostRepeatedData = recommendationData
-                        maxCount = count
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    
+                    if let exhibitionUid = data["exhibitionUid"] as? String,
+                       let title = data["title"] as? String,
+                       let category = data["category"] as? String,
+                       let location = data["location"] as? String,
+                       let locationName = data["locationName"] as? String {
+                        // add RecommendationData to list
+                        let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
+                        recommendationDataList.append(recommendationData)
                     }
                 }
                 
-                // recommend mostRepeatedData
-                self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
-            } else {
-                // if no RecommendationData，recommend for random
-                if let randomData = recommendationDataList.randomElement() {
-                    self.collectionDelegate?.manager(self, didGet: [randomData])
+                if !recommendationDataList.isEmpty {
+                    // calculate every RecommendationData amount
+                    var counts = [RecommendationData: Int]()
+                    
+                    for recommendationData in recommendationDataList {
+                        counts[recommendationData, default: 0] += 1
+                    }
+                    
+                    // find mostRepeatedData
+                    var mostRepeatedData = recommendationDataList[0]
+                    var maxCount = counts[mostRepeatedData] ?? 0
+                    
+                    for (recommendationData, count) in counts {
+                        if count > maxCount {
+                            mostRepeatedData = recommendationData
+                            maxCount = count
+                        }
+                    }
+                    
+                    // Cache the fetched RecommendationData
+                    self.cachedRecommendationData = [mostRepeatedData]
+                    
+                    // recommend mostRepeatedData
+                    self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
                 } else {
-                    // no data could choose
-                    self.collectionDelegate?.manager(self, didGet: [])
+                    // if no RecommendationData，recommend for random
+                    if let randomData = recommendationDataList.randomElement() {
+                        // Cache the fetched RecommendationData
+                        self.cachedRecommendationData = [randomData]
+                        self.collectionDelegate?.manager(self, didGet: [randomData])
+                    } else {
+                        // no data could choose
+                        self.collectionDelegate?.manager(self, didGet: [])
+                    }
                 }
             }
         }
