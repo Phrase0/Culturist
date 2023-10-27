@@ -101,7 +101,7 @@ class LikeViewController: UIViewController {
             guard let self = self else { return }
             if !KeychainItem.currentUserIdentifier.isEmpty {
                 self.firebaseManager.fetchUserLikeData { _ in
-                    if self.likeEXProducts.isEmpty {
+                    if self.likeData.isEmpty {
                         self.noDataNoteLabel.isHidden = false
                     } else {
                         self.noDataNoteLabel.isHidden = true
@@ -226,11 +226,6 @@ extension LikeViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print(error.localizedDescription)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            // self.group.leave()
-        }
     }
     
 }
@@ -238,37 +233,21 @@ extension LikeViewController: ArtManagerDelegate {
 // MARK: - FirebaseDataDelegate
 extension LikeViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
     }
     
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.likeCollectionView.reloadData()
-            self.loading.stopAnimating()
-        }
     }
     
 }
 
 extension LikeViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
     }
     
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.likeCollectionView.reloadData()
-            self.loading.stopAnimating()
-        }
     }
 }

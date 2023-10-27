@@ -112,13 +112,12 @@ class RecommendViewController: UIViewController {
         self.group.notify(queue: .main) {[weak self] in
             guard let self = self else { return }
             if !KeychainItem.currentUserIdentifier.isEmpty {
-                self.loading.stopAnimating()
                 self.recommendationManager.readFilterRecommendationData()
             } else {
                 self.filterData.removeAll()
                 DispatchQueue.main.async {
-                    self.loading.stopAnimating()
                     self.recommendCollectionView.reloadData()
+                    self.loading.stopAnimating()
                 }
             }
         }
@@ -277,12 +276,14 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+// MARK: -  FirebaseCollectionDelegate
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
         self.filterData = recommendationData
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
         }
     }
 }
@@ -307,11 +308,11 @@ extension RecommendViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print("can't not get api data")
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            // self.group.leave()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            self.loading.stopAnimating()
+//            // self.group.leave()
+//        }
     }
     
 }
@@ -320,33 +321,35 @@ extension RecommendViewController: ArtManagerDelegate {
 extension RecommendViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            self.recommendCollectionView.reloadData()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            self.loading.stopAnimating()
+//            self.recommendCollectionView.reloadData()
+//        }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            self.loading.stopAnimating()
+//        }
     }
 }
 
 extension RecommendViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            self.recommendCollectionView.reloadData()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            self.loading.stopAnimating()
+//            self.recommendCollectionView.reloadData()
+//        }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
+//            self.loading.stopAnimating()
+//        }
     }
 }

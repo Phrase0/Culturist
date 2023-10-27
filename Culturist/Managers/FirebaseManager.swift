@@ -251,8 +251,7 @@ class FirebaseManager {
                    let title = data["title"] as? String,
                    let category = data["category"] as? String,
                    let location = data["location"] as? String,
-                   let locationName = data["locationName"] as? String,
-                   let timestamp = data["timestamp"] as? TimeInterval {
+                   let locationName = data["locationName"] as? String {
                     // add RecommendationData to list
                     let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
                     recommendationDataList.append(recommendationData)
@@ -308,7 +307,7 @@ class FirebaseManager {
                         maxCount = count
                     }
                 }
-                //delete too much data
+                // delete too much data
                 self.deleteRecommendDataIfNeeded()
                 // recommend mostRepeatedData
                 self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
@@ -362,9 +361,6 @@ class FirebaseManager {
         }
     }
 
-
-    
-    
     // ---------------------------------------------------
     // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {
