@@ -87,10 +87,6 @@ class RecommendViewController: UIViewController {
             DispatchQueue.global(qos: .background).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
-                // Notify on the main queue when both calls are complete
-                self?.group.notify(queue: .main) {
-                    self?.dataLoaded()
-                }
             }
             print("loadAPIFromWeb")
         } else {
@@ -99,9 +95,6 @@ class RecommendViewController: UIViewController {
             exhibitionDataManager.exhibitionDelegate = self
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
-            self.group.notify(queue: .main) { [weak self] in
-                self?.dataLoaded()
-            }
             print("loadAPIFromFirebase")
         }
         
@@ -116,12 +109,17 @@ class RecommendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if !KeychainItem.currentUserIdentifier.isEmpty {
-            recommendationManager.readFilterRecommendationData()
-        } else {
-            self.filterData.removeAll()
-            self.recommendCollectionView.reloadData()
+        self.group.notify(queue: .main) {[weak self] in
+            guard let self = self else { return }
+            if !KeychainItem.currentUserIdentifier.isEmpty {
+                self.recommendationManager.readFilterRecommendationData()
+            } else {
+                self.filterData.removeAll()
+                DispatchQueue.main.async {
+                    self.recommendCollectionView.reloadData()
+                    self.loading.stopAnimating()
+                }
+            }
         }
         // pullToRefresh trailer
         let trailer = MJRefreshNormalTrailer {
@@ -136,7 +134,10 @@ class RecommendViewController: UIViewController {
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
                         self?.group.notify(queue: .main) {
-                            self?.dataLoaded()
+                            DispatchQueue.main.async {
+                                self?.loading.stopAnimating()
+                                self?.recommendCollectionView.reloadData()
+                            }
                         }
                     }
                     print("loadAPIFromWeb")
@@ -145,7 +146,10 @@ class RecommendViewController: UIViewController {
                     concertDataManager.fetchConcertData()
                     exhibitionDataManager.fetchExhibitionData()
                     self.group.notify(queue: .main) { [weak self] in
-                        self?.dataLoaded()
+                        DispatchQueue.main.async {
+                            self?.loading.stopAnimating()
+                            self?.recommendCollectionView.reloadData()
+                        }
                     }
                     print("loadAPIFromFirebase")
                 }
@@ -160,14 +164,6 @@ class RecommendViewController: UIViewController {
     }
     
     // MARK: - Function
-    // load api data
-    func dataLoaded() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            self.recommendCollectionView.reloadData()
-        }
-    }
     
     func setAnimation() {
         view.addSubview(loading)
@@ -280,9 +276,15 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+// MARK: - FirebaseCollectionDelegate
 extension RecommendViewController: FirebaseCollectionDelegate {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData]) {
         self.filterData = recommendationData
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
+        }
     }
 }
 
@@ -306,11 +308,7 @@ extension RecommendViewController: ArtManagerDelegate {
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
         print("can't not get api data")
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            // self.group.leave()
-        }
+        print(error.localizedDescription)
     }
     
 }
@@ -319,33 +317,17 @@ extension RecommendViewController: ArtManagerDelegate {
 extension RecommendViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.recommendCollectionView.reloadData()
-            self.loading.stopAnimating()
-        }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
     }
 }
 
 extension RecommendViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.recommendCollectionView.reloadData()
-            self.loading.stopAnimating()
-        }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-        }
+        print(error.localizedDescription)
     }
 }

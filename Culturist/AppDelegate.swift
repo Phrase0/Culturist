@@ -12,6 +12,7 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var lastCacheClearTime: Date?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -30,7 +31,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
+        // check clear the cache or not
+        if let lastClearTime = lastCacheClearTime {
+            let currentTime = Date()
+            let timeIntervalSinceLastClear = currentTime.timeIntervalSince(lastClearTime)
+             let oneDayInSeconds: TimeInterval = 24 * 60 * 60
+            if timeIntervalSinceLastClear >= oneDayInSeconds {
+                clearCache()
+            }
+        }
+        // record the time now
+        lastCacheClearTime = Date()
+        
         return true
+    }
+    
+    // Method to clear the cache
+    func clearCache() {
+        URLCache.shared.removeAllCachedResponses()
     }
     
     // MARK: UISceneSession Lifecycle
@@ -48,3 +66,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
