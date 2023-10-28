@@ -29,20 +29,6 @@ class LikeViewController: UIViewController {
     
     var likeData = [LikeData]()
     // products in likeCollection
-//    var likeEXProducts: [ArtDatum] {
-//        let filteredProducts = self.artProducts1 + self.artProducts6
-//        // compactMap: a map without nil
-//        let filteredLikes = self.likeData.compactMap { like in
-//            if let exhibitionUid = like.exhibitionUid {
-//                return filteredProducts.first { product in
-//                    return product.uid == exhibitionUid
-//                }
-//            }
-//            return nil
-//        }
-//        return filteredLikes
-//    }
-    
     var likeEXProducts: [ArtDatum] {
         let filteredProducts = self.artProducts1 + self.artProducts6
         // compactMap: a map without nil
