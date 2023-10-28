@@ -38,6 +38,7 @@ class AnimationTableViewCell: UITableViewCell {
     deinit {
         // Stop the timer when the view is deallocated
         timer?.invalidate()
+        timer = nil
     }
     
     func setupGeminiAnimation() {

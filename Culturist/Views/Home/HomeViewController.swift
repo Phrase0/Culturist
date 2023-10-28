@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
                         self?.artManager1.getArtProductList(number: "1")
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
-                        self?.group.notify(queue: .main) {
+                        self?.group.notify(queue: .main) { [weak self] in
                             self?.dataLoaded()
                         }
                     }
@@ -111,7 +111,7 @@ class HomeViewController: UIViewController {
             self.searchButton?.isEnabled = true
         }
     }
-    
+
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in
@@ -121,7 +121,7 @@ class HomeViewController: UIViewController {
             make.height.equalTo(40)
         }
     }
-
+    
     func setNavigationTitle() {
         // MARK: - navigationTitle
         // Create an empty UIBarButtonItem as the left item
@@ -286,12 +286,7 @@ extension HomeViewController: ArtManagerDelegate {
     }
     
     func manager(_ manager: ArtProductManager, didFailWith error: Error) {
-         print(error.localizedDescription)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loading.stopAnimating()
-            // self.group.leave()
-        }
+        print(error.localizedDescription)
     }
     
 }

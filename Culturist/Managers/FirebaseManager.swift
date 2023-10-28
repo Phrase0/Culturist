@@ -63,7 +63,7 @@ class FirebaseManager {
                     }
                 }
             }
-        
+            
             // ---------------------------------------------------
             // If the document doesn't exist, add new data
             if snapshot?.exists == false {
@@ -85,25 +85,25 @@ class FirebaseManager {
         }
     }
     
-//    func readUserData(completion: @escaping (String?) -> Void) {
-//        // Get the user's document reference
-//        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-//        // Get the single document from the subcollection
-//        userRef.getDocument { (snapshot, error) in
-//            if let error {
-//                print("Error getting document: \(error.localizedDescription)")
-//                completion(nil)
-//            } else {
-//                // Check if the document exists and contains a fullName field
-//                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
-//                    completion(fullName)
-//                } else {
-//                    completion(nil)
-//                }
-//            }
-//        }
-//    }
-
+    //    func readUserData(completion: @escaping (String?) -> Void) {
+    //        // Get the user's document reference
+    //        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+    //        // Get the single document from the subcollection
+    //        userRef.getDocument { (snapshot, error) in
+    //            if let error {
+    //                print("Error getting document: \(error.localizedDescription)")
+    //                completion(nil)
+    //            } else {
+    //                // Check if the document exists and contains a fullName field
+    //                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
+    //                    completion(fullName)
+    //                } else {
+    //                    completion(nil)
+    //                }
+    //            }
+    //        }
+    //    }
+    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -155,7 +155,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // MARK: - addProfileImage
     func addImage(imageUrl: String) {
         // Get the user's document reference
@@ -203,7 +203,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // MARK: - Recommendation
     func addRecommendData(exhibitionUid: String, title: String, category: String, location: String, locationName: String) {
         // Create a new RecommendationData
@@ -219,7 +219,8 @@ class FirebaseManager {
             "title": newRecommendationData.title,
             "category": newRecommendationData.category,
             "location": newRecommendationData.location,
-            "locationName": newRecommendationData.locationName
+            "locationName": newRecommendationData.locationName,
+            "timestamp": FieldValue.serverTimestamp()
         ]
         
         // Add RecommendationData to the recommendationData collection
@@ -231,8 +232,7 @@ class FirebaseManager {
             }
         }
     }
-
-    // ---------------------------------------------------
+    
     func readRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -261,7 +261,6 @@ class FirebaseManager {
         }
     }
     
-    // ---------------------------------------------------
     func readFilterRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -306,16 +305,54 @@ class FirebaseManager {
                         maxCount = count
                     }
                 }
-                
+                // delete too much data
+                self.deleteRecommendDataIfNeeded()
                 // recommend mostRepeatedData
                 self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
             } else {
-                // if no RecommendationData，recommend for random
+                // if no RecommendationData(two data have same count)，recommend for random
                 if let randomData = recommendationDataList.randomElement() {
                     self.collectionDelegate?.manager(self, didGet: [randomData])
                 } else {
                     // no data could choose
                     self.collectionDelegate?.manager(self, didGet: [])
+                }
+            }
+        }
+    }
+    
+    func deleteRecommendDataIfNeeded() {
+        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+        let recommendationDataCollection = userRef.collection("recommendationData")
+        
+        // Fetch all recommendation data documents
+        recommendationDataCollection.getDocuments { (querySnapshot, error) in
+            if let error {
+                print("Error fetching recommendationData: \(error)")
+                return
+            }
+            
+            // If the recommendation data count exceeds 20, we need to delete the earliest data
+            if querySnapshot!.documents.count > 20 {
+                // Sort documents in ascending order based on timestamp
+                let sortedDocuments = querySnapshot!.documents.sorted(by: { (doc1, doc2) -> Bool in
+                    if let timestamp1 = doc1["timestamp"] as? Timestamp, let timestamp2 = doc2["timestamp"] as? Timestamp {
+                        return timestamp1.seconds < timestamp2.seconds
+                    }
+                    return false
+                })
+                
+                // Calculate the number of documents to delete
+                let deleteCount = querySnapshot!.documents.count - 20
+                
+                // Delete the earliest documents
+                for i in 0..<deleteCount {
+                    let document = sortedDocuments[i]
+                    recommendationDataCollection.document(document.documentID).delete { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        }
+                    }
                 }
             }
         }
@@ -351,7 +388,6 @@ class FirebaseManager {
         }
     }
     
-    // ---------------------------------------------------
     func removeLikeData(likeData: LikeData) {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
@@ -390,7 +426,7 @@ class FirebaseManager {
         }
         
     }
-    // ---------------------------------------------------
+    
     func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
@@ -416,5 +452,4 @@ class FirebaseManager {
             }
         }
     }
-    
 }
