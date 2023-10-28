@@ -317,6 +317,11 @@ extension RecommendViewController: ArtManagerDelegate {
 extension RecommendViewController: FirebaseConcertDelegate {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
+        }
     }
     func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
         print(error.localizedDescription)
@@ -326,6 +331,11 @@ extension RecommendViewController: FirebaseConcertDelegate {
 extension RecommendViewController: FirebaseExhibitionDelegate {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.recommendCollectionView.reloadData()
+            self.loading.stopAnimating()
+        }
     }
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
         print(error.localizedDescription)
