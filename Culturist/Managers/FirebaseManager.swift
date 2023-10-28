@@ -220,7 +220,7 @@ class FirebaseManager {
             "category": newRecommendationData.category,
             "location": newRecommendationData.location,
             "locationName": newRecommendationData.locationName,
-            "timestamp": Date().timeIntervalSince1970
+            "timestamp": FieldValue.serverTimestamp()
         ]
         
         // Add RecommendationData to the recommendationData collection

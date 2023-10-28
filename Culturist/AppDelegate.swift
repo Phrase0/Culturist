@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let currentTime = Date()
             let timeIntervalSinceLastClear = currentTime.timeIntervalSince(lastClearTime)
              let oneDayInSeconds: TimeInterval = 24 * 60 * 60
-            //let oneDayInSeconds: TimeInterval = 40
             if timeIntervalSinceLastClear >= oneDayInSeconds {
                 clearCache()
             }
