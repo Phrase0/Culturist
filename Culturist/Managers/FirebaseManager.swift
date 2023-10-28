@@ -155,7 +155,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // MARK: - addProfileImage
     func addImage(imageUrl: String) {
         // Get the user's document reference
@@ -233,7 +233,6 @@ class FirebaseManager {
         }
     }
     
-    // ---------------------------------------------------
     func readRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -262,7 +261,6 @@ class FirebaseManager {
         }
     }
     
-    // ---------------------------------------------------
     func readFilterRecommendationData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -322,8 +320,7 @@ class FirebaseManager {
             }
         }
     }
-
-    // ---------------------------------------------------
+    
     func deleteRecommendDataIfNeeded() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -360,7 +357,7 @@ class FirebaseManager {
             }
         }
     }
-
+    
     // ---------------------------------------------------
     // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {
@@ -391,7 +388,6 @@ class FirebaseManager {
         }
     }
     
-    // ---------------------------------------------------
     func removeLikeData(likeData: LikeData) {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
@@ -430,7 +426,7 @@ class FirebaseManager {
         }
         
     }
-    // ---------------------------------------------------
+    
     func fetchUserLikeData(completion: @escaping ([LikeData]?) -> Void) {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let likeCollection = userRef.collection("likeCollection")
@@ -456,5 +452,4 @@ class FirebaseManager {
             }
         }
     }
-    
 }

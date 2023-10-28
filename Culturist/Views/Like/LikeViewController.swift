@@ -93,7 +93,7 @@ class LikeViewController: UIViewController {
             print("loadAPIFromFirebase")
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -121,7 +121,7 @@ class LikeViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - Function
     func setAnimation() {
         view.addSubview(loading)
@@ -232,22 +232,19 @@ extension LikeViewController: ArtManagerDelegate {
 
 // MARK: - FirebaseDataDelegate
 extension LikeViewController: FirebaseConcertDelegate {
-    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
-        print(error.localizedDescription)
-    }
-    
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum]) {
         self.artProducts1 = concertData
     }
-    
+    func manager(_ manager: ConcertDataManager, didFailWith error: Error) {
+        print(error.localizedDescription)
+    }
 }
 
 extension LikeViewController: FirebaseExhibitionDelegate {
-    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
-        print(error.localizedDescription)
-    }
-    
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum]) {
         self.artProducts6 = exhibitionData
+    }
+    func manager(_ manager: ExhibitionDataManager, didFailWith error: Error) {
+        print(error.localizedDescription)
     }
 }
