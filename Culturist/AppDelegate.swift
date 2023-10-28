@@ -12,7 +12,7 @@ import FirebaseCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var cacheClearTimer: Timer?
+    var lastCacheClearTime: Date?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -30,33 +30,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarAppearance.backgroundColor = .GR4
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        // Set up the timer to clear the cache when the application launches
-        startCacheClearTimer()
+        
+        // check clear the cache or not
+        if let lastClearTime = lastCacheClearTime {
+            let currentTime = Date()
+            let timeIntervalSinceLastClear = currentTime.timeIntervalSince(lastClearTime)
+             let oneDayInSeconds: TimeInterval = 24 * 60 * 60
+            //let oneDayInSeconds: TimeInterval = 40
+            if timeIntervalSinceLastClear >= oneDayInSeconds {
+                clearCache()
+            }
+        }
+        // record the time now
+        lastCacheClearTime = Date()
         
         return true
     }
     
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Stop the timer when the application is about to terminate
-        stopCacheClearTimer()
-    }
-    
-    // Start the timer
-    func startCacheClearTimer() {
-        let oneDayInSeconds: TimeInterval = 24 * 60 * 60
-        cacheClearTimer = Timer.scheduledTimer(timeInterval: oneDayInSeconds, target: self, selector: #selector(clearCache), userInfo: nil, repeats: true)
-        print("clean cache")
-    }
-    
     // Method to clear the cache
-    @objc func clearCache() {
+    func clearCache() {
         URLCache.shared.removeAllCachedResponses()
-    }
-    
-    // Stop the timer
-    func stopCacheClearTimer() {
-        cacheClearTimer?.invalidate()
-        cacheClearTimer = nil
     }
     
     // MARK: UISceneSession Lifecycle
@@ -74,3 +67,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
