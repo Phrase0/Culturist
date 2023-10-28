@@ -34,15 +34,20 @@ class LikeViewController: UIViewController {
         // compactMap: a map without nil
         let filteredLikes = self.likeData.compactMap { like in
             if let exhibitionUid = like.exhibitionUid {
-                return filteredProducts.first { product in
-                    return product.uid == exhibitionUid
+                if let matchingProduct = filteredProducts.first(where: { $0.uid == exhibitionUid }) {
+                    return matchingProduct
+                } else {
+                    // If a matching product is not found, delete the likeData.
+                    firebaseManager.removeLikeData(likeData: like)
+                    self.noDataNoteLabel.isHidden = false
+                    return nil
                 }
             }
             return nil
         }
         return filteredLikes
     }
-    
+
     lazy var noDataNoteLabel: UILabel = {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
@@ -62,7 +67,7 @@ class LikeViewController: UIViewController {
         
         // Add the noDataNoteLabel to the view
         view.addSubview(noDataNoteLabel)
-        noDataNoteLabel.isHidden = true
+        self.noDataNoteLabel.isHidden = true
         // Set up animations and constraints
         setAnimation()
         setupConstraints()
