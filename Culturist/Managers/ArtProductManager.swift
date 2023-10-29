@@ -51,13 +51,12 @@ class ArtProductManager {
                 case .failure(let error):
                     self.delegate?.manager(self, didFailWith: error)
                     print("Error fetching JSON data: \(error)")
-
-                    if number == "1" {
-                        self.getArtProductListFromAsset(filename: JsonName.concert.rawValue)
-                    } else {
-                        self.getArtProductListFromAsset(filename: JsonName.exhibition.rawValue)
-                    }
-                    print("Using local artProduct local data")
+//                    if number == "1" {
+//                        self.getArtProductListFromAsset(filename: JsonName.concert.rawValue)
+//                    } else {
+//                        self.getArtProductListFromAsset(filename: JsonName.exhibition.rawValue)
+//                    }
+//                    print("Using local artProduct local data")
                 }
             }, receiveValue: { artProductList in
                 DispatchQueue.global(qos: .userInitiated).async {
