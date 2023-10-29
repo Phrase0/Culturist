@@ -115,7 +115,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
         let distanceInKilometers = distance / 1000.0
         
         // If the distance is greater than 5 kilometers, display a warning
-        if distanceInKilometers > 5.0 {
+        if distanceInKilometers > 3.0 {
             showAlert(message: "超出可導航範圍，請重新選取鄰近的書店")
         } else {
             // refreshControl.startAnimating()
