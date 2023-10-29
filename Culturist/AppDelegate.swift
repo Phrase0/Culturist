@@ -30,18 +30,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarAppearance.backgroundColor = .GR4
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        // check clear the cache or not
-        if let lastClearTime = lastCacheClearTime {
+        // Check if we need to clear the cache
+        if let lastClearTime = UserDefaults.standard.object(forKey: "lastCacheClearTime") as? Date {
             let currentTime = Date()
+            
             let timeIntervalSinceLastClear = currentTime.timeIntervalSince(lastClearTime)
-             let oneDayInSeconds: TimeInterval = 24 * 60 * 60
+            let oneDayInSeconds: TimeInterval = 24 * 60 * 60
             if timeIntervalSinceLastClear >= oneDayInSeconds {
                 clearCache()
             }
         }
         // record the time now
         lastCacheClearTime = Date()
-        
+        UserDefaults.standard.set(lastCacheClearTime, forKey: "lastCacheClearTime")
         return true
     }
     
