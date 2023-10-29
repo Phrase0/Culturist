@@ -16,10 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // set Firebase
         FirebaseApp.configure()
         
+        // set navigationBarAppearance
         let navigationBarAppearance = UINavigationBarAppearance()
-        
         navigationBarAppearance.configureWithTransparentBackground()
         navigationBarAppearance.shadowColor = .clear
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
@@ -31,24 +32,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
-        // check clear the cache or not
-        if let lastClearTime = lastCacheClearTime {
+        // Check if we need to clear the cache
+        if let lastClearTime = UserDefaults.standard.object(forKey: "lastCacheClearTime") as? Date {
             let currentTime = Date()
             let timeIntervalSinceLastClear = currentTime.timeIntervalSince(lastClearTime)
-             let oneDayInSeconds: TimeInterval = 24 * 60 * 60
+            print("Last clear time: \(lastClearTime)")
+            print("Current time: \(currentTime)")
+            print("Time interval since last clear: \(timeIntervalSinceLastClear)")
+            let oneDayInSeconds: TimeInterval = 24 * 60 * 60
             if timeIntervalSinceLastClear >= oneDayInSeconds {
                 clearCache()
+                // reset the clear time
+                lastCacheClearTime = Date()
+                UserDefaults.standard.set(lastCacheClearTime, forKey: "lastCacheClearTime")
             }
         }
-        // record the time now
-        lastCacheClearTime = Date()
-        
         return true
     }
     
     // Method to clear the cache
     func clearCache() {
         URLCache.shared.removeAllCachedResponses()
+        print("clearCache")
     }
     
     // MARK: UISceneSession Lifecycle
@@ -66,4 +71,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-

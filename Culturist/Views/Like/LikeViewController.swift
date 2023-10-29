@@ -84,7 +84,7 @@ class LikeViewController: UIViewController {
             group.enter()
             group.enter()
             // Load data asynchronously
-            DispatchQueue.global(qos: .background).async { [weak self] in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
             }
