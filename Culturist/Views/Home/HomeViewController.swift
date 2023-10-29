@@ -82,7 +82,7 @@ class HomeViewController: UIViewController {
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
                         self?.group.notify(queue: .main) { [weak self] in
-                            self?.dataLoaded()
+                            self?.homeTableView.reloadData()
                         }
                     }
                     print("loadAPIFromWeb")
@@ -91,7 +91,7 @@ class HomeViewController: UIViewController {
                     concertDataManager.fetchConcertData()
                     exhibitionDataManager.fetchExhibitionData()
                     self.group.notify(queue: .main) { [weak self] in
-                        self?.dataLoaded()
+                        self?.homeTableView.reloadData()
                     }
                     print("loadAPIFromFirebase")
                 }

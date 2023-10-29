@@ -135,7 +135,6 @@ class RecommendViewController: UIViewController {
                         // Notify on the main queue when both calls are complete
                         self?.group.notify(queue: .main) {
                             DispatchQueue.main.async {
-                                self?.loading.stopAnimating()
                                 self?.recommendCollectionView.reloadData()
                             }
                         }
@@ -147,7 +146,6 @@ class RecommendViewController: UIViewController {
                     exhibitionDataManager.fetchExhibitionData()
                     self.group.notify(queue: .main) { [weak self] in
                         DispatchQueue.main.async {
-                            self?.loading.stopAnimating()
                             self?.recommendCollectionView.reloadData()
                         }
                     }
