@@ -84,7 +84,7 @@ class RecommendViewController: UIViewController {
             group.enter()
             group.enter()
             // Load data asynchronously
-            DispatchQueue.global(qos: .background).async { [weak self] in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
             }
@@ -129,13 +129,12 @@ class RecommendViewController: UIViewController {
                     group.enter()
                     group.enter()
                     // Load data asynchronously
-                    DispatchQueue.global(qos: .background).async { [weak self] in
+                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                         self?.artManager1.getArtProductList(number: "1")
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
                         self?.group.notify(queue: .main) {
                             DispatchQueue.main.async {
-                                self?.loading.stopAnimating()
                                 self?.recommendCollectionView.reloadData()
                             }
                         }
@@ -147,7 +146,6 @@ class RecommendViewController: UIViewController {
                     exhibitionDataManager.fetchExhibitionData()
                     self.group.notify(queue: .main) { [weak self] in
                         DispatchQueue.main.async {
-                            self?.loading.stopAnimating()
                             self?.recommendCollectionView.reloadData()
                         }
                     }

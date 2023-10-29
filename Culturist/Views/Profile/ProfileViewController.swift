@@ -78,6 +78,10 @@ class ProfileViewController: UIViewController {
         calendar.select(today)
         // Scroll to the current month
         calendar.setCurrentPage(today, animated: true)
+        selectedDate = today
+        DispatchQueue.main.async {
+            self.eventsTableView.reloadData()
+        }
     }
 
     @IBAction func imageViewTapped(_ sender: UIButton) {
