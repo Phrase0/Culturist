@@ -79,7 +79,10 @@ extension NavigationViewController: ARSessionDelegate {
         alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
             self.dismiss(animated: true)
         }))
-        present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
