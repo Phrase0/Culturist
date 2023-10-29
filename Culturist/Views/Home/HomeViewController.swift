@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
             group.enter()
             group.enter()
             // Load data asynchronously
-            DispatchQueue.global(qos: .background).async { [weak self] in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.artManager1.getArtProductList(number: "1")
                 self?.artManager6.getArtProductList(number: "6")
                 // Notify on the main queue when both calls are complete
@@ -77,7 +77,7 @@ class HomeViewController: UIViewController {
                     group.enter()
                     group.enter()
                     // Load data asynchronously
-                    DispatchQueue.global(qos: .background).async { [weak self] in
+                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                         self?.artManager1.getArtProductList(number: "1")
                         self?.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
@@ -261,7 +261,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             checkMoreVC.result = artProducts6
             checkMoreVC.navigationItemTitle = "展覽"
         }
-        
         navigationController?.pushViewController(checkMoreVC, animated: true)
     }
     

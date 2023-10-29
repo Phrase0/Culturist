@@ -25,8 +25,12 @@ class ArtProductManager {
         if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: URL(string: urlString)!)) {
             // Use cached data if available
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
-                let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                delegate?.manager(self, didGet: filteredData)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
+                    DispatchQueue.main.async {
+                        self.delegate?.manager(self, didGet: filteredData)
+                    }
+                }
                 return
             }
         }
@@ -56,8 +60,14 @@ class ArtProductManager {
                     print("Using local artProduct local data")
                 }
             }, receiveValue: { artProductList in
-                let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                self.delegate?.manager(self, didGet: filteredData)
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
+                    DispatchQueue.main.async {
+                        self.delegate?.manager(self, didGet: filteredData)
+                    }
+                }
+
+                
             })
             .store(in: &cancellables)
     }
