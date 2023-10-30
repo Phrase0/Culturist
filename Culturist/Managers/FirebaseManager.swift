@@ -140,35 +140,20 @@ class FirebaseManager {
     
     // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
-        // compressedImage
-        if let compressedImageData = compressImage(imageData) {
-            storage.child("images/\(KeychainItem.currentUserIdentifier).png").putData(compressedImageData) { _, error in
-                guard error == nil else {
-                    print("Failed to upload")
+        storage.child("images/\(KeychainItem.currentUserIdentifier).jpg").putData(imageData) { _, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            self.storage.child("images/\(KeychainItem.currentUserIdentifier).jpg").downloadURL { url, error in
+                guard let url = url, error == nil else {
                     return
                 }
-                self.storage.child("images/\(KeychainItem.currentUserIdentifier).png").downloadURL { url, error in
-                    guard let url = url, error == nil else {
-                        return
-                    }
-                    let urlString = url.absoluteString
-                    UserDefaults.standard.set(urlString, forKey: "url")
-                    self.addImage(imageUrl: urlString)
-                }
+                let urlString = url.absoluteString
+                UserDefaults.standard.set(urlString, forKey: "url")
+                self.addImage(imageUrl: urlString)
             }
         }
-    }
-    
-    // compressImageQuality
-    func compressImage(_ imageData: Data) -> Data? {
-        if let image = UIImage(data: imageData) {
-            // set compressionQuality
-            let compressionQuality: CGFloat = 0.0001
-            if let compressedImageData = image.jpegData(compressionQuality: compressionQuality) {
-                return compressedImageData
-            }
-        }
-        return nil
     }
     
     // MARK: - addProfileImage

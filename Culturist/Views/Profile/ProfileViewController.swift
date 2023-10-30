@@ -143,7 +143,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationC
         // close ImagePickerController
         picker.dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            guard let imageData = image.pngData() else { return }
+            guard let imageData = image.jpegData(compressionQuality: 0.0001) else { return }
             DispatchQueue.main.async {
                 self.profileImageView.image = image
             }
