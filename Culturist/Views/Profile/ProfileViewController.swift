@@ -35,8 +35,9 @@ class ProfileViewController: UIViewController {
         setCalendarAppearance()
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
-     
+        setProfileImage()
         setCorner()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .GR0
     }
@@ -44,22 +45,15 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestAccess()
-        if KeychainItem.currentUserIdentifier.isEmpty {
-            // If there is no user identifier in Keychain, navigate to SignInViewController
-            self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
-            self.profileImageView.tintColor = .GR4
-        } else {
-            if let imageUrl = UserDefaults.standard.string(forKey: "url"), let url = URL(string: imageUrl) {
-                DispatchQueue.main.async {
-                    self.profileImageView.kf.setImage(with: url)
-                }
-            } else {
-                self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
-                self.profileImageView.tintColor = .GR4
-            }
-        }
+        // notify if sign in or log out, change the default picture
+        NotificationCenter.default.addObserver(self, selector: #selector(userDidSignIn), name: Notification.Name("UserDidSignIn"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userDidSignOutOrDelete), name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
     }
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @IBAction func todayBtn(_ sender: UIButton) {
         // Get the current date
         let today = Date()
@@ -72,15 +66,15 @@ class ProfileViewController: UIViewController {
             self.eventsTableView.reloadData()
         }
     }
-
+    
     @IBAction func imageViewTapped(_ sender: UIButton) {
         if KeychainItem.currentUserIdentifier.isEmpty {
-                    // If there is no user identifier in Keychain, navigate to SignInViewController
-                    guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
-                    let navVC = UINavigationController(rootViewController: detailVC)
-                    navVC.modalPresentationStyle = .fullScreen
-                    navVC.modalTransitionStyle = .crossDissolve
-                    self.present(navVC, animated: true)
+            // If there is no user identifier in Keychain, navigate to SignInViewController
+            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController  else { return }
+            let navVC = UINavigationController(rootViewController: detailVC)
+            navVC.modalPresentationStyle = .fullScreen
+            navVC.modalTransitionStyle = .crossDissolve
+            self.present(navVC, animated: true)
         } else {
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 let imagePickerController = UIImagePickerController()
@@ -93,6 +87,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - function
     @objc private func goToSetting() {
         // Check if the current user identifier exists in Keychain
         if KeychainItem.currentUserIdentifier.isEmpty {
@@ -112,6 +107,67 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @objc func userDidSignIn() {
+        firebaseManager.readImage { imageUrl in
+            if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                DispatchQueue.main.async {
+                    self.profileImageView.kf.setImage(with: url)
+                }
+            } else {
+                self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+                self.profileImageView.tintColor = .GR4
+            }
+        }
+        //        if let imageUrl = UserDefaults.standard.string(forKey: "url"), let url = URL(string: imageUrl) {
+        //            DispatchQueue.main.async {
+        //                self.profileImageView.kf.setImage(with: url)
+        //            }
+        //        } else {
+        //            self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        //            self.profileImageView.tintColor = .GR4
+        //        }
+    }
+    
+    @objc func userDidSignOutOrDelete() {
+        self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        self.profileImageView.tintColor = .GR4
+    }
+    
+    func setProfileImage() {
+        // ---------------------------------------------------
+        if KeychainItem.currentUserIdentifier.isEmpty {
+            // If there is no user identifier in Keychain, navigate to SignInViewController
+            self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+            self.profileImageView.tintColor = .GR4
+        } else {
+            firebaseManager.readImage { imageUrl in
+                if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                    DispatchQueue.main.async {
+                        self.profileImageView.kf.setImage(with: url)
+                    }
+                } else {
+                    self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+                    self.profileImageView.tintColor = .GR4
+                }
+            }
+        }
+        // ---------------------------------------------------
+        //        if KeychainItem.currentUserIdentifier.isEmpty {
+        //            // If there is no user identifier in Keychain, navigate to SignInViewController
+        //            self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        //            self.profileImageView.tintColor = .GR4
+        //        } else {
+        //            if let imageUrl = UserDefaults.standard.string(forKey: "url"), let url = URL(string: imageUrl) {
+        //                DispatchQueue.main.async {
+        //                    self.profileImageView.kf.setImage(with: url)
+        //                }
+        //            } else {
+        //                self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        //                self.profileImageView.tintColor = .GR4
+        //            }
+        //        }
+    }
+    
     func setCorner() {
         backgroundWhiteView.backgroundColor = .white
         backgroundWhiteView.layer.cornerRadius = 15
@@ -127,6 +183,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // close ImagePickerController

@@ -131,8 +131,8 @@ class FirebaseManager {
                     return
                 }
                 let urlString = url.absoluteString
-                UserDefaults.standard.set(urlString, forKey: "url")
-                // self.addImage(imageUrl: urlString)
+                // UserDefaults.standard.set(urlString, forKey: "url")
+                 self.addImage(imageUrl: urlString)
             }
         }
     }
