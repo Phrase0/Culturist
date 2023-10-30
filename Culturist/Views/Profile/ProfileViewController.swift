@@ -35,15 +35,7 @@ class ProfileViewController: UIViewController {
         setCalendarAppearance()
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
-//        firebaseManager.readUserData { fullName in
-//            if let fullName = fullName {
-//                self.userDefault.set(fullName, forKey: "fullName")
-//                self.nameLabel.text = fullName
-//            } else {
-//                print("Full Name not found.")
-//            }
-//        }
-
+     
         setCorner()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(goToSetting))
         navigationItem.rightBarButtonItem?.tintColor = .GR0
@@ -57,18 +49,15 @@ class ProfileViewController: UIViewController {
             self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
             self.profileImageView.tintColor = .GR4
         } else {
-            firebaseManager.readImage { imageUrl in
-                if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
-                    DispatchQueue.main.async {
-                        self.profileImageView.kf.setImage(with: url)
-                    }
-                } else {
-                    self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
-                    self.profileImageView.tintColor = .GR4
+            if let imageUrl = UserDefaults.standard.string(forKey: "url"), let url = URL(string: imageUrl) {
+                DispatchQueue.main.async {
+                    self.profileImageView.kf.setImage(with: url)
                 }
+            } else {
+                self.profileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+                self.profileImageView.tintColor = .GR4
             }
         }
-        // nameLabel.text = userDefault.value(forKey: "fullName") as? String
     }
 
     @IBAction func todayBtn(_ sender: UIButton) {
