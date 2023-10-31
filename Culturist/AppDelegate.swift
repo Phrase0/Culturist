@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             lastCacheClearTime = Date()
             UserDefaults.standard.set(lastCacheClearTime, forKey: "lastCacheClearTime")
-            print("first save: \(lastCacheClearTime)")
+            print("first save: \(String(describing: lastCacheClearTime))")
         }
     }
 
