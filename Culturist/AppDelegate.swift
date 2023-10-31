@@ -32,6 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         
+        checkCacheClear()
+        
+        return true
+    }
+    
+    
+    func checkCacheClear() {
         // Check if we need to clear the cache
         if let lastClearTime = UserDefaults.standard.object(forKey: "lastCacheClearTime") as? Date {
             let currentTime = Date()
@@ -46,10 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 lastCacheClearTime = Date()
                 UserDefaults.standard.set(lastCacheClearTime, forKey: "lastCacheClearTime")
             }
+        } else {
+            lastCacheClearTime = Date()
+            UserDefaults.standard.set(lastCacheClearTime, forKey: "lastCacheClearTime")
+            print("first save: \(lastCacheClearTime)")
         }
-        return true
     }
-    
+
     // Method to clear the cache
     func clearCache() {
         URLCache.shared.removeAllCachedResponses()
