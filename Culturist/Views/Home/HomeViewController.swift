@@ -73,12 +73,12 @@ class HomeViewController: UIViewController {
                 if HomeViewController.loadAPIFromWeb == true {
                     group.enter()
                     group.enter()
-                        self.artManager1.getArtProductList(number: "1")
-                        self.artManager6.getArtProductList(number: "6")
-                        // Notify on the main queue when both calls are complete
-                        self.group.notify(queue: .main) { [weak self] in
-                            self?.homeTableView.reloadData()
-                        }
+                    self.artManager1.getArtProductList(number: "1")
+                    self.artManager6.getArtProductList(number: "6")
+                    // Notify on the main queue when both calls are complete
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.homeTableView.reloadData()
+                    }
                     print("loadAPIFromWeb")
                 } else {
                     // use firebase to get data

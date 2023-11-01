@@ -48,7 +48,7 @@ class LikeViewController: UIViewController {
         }
         return filteredLikes
     }
-
+    
     lazy var noDataNoteLabel: UILabel = {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
@@ -84,8 +84,8 @@ class LikeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-                self.artManager1.getArtProductList(number: "1")
-                self.artManager6.getArtProductList(number: "6")
+            self.artManager1.getArtProductList(number: "1")
+            self.artManager6.getArtProductList(number: "6")
             print("loadAPIFromWeb")
         } else {
             // Use Firebase to get data

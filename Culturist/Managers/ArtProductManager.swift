@@ -22,7 +22,8 @@ class ArtProductManager {
     func getArtProductList(number: String) {
         let urlString = "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
         
-        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: URL(string: urlString)!)) {
+        guard let urlString = URL(string: urlString) else { return }
+        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: urlString)) {
             // Use cached data if available
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
                 DispatchQueue.global(qos: .userInitiated).async {
@@ -35,11 +36,11 @@ class ArtProductManager {
             }
         }
         
-        URLSession.shared.dataTaskPublisher(for: URL(string: urlString)!)
+        URLSession.shared.dataTaskPublisher(for: urlString)
             .tryMap { data, response in
                 // Cache the response
                 let cachedData = CachedURLResponse(response: response, data: data)
-                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: URL(string: urlString)!))
+                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: urlString))
                 return data
             }
             .decode(type: [ArtDatum].self, decoder: JSONDecoder())
