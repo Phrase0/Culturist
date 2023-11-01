@@ -38,19 +38,22 @@ class RecommendCollectionViewCell: GeminiCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSubviews()
-        setupConstraints()
-        setShadowColor()
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         setupSubviews()
         setupConstraints()
         setShadowColor()
     }
     
-    func setFont(productName:UILabel, size: CGFloat) {
+    
+    private func setFont(productName:UILabel, size: CGFloat) {
         productName.numberOfLines = 1
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: size) {
             productName.font = pingFangFont
@@ -99,7 +102,7 @@ class RecommendCollectionViewCell: GeminiCell {
         }
     }
     
-    func setShadowColor() {
+    private func setShadowColor() {
         productBackView.backgroundColor = .GR0
         // productBackView.backgroundColor = UIColor(red: 106/255, green: 111/255, blue: 76/255, alpha: 1)
         productView.backgroundColor = .B4

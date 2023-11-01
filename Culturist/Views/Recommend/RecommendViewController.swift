@@ -83,11 +83,8 @@ class RecommendViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
-            }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
@@ -128,17 +125,14 @@ class RecommendViewController: UIViewController {
                 if HomeViewController.loadAPIFromWeb == true {
                     group.enter()
                     group.enter()
-                    // Load data asynchronously
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                        self?.artManager1.getArtProductList(number: "1")
-                        self?.artManager6.getArtProductList(number: "6")
+                        self.artManager1.getArtProductList(number: "1")
+                        self.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
-                        self?.group.notify(queue: .main) {
+                        self.group.notify(queue: .main) {
                             DispatchQueue.main.async {
-                                self?.recommendCollectionView.reloadData()
+                                self.recommendCollectionView.reloadData()
                             }
                         }
-                    }
                     print("loadAPIFromWeb")
                 } else {
                     // use firebase to get data

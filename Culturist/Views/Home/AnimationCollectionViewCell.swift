@@ -12,13 +12,11 @@ import Gemini
 class AnimationCollectionViewCell: GeminiCell {
 
     lazy var animationView: UIView = {
-        let animationView = UIView()
-        return animationView
+        return UIView()
     }()
     
     lazy var animationImage: UIImageView = {
-        let animationImage = UIImageView()
-        return animationImage
+        return UIImageView()
     }()
     
     lazy var productTitle: UILabel = {
@@ -36,13 +34,15 @@ class AnimationCollectionViewCell: GeminiCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSubviews()
-        setupConstraints()
-
+        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         setupSubviews()
         setupConstraints()
     }
@@ -53,7 +53,7 @@ class AnimationCollectionViewCell: GeminiCell {
         animationView.addSubview(productTitle)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         animationView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(contentView).inset(10)
             make.top.equalTo(contentView).inset(5)

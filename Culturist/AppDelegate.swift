@@ -36,8 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    
+
     func checkCacheClear() {
         // Check if we need to clear the cache
         if let lastClearTime = UserDefaults.standard.object(forKey: "lastCacheClearTime") as? Date {

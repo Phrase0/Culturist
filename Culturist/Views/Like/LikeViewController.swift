@@ -35,6 +35,7 @@ class LikeViewController: UIViewController {
         let filteredLikes = self.likeData.compactMap { like in
             if let exhibitionUid = like.exhibitionUid {
                 if let matchingProduct = filteredProducts.first(where: { $0.uid == exhibitionUid }) {
+                    self.noDataNoteLabel.isHidden = true
                     return matchingProduct
                 } else {
                     // If a matching product is not found, delete the likeData.
@@ -83,11 +84,8 @@ class LikeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
-            }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
             print("loadAPIFromWeb")
         } else {
             // Use Firebase to get data

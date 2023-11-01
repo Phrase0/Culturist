@@ -44,14 +44,11 @@ class HomeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
-                // Notify on the main queue when both calls are complete
-                self?.group.notify(queue: .main) {
-                    self?.dataLoaded()
-                }
+            self.artManager1.getArtProductList(number: "1")
+            self.artManager6.getArtProductList(number: "6")
+            // Notify on the main queue when both calls are complete
+            self.group.notify(queue: .main) {
+                self.dataLoaded()
             }
             print("loadAPIFromWeb")
         } else {
@@ -76,15 +73,12 @@ class HomeViewController: UIViewController {
                 if HomeViewController.loadAPIFromWeb == true {
                     group.enter()
                     group.enter()
-                    // Load data asynchronously
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                        self?.artManager1.getArtProductList(number: "1")
-                        self?.artManager6.getArtProductList(number: "6")
+                        self.artManager1.getArtProductList(number: "1")
+                        self.artManager6.getArtProductList(number: "6")
                         // Notify on the main queue when both calls are complete
-                        self?.group.notify(queue: .main) { [weak self] in
+                        self.group.notify(queue: .main) { [weak self] in
                             self?.homeTableView.reloadData()
                         }
-                    }
                     print("loadAPIFromWeb")
                 } else {
                     // use firebase to get data
@@ -111,7 +105,7 @@ class HomeViewController: UIViewController {
             self.searchButton?.isEnabled = true
         }
     }
-
+    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in
