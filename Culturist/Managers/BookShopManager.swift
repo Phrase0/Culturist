@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-protocol BookShopManagerDelegate {
+protocol BookShopManagerDelegate: AnyObject {
     func manager(_ manager: BookShopManager, didGet BookShopList: [BookShop])
     func manager(_ manager: BookShopManager, didFailWith error: Error)
 }
 
 class BookShopManager {
     
-    var delegate: BookShopManagerDelegate?
+    weak var delegate: BookShopManagerDelegate?
     
     func loadBookShops() {
         // ask for coffeeShop request

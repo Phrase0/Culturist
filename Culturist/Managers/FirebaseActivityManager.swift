@@ -5,12 +5,12 @@
 //  Created by Peiyun on 2023/9/28.
 //
 
-protocol FirebaseConcertDelegate {
+protocol FirebaseConcertDelegate: AnyObject {
     func manager(_ manager: ConcertDataManager, didGet concertData: [ArtDatum])
     func manager(_ manager: ConcertDataManager, didFailWith error: Error)
 }
 
-protocol FirebaseExhibitionDelegate {
+protocol FirebaseExhibitionDelegate: AnyObject {
     func manager(_ manager: ExhibitionDataManager, didGet exhibitionData: [ArtDatum])
     func manager(_ manager: ExhibitionDataManager, didFailWith error: Error)
 }
@@ -21,7 +21,7 @@ import FirebaseFirestore
 
 // MARK: - ConcertDataManager
 class ConcertDataManager {
-    var concertDelegate: FirebaseConcertDelegate?
+    weak var concertDelegate: FirebaseConcertDelegate?
     // get firebase data(local method)
     func fetchConcertData() {
         let db = Firestore.firestore()
@@ -78,7 +78,7 @@ class ConcertDataManager {
 
 // MARK: - ExhibitionDataManager
 class ExhibitionDataManager {
-    var exhibitionDelegate: FirebaseExhibitionDelegate?
+    weak var exhibitionDelegate: FirebaseExhibitionDelegate?
     
     func fetchExhibitionData() {
         let db = Firestore.firestore()

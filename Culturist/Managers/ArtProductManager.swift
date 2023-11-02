@@ -8,14 +8,14 @@
 import UIKit
 import Combine
 
-protocol ArtManagerDelegate {
+protocol ArtManagerDelegate: AnyObject {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum])
     func manager(_ manager: ArtProductManager, didFailWith error: Error)
 }
 
 class ArtProductManager {
     
-    var delegate: ArtManagerDelegate?
+    weak var delegate: ArtManagerDelegate?
     
     private var cancellables: Set<AnyCancellable> = []
     

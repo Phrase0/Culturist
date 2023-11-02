@@ -51,8 +51,7 @@ class RecommendCollectionViewCell: GeminiCell {
         setupConstraints()
         setShadowColor()
     }
-    
-    
+
     private func setFont(productName:UILabel, size: CGFloat) {
         productName.numberOfLines = 1
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: size) {
