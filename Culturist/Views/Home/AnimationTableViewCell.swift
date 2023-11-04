@@ -100,9 +100,14 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
         let itemData = randomSixItems[indexPath.item]
         cell.animationView.backgroundColor = viewArray[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.animationImage.kf.setImage(with: url)
+        cell.animationImage.kf.setImage(with: url, placeholder: UIImage(named: "culturist_lcon-black"), options: [.transition(.fade(0.2))]) { result in
+            switch result {
+            case .success(_): break
+            case .failure(let error):
+                print("Image loading failed: \(error)")
+            }
+        }
         cell.productTitle.text = itemData.title
-        
         self.animationCollectionView.animateCell(cell)
         
         return cell

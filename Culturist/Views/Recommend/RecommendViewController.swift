@@ -184,7 +184,13 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionViewCell", for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
         let itemData = recommendProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url)
+        cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "culturist_lcon-black"), options: [.transition(.fade(0.2))]) { result in
+            switch result {
+            case .success(_): break
+            case .failure(let error):
+                print("Image loading failed: \(error)")
+            }
+        }
         cell.productTitle.text = itemData.title
         
         cell.productTime.text = "\(itemData.startDate)-\(itemData.endDate)"

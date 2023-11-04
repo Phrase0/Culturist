@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarAppearance.backgroundColor = .GR4
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-        
+
         checkCacheClear()
         
         return true

@@ -279,7 +279,7 @@ class FirebaseManager {
                         counts[recommendationData, default: 0] += 1
                     }
                     
-                    // find  mostRepeatedData
+                    // find mostRepeatedData
                     var mostRepeatedData = recommendationDataList[0]
                     var maxCount = counts[mostRepeatedData] ?? 0
                     
