@@ -22,7 +22,12 @@ class ArtProductManager {
     func getArtProductList(number: String) {
         let urlString = "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
         
-        guard let urlString = URL(string: urlString) else { return }
+        guard let urlString = URL(string: urlString) else {
+            let error = NSError(domain: "Culturist", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+            self.delegate?.manager(self, didFailWith: error)
+            return }
+
+        
         if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: urlString)) {
             // Use cached data if available
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
