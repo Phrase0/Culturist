@@ -26,14 +26,14 @@ class ArtProductManager {
             let error = NSError(domain: "Culturist", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             self.delegate?.manager(self, didFailWith: error)
             return }
-
         
         if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: urlString)) {
             // Use cached data if available
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.delegate?.manager(self, didGet: filteredData)
                     }
                 }
@@ -67,7 +67,8 @@ class ArtProductManager {
             }, receiveValue: { artProductList in
                 DispatchQueue.global(qos: .userInitiated).async {
                     let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.delegate?.manager(self, didGet: filteredData)
                     }
                 }

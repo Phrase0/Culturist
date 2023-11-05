@@ -84,8 +84,11 @@ class LikeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            self.artManager1.getArtProductList(number: "1")
-            self.artManager6.getArtProductList(number: "6")
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+            }
             print("loadAPIFromWeb")
         } else {
             // Use Firebase to get data
@@ -155,13 +158,7 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikeCollectionViewCell", for: indexPath) as? LikeCollectionViewCell else {return UICollectionViewCell()}
         let itemData = likeEXProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "culturist_lcon-black"), options: [.transition(.fade(0.2))]) { result in
-            switch result {
-            case .success(_): break
-            case .failure(let error):
-                print("Image loading failed: \(error)")
-            }
-        }
+        cell.productImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
         return cell
     }

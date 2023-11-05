@@ -83,8 +83,11 @@ class RecommendViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            self.artManager1.getArtProductList(number: "1")
-            self.artManager6.getArtProductList(number: "6")
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+            }
             print("loadAPIFromWeb")
         } else {
             // use firebase to get data
@@ -184,13 +187,7 @@ extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionViewCell", for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
         let itemData = recommendProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "culturist_lcon-black"), options: [.transition(.fade(0.2))]) { result in
-            switch result {
-            case .success(_): break
-            case .failure(let error):
-                print("Image loading failed: \(error)")
-            }
-        }
+        cell.productImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
         
         cell.productTime.text = "\(itemData.startDate)-\(itemData.endDate)"

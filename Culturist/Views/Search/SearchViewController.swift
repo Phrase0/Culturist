@@ -168,15 +168,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if mySearchController.isActive {
             let itemData = searchResult[indexPath.item]
-            
             let url = URL(string: itemData.imageURL)
-            cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "culturist_lcon-black"), options: [.transition(.fade(0.2))]) { result in
-                switch result {
-                case .success(_): break
-                case .failure(let error):
-                    print("Image loading failed: \(error)")
-                }
-            }
+            cell.productImage.kf.setImage(with: url)
             cell.productTitle.text = itemData.title
         }
         return cell
