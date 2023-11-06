@@ -74,7 +74,8 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.bookImageView.image = UIImage(named: "bookImage")
             } else {
                 let url = URL(string: bookShop.representImage)
-                cell.bookImageView.kf.setImage(with: url) { result in
+                cell.bookImageView.kf.setImage(with: url, placeholder: UIImage(named: "bookImage_gray"))
+                { result in
                     switch result {
                     case .success:
                         print("successs")
@@ -127,11 +128,11 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             let directions = MKDirections(request: request)
             
             directions.calculate(completionHandler: { response, error in
-//                defer {
-//                    DispatchQueue.main.async { [weak self] in
-//                        self?.refreshControl.stopAnimating()
-//                    }
-//                }
+                //                defer {
+                //                    DispatchQueue.main.async { [weak self] in
+                //                        self?.refreshControl.stopAnimating()
+                //                    }
+                //                }
                 if let error {
                     return print("Error getting directions: \(error.localizedDescription)")
                 }
