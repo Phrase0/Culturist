@@ -35,13 +35,15 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupSubviews()
-        setupConstraints()
-        setShadowColor()
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         setupSubviews()
         setupConstraints()
         setShadowColor()
@@ -74,7 +76,7 @@ class CheckMoreCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setShadowColor() {
+    private func setShadowColor() {
         // Set corner radius for rounded corners
         productView.backgroundColor = .white
         productView.layer.cornerRadius = 8

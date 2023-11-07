@@ -44,14 +44,15 @@ class HomeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
-                // Notify on the main queue when both calls are complete
-                self?.group.notify(queue: .main) {
-                    self?.dataLoaded()
-                }
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
+            }
+            // Notify on the main queue when both calls are complete
+            self.group.notify(queue: .main) { [weak self] in
+                guard let self = self else { return }
+                self.dataLoaded()
             }
             print("loadAPIFromWeb")
         } else {
@@ -61,7 +62,8 @@ class HomeViewController: UIViewController {
             concertDataManager.fetchConcertData()
             exhibitionDataManager.fetchExhibitionData()
             self.group.notify(queue: .main) { [weak self] in
-                self?.dataLoaded()
+                guard let self = self else { return }
+                self.dataLoaded()
             }
             print("loadAPIFromFirebase")
         }
@@ -76,14 +78,11 @@ class HomeViewController: UIViewController {
                 if HomeViewController.loadAPIFromWeb == true {
                     group.enter()
                     group.enter()
-                    // Load data asynchronously
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                        self?.artManager1.getArtProductList(number: "1")
-                        self?.artManager6.getArtProductList(number: "6")
-                        // Notify on the main queue when both calls are complete
-                        self?.group.notify(queue: .main) { [weak self] in
-                            self?.homeTableView.reloadData()
-                        }
+                    self.artManager1.getArtProductList(number: "1")
+                    self.artManager6.getArtProductList(number: "6")
+                    // Notify on the main queue when both calls are complete
+                    self.group.notify(queue: .main) { [weak self] in
+                        self?.homeTableView.reloadData()
                     }
                     print("loadAPIFromWeb")
                 } else {
@@ -111,7 +110,7 @@ class HomeViewController: UIViewController {
             self.searchButton?.isEnabled = true
         }
     }
-
+    
     func setAnimation() {
         view.addSubview(loading)
         loading.snp.makeConstraints { make in

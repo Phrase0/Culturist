@@ -8,26 +8,32 @@
 import UIKit
 import Combine
 
-protocol ArtManagerDelegate {
+protocol ArtManagerDelegate: AnyObject {
     func manager(_ manager: ArtProductManager, didGet artProductList: [ArtDatum])
     func manager(_ manager: ArtProductManager, didFailWith error: Error)
 }
 
 class ArtProductManager {
     
-    var delegate: ArtManagerDelegate?
+    weak var delegate: ArtManagerDelegate?
     
     private var cancellables: Set<AnyCancellable> = []
     
     func getArtProductList(number: String) {
         let urlString = "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
         
-        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: URL(string: urlString)!)) {
+        guard let urlString = URL(string: urlString) else {
+            let error = NSError(domain: "Culturist", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+            self.delegate?.manager(self, didFailWith: error)
+            return }
+        
+        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: urlString)) {
             // Use cached data if available
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
                 DispatchQueue.global(qos: .userInitiated).async {
                     let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.delegate?.manager(self, didGet: filteredData)
                     }
                 }
@@ -35,11 +41,11 @@ class ArtProductManager {
             }
         }
         
-        URLSession.shared.dataTaskPublisher(for: URL(string: urlString)!)
+        URLSession.shared.dataTaskPublisher(for: urlString)
             .tryMap { data, response in
                 // Cache the response
                 let cachedData = CachedURLResponse(response: response, data: data)
-                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: URL(string: urlString)!))
+                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: urlString))
                 return data
             }
             .decode(type: [ArtDatum].self, decoder: JSONDecoder())
@@ -61,7 +67,8 @@ class ArtProductManager {
             }, receiveValue: { artProductList in
                 DispatchQueue.global(qos: .userInitiated).async {
                     let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
                         self.delegate?.manager(self, didGet: filteredData)
                     }
                 }

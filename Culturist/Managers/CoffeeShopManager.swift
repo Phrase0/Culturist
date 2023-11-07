@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-protocol CoffeeShopManagerDelegate {
+protocol CoffeeShopManagerDelegate: AnyObject {
     func manager(_ manager: CoffeeShopManager, didGet CoffeeShopList: [CoffeeShop])
     func manager(_ manager: CoffeeShopManager, didFailWith error: Error)
 }
 
 class CoffeeShopManager {
     
-    var delegate: CoffeeShopManagerDelegate?
+    weak var delegate: CoffeeShopManagerDelegate?
     
     func loadCoffeeShops() {
         // ask for coffeeShop request

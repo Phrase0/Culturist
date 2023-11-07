@@ -23,7 +23,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //performExistingAccountSetupFlows()
+        // performExistingAccountSetupFlows()
     }
     
     @objc private func backButtonTapped() {
@@ -74,6 +74,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             // For the purpose of this app, store the `userIdentifier` in the keychain.
             self.saveUserIdentifierInKeychain(userIdentifier)
             if !KeychainItem.currentUserIdentifier.isEmpty {
+                NotificationCenter.default.post(name: Notification.Name("UserDidSignIn"), object: nil)
                 self.dismiss(animated: true)
             }
         case let passwordCredential as ASPasswordCredential:
@@ -113,6 +114,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         // Show error
         print(error.localizedDescription)
     }
+   
 }
 
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding {

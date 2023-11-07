@@ -35,6 +35,7 @@ class LikeViewController: UIViewController {
         let filteredLikes = self.likeData.compactMap { like in
             if let exhibitionUid = like.exhibitionUid {
                 if let matchingProduct = filteredProducts.first(where: { $0.uid == exhibitionUid }) {
+                    self.noDataNoteLabel.isHidden = true
                     return matchingProduct
                 } else {
                     // If a matching product is not found, delete the likeData.
@@ -47,7 +48,7 @@ class LikeViewController: UIViewController {
         }
         return filteredLikes
     }
-
+    
     lazy var noDataNoteLabel: UILabel = {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
@@ -83,10 +84,10 @@ class LikeViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
             }
             print("loadAPIFromWeb")
         } else {
@@ -198,7 +199,7 @@ extension LikeViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        likeCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 20.0, right: 12.0)
+        likeCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 12.0)
         return flowLayout.itemSize
     }
     
