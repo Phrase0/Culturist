@@ -10,18 +10,18 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 
-protocol FirebaseCollectionDelegate {
+protocol FirebaseCollectionDelegate: AnyObject {
     func manager(_ manager: FirebaseManager, didGet recommendationData: [RecommendationData])
 }
 
-protocol FirebaseLikeDelegate {
+protocol FirebaseLikeDelegate: AnyObject {
     func manager(_ manager: FirebaseManager, didGet likeData: [LikeData])
 }
 
 class FirebaseManager {
     
-    var collectionDelegate:FirebaseCollectionDelegate?
-    var likeDelegate: FirebaseLikeDelegate?
+    weak var collectionDelegate:FirebaseCollectionDelegate?
+    weak var likeDelegate: FirebaseLikeDelegate?
     
     // Get the Firestore database reference
     let db = Firestore.firestore()
@@ -85,25 +85,6 @@ class FirebaseManager {
         }
     }
     
-    //    func readUserData(completion: @escaping (String?) -> Void) {
-    //        // Get the user's document reference
-    //        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-    //        // Get the single document from the subcollection
-    //        userRef.getDocument { (snapshot, error) in
-    //            if let error {
-    //                print("Error getting document: \(error.localizedDescription)")
-    //                completion(nil)
-    //            } else {
-    //                // Check if the document exists and contains a fullName field
-    //                if let document = snapshot, let fullName = document.data()?["fullName"] as? String {
-    //                    completion(fullName)
-    //                } else {
-    //                    completion(nil)
-    //                }
-    //            }
-    //        }
-    //    }
-    
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
@@ -140,17 +121,17 @@ class FirebaseManager {
     
     // MARK: - storeProfileImage
     func storeImage(imageData: Data) {
-        storage.child("images/\(KeychainItem.currentUserIdentifier).png").putData(imageData) { _, error in
+        storage.child("images/\(KeychainItem.currentUserIdentifier).jpg").putData(imageData) { _, error in
             guard error == nil else {
                 print("Failed to upload")
                 return
             }
-            self.storage.child("images/\(KeychainItem.currentUserIdentifier).png").downloadURL { url, error in
+            self.storage.child("images/\(KeychainItem.currentUserIdentifier).jpg").downloadURL { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
                 let urlString = url.absoluteString
-                UserDefaults.standard.set(urlString, forKey: "url")
+                // UserDefaults.standard.set(urlString, forKey: "url")
                 self.addImage(imageUrl: urlString)
             }
         }
@@ -262,66 +243,68 @@ class FirebaseManager {
     }
     
     func readFilterRecommendationData() {
-        let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
-        let recommendationDataCollection = userRef.collection("recommendationData")
-        
-        // search "recommendationData" documents
-        recommendationDataCollection.getDocuments { (querySnapshot, error) in
-            if let error {
-                print("Error fetching recommendationData: \(error)")
-                return
-            }
-            var recommendationDataList = [RecommendationData]()
+        self.deleteRecommendDataIfNeeded { [weak self] in
+            guard let self = self else { return }
             
-            for document in querySnapshot!.documents {
-                let data = document.data()
-                
-                if let exhibitionUid = data["exhibitionUid"] as? String,
-                   let title = data["title"] as? String,
-                   let category = data["category"] as? String,
-                   let location = data["location"] as? String,
-                   let locationName = data["locationName"] as? String {
-                    // add RecommendationData to list
-                    let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
-                    recommendationDataList.append(recommendationData)
-                }
-            }
+            let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+            let recommendationDataCollection = userRef.collection("recommendationData")
             
-            if !recommendationDataList.isEmpty {
-                // calculate every RecommendationData amount
-                var counts = [RecommendationData: Int]()
-                
-                for recommendationData in recommendationDataList {
-                    counts[recommendationData, default: 0] += 1
+            // search "recommendationData" documents
+            recommendationDataCollection.getDocuments { (querySnapshot, error) in
+                if let error {
+                    print("Error fetching recommendationData: \(error)")
+                    return
                 }
+                var recommendationDataList = [RecommendationData]()
                 
-                // find  mostRepeatedData
-                var mostRepeatedData = recommendationDataList[0]
-                var maxCount = counts[mostRepeatedData] ?? 0
-                
-                for (recommendationData, count) in counts {
-                    if count > maxCount {
-                        mostRepeatedData = recommendationData
-                        maxCount = count
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    
+                    if let exhibitionUid = data["exhibitionUid"] as? String,
+                       let title = data["title"] as? String,
+                       let category = data["category"] as? String,
+                       let location = data["location"] as? String,
+                       let locationName = data["locationName"] as? String {
+                        // add RecommendationData to list
+                        let recommendationData = RecommendationData(exhibitionUid: exhibitionUid, title: title, category: category, location: location, locationName: locationName)
+                        recommendationDataList.append(recommendationData)
                     }
                 }
-                // delete too much data
-                self.deleteRecommendDataIfNeeded()
-                // recommend mostRepeatedData
-                self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
-            } else {
-                // if no RecommendationData(two data have same count)，recommend for random
-                if let randomData = recommendationDataList.randomElement() {
-                    self.collectionDelegate?.manager(self, didGet: [randomData])
+                
+                if !recommendationDataList.isEmpty {
+                    // calculate every RecommendationData amount
+                    var counts = [RecommendationData: Int]()
+                    
+                    for recommendationData in recommendationDataList {
+                        counts[recommendationData, default: 0] += 1
+                    }
+                    
+                    // find mostRepeatedData
+                    var mostRepeatedData = recommendationDataList[0]
+                    var maxCount = counts[mostRepeatedData] ?? 0
+                    
+                    for (recommendationData, count) in counts {
+                        if count > maxCount {
+                            mostRepeatedData = recommendationData
+                            maxCount = count
+                        }
+                    }
+                    // recommend mostRepeatedData
+                    self.collectionDelegate?.manager(self, didGet: [mostRepeatedData])
                 } else {
-                    // no data could choose
-                    self.collectionDelegate?.manager(self, didGet: [])
+                    // if no RecommendationData(two data have same count)，recommend for random
+                    if let randomData = recommendationDataList.randomElement() {
+                        self.collectionDelegate?.manager(self, didGet: [randomData])
+                    } else {
+                        // no data could choose
+                        self.collectionDelegate?.manager(self, didGet: [])
+                    }
                 }
             }
         }
     }
     
-    func deleteRecommendDataIfNeeded() {
+    func deleteRecommendDataIfNeeded(completion: @escaping () -> Void) {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
         let recommendationDataCollection = userRef.collection("recommendationData")
         
@@ -329,11 +312,12 @@ class FirebaseManager {
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
             if let error {
                 print("Error fetching recommendationData: \(error)")
+                completion()
                 return
             }
             
-            // If the recommendation data count exceeds 20, we need to delete the earliest data
-            if querySnapshot!.documents.count > 20 {
+            // If the recommendation data count exceeds 10, we need to delete the earliest data
+            if querySnapshot!.documents.count > 10 {
                 // Sort documents in ascending order based on timestamp
                 let sortedDocuments = querySnapshot!.documents.sorted(by: { (doc1, doc2) -> Bool in
                     if let timestamp1 = doc1["timestamp"] as? Timestamp, let timestamp2 = doc2["timestamp"] as? Timestamp {
@@ -343,7 +327,7 @@ class FirebaseManager {
                 })
                 
                 // Calculate the number of documents to delete
-                let deleteCount = querySnapshot!.documents.count - 20
+                let deleteCount = querySnapshot!.documents.count - 10
                 
                 // Delete the earliest documents
                 for i in 0..<deleteCount {
@@ -355,9 +339,9 @@ class FirebaseManager {
                     }
                 }
             }
+            completion()
         }
     }
-    
     // ---------------------------------------------------
     // MARK: - LikeCollection
     func addLikeData(likeData: LikeData) {

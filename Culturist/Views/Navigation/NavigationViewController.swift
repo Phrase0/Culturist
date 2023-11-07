@@ -94,6 +94,10 @@ class NavigationViewController: UIViewController {
         sceneLocationView.frame = contentView.bounds
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - functions
     func setCloseButton() {
         // closeBtn
@@ -114,7 +118,7 @@ class NavigationViewController: UIViewController {
             make.height.equalTo(40)
         }
     }
-
+    
     func setCorner() {
         mapView.layer.cornerRadius = 20
         mapView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

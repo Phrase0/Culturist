@@ -32,9 +32,9 @@ class SettingViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+            NotificationCenter.default.post(name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
             self.goBackToRootVC()
         }))
-        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -45,6 +45,8 @@ class SettingViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
             self.firebaseManager.removeUserData()
+            // UserDefaults.standard.removeObject(forKey: "url")
+            NotificationCenter.default.post(name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
             self.goBackToRootVC()
         }))
         

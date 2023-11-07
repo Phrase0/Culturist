@@ -102,7 +102,6 @@ extension AnimationTableViewCell: UICollectionViewDelegate, UICollectionViewData
         let url = URL(string: itemData.imageURL)
         cell.animationImage.kf.setImage(with: url)
         cell.productTitle.text = itemData.title
-        
         self.animationCollectionView.animateCell(cell)
         
         return cell

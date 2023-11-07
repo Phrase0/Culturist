@@ -93,7 +93,7 @@ extension CheckMoreViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.itemSize = CGSize(width: width, height: width * 11/7)
         
         // Set content insets
-        checkMoreCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 20.0, right: 12.0)
+        checkMoreCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 15.0, right: 12.0)
         return flowLayout.itemSize
     }
     

@@ -83,10 +83,10 @@ class RecommendViewController: UIViewController {
             artManager6.delegate = self
             group.enter()
             group.enter()
-            // Load data asynchronously
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.artManager1.getArtProductList(number: "1")
-                self?.artManager6.getArtProductList(number: "6")
+                guard let self = self else { return }
+                self.artManager1.getArtProductList(number: "1")
+                self.artManager6.getArtProductList(number: "6")
             }
             print("loadAPIFromWeb")
         } else {
@@ -128,15 +128,12 @@ class RecommendViewController: UIViewController {
                 if HomeViewController.loadAPIFromWeb == true {
                     group.enter()
                     group.enter()
-                    // Load data asynchronously
-                    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                        self?.artManager1.getArtProductList(number: "1")
-                        self?.artManager6.getArtProductList(number: "6")
-                        // Notify on the main queue when both calls are complete
-                        self?.group.notify(queue: .main) {
-                            DispatchQueue.main.async {
-                                self?.recommendCollectionView.reloadData()
-                            }
+                    self.artManager1.getArtProductList(number: "1")
+                    self.artManager6.getArtProductList(number: "6")
+                    // Notify on the main queue when both calls are complete
+                    self.group.notify(queue: .main) {
+                        DispatchQueue.main.async {
+                            self.recommendCollectionView.reloadData()
                         }
                     }
                     print("loadAPIFromWeb")
@@ -268,7 +265,7 @@ extension  RecommendViewController: UICollectionViewDelegateFlowLayout {
         flowLayout.minimumLineSpacing = lineSpace
         flowLayout.itemSize = CGSize(width: width, height: width * 105/75)
         // Set content insets
-        recommendCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 40.0, bottom: 40.0, right: 40.0)
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 40.0, bottom: 30.0, right: 40.0)
         return flowLayout.itemSize
     }
     
