@@ -53,7 +53,7 @@ class LikeViewController: UIViewController {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
         noDataNoteLabel.textColor = .B2
-        noDataNoteLabel.text = "開始添加展覽到您的收藏清單吧"
+        noDataNoteLabel.text = NSLocalizedString("開始添加展覽到您的收藏清單吧")
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noDataNoteLabel.font = pingFangFont
         } else {
