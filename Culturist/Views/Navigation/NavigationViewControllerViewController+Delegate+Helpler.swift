@@ -75,8 +75,8 @@ extension NavigationViewController: ARSCNViewDelegate {
 @available(iOS 11.0, *)
 extension NavigationViewController: ARSessionDelegate {
     func session(_ session: ARSession, didFailWithError error: Error) {
-        let alertController = UIAlertController(title: "警告", message: "內存空間不足，請關閉AR導航，重新啟動", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+        let alertController = UIAlertController(title: NSLocalizedString("警告"), message: NSLocalizedString("內存空間不足，請關閉AR導航，重新啟動"), preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("確定"), style: .default, handler: { _ in
             self.dismiss(animated: true)
         }))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in

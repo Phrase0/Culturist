@@ -88,7 +88,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         // Get the user's current location
         guard let userLocation = locationManager.location else {
             // If unable to retrieve the user's location, display an error message
-            showAlert(message: "無法找到您目前的位置")
+            showAlert(message: NSLocalizedString("無法找到您目前的位置"))
             return
         }
         
@@ -104,7 +104,7 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         
         // If the distance is greater than 5 kilometers, display a warning
         if distanceInKilometers > 3.0 {
-            showAlert(message: "超出可導航範圍，請重新選取鄰近的咖啡館")
+            showAlert(message: NSLocalizedString("超出可導航範圍，請重新選取鄰近的咖啡館"))
         } else {
             // refreshControl.startAnimating()
             let request = MKDirections.Request()
@@ -145,8 +145,8 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func showAlert(message: String) {
-        let alertController = UIAlertController(title: "警告", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
+        let alertController = UIAlertController(title: NSLocalizedString("警告"), message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("確定"), style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 }

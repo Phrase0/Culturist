@@ -27,11 +27,11 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func signOutButtonPressed(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "登出",
-                                                message: "您確定要登出嗎？",
+        let alertController = UIAlertController(title: NSLocalizedString("登出"),
+                                                message: NSLocalizedString("您確定要登出嗎？"),
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("取消"), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("確定"), style: .default, handler: { _ in
             NotificationCenter.default.post(name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
             self.goBackToRootVC()
         }))
@@ -39,11 +39,11 @@ class SettingViewController: UIViewController {
     }
     
     @IBAction func deleteAccountTapped(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "刪除帳號",
-                                                message: "您確定要刪除帳號嗎？",
+        let alertController = UIAlertController(title: NSLocalizedString("刪除帳號"),
+                                                message: NSLocalizedString("您確定要刪除帳號嗎？"),
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "確定", style: .default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("取消"), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("確定"), style: .default, handler: { _ in
             self.firebaseManager.removeUserData()
             // UserDefaults.standard.removeObject(forKey: "url")
             NotificationCenter.default.post(name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
