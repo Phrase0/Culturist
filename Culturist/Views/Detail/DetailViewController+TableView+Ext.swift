@@ -283,7 +283,7 @@ extension DetailViewController: EKEventEditViewDelegate, UINavigationControllerD
         dismiss(animated: true, completion: nil)
         if action == .saved {
             // Event is saved, show a success message
-            let alert = UIAlertController(title: nil, message: "儲存成功，已加入行事曆", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: NSLocalizedString("儲存成功，已加入行事曆"), preferredStyle: .alert)
             present(alert, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 alert.dismiss(animated: true, completion: nil)

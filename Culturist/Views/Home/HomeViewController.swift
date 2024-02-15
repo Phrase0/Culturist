@@ -186,10 +186,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             buttonTag = 1
-            return headerView(title: "音樂")
+            return headerView(title: NSLocalizedString("音樂"))
         } else if section == 2 {
             buttonTag = 2
-            return headerView(title: "展覽")
+            return headerView(title: NSLocalizedString("展覽"))
         }
         return UIView()
     }
@@ -214,7 +214,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // add button
         let headButton = UIButton()
         headButton.setTitleColor(UIColor.GR0, for: .normal)
-        headButton.setTitle("查看更多 >", for: .normal)
+        headButton.setTitle(NSLocalizedString("查看更多 >"), for: .normal)
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 15) {
             headButton.titleLabel?.font = pingFangFont
         } else {
@@ -255,10 +255,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let section = sender.tag
         if section == 1 {
             checkMoreVC.result = artProducts1
-            checkMoreVC.navigationItemTitle = "音樂"
+            checkMoreVC.navigationItemTitle = NSLocalizedString("音樂")
         } else {
             checkMoreVC.result = artProducts6
-            checkMoreVC.navigationItemTitle = "展覽"
+            checkMoreVC.navigationItemTitle = NSLocalizedString("展覽")
         }
         navigationController?.pushViewController(checkMoreVC, animated: true)
     }

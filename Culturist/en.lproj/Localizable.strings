@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  Culturist
+
+  Created by Peiyun on 2024/2/15.
+  
+*/
+"音樂" = "Concert";
+"展覽" = "Exhibition";
+"查看更多 >" = "check more >";
+"找尋您感興趣的音樂會跟展覽" = "Search for concerts and exhibitions";
+"抱歉，未找到符合條件的搜尋結果" = "Sorry, no search results matching";
+"搜尋" = "Search";
+"音樂會或展覽" = "concerts or exhibitions";
+"取消" = "Cancel";
+"請搜尋音樂會或展覽" = "Please search for concerts and exhibitions";
+"儲存成功，已加入行事曆" = "Save successfully, added to calendar.";
+"無法找到您目前的位置" = "Unable to find your current location.";
+"超出可導航範圍，請重新選取鄰近的咖啡館" = "Beyond navigable range, please select a nearby café again.";
+"警告" = "Warning";
+"確定" = "OK";
+"無法找到您目前的位置" = "Unable to find your current location.";
+"超出可導航範圍，請重新選取鄰近的書店" = "Beyond navigable range, please reselect a nearby bookstore.";
+"內存空間不足，請關閉AR導航，重新啟動" = "Insufficient storage space, please close AR navigation and restart.";
+"登出" = "Log out";
+"您確定要登出嗎？" = "Are you sure to log out?";
+"取消" = "Cancel";
+"刪除帳號" = "Delete account";
+"您確定要刪除帳號嗎？" = "Are you sure to delete your account?";
+"開始添加展覽到您的收藏清單吧" = "Begin adding exhibitions to your collection";
