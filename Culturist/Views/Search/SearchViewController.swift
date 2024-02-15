@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
         let noDataNoteLabel = UILabel()
         noDataNoteLabel.numberOfLines = 1
         noDataNoteLabel.textColor = .B2
-        noDataNoteLabel.text = "找尋您感興趣的音樂會跟展覽"
+        noDataNoteLabel.text = NSLocalizedString("找尋您感興趣的音樂會跟展覽")
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noDataNoteLabel.font = pingFangFont
         } else {
@@ -43,7 +43,7 @@ class SearchViewController: UIViewController {
         let noResultNoteLabel = UILabel()
         noResultNoteLabel.numberOfLines = 1
         noResultNoteLabel.textColor = .B2
-        noResultNoteLabel.text = "抱歉，未找到符合條件的搜尋結果"
+        noResultNoteLabel.text = NSLocalizedString("抱歉，未找到符合條件的搜尋結果")
         if let pingFangFont = UIFont(name: "PingFangTC-Regular", size: 17) {
             noResultNoteLabel.font = pingFangFont
         } else {
@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         settingSearchController()
-        navigationItem.title = "搜尋"
+        navigationItem.title = NSLocalizedString("搜尋")
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .GR0
@@ -224,7 +224,7 @@ extension SearchViewController: UISearchResultsUpdating {
         mySearchController.hidesNavigationBarDuringPresentation = false
         mySearchController.searchResultsUpdater = self
         let searchBar = mySearchController.searchBar
-        searchBar.placeholder = "音樂會或展覽"
+        searchBar.placeholder = NSLocalizedString("音樂會或展覽")
         searchBar.searchBarStyle = .prominent
         searchBar.delegate = self
         // Configure the appearance of the search bar
@@ -237,7 +237,7 @@ extension SearchViewController: UISearchResultsUpdating {
         // Color for the cancel button
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .GR2
         // Customize the title of the cancel button
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "取消"
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = NSLocalizedString("取消")
         
     }
     
@@ -288,7 +288,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         noDataNoteLabel.isHidden = false
-        noDataNoteLabel.text = "請搜尋音樂會或展覽"
+        noDataNoteLabel.text = NSLocalizedString("請搜尋音樂會或展覽")
         setUpBtn()
     }
 }

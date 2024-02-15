@@ -1,0 +1,207 @@
+
+/* Class = "UIButton"; configuration.title = "刪除帳號"; ObjectID = "0G4-pc-a9U"; */
+"0G4-pc-a9U.configuration.title" = "刪除帳號";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0G4-pc-a9U"; */
+"0G4-pc-a9U.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "首頁"; ObjectID = "0g2-yv-RLo"; */
+"0g2-yv-RLo.title" = "首頁";
+
+/* Class = "UILabel"; text = "tasty"; ObjectID = "1YK-9e-JVD"; */
+"1YK-9e-JVD.text" = "tasty";
+
+/* Class = "UILabel"; text = "title"; ObjectID = "1aV-Wk-NrT"; */
+"1aV-Wk-NrT.text" = "title";
+
+/* Class = "UIButton"; configuration.title = "登出"; ObjectID = "2td-iR-w6b"; */
+"2td-iR-w6b.configuration.title" = "登出";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "2td-iR-w6b"; */
+"2td-iR-w6b.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "通常有位"; ObjectID = "3BR-Zb-DtB"; */
+"3BR-Zb-DtB.text" = "通常有位";
+
+/* Class = "UILabel"; text = "phone"; ObjectID = "59A-C2-sPZ"; */
+"59A-C2-sPZ.text" = "phone";
+
+/* Class = "UITabBarItem"; title = "我的"; ObjectID = "5hM-1E-Shh"; */
+"5hM-1E-Shh.title" = "我的";
+
+/* Class = "UILabel"; text = "socket"; ObjectID = "6dM-B7-Bp1"; */
+"6dM-B7-Bp1.text" = "socket";
+
+/* Class = "UILabel"; text = "Label\nLabel"; ObjectID = "6mE-hg-BKt"; */
+"6mE-hg-BKt.text" = "Label\nLabel";
+
+/* Class = "UILabel"; text = "cheap"; ObjectID = "8Jr-hy-1im"; */
+"8Jr-hy-1im.text" = "cheap";
+
+/* Class = "UILabel"; text = "音樂"; ObjectID = "A2O-8s-Peo"; */
+"A2O-8s-Peo.text" = "音樂";
+
+/* Class = "UILabel"; text = "address"; ObjectID = "BH5-HT-2Nh"; */
+"BH5-HT-2Nh.text" = "address";
+
+/* Class = "UILabel"; text = "locationName"; ObjectID = "BLB-fj-jlp"; */
+"BLB-fj-jlp.text" = "locationName";
+
+/* Class = "UILabel"; text = "music"; ObjectID = "CeB-Ij-Yrj"; */
+"CeB-Ij-Yrj.text" = "music";
+
+/* Class = "UILabel"; text = "intro"; ObjectID = "Df6-Bd-sZV"; */
+"Df6-Bd-sZV.text" = "intro";
+
+/* Class = "UILabel"; text = "評分等級"; ObjectID = "Djk-Sc-4Qp"; */
+"Djk-Sc-4Qp.text" = "評分等級";
+
+/* Class = "UIButton"; configuration.title = "音樂"; ObjectID = "FGa-PO-t9N"; */
+"FGa-PO-t9N.configuration.title" = "音樂";
+
+/* Class = "UIButton"; normalTitle = "音樂"; ObjectID = "FGa-PO-t9N"; */
+"FGa-PO-t9N.normalTitle" = "音樂";
+
+/* Class = "UILabel"; text = "熱門搜尋"; ObjectID = "Fa4-Xz-8w9"; */
+"Fa4-Xz-8w9.text" = "熱門搜尋";
+
+/* Class = "UILabel"; text = "maybe"; ObjectID = "HoC-lz-FXQ"; */
+"HoC-lz-FXQ.text" = "maybe";
+
+/* Class = "UILabel"; text = "data"; ObjectID = "Ibn-wB-uP1"; */
+"Ibn-wB-uP1.text" = "data";
+
+/* Class = "UILabel"; text = "店家資訊"; ObjectID = "JYk-fa-Yln"; */
+"JYk-fa-Yln.text" = "店家資訊";
+
+/* Class = "UILabel"; text = "東西好吃"; ObjectID = "KfT-od-Qnm"; */
+"KfT-od-Qnm.text" = "東西好吃";
+
+/* Class = "UILabel"; text = "address"; ObjectID = "KpQ-Aq-fD9"; */
+"KpQ-Aq-fD9.text" = "address";
+
+/* Class = "UILabel"; text = "opentime"; ObjectID = "Mb8-QD-8Fr"; */
+"Mb8-QD-8Fr.text" = "opentime";
+
+/* Class = "UILabel"; text = "有無插座"; ObjectID = "MuT-Lb-SwJ"; */
+"MuT-Lb-SwJ.text" = "有無插座";
+
+/* Class = "UIButton"; configuration.title = "探索書店 "; ObjectID = "Oab-pH-xdy"; */
+"Oab-pH-xdy.configuration.title" = "探索書店 ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Oab-pH-xdy"; */
+"Oab-pH-xdy.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "臺中"; ObjectID = "Q83-kX-cfN"; */
+"Q83-kX-cfN.configuration.title" = "臺中";
+
+/* Class = "UIButton"; normalTitle = "臺中"; ObjectID = "Q83-kX-cfN"; */
+"Q83-kX-cfN.normalTitle" = "臺中";
+
+/* Class = "UILabel"; text = "address"; ObjectID = "RVB-Od-RM1"; */
+"RVB-Od-RM1.text" = "address";
+
+/* Class = "UITabBarItem"; title = "收藏"; ObjectID = "T48-js-v7F"; */
+"T48-js-v7F.title" = "收藏";
+
+/* Class = "UILabel"; text = "opentime"; ObjectID = "U3F-Np-X7R"; */
+"U3F-Np-X7R.text" = "opentime";
+
+/* Class = "UILabel"; text = "seat"; ObjectID = "W1N-G5-JDc"; */
+"W1N-G5-JDc.text" = "seat";
+
+/* Class = "UILabel"; text = "我的行事曆"; ObjectID = "Z10-zY-o7q"; */
+"Z10-zY-o7q.text" = "我的行事曆";
+
+/* Class = "UILabel"; text = "wifi穩定"; ObjectID = "ZMk-eL-21z"; */
+"ZMk-eL-21z.text" = "wifi穩定";
+
+/* Class = "UILabel"; text = "Start Time Label"; ObjectID = "cO2-Pv-l6m"; */
+"cO2-Pv-l6m.text" = "Start Time Label";
+
+/* Class = "UILabel"; text = "price"; ObjectID = "cQk-Xd-gUq"; */
+"cQk-Xd-gUq.text" = "price";
+
+/* Class = "UILabel"; text = "價格便宜"; ObjectID = "dBz-3f-olg"; */
+"dBz-3f-olg.text" = "價格便宜";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "dte-An-pO7"; */
+"dte-An-pO7.normalTitle" = "Today";
+
+/* Class = "UIButton"; configuration.title = "臺北"; ObjectID = "eso-ZD-Ur2"; */
+"eso-ZD-Ur2.configuration.title" = "臺北";
+
+/* Class = "UIButton"; normalTitle = "臺北"; ObjectID = "eso-ZD-Ur2"; */
+"eso-ZD-Ur2.normalTitle" = "臺北";
+
+/* Class = "UIButton"; configuration.title = "畫展"; ObjectID = "hFh-MG-CrD"; */
+"hFh-MG-CrD.configuration.title" = "畫展";
+
+/* Class = "UIButton"; normalTitle = "畫展"; ObjectID = "hFh-MG-CrD"; */
+"hFh-MG-CrD.normalTitle" = "畫展";
+
+/* Class = "UILabel"; text = "IN 4 DAYS"; ObjectID = "hum-Vs-p4g"; */
+"hum-Vs-p4g.text" = "IN 4 DAYS";
+
+/* Class = "UILabel"; text = "有無限時"; ObjectID = "juK-Zd-qGx"; */
+"juK-Zd-qGx.text" = "有無限時";
+
+/* Class = "UILabel"; text = "wifi"; ObjectID = "kBU-T6-5EK"; */
+"kBU-T6-5EK.text" = "wifi";
+
+/* Class = "UILabel"; text = " - "; ObjectID = "kbd-Ot-utv"; */
+"kbd-Ot-utv.text" = " - ";
+
+/* Class = "UILabel"; text = "Meeting with a team"; ObjectID = "lEe-Pd-bZN"; */
+"lEe-Pd-bZN.text" = "Meeting with a team";
+
+/* Class = "UILabel"; text = "all-day"; ObjectID = "lKF-ys-qLa"; */
+"lKF-ys-qLa.text" = "all-day";
+
+/* Class = "UILabel"; text = "quiet"; ObjectID = "lu4-X5-gBa"; */
+"lu4-X5-gBa.text" = "quiet";
+
+/* Class = "UILabel"; text = "帳戶設定"; ObjectID = "ncL-i8-QDq"; */
+"ncL-i8-QDq.text" = "帳戶設定";
+
+/* Class = "UILabel"; text = "title"; ObjectID = "ndJ-9q-HJp"; */
+"ndJ-9q-HJp.text" = "title";
+
+/* Class = "UILabel"; text = "title"; ObjectID = "oBr-fE-PAI"; */
+"oBr-fE-PAI.text" = "title";
+
+/* Class = "UITabBarItem"; title = "推薦"; ObjectID = "oz3-Oj-t6x"; */
+"oz3-Oj-t6x.title" = "推薦";
+
+/* Class = "UILabel"; text = "安靜程度"; ObjectID = "quU-c5-LcJ"; */
+"quU-c5-LcJ.text" = "安靜程度";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rrD-Rs-e7v"; */
+"rrD-Rs-e7v.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "探索咖啡店"; ObjectID = "t7E-Uv-1dp"; */
+"t7E-Uv-1dp.configuration.title" = "探索咖啡店";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "t7E-Uv-1dp"; */
+"t7E-Uv-1dp.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "endtime"; ObjectID = "uGF-Gu-guP"; */
+"uGF-Gu-guP.text" = "endtime";
+
+/* Class = "UILabel"; text = "為你推薦"; ObjectID = "vPM-SI-CNq"; */
+"vPM-SI-CNq.text" = "為你推薦";
+
+/* Class = "UIButton"; normalTitle = "  Sign in with Apple"; ObjectID = "vQ3-M4-lug"; */
+"vQ3-M4-lug.normalTitle" = "  Sign in with Apple";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "waa-ue-cTV"; */
+"waa-ue-cTV.text" = "Label";
+
+/* Class = "UILabel"; text = "我的收藏"; ObjectID = "wbT-DR-eco"; */
+"wbT-DR-eco.text" = "我的收藏";
+
+/* Class = "UILabel"; text = "裝潢音樂"; ObjectID = "yaV-gJ-0Kd"; */
+"yaV-gJ-0Kd.text" = "裝潢音樂";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "z07-rb-iTE"; */
+"z07-rb-iTE.normalTitle" = "Button";

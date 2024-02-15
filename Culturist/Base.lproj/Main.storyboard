@@ -106,12 +106,12 @@
                         <viewLayoutGuide key="safeArea" id="WEY-B2-OW4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="982-PK-XFR" firstAttribute="leading" secondItem="WEY-B2-OW4" secondAttribute="leading" constant="20" id="0aX-im-ZRp"/>
                             <constraint firstItem="Raz-Jg-dh5" firstAttribute="leading" secondItem="Tsb-Mn-4vV" secondAttribute="leading" id="Kx4-p2-EP0"/>
                             <constraint firstAttribute="trailing" secondItem="Raz-Jg-dh5" secondAttribute="trailing" id="QiT-cj-9rz"/>
                             <constraint firstItem="982-PK-XFR" firstAttribute="top" secondItem="Fa4-Xz-8w9" secondAttribute="bottom" constant="10" id="Sbi-br-BBo"/>
                             <constraint firstItem="Fa4-Xz-8w9" firstAttribute="leading" secondItem="WEY-B2-OW4" secondAttribute="leading" constant="20" id="Yp0-oe-Wpn"/>
                             <constraint firstItem="Fa4-Xz-8w9" firstAttribute="top" secondItem="WEY-B2-OW4" secondAttribute="top" id="cQC-jL-tQc"/>
-                            <constraint firstItem="982-PK-XFR" firstAttribute="leading" secondItem="WEY-B2-OW4" secondAttribute="leading" constant="20" id="idr-Oh-zH8"/>
                             <constraint firstItem="Raz-Jg-dh5" firstAttribute="top" secondItem="982-PK-XFR" secondAttribute="bottom" constant="20" id="rhO-Ju-ekr"/>
                             <constraint firstItem="WEY-B2-OW4" firstAttribute="bottom" secondItem="Raz-Jg-dh5" secondAttribute="bottom" id="xdr-mF-Gpq"/>
                         </constraints>

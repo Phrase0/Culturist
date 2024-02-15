@@ -58,6 +58,8 @@
 		F8B816B62AB83C5B0016F4BB /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B52AB83C5B0016F4BB /* LikeViewController.swift */; };
 		F8B816BA2AB871860016F4BB /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */; };
 		F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift */; };
+		F8CE734E2B7E5CC1002A4E63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F8CE73502B7E5CC1002A4E63 /* Localizable.strings */; };
+		F8CE73532B7E5D02002A4E63 /* NSLocalizedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE73522B7E5D02002A4E63 /* NSLocalizedString+Extension.swift */; };
 		F8D2460B2AB328E100521C5E /* CoffeeShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */; };
 		F8D2460E2AB32E0100521C5E /* CoffeeShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */; };
 		F8FAA6032AE12FD9001A5329 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */; };
@@ -168,6 +170,12 @@
 		F8B816B92AB871860016F4BB /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8B816F52AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationViewControllerViewController+Delegate+Helpler.swift"; sourceTree = "<group>"; };
 		F8BC6EB12AC32DFB0091DF4F /* CulturistRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CulturistRelease.entitlements; sourceTree = "<group>"; };
+		F8CE73482B7E5759002A4E63 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		F8CE73492B7E575A002A4E63 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		F8CE734B2B7E577A002A4E63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F8CE734F2B7E5CC1002A4E63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F8CE73512B7E5CC5002A4E63 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F8CE73522B7E5D02002A4E63 /* NSLocalizedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocalizedString+Extension.swift"; sourceTree = "<group>"; };
 		F8D2460A2AB328E100521C5E /* CoffeeShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopViewController.swift; sourceTree = "<group>"; };
 		F8D2460D2AB32E0100521C5E /* CoffeeShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShopTableViewCell.swift; sourceTree = "<group>"; };
 		F8FAA6022AE12FD9001A5329 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
@@ -315,6 +323,7 @@
 				F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */,
 				F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */,
 				F82A34F32AB2AC4C004FF247 /* Main.storyboard */,
+				F8CE73502B7E5CC1002A4E63 /* Localizable.strings */,
 				F88EDD412ABC1DA20061AA18 /* Extension */,
 				F82A35092AB2B8BF004FF247 /* Models */,
 				F851F7512AB6136B0029C78E /* Managers */,
@@ -409,6 +418,7 @@
 				F88EDD422ABC1DBA0061AA18 /* EventKit+Extension.swift */,
 				F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */,
 				F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */,
+				F8CE73522B7E5D02002A4E63 /* NSLocalizedString+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -675,6 +685,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = F82A34E12AB2AC4C004FF247;
 			productRefGroup = F82A34EB2AB2AC4C004FF247 /* Products */;
@@ -699,6 +710,7 @@
 				F82A35132AB2DDC5004FF247 /* .swiftlint.yml in Resources */,
 				F85E30382ACE4A4200622014 /* culturist_lcon_small.png in Resources */,
 				F82A34FA2AB2AC4D004FF247 /* LaunchScreen.storyboard in Resources */,
+				F8CE734E2B7E5CC1002A4E63 /* Localizable.strings in Resources */,
 				F883BEB62AC552CB00437C1D /* GoogleService-Info.plist in Resources */,
 				F82A34F72AB2AC4D004FF247 /* Assets.xcassets in Resources */,
 				F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */,
@@ -869,6 +881,7 @@
 				F8AAC8912ADB9979007C4F20 /* CustomAnnotation.swift in Sources */,
 				F83E4C292ABEC66A000E2DAC /* ProductTableViewCell.swift in Sources */,
 				F8B816F62AB99A250016F4BB /* NavigationViewControllerViewController+Delegate+Helpler.swift in Sources */,
+				F8CE73532B7E5D02002A4E63 /* NSLocalizedString+Extension.swift in Sources */,
 				F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */,
 				F82A350B2AB2B8FD004FF247 /* BookShop.swift in Sources */,
 				F80D8D5E2ABFF600009195B2 /* SearchCollectionViewCell.swift in Sources */,
@@ -954,6 +967,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				F82A34F42AB2AC4C004FF247 /* Base */,
+				F8CE73482B7E5759002A4E63 /* zh-Hant */,
+				F8CE734B2B7E577A002A4E63 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -962,8 +977,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				F82A34F92AB2AC4D004FF247 /* Base */,
+				F8CE73492B7E575A002A4E63 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F8CE73502B7E5CC1002A4E63 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8CE734F2B7E5CC1002A4E63 /* en */,
+				F8CE73512B7E5CC5002A4E63 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -973,6 +998,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1033,6 +1059,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1091,7 +1118,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1135,7 +1162,7 @@
 				CODE_SIGN_ENTITLEMENTS = Culturist/CulturistRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VLTRC7L6R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Culturist/Info.plist;
