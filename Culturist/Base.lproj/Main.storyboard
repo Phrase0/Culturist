@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1474,7 +1475,37 @@ Label</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7a-sU-8Px" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5650" y="1111"/>
+            <point key="canvasLocation" x="5649" y="1418"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="bUS-q3-w9d">
+            <objects>
+                <viewController id="2zU-LC-iyr" customClass="MapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D6A-SB-lJs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhL-L4-FVd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G81-OH-byi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OhL-L4-FVd" firstAttribute="leading" secondItem="D6A-SB-lJs" secondAttribute="leading" id="4Dh-J7-cWZ"/>
+                            <constraint firstAttribute="trailing" secondItem="OhL-L4-FVd" secondAttribute="trailing" id="Qjl-o9-F7z"/>
+                            <constraint firstAttribute="bottom" secondItem="OhL-L4-FVd" secondAttribute="bottom" id="bRh-p7-Wo6"/>
+                            <constraint firstItem="OhL-L4-FVd" firstAttribute="top" secondItem="D6A-SB-lJs" secondAttribute="top" id="g2k-9W-uXn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="OhL-L4-FVd" id="8cT-zh-9WH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0S-L2-ltb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5648.8000000000002" y="678.32512315270935"/>
         </scene>
         <!--首頁-->
         <scene sceneID="ckV-0z-aXN">

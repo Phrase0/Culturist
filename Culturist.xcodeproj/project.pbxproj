@@ -17,6 +17,7 @@
 		F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */; };
 		F820B83E2ABC46B100900DB4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */; };
 		F820B8422ABCA57400900DB4 /* CulturistTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */; };
+		F8214EDB2B98A4B8003F4213 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8214EDA2B98A4B8003F4213 /* MapViewController.swift */; };
 		F82A34EE2AB2AC4C004FF247 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */; };
 		F82A34F02AB2AC4C004FF247 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */; };
 		F82A34F52AB2AC4C004FF247 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F82A34F32AB2AC4C004FF247 /* Main.storyboard */; };
@@ -124,6 +125,7 @@
 		F820B83B2ABC466300900DB4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F820B83D2ABC46B100900DB4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F820B8412ABCA57400900DB4 /* CulturistTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulturistTabBarController.swift; sourceTree = "<group>"; };
+		F8214EDA2B98A4B8003F4213 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F82A34EA2AB2AC4C004FF247 /* Culturist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culturist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F82A34ED2AB2AC4C004FF247 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F82A34EF2AB2AC4C004FF247 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +284,14 @@
 				F81E8CE62ACA6E76002AED22 /* KeychainItem.swift */,
 			);
 			path = SignIn;
+			sourceTree = "<group>";
+		};
+		F8214ED92B98A4A8003F4213 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F8214EDA2B98A4B8003F4213 /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		F82A34E12AB2AC4C004FF247 = {
@@ -473,6 +483,7 @@
 				F8D2460C2AB328EA00521C5E /* CoffeeShop */,
 				F851F7412AB35F5F0029C78E /* BookShop */,
 				F8447A232AB9CE0B00471552 /* Navigation */,
+				F8214ED92B98A4A8003F4213 /* Map */,
 				F8A14E7A2ACF0C4D009A9291 /* Like */,
 				F8B816B22AB83B7D0016F4BB /* Profile */,
 				F81E8C772AC95F8D002AED22 /* SignIn */,
@@ -854,6 +865,7 @@
 				F8FED9BA2AC47D8B00273B23 /* JsonNameEnum.swift in Sources */,
 				F83E4C272ABEC65B000E2DAC /* AnimationTableViewCell.swift in Sources */,
 				F851F7662AB709250029C78E /* FirebaseData.swift in Sources */,
+				F8214EDB2B98A4B8003F4213 /* MapViewController.swift in Sources */,
 				F820B83C2ABC466300900DB4 /* UIColor+Extension.swift in Sources */,
 				F851F75A2AB6B6650029C78E /* RecommendCollectionViewCell.swift in Sources */,
 				F81E8CE72ACA6E76002AED22 /* KeychainItem.swift in Sources */,
