@@ -432,10 +432,10 @@ Label</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dte-An-pO7">
-                                <rect key="frame" x="279" y="206.66666666666666" width="46" height="33"/>
+                                <rect key="frame" x="290" y="206.66666666666666" width="35" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Today">
+                                <state key="normal" title="今天">
                                     <color key="titleColor" name="GR1"/>
                                 </state>
                                 <connections>
