@@ -16,15 +16,18 @@
 "請搜尋音樂會或展覽" = "Please search for concerts and exhibitions";
 "儲存成功，已加入行事曆" = "Save successfully, added to calendar.";
 "無法找到您目前的位置" = "Unable to find your current location.";
-"超出可導航範圍，請重新選取鄰近的咖啡館" = "Beyond navigable range, please select a nearby café again.";
+"超出可導航範圍，請重新選取鄰近的咖啡廳" = "Beyond navigable range, please select a nearby café again.";
 "警告" = "Warning";
 "確定" = "OK";
 "無法找到您目前的位置" = "Unable to find your current location.";
-"超出可導航範圍，請重新選取鄰近的書店" = "Beyond navigable range, please reselect a nearby bookstore.";
+"超出可導航範圍，請重新選取鄰近的書店" = "Beyond navigable range, please reselect a nearby bookshop again.";
 "內存空間不足，請關閉AR導航，重新啟動" = "Insufficient storage space, please close AR navigation and restart.";
 "登出" = "Log out";
-"您確定要登出嗎？" = "Are you sure to log out?";
+"您確定要登出嗎？" = "Are you sure you want to log out?";
 "取消" = "Cancel";
 "刪除帳號" = "Delete account";
-"您確定要刪除帳號嗎？" = "Are you sure to delete your account?";
+"您確定要刪除帳號嗎？" = "Are you sure you want to delete your account?";
 "開始添加展覽到您的收藏清單吧" = "Begin adding exhibitions to your collection";
+
+"刪除行程" = "Delete Event";
+"確定要刪除此行程嗎？" = "Are you sure you want to delete this event?";
