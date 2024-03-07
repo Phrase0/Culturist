@@ -125,7 +125,7 @@
 /* Class = "UILabel"; text = "價格便宜"; ObjectID = "dBz-3f-olg"; */
 "dBz-3f-olg.text" = "價格便宜";
 
-/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "dte-An-pO7"; */
+/* Class = "UIButton"; normalTitle = "今天"; ObjectID = "dte-An-pO7"; */
 "dte-An-pO7.normalTitle" = "Today";
 
 /* Class = "UIButton"; configuration.title = "臺北"; ObjectID = "eso-ZD-Ur2"; */
@@ -179,8 +179,8 @@
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "rrD-Rs-e7v"; */
 "rrD-Rs-e7v.normalTitle" = "Button";
 
-/* Class = "UIButton"; configuration.title = "探索咖啡店"; ObjectID = "t7E-Uv-1dp"; */
-"t7E-Uv-1dp.configuration.title" = "Visit cafe";
+/* Class = "UIButton"; configuration.title = "探索咖啡廳"; ObjectID = "t7E-Uv-1dp"; */
+"t7E-Uv-1dp.configuration.title" = "Visit café";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "t7E-Uv-1dp"; */
 "t7E-Uv-1dp.normalTitle" = "Button";

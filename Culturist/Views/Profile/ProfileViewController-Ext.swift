@@ -149,8 +149,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func deleteEventWithConfirmation(event: EKEvent, at indexPath: IndexPath) {
-        let ac = UIAlertController(title: nil, message: "Are you sure you want to delete this event?", preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+        let ac = UIAlertController(title: nil, message: NSLocalizedString("確定要刪除此行程嗎？"), preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: NSLocalizedString("刪除行程"), style: .destructive, handler: { (_) in
             do {
                 try self.eventStore.remove(event, span: .thisEvent)
                 // Update the data source, removing the event from the events array
@@ -164,7 +164,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 print(error)
             }
         }))
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: NSLocalizedString("取消"), style: .cancel, handler: nil))
         present(ac, animated: true)
     }
     
