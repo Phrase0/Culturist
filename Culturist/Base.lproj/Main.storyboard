@@ -875,12 +875,12 @@ Label</string>
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="38"/>
                                                             <color key="tintColor" name="B1"/>
                                                             <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="gray" image="Icons_18px_Coffee" title="探索咖啡店" imagePadding="5">
+                                                            <buttonConfiguration key="configuration" style="gray" image="Icons_18px_Coffee" title="探索咖啡廳" imagePadding="5">
                                                                 <fontDescription key="titleFontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
                                                                 <color key="baseBackgroundColor" name="B4"/>
                                                             </buttonConfiguration>
                                                             <connections>
-                                                                <action selector="searchCoffeeShop:" destination="eiP-1D-OOg" eventType="touchUpInside" id="sj1-ex-Ads"/>
+                                                                <action selector="searchCoffeeShop:" destination="eiP-1D-OOg" eventType="touchUpInside" id="g2T-Yq-aRv"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oab-pH-xdy">
@@ -1480,7 +1480,7 @@ Label</string>
         <!--Map View Controller-->
         <scene sceneID="bUS-q3-w9d">
             <objects>
-                <viewController id="2zU-LC-iyr" customClass="MapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="2zU-LC-iyr" customClass="MapViewController" customModule="Culturist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D6A-SB-lJs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

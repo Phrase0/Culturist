@@ -103,8 +103,38 @@ extension CoffeeShopViewController: UITableViewDelegate, UITableViewDataSource {
         let distanceInKilometers = distance / 1000.0
         
         // If the distance is greater than 5 kilometers, display a warning
-        if distanceInKilometers > 3.0 {
-            showAlert(message: NSLocalizedString("超出可導航範圍，請重新選取鄰近的咖啡館"))
+        if distanceInKilometers > 5.0 {
+            let request = MKDirections.Request()
+            request.source = MKMapItem.forCurrentLocation()
+            request.destination = mapLocation
+            request.requestsAlternateRoutes = false
+            
+            let directions = MKDirections(request: request)
+            
+            directions.calculate(completionHandler: { response, error in
+                if let error {
+                    self.showAlert(message: NSLocalizedString("超出可導航範圍，請重新選取鄰近的咖啡廳"))
+                    return print("Error getting directions: \(error.localizedDescription)")
+                }
+                guard let response = response else {
+                    return assertionFailure("No error, but no response, either.")
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+                    detailVC.routes = response.routes
+                    detailVC.name = coffeeShop?.name
+                    detailVC.latitude = Double(coffeeShop!.latitude)
+                    detailVC.longitude = Double(coffeeShop!.longitude)
+                    let navVC = UINavigationController(rootViewController: detailVC)
+                    navVC.modalPresentationStyle = .fullScreen
+                    self.present(navVC, animated: true)
+                }
+            })
+// ---------------------------------------------------
         } else {
             // refreshControl.startAnimating()
             let request = MKDirections.Request()

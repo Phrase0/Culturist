@@ -15,7 +15,7 @@ extension NavigationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.lineWidth = 3
-        renderer.strokeColor = UIColor.systemCyan.withAlphaComponent(0.5)
+        renderer.strokeColor = UIColor.systemCyan.withAlphaComponent(0.7)
         return renderer
     }
     
