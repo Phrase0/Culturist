@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
     var userAnnotation: MKPointAnnotation?
     
     var routes: [MKRoute]?
-    var updateUserLocationTimer: Timer?
     
     var name: String?
     var latitude: Double?
@@ -140,4 +139,3 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
 }
-
