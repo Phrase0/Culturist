@@ -12,8 +12,6 @@ An app for exploring art activities and discovering coffee shops or bookstores n
 1. **Personalized Suggestions:** Explore exhibitions tailored to your interests.
 1. **Calendar Integration:** Set reminders for important dates.
 
-<details>
-
 <summary>View Video and Featured Images</summary>
 
 https://github.com/Phrase0/Culturist/assets/106171384/12ec05a3-bc08-413e-b7d6-e7b935c3fd60
@@ -23,8 +21,6 @@ https://github.com/Phrase0/Culturist/assets/106171384/12ec05a3-bc08-413e-b7d6-e7
 ![mockupApp-20](https://github.com/Phrase0/Culturist/assets/106171384/fff63f34-7f35-4703-8ffe-92726a741ff9)
 
 ![mockupApp-21](https://github.com/Phrase0/Culturist/assets/106171384/ba617f74-04fe-4a19-bc97-29694ca7af51)
-
-</details>
 
 ### Technical Highlights
 1. Utilized MapKit for nearby cafe and bookstore discovery.
