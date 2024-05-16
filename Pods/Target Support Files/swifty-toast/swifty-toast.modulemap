@@ -1,6 +1,0 @@
-framework module Toast {
-  umbrella header "swifty-toast-umbrella.h"
-
-  export *
-  module * { export * }
-}

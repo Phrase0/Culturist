@@ -2,7 +2,6 @@ ${PODS_ROOT}/Target Support Files/Pods-Culturist/Pods-Culturist-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
-${BUILT_PRODUCTS_DIR}/CMHUD/CMHUD.framework
 ${BUILT_PRODUCTS_DIR}/FSCalendar+Persian/FSCalendar_Persian.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework
@@ -31,5 +30,3 @@ ${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework
 ${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework
 ${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
-${BUILT_PRODUCTS_DIR}/swift-layout/Layout.framework
-${BUILT_PRODUCTS_DIR}/swifty-toast/Toast.framework

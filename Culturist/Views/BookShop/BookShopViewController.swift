@@ -105,6 +105,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             showAlert(message: NSLocalizedString("無法找到您目前的位置"))
             return
         }
+        
         // Coordinates of the target location
         let targetCoordinate = CLLocationCoordinate2D(latitude: Double(bookShop!.latitude)!, longitude: Double(bookShop!.longitude)!)
         let targetLocation = CLLocation(latitude: targetCoordinate.latitude, longitude: targetCoordinate.longitude)
