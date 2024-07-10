@@ -53,7 +53,7 @@ https://github.com/Phrase0/Culturist/assets/106171384/12ec05a3-bc08-413e-b7d6-e7
 - iOS 15.0 or later
 
 ## Contact
-Peiyun Wu phrase911@gmail.com   [LinkedIn](https://www.linkedin.com/in/peiyun-wu-027564262/)
+Peiyun Wu phrase911@gmail.com   [LinkedIn](https://www.linkedin.com/in/peiyun-iris-wu/)
 
 ## License
 Culturist is released under the MIT license. 
