@@ -132,7 +132,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 
     func configureCell(_ cell: DetailTableViewCell, with detailDescription: ArtDatum) {
         let url = URL(string: detailDescription.imageURL)
-        cell.detailImageView.kf.setImage(with: url)
+        cell.detailImageView.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
         cell.titleLabel.text = detailDescription.title
         
         // set time

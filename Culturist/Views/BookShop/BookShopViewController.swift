@@ -74,7 +74,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.bookImageView.image = UIImage(named: "bookImage")
             } else {
                 let url = URL(string: bookShop.representImage)
-                cell.bookImageView.kf.setImage(with: url, placeholder: UIImage(named: "bookImage_gray"))
+                cell.bookImageView.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
                 { result in
                     switch result {
                     case .success:
@@ -105,6 +105,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
             showAlert(message: NSLocalizedString("無法找到您目前的位置"))
             return
         }
+        
         // Coordinates of the target location
         let targetCoordinate = CLLocationCoordinate2D(latitude: Double(bookShop!.latitude)!, longitude: Double(bookShop!.longitude)!)
         let targetLocation = CLLocation(latitude: targetCoordinate.latitude, longitude: targetCoordinate.longitude)
