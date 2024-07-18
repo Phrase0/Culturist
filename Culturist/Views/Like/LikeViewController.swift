@@ -158,7 +158,7 @@ extension LikeViewController: UICollectionViewDataSource, UICollectionViewDelega
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikeCollectionViewCell", for: indexPath) as? LikeCollectionViewCell else {return UICollectionViewCell()}
         let itemData = likeEXProducts[indexPath.item]
         let url = URL(string: itemData.imageURL)
-        cell.productImage.kf.setImage(with: url)
+        cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
         cell.productTitle.text = itemData.title
         return cell
     }

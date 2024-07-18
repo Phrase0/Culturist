@@ -52,12 +52,12 @@ extension ProductTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         if productIndexPath == 1 {
             let itemData = artProducts1[indexPath.item]
             let url = URL(string: itemData.imageURL)
-            cell.productImage.kf.setImage(with: url)
+            cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
             cell.productTitle.text = itemData.title
         } else if productIndexPath == 2 {
             let itemData = artProducts6[indexPath.item]
             let url = URL(string: itemData.imageURL)
-            cell.productImage.kf.setImage(with: url)
+            cell.productImage.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
             cell.productTitle.text = itemData.title
         }
         return cell

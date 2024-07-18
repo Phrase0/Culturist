@@ -22,30 +22,23 @@ class ArtProductManager {
     func getArtProductList(number: String) {
         let urlString = "https://cloud.culture.tw/frontsite/opendata/activityOpenDataJsonAction.do?method=doFindActivitiesByCategory&category=\(number)"
         
-        guard let urlString = URL(string: urlString) else {
+        guard let url = URL(string: urlString) else {
             let error = NSError(domain: "Culturist", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
             self.delegate?.manager(self, didFailWith: error)
-            return }
+            return
+        }
         
-        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: urlString)) {
-            // Use cached data if available
+        if let cachedData = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {
             if let artProductList = try? JSONDecoder().decode([ArtDatum].self, from: cachedData.data) {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.delegate?.manager(self, didGet: filteredData)
-                    }
-                }
+                filterAndNotify(artProductList)
                 return
             }
         }
         
-        URLSession.shared.dataTaskPublisher(for: urlString)
-            .tryMap { data, response in
-                // Cache the response
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { data, response -> Data in
                 let cachedData = CachedURLResponse(response: response, data: data)
-                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: urlString))
+                URLCache.shared.storeCachedResponse(cachedData, for: URLRequest(url: url))
                 return data
             }
             .decode(type: [ArtDatum].self, decoder: JSONDecoder())
@@ -57,26 +50,23 @@ class ArtProductManager {
                 case .failure(let error):
                     self.delegate?.manager(self, didFailWith: error)
                     print("Error fetching JSON data: \(error)")
-                    //                    if number == "1" {
-                    //                        self.getArtProductListFromAsset(filename: JsonName.concert.rawValue)
-                    //                    } else {
-                    //                        self.getArtProductListFromAsset(filename: JsonName.exhibition.rawValue)
-                    //                    }
-                    //                    print("Using local artProduct local data")
                 }
-            }, receiveValue: { artProductList in
-                DispatchQueue.global(qos: .userInitiated).async {
-                    let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        self.delegate?.manager(self, didGet: filteredData)
-                    }
-                }
+            }, receiveValue: { [weak self] artProductList in
+                self?.filterAndNotify(artProductList)
             })
             .store(in: &cancellables)
     }
     
-    // if api fetch failure
+    private func filterAndNotify(_ artProductList: [ArtDatum]) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let filteredData = artProductList.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.manager(self, didGet: filteredData)
+            }
+        }
+    }
+    
     func getArtProductListFromAsset(filename: String) {
         let jsonData: [ArtDatum] = load(filename)
         let filteredData = jsonData.filter { !$0.imageURL.isEmpty && $0.uid != "645357a031bef61dcaf57d5c" }
