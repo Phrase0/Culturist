@@ -74,7 +74,7 @@ extension BookShopViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.bookImageView.image = UIImage(named: "bookImage")
             } else {
                 let url = URL(string: bookShop.representImage)
-                cell.bookImageView.kf.setImage(with: url, placeholder: UIImage(named: "bookImage_gray"))
+                cell.bookImageView.kf.setImage(with: url, placeholder: UIImage(named: "image_gray"))
                 { result in
                     switch result {
                     case .success:
