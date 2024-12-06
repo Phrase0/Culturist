@@ -217,6 +217,8 @@ extension DetailViewController: DetailTableViewCellDelegate {
             break
         }
     }
+    
+    
 
 }
 
