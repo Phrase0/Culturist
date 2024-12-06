@@ -12,16 +12,21 @@ import EventKitUI
 
 extension ProfileViewController {
     func requestAccess() {
-        // Forcefully clear EventKit cache
-        eventStore.reset()
+        // Check if the user granted permission to access the calendar
         eventStore.requestAccess(to: .event) { [weak self] (granted, _) in
-            if granted {
-                self?.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
-            } else {
-                // Handling when access is denied or the calendar is not found
-                // Clean event data
-                self?.events.removeAll()
+            guard granted else {
+                // If access is denied, clear events and refresh the UI
+                DispatchQueue.main.async {
+                    self?.events.removeAll()
+                    self?.calendar.reloadData()
+                    self?.eventsTableView.reloadData()
+                }
+                return
             }
+            // If access is granted, ensure the calendar exists and fetch events
+            self?.createCalendarIfNeeded(calendarName: "CulturistCalendar")
+            self?.fetchEventsFromCalendar(calendarName: "CulturistCalendar")
+            
             DispatchQueue.main.async {
                 self?.calendar.reloadData()
                 self?.eventsTableView.reloadData()
@@ -29,28 +34,45 @@ extension ProfileViewController {
         }
     }
     
+    func createCalendarIfNeeded(calendarName: String) {
+        let calendars = eventStore.calendars(for: .event)
+        if calendars.contains(where: { $0.title == calendarName }) {
+            return
+        }
+        
+        // Attempt to select a source that allows adding calendars
+        let sources = eventStore.sources
+        guard let source = sources.first(where: { $0.sourceType == .local || $0.sourceType == .calDAV || $0.sourceType == .exchange }) else {
+            print("No valid source found to create calendar.")
+            return
+        }
+        
+        // create new calendar
+        let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
+        newCalendar.title = calendarName
+        newCalendar.source = source
+        
+        do {
+            try eventStore.saveCalendar(newCalendar, commit: true)
+            print("Calendar '\(calendarName)' created successfully.")
+        } catch {
+            print("Failed to save calendar: \(error.localizedDescription)")
+        }
+    }
+    
     func fetchEventsFromCalendar(calendarName: String) {
         let calendars = eventStore.calendars(for: .event)
-        var calendarFound = false
-        for calendar in calendars {
-            if calendar.title == calendarName {
-                calendarFound = true
-                // set event start time
-                let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
-                // set event end time
-                let endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date()-1)!
-                
-                let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
-                events = eventStore.events(matching: predicate)
-                // Sort events by startDate
-                events.sort { $0.startDate < $1.startDate }
-                
-            }
-        }
-        if !calendarFound {
-            // Handling when the specified calendar is not found
+        guard let calendar = calendars.first(where: { $0.title == calendarName }) else {
             events.removeAll()
+            return
         }
+        
+        let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+        let endDate = Calendar.current.date(byAdding: .year, value: 1, to: Date())!
+        
+        let predicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+        events = eventStore.events(matching: predicate)
+        events.sort { $0.startDate < $1.startDate }
     }
     
     func setCalendarAppearance() {
