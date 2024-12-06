@@ -74,7 +74,7 @@ extension ProfileViewController {
         events = eventStore.events(matching: predicate)
         events.sort { $0.startDate < $1.startDate }
     }
-    
+
     func setCalendarAppearance() {
         calendar.today = Date()
         calendar.appearance.headerTitleColor = .GR1
