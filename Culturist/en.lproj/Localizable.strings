@@ -12,8 +12,10 @@
 "抱歉，未找到符合條件的搜尋結果" = "Sorry, no search results matching";
 "搜尋" = "Search";
 "音樂會或展覽" = "concerts or exhibitions";
-"取消" = "Cancel";
 "請搜尋音樂會或展覽" = "Please search for concerts and exhibitions";
+"需要行事曆存取權限" = "Calendar Access Required";
+"此應用程式需要存取您的行事曆。請在設定中啟用存取權限" = "This app requires access to your calendar. Please enable access in Settings.";
+"前往設定" = "Go to Settings";
 "儲存成功，已加入行事曆" = "Save successfully, added to calendar.";
 "無法找到您目前的位置" = "Unable to find your current location.";
 "超出可導航範圍，請重新選取鄰近的咖啡廳" = "Beyond navigable range, please select a nearby café again.";

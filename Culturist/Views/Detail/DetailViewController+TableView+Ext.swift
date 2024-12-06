@@ -212,14 +212,40 @@ extension DetailViewController: DetailTableViewCellDelegate {
                 self.showEventViewController()
             }
         case .denied, .restricted:
-            print("Event access is denied or restricted.")
+            DispatchQueue.main.async {
+                print("Event access is denied or restricted.")
+                self.showSettingsAlert()
+            }
         @unknown default:
+            fatalError()
             break
         }
     }
     
-    
+    func showSettingsAlert() {
+        let alertController = UIAlertController(
+            title: NSLocalizedString("需要行事曆存取權限"),
+            message: NSLocalizedString("此應用程式需要存取您的行事曆。請在設定中啟用存取權限"),
+            preferredStyle: .alert
+        )
+        
+        // add "Go to Settings" btn
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("前往設定"), style: .default) { _ in
+            // open setting
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL)
+            }
+        })
+        // add "cancel" btn
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("取消"), style: .cancel, handler: nil))
 
+        if let topController = UIApplication.shared.windows.first?.rootViewController {
+            topController.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: - EKEventEditViewDelegate, UINavigationControllerDelegate
