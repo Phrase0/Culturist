@@ -69,7 +69,7 @@ public func wrap<Value>(
 ) -> Promise<Value> {
   return Promise<Value>(on: queue) { fulfill, reject in
     try work { value, error in
-      if let error {
+      if let error = error {
         reject(error)
       } else {
         fulfill(value)
@@ -90,7 +90,7 @@ public func wrap<Value>(
 ) -> Promise<Value> {
   return Promise<Value>(on: queue) { fulfill, reject in
     try work { error, value in
-      if let error {
+      if let error = error {
         reject(error)
       } else {
         fulfill(value)
@@ -111,7 +111,7 @@ public func wrap<Value>(
 ) -> Promise<Value?> {
   return Promise<Value?>(on: queue) { fulfill, reject in
     try work { value, error in
-      if let error {
+      if let error = error {
         reject(error)
       } else {
         fulfill(value)
@@ -132,7 +132,7 @@ public func wrap<Value>(
 ) -> Promise<Value?> {
   return Promise<Value?>(on: queue) { fulfill, reject in
     try work { error, value in
-      if let error {
+      if let error = error {
         reject(error)
       } else {
         fulfill(value)
@@ -153,7 +153,7 @@ public func wrap<Value1, Value2>(
 ) -> Promise<(Value1?, Value2?)> {
   return Promise<(Value1?, Value2?)>(on: queue) { fulfill, reject in
     try work { value1, value2, error in
-      if let error {
+      if let error = error {
         reject(error)
       } else {
         fulfill((value1, value2))

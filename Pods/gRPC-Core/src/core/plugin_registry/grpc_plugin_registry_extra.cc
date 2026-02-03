@@ -14,30 +14,17 @@
 // limitations under the License.
 //
 
+#include <grpc/grpc.h>
 #include <grpc/support/port_platform.h>
 
-#include <grpc/grpc.h>
-
-#include "src/core/lib/config/core_configuration.h"
-#include "src/core/lib/surface/builtins.h"
-
-#ifndef GRPC_NO_XDS
-namespace grpc_core {
-void XdsClientGlobalInit();
-void XdsClientGlobalShutdown();
-}  // namespace grpc_core
-#endif
-
-void grpc_register_extra_plugins() {
-#ifndef GRPC_NO_XDS
-  grpc_register_plugin(grpc_core::XdsClientGlobalInit,
-                       grpc_core::XdsClientGlobalShutdown);
-#endif
-}
+#include "src/core/config/core_configuration.h"
 
 namespace grpc_core {
 #ifndef GRPC_NO_XDS
 extern void RbacFilterRegister(CoreConfiguration::Builder* builder);
+extern void StatefulSessionFilterRegister(CoreConfiguration::Builder* builder);
+extern void GcpAuthenticationFilterRegister(
+    CoreConfiguration::Builder* builder);
 extern void RegisterXdsChannelStackModifier(
     CoreConfiguration::Builder* builder);
 extern void RegisterChannelDefaultCreds(CoreConfiguration::Builder* builder);
@@ -47,10 +34,13 @@ extern void RegisterXdsClusterManagerLbPolicy(
     CoreConfiguration::Builder* builder);
 extern void RegisterXdsClusterImplLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterCdsLbPolicy(CoreConfiguration::Builder* builder);
-extern void RegisterXdsClusterResolverLbPolicy(
+extern void RegisterXdsOverrideHostLbPolicy(
     CoreConfiguration::Builder* builder);
+extern void RegisterXdsWrrLocalityLbPolicy(CoreConfiguration::Builder* builder);
+extern void RegisterRingHashLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterFileWatcherCertificateProvider(
     CoreConfiguration::Builder* builder);
+extern void RegisterXdsHttpProxyMapper(CoreConfiguration::Builder* builder);
 #endif
 void RegisterExtraFilters(CoreConfiguration::Builder* builder) {
   // Use builder to avoid unused-parameter warning.
@@ -59,6 +49,8 @@ void RegisterExtraFilters(CoreConfiguration::Builder* builder) {
   // rbac_filter is being guarded with GRPC_NO_XDS to avoid a dependency on the
   // re2 library by default
   RbacFilterRegister(builder);
+  StatefulSessionFilterRegister(builder);
+  GcpAuthenticationFilterRegister(builder);
   RegisterXdsChannelStackModifier(builder);
   RegisterChannelDefaultCreds(builder);
   RegisterXdsResolver(builder);
@@ -66,8 +58,11 @@ void RegisterExtraFilters(CoreConfiguration::Builder* builder) {
   RegisterXdsClusterManagerLbPolicy(builder);
   RegisterXdsClusterImplLbPolicy(builder);
   RegisterCdsLbPolicy(builder);
-  RegisterXdsClusterResolverLbPolicy(builder);
+  RegisterXdsOverrideHostLbPolicy(builder);
+  RegisterXdsWrrLocalityLbPolicy(builder);
+  RegisterRingHashLbPolicy(builder);
   RegisterFileWatcherCertificateProvider(builder);
+  RegisterXdsHttpProxyMapper(builder);
 #endif
 }
 }  // namespace grpc_core

@@ -15,11 +15,13 @@
 import Foundation
 
 /// Contains the list of errors that are localized for Firebase Sessions Library
-enum FirebaseSessionsError: Error {
+enum FirebaseSessionsError: Error, Sendable {
   /// Event sampling related error
   case SessionSamplingError
   /// Firebase Installation ID related error
   case SessionInstallationsError(Error)
+  /// Firebase Installation ID related timeout error
+  case SessionInstallationsTimeOutError
   /// Error from the GoogleDataTransport SDK
   case DataTransportError(Error)
   /// Sessions SDK is disabled via settings error
