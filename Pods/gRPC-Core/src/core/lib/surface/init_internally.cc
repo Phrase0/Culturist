@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <grpc/support/port_platform.h>
-
 #include "src/core/lib/surface/init_internally.h"
+
+#include <grpc/support/port_platform.h>
 
 namespace grpc_core {
 
 void (*InitInternally)();
 void (*ShutdownInternally)();
+bool (*IsInitializedInternally)();
 
 }  // namespace grpc_core
