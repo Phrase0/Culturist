@@ -130,9 +130,12 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItems = [leftSpacer]
         
         // Create an image view as the title view
-        let imageView = UIImageView(image: UIImage.asset(.culturist_logo_green_navTitle))
+        let imageView = UIImageView(image:
+        UIImage.asset(.culturist_logo_green_navTitle))
         imageView.contentMode = .scaleAspectFit
-        // Set the image view as the title view
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         navigationItem.titleView = imageView
         
         searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))

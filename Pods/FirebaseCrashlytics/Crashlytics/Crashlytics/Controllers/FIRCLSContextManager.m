@@ -40,17 +40,17 @@
   return self;
 }
 
-- (BOOL)setupContextWithReport:(FIRCLSInternalReport *)report
-                      settings:(FIRCLSSettings *)settings
-                   fileManager:(FIRCLSFileManager *)fileManager {
+- (FBLPromise *)setupContextWithReport:(FIRCLSInternalReport *)report
+                              settings:(FIRCLSSettings *)settings
+                           fileManager:(FIRCLSFileManager *)fileManager {
   _report = report;
   _settings = settings;
   _fileManager = fileManager;
 
   _hasInitializedContext = true;
 
-  FIRCLSContextInitData initDataObj = self.buildInitData;
-  return FIRCLSContextInitialize(&initDataObj, self.fileManager);
+  FIRCLSContextInitData *initDataObj = self.buildInitData;
+  return FIRCLSContextInitialize(initDataObj, self.fileManager);
 }
 
 - (void)setAppQualitySessionId:(NSString *)appQualitySessionId {
@@ -64,13 +64,13 @@
     return;
   }
 
-  FIRCLSContextInitData initDataObj = self.buildInitData;
-  if (!FIRCLSContextRecordMetadata(self.report.path, &initDataObj)) {
+  FIRCLSContextInitData *initDataObj = self.buildInitData;
+  if (!FIRCLSContextRecordMetadata(self.report.path, initDataObj)) {
     FIRCLSErrorLog(@"Failed to write context file while updating App Quality Session ID");
   }
 }
 
-- (FIRCLSContextInitData)buildInitData {
+- (FIRCLSContextInitData *)buildInitData {
   return FIRCLSContextBuildInitData(self.report, self.settings, self.fileManager,
                                     self.appQualitySessionId);
 }
