@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SettingViewController: UIViewController {
     
@@ -44,17 +45,37 @@ class SettingViewController: UIViewController {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("取消"), style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: NSLocalizedString("確定"), style: .default, handler: { _ in
+            // Remove Firestore data first
             self.firebaseManager.removeUserData()
-            // UserDefaults.standard.removeObject(forKey: "url")
+
+            // Delete Firebase Auth user
+            if let user = Auth.auth().currentUser {
+                user.delete { error in
+                    if let error = error {
+                        print("Error deleting Firebase Auth user: \(error.localizedDescription)")
+                    } else {
+                        print("Successfully deleted Firebase Auth user")
+                    }
+                }
+            }
+
             NotificationCenter.default.post(name: Notification.Name("UserDidSignOutOrDelete"), object: nil)
             self.goBackToRootVC()
         }))
-        
+
         self.present(alertController, animated: true, completion: nil)
     }
     
     func goBackToRootVC() {
-        // clean user data
+        // Sign out from Firebase Auth
+        do {
+            try Auth.auth().signOut()
+            print("Successfully signed out from Firebase")
+        } catch let signOutError as NSError {
+            print("Error signing out from Firebase: \(signOutError.localizedDescription)")
+        }
+
+        // Clean user data from Keychain
         KeychainItem.deleteUserIdentifierFromKeychain()
         self.dismiss(animated: true)
     }
