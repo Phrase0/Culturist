@@ -87,34 +87,75 @@ class FirebaseManager {
     
     func removeUserData() {
         let userRef = db.collection("users").document(KeychainItem.currentUserIdentifier)
+
+        // 1. 先刪除 Storage 中的圖片
+        let imageRef = storage.child("images/\(KeychainItem.currentUserIdentifier).jpg")
+        imageRef.delete { error in
+            if let error = error {
+                // 圖片可能不存在（用戶沒上傳過），這是正常的
+                print("Note: Could not delete image from Storage (may not exist): \(error.localizedDescription)")
+            } else {
+                print("Successfully deleted image from Storage")
+            }
+        }
+
+        // 2. 刪除 Firestore 中的 recommendationData 集合
         let recommendationDataCollection = userRef.collection("recommendationData")
         recommendationDataCollection.getDocuments { (querySnapshot, error) in
             if let error {
-                print("Error getting documents: \(error)")
+                print("Error getting recommendationData documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    document.reference.delete()
+                    document.reference.delete { error in
+                        if let error {
+                            print("Error deleting recommendationData document: \(error)")
+                        }
+                    }
                 }
+                print("Successfully deleted recommendationData collection")
             }
         }
+
+        // 3. 刪除 Firestore 中的 likeCollection 集合
         let likeCollection = userRef.collection("likeCollection")
         likeCollection.getDocuments { (querySnapshot, error) in
             if let error {
-                print("Error getting documents: \(error)")
+                print("Error getting likeCollection documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    document.reference.delete()
+                    document.reference.delete { error in
+                        if let error {
+                            print("Error deleting likeCollection document: \(error)")
+                        }
+                    }
                 }
+                print("Successfully deleted likeCollection")
             }
         }
+
+        // 4. 刪除 Firestore 中的 imageData 集合
         let imageData = userRef.collection("imageData")
         imageData.getDocuments { (querySnapshot, error) in
             if let error {
-                print("Error getting documents: \(error)")
+                print("Error getting imageData documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    document.reference.delete()
+                    document.reference.delete { error in
+                        if let error {
+                            print("Error deleting imageData document: \(error)")
+                        }
+                    }
                 }
+                print("Successfully deleted imageData collection")
+            }
+        }
+
+        // 5. 最後刪除用戶文檔本身
+        userRef.delete { error in
+            if let error {
+                print("Error deleting user document: \(error)")
+            } else {
+                print("Successfully deleted user document")
             }
         }
     }
